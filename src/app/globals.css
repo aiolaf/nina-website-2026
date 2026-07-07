@@ -1,26 +1,379 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* NinA AI Ivory-thema, tokens uit het merkdeck/carousel-systeem */
+  --color-bg: #f4f0e8;
+  --color-bg-card: #ffffff;
+  --color-bg-alt: #ede6da;
+  --color-bg-muted: #e7e1d6;
+  --color-primary: #614479;
+  --color-primary-light: #a562a1;
+  --color-magenta: #c270b5;
+  --color-ink-deep: #4c2a4f;
+  --color-text: #2a2130;
+  --color-text-muted: #635a6d;
+  --color-border: #ddd5c9;
+  --color-gold: #8f6c1d;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scroll-reveal: verborgen tot IntersectionObserver .is-visible zet.
+   Zonder scripting of met reduced motion direct zichtbaar. */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 24px));
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Directe entree-animatie voor above-the-fold content: pure CSS, geen
+   JS-gate, dus de LCP-tekst staat in de eerste paint. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal-now {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+/* Papierkorrel voor de warme ivory-uitstraling */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+/* Brand-gradient op accentwoorden in koppen, uit het carousel-systeem */
+.text-shimmer {
+  background: linear-gradient(
+    122deg,
+    #4c2a4f 0%,
+    #614479 36%,
+    #a562a1 70%,
+    #c270b5 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Titel-entree: blur weg, omhoog schuiven; getriggerd via .reveal */
+.title-blur {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal:not(.is-visible) .title-blur {
+  filter: blur(8px);
+}
+
+/* Draaiende conic-gradient rand voor uitgelichte kaarten */
+.border-glow {
+  position: relative;
+}
+.border-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    transparent 0%,
+    #614479 18%,
+    #a562a1 30%,
+    transparent 45%,
+    transparent 55%,
+    #c270b5 68%,
+    transparent 80%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-spin 6s linear infinite;
+  pointer-events: none;
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes border-spin {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Glowcard: pointer-gevolgde highlight plus subtiele 3D-tilt via JS-vars */
+.glow-card {
+  position: relative;
+  overflow: hidden;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.25s ease-out, border-color 0.25s, box-shadow 0.25s;
+  will-change: transform;
+}
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(97, 68, 121, 0.08),
+    transparent 65%
+  );
+  opacity: var(--glow, 0);
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+/* Pulserende status-ring */
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.ping-soft::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: ping-soft 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Verticale log-ticker */
+@keyframes ticker-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+.ticker-up {
+  animation: ticker-up 22s linear infinite;
+}
+
+/* Zwevende gradient-orbs achter secties */
+@keyframes orb-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(40px, -30px) scale(1.08);
+  }
+  66% {
+    transform: translate(-30px, 24px) scale(0.95);
+  }
+}
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  animation: orb-drift 18s ease-in-out infinite;
+}
+
+/* Scroll-voortgangsbalk: CSS scroll-driven, geen JS. Zonder support
+   blijft de balk verborgen. */
+.scroll-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    display: block;
+    transform: scaleX(0);
+    animation: scroll-progress-grow linear both;
+    animation-timeline: scroll(root);
+  }
+  @keyframes scroll-progress-grow {
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress {
+    display: none;
+  }
+}
+
+/* Footer-watermerk als pseudo-element, puur decoratief */
+.footer-watermark::after {
+  content: "NinA AI";
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 9rem;
+  line-height: 1;
+  white-space: nowrap;
+  color: rgba(42, 33, 48, 0.035);
+  position: absolute;
+  bottom: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+@media (min-width: 640px) {
+  .footer-watermark::after {
+    font-size: 13rem;
+  }
+}
+
+/* Stromende workflow-verbindingen, n8n-stijl */
+@keyframes flow-x {
+  to {
+    background-position-x: -24px;
+  }
+}
+@keyframes flow-y {
+  to {
+    background-position-y: -24px;
+  }
+}
+.flow-line-x {
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #a562a1 0 8px,
+    transparent 8px 16px
+  );
+  background-size: 24px 2px;
+}
+.flow-line-x.is-on {
+  animation: flow-x 0.6s linear infinite;
+}
+.flow-line-y {
+  width: 2px;
+  background-image: repeating-linear-gradient(
+    180deg,
+    #a562a1 0 8px,
+    transparent 8px 16px
+  );
+  background-size: 2px 24px;
+}
+.flow-line-y.is-on {
+  animation: flow-y 0.6s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow-line-x.is-on,
+  .flow-line-y.is-on {
+    animation: none;
+  }
+}
+
+/* Zachte bob voor speelbare taak-chips */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Motto-marquee: grote outline-tekst die traag voorbijschuift */
+.motto-outline {
+  color: var(--color-text);
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px rgba(42, 33, 48, 0.58);
+}
+.motto-fill {
+  background: linear-gradient(122deg, #614479, #a562a1 60%, #c270b5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Scroll-hint muisje */
+@keyframes scroll-hint {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(10px);
+    opacity: 0.2;
+  }
+}
+.scroll-hint-dot {
+  animation: scroll-hint 1.8s ease-in-out infinite;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
