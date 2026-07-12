@@ -1,0 +1,38 @@
+{
+  "klant": "Voorbeeld Webshop",
+  "vraag": "We willen inkomende support-tickets automatisch laten categoriseren, prioriteren en van een concept-antwoord voorzien, zodat ons team sneller kan reageren.",
+  "type": "automation",
+  "dataFiles": ["support_tickets.csv", "orders.json"],
+  "workflow": [
+    {
+      "id": "trigger",
+      "label": "Nieuw support-ticket",
+      "kind": "trigger"
+    },
+    {
+      "id": "classify",
+      "label": "Categoriseer & prioriteer",
+      "kind": "ai",
+      "prompt": "Bepaal voor dit support-ticket: (1) een categorie (bezorging, retour, betaling, product, klacht, overig), (2) urgentie (laag/midden/hoog), en (3) het sentiment (positief/neutraal/negatief). Geef het terug als compacte JSON met de sleutels categorie, urgentie, sentiment."
+    },
+    {
+      "id": "draft",
+      "label": "Concept-antwoord opstellen",
+      "kind": "ai",
+      "prompt": "Schrijf een vriendelijk, professioneel concept-antwoord in het Nederlands op dit ticket, passend bij de klantvraag. Maximaal 4 zinnen. Sluit af met een concrete vervolgstap."
+    },
+    {
+      "id": "route",
+      "label": "Routeren naar team",
+      "kind": "route",
+      "mockOutput": "Toegewezen aan team op basis van categorie en urgentie (gemockt)."
+    },
+    {
+      "id": "output",
+      "label": "Klaarzetten in helpdesk",
+      "kind": "output",
+      "mockOutput": "Concept + labels weggeschreven naar de helpdesk als draft ({{ticket_id}})."
+    }
+  ],
+  "n8nWebhookUrl": ""
+}
