@@ -19,9 +19,29 @@ function typeTone(t: FieldProfile['type']) {
   return 'text-[var(--color-ink-soft)]'
 }
 
+function StatTile({ value, label }: { value: string | number; label: string }) {
+  return (
+    <div className="rounded-2xl border border-[var(--color-line)] bg-white px-4 py-3">
+      <div className="text-2xl font-semibold tabular-nums">{value}</div>
+      <div className="text-xs text-[var(--color-ink-soft)]">{label}</div>
+    </div>
+  )
+}
+
 export function ProfilerPanel({ profile }: { profile: ProfileResult }) {
   return (
     <div className="space-y-5">
+      {/* Stat-tiles */}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <StatTile value={profile.totalRecords} label="records" />
+        <StatTile value={profile.totalFields} label="velden" />
+        <StatTile value={profile.files.length} label="bestanden" />
+        <StatTile
+          value={profile.piiFound.length}
+          label={profile.piiFound.length === 1 ? 'PII-soort' : 'PII-soorten'}
+        />
+      </div>
+
       {/* Oordeel */}
       <Card className="p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">

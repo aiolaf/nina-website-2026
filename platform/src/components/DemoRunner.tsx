@@ -97,8 +97,16 @@ export function DemoRunner({
         </button>
 
         {total > 0 && (
-          <label className="flex items-center gap-3 text-sm">
+          <label className="flex items-center gap-2 text-sm">
             <span className="text-[var(--color-ink-soft)]">Record</span>
+            <button
+              onClick={() => setRecordIndex((i) => Math.max(0, i - 1))}
+              disabled={running || recordIndex === 0}
+              className="rounded-md border border-[var(--color-line)] px-2 py-0.5 text-[var(--color-ink-soft)] transition hover:border-[var(--color-ink-soft)] disabled:opacity-40"
+              aria-label="Vorig record"
+            >
+              ‹
+            </button>
             <input
               type="range"
               min={0}
@@ -106,9 +114,19 @@ export function DemoRunner({
               value={recordIndex}
               disabled={running}
               onChange={(e) => setRecordIndex(Number(e.target.value))}
-              className="w-40 accent-[var(--color-accent)]"
+              className="w-32 accent-[var(--color-accent)]"
             />
-            <span className="w-16 tabular-nums text-[var(--color-ink-soft)]">
+            <button
+              onClick={() =>
+                setRecordIndex((i) => Math.min(total - 1, i + 1))
+              }
+              disabled={running || recordIndex >= total - 1}
+              className="rounded-md border border-[var(--color-line)] px-2 py-0.5 text-[var(--color-ink-soft)] transition hover:border-[var(--color-ink-soft)] disabled:opacity-40"
+              aria-label="Volgend record"
+            >
+              ›
+            </button>
+            <span className="w-14 tabular-nums text-[var(--color-ink-soft)]">
               {recordIndex + 1} / {total}
             </span>
           </label>
@@ -146,6 +164,30 @@ export function DemoRunner({
       )}
       {error && <ErrorNote message={error} />}
       {running && revealed < 0 && <Spinner label="Workflow starten…" />}
+
+      {/* Samenvatting na afloop */}
+      {result && !running && (
+        <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-[var(--color-line)] bg-neutral-50 px-4 py-3 text-sm">
+          <span className="font-medium">Resultaat</span>
+          <span className="text-[var(--color-ink-soft)]">
+            {result.nodes.length} stappen
+          </span>
+          {!result.usedRealN8n && (
+            <span className="text-[var(--color-ink-soft)]">
+              {result.nodes.filter((n) => n.source === 'ai').length} echte
+              AI-calls
+            </span>
+          )}
+          <span className="text-[var(--color-ink-soft)]">
+            {result.nodes.reduce((a, n) => a + n.ms, 0)}ms totaal
+          </span>
+          {result.nodes.some((n) => n.error) && (
+            <Badge tone="bad">
+              {result.nodes.filter((n) => n.error).length} fout
+            </Badge>
+          )}
+        </div>
+      )}
 
       {/* De flow */}
       <div>

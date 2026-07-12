@@ -11,13 +11,45 @@ const kindMeta: Record<NodeKind, { icon: string; label: string }> = {
 
 export type NodeStatus = 'idle' | 'running' | 'done' | 'error'
 
-function renderValue(value: unknown): string {
-  if (value === null || value === undefined) return '—'
-  if (typeof value === 'string') return value
+/**
+ * Probeer een waarde als gestructureerde data te lezen. AI-stappen geven vaak
+ * JSON terug (soms in een ```json codeblok); die tonen we dan als nette key/value
+ * i.p.v. een ruwe string.
+ */
+function coerce(value: unknown):
+  | { kind: 'text'; text: string }
+  | { kind: 'object'; data: Record<string, unknown> }
+  | { kind: 'json'; text: string } {
+  if (value === null || value === undefined) return { kind: 'text', text: '—' }
+  if (typeof value === 'object') {
+    if (!Array.isArray(value)) {
+      return { kind: 'object', data: value as Record<string, unknown> }
+    }
+    return { kind: 'json', text: JSON.stringify(value, null, 2) }
+  }
+  if (typeof value === 'string') {
+    const parsed = tryParseJson(value)
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      return { kind: 'object', data: parsed as Record<string, unknown> }
+    }
+    if (parsed && typeof parsed === 'object') {
+      return { kind: 'json', text: JSON.stringify(parsed, null, 2) }
+    }
+    return { kind: 'text', text: value }
+  }
+  return { kind: 'text', text: String(value) }
+}
+
+function tryParseJson(s: string): unknown {
+  const trimmed = s.trim()
+  // Haal een eventueel ```json ... ``` codeblok eruit.
+  const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/)
+  const candidate = fenced ? fenced[1].trim() : trimmed
+  if (!/^[[{]/.test(candidate)) return null
   try {
-    return JSON.stringify(value, null, 2)
+    return JSON.parse(candidate)
   } catch {
-    return String(value)
+    return null
   }
 }
 
@@ -137,22 +169,40 @@ function IoBlock({
   accent?: boolean
   full?: boolean
 }) {
+  const c = coerce(value)
+  const bg = accent
+    ? 'bg-[var(--color-accent-soft)] text-emerald-900'
+    : muted
+      ? 'bg-neutral-50 text-[var(--color-ink-soft)]'
+      : 'bg-neutral-50 text-[var(--color-ink)]'
+
   return (
     <div className={full ? 'md:col-span-2' : ''}>
       <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]">
         {label}
       </div>
-      <pre
-        className={`max-h-48 overflow-auto whitespace-pre-wrap break-words rounded-lg px-3 py-2 text-xs leading-relaxed ${
-          accent
-            ? 'bg-[var(--color-accent-soft)] text-emerald-900'
-            : muted
-              ? 'bg-neutral-50 text-[var(--color-ink-soft)]'
-              : 'bg-neutral-50 text-[var(--color-ink)]'
-        }`}
-      >
-        {renderValue(value)}
-      </pre>
+      {c.kind === 'object' ? (
+        <dl
+          className={`max-h-56 space-y-1 overflow-auto rounded-lg px-3 py-2 text-xs leading-relaxed ${bg}`}
+        >
+          {Object.entries(c.data).map(([k, v]) => (
+            <div key={k} className="flex gap-2">
+              <dt className="shrink-0 font-medium opacity-70">{k}</dt>
+              <dd className="min-w-0 break-words">
+                {typeof v === 'object' && v !== null
+                  ? JSON.stringify(v)
+                  : String(v)}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      ) : (
+        <pre
+          className={`max-h-56 overflow-auto whitespace-pre-wrap break-words rounded-lg px-3 py-2 text-xs leading-relaxed ${bg}`}
+        >
+          {c.text}
+        </pre>
+      )}
     </div>
   )
 }

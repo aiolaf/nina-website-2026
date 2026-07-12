@@ -77,10 +77,12 @@ export default function App() {
     }
   }
 
-  async function loadFeasibility() {
+  async function loadFeasibility(force = false) {
     if (!selected) return
     setStep(2)
-    if (report || reportLoading) return
+    if (!force && (report || reportLoading)) return
+    if (reportLoading) return
+    setReport(null)
     setReportError(null)
     setReportLoading(true)
     try {
@@ -98,7 +100,7 @@ export default function App() {
   return (
     <div className="mx-auto min-h-full max-w-5xl px-6 py-10">
       {/* Header */}
-      <header className="mb-8 flex items-end justify-between">
+      <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <span className="text-2xl font-semibold tracking-tight">NinA</span>
@@ -174,7 +176,7 @@ export default function App() {
           {profile && (
             <div className="flex justify-end">
               <button
-                onClick={loadFeasibility}
+                onClick={() => loadFeasibility()}
                 className="rounded-xl bg-[var(--color-ink)] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-black"
               >
                 Naar haalbaarheidscheck →
@@ -193,7 +195,13 @@ export default function App() {
           {reportError && <ErrorNote message={reportError} />}
           {report && <FeasibilityPanel report={report} />}
           {report && (
-            <div className="flex justify-end">
+            <div className="flex justify-between">
+              <button
+                onClick={() => loadFeasibility(true)}
+                className="rounded-xl border border-[var(--color-line)] px-4 py-2.5 text-sm font-medium text-[var(--color-ink-soft)] transition hover:border-[var(--color-ink-soft)]"
+              >
+                ↻ Opnieuw genereren
+              </button>
               <button
                 onClick={() => setStep(3)}
                 className="rounded-xl bg-[var(--color-ink)] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-black"
