@@ -1,6 +1,7 @@
 import type {
   ClientDetail,
   FeasibilityReport,
+  HistoryEntry,
   ProfileResult,
   RecordInfo,
   RunResult,
@@ -58,4 +59,17 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ recordIndex, realN8n }),
     }),
+  history: (klant: string) =>
+    req<{ entries: HistoryEntry[] }>(
+      `/api/history?klant=${encodeURIComponent(klant)}`,
+    ),
+  deleteRun: (id: string) =>
+    req<{ deleted: boolean }>(`/api/history/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    }),
+  clearHistory: (klant: string) =>
+    req<{ removed: number }>(
+      `/api/history?klant=${encodeURIComponent(klant)}`,
+      { method: 'DELETE' },
+    ),
 }

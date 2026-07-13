@@ -81,6 +81,10 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
 - toont per node de input en output, en laat de data zichtbaar "stromen"
 - optionele **real n8n mode**: stuur de payload naar een echte n8n-webhook-URL
   uit `config.json` in plaats van te mocken (toggle in de UI)
+- **historie**: elke gedraaide demo wordt bewaard (per klant). Onder de flow
+  zie je "Eerdere demo's"; je kunt een oude run terugbekijken, losse runs
+  verwijderen (✕) of alles wissen. De historie staat lokaal in
+  `.local/history.json` (gitignored).
 
 ## Mappenstructuur
 

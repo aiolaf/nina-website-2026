@@ -99,6 +99,15 @@ export interface RunResult {
   nodes: RunNodeResult[]
 }
 
+export interface HistoryEntry {
+  id: string
+  klant: string
+  createdAt: string
+  recordIndex: number
+  usedRealN8n: boolean
+  nodes: RunNodeResult[]
+}
+
 export interface ClientDetail {
   config: ClientConfig
   dataFiles: string[]

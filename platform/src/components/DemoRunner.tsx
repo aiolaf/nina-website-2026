@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { ClientConfig, RunResult } from '../lib/types'
+import type { ClientConfig, HistoryEntry, RunResult } from '../lib/types'
 import { api } from '../lib/api'
 import { Badge, ErrorNote, Spinner } from './ui'
 import {
@@ -25,9 +25,19 @@ export function DemoRunner({
   const [result, setResult] = useState<RunResult | null>(null)
   // Tot welke node-index is de "stroom" onthuld (voor de flow-animatie).
   const [revealed, setRevealed] = useState(-1)
+  const [history, setHistory] = useState<HistoryEntry[]>([])
+  // Welke bewaarde run bekijken we nu (null = de live/laatste run).
+  const [viewingId, setViewingId] = useState<string | null>(null)
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
 
-  // Aantal records ophalen zodat de slider klopt.
+  function loadHistory() {
+    api
+      .history(klant)
+      .then((r) => setHistory(r.entries))
+      .catch(() => {})
+  }
+
+  // Aantal records + historie ophalen bij klantwissel.
   useEffect(() => {
     let cancelled = false
     api
@@ -36,9 +46,11 @@ export function DemoRunner({
         if (!cancelled) setTotal(info.total)
       })
       .catch(() => {})
+    loadHistory()
     return () => {
       cancelled = true
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [klant])
 
   // Ruim timers op bij unmount / opnieuw runnen.
@@ -53,6 +65,7 @@ export function DemoRunner({
     timers.current = []
     setError(null)
     setResult(null)
+    setViewingId(null)
     setRevealed(-1)
     setRunning(true)
     try {
@@ -63,14 +76,58 @@ export function DemoRunner({
         const t = setTimeout(() => setRevealed(i), i * 500)
         timers.current.push(t)
       })
-      const done = setTimeout(
-        () => setRunning(false),
-        res.nodes.length * 500,
-      )
+      const done = setTimeout(() => {
+        setRunning(false)
+        loadHistory() // net bewaarde run verschijnt in de historie
+      }, res.nodes.length * 500)
       timers.current.push(done)
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err))
       setRunning(false)
+    }
+  }
+
+  // Een bewaarde run terug in beeld brengen (volledig onthuld, niet lopend).
+  function viewEntry(entry: HistoryEntry) {
+    timers.current.forEach(clearTimeout)
+    timers.current = []
+    setError(null)
+    setRunning(false)
+    setResult({
+      klant: entry.klant,
+      recordIndex: entry.recordIndex,
+      usedRealN8n: entry.usedRealN8n,
+      nodes: entry.nodes,
+    })
+    setRevealed(entry.nodes.length - 1)
+    setViewingId(entry.id)
+  }
+
+  async function deleteEntry(id: string) {
+    try {
+      await api.deleteRun(id)
+      if (viewingId === id) {
+        setResult(null)
+        setViewingId(null)
+        setRevealed(-1)
+      }
+      loadHistory()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err))
+    }
+  }
+
+  async function clearAll() {
+    try {
+      await api.clearHistory(klant)
+      setHistory([])
+      if (viewingId) {
+        setResult(null)
+        setViewingId(null)
+        setRevealed(-1)
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err))
     }
   }
 
@@ -189,6 +246,24 @@ export function DemoRunner({
         </div>
       )}
 
+      {viewingId && (
+        <div className="flex items-center justify-between rounded-xl border border-[var(--color-line)] bg-neutral-50 px-4 py-2 text-sm">
+          <span className="text-[var(--color-ink-soft)]">
+            Je bekijkt een bewaarde demo-run.
+          </span>
+          <button
+            onClick={() => {
+              setResult(null)
+              setViewingId(null)
+              setRevealed(-1)
+            }}
+            className="text-[var(--color-ink-soft)] underline hover:text-[var(--color-ink)]"
+          >
+            terug naar live
+          </button>
+        </div>
+      )}
+
       {/* De flow */}
       <div>
         {(result ? result.nodes : nodes).map((n, i) => (
@@ -204,6 +279,124 @@ export function DemoRunner({
           </div>
         ))}
       </div>
+
+      {/* Historie van eerdere runs */}
+      <HistoryPanel
+        history={history}
+        viewingId={viewingId}
+        onView={viewEntry}
+        onDelete={deleteEntry}
+        onClear={clearAll}
+      />
+    </div>
+  )
+}
+
+function formatWhen(iso: string): string {
+  try {
+    return new Date(iso).toLocaleString('nl-NL', {
+      day: '2-digit',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+  } catch {
+    return iso
+  }
+}
+
+function HistoryPanel({
+  history,
+  viewingId,
+  onView,
+  onDelete,
+  onClear,
+}: {
+  history: HistoryEntry[]
+  viewingId: string | null
+  onView: (e: HistoryEntry) => void
+  onDelete: (id: string) => void
+  onClear: () => void
+}) {
+  const [confirmClear, setConfirmClear] = useState(false)
+  if (history.length === 0) return null
+
+  return (
+    <div className="rounded-2xl border border-[var(--color-line)] bg-white">
+      <div className="flex items-center justify-between border-b border-[var(--color-line)] px-5 py-3">
+        <div className="flex items-center gap-2">
+          <span className="font-medium">Eerdere demo's</span>
+          <Badge>{history.length}</Badge>
+        </div>
+        {confirmClear ? (
+          <span className="flex items-center gap-2 text-sm">
+            <span className="text-[var(--color-ink-soft)]">Alles wissen?</span>
+            <button
+              onClick={() => {
+                setConfirmClear(false)
+                onClear()
+              }}
+              className="font-medium text-rose-600 hover:underline"
+            >
+              ja
+            </button>
+            <button
+              onClick={() => setConfirmClear(false)}
+              className="text-[var(--color-ink-soft)] hover:underline"
+            >
+              nee
+            </button>
+          </span>
+        ) : (
+          <button
+            onClick={() => setConfirmClear(true)}
+            className="text-sm text-[var(--color-ink-soft)] transition hover:text-rose-600"
+          >
+            Alles wissen
+          </button>
+        )}
+      </div>
+      <ul>
+        {history.map((e) => {
+          const aiCalls = e.nodes.filter((n) => n.source === 'ai').length
+          const errors = e.nodes.filter((n) => n.error).length
+          const active = e.id === viewingId
+          return (
+            <li
+              key={e.id}
+              className={`flex items-center gap-3 border-b border-[var(--color-line)] px-5 py-3 text-sm last:border-0 ${
+                active ? 'bg-[var(--color-accent-soft)]' : ''
+              }`}
+            >
+              <span className="w-28 shrink-0 tabular-nums text-[var(--color-ink-soft)]">
+                {formatWhen(e.createdAt)}
+              </span>
+              <span className="w-20 shrink-0">record {e.recordIndex + 1}</span>
+              <Badge tone={e.usedRealN8n ? 'accent' : 'neutral'}>
+                {e.usedRealN8n ? 'n8n' : 'lokaal'}
+              </Badge>
+              <span className="flex-1 truncate text-[var(--color-ink-soft)]">
+                {e.nodes.length} stappen
+                {aiCalls > 0 && ` · ${aiCalls} AI`}
+                {errors > 0 && ` · ${errors} fout`}
+              </span>
+              <button
+                onClick={() => onView(e)}
+                className="shrink-0 rounded-md border border-[var(--color-line)] px-2.5 py-1 text-xs transition hover:border-[var(--color-ink-soft)]"
+              >
+                bekijk
+              </button>
+              <button
+                onClick={() => onDelete(e.id)}
+                aria-label="Verwijder run"
+                className="shrink-0 rounded-md px-2 py-1 text-[var(--color-ink-soft)] transition hover:bg-rose-50 hover:text-rose-600"
+              >
+                ✕
+              </button>
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }

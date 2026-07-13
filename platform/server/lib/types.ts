@@ -110,3 +110,13 @@ export interface RunResult {
   usedRealN8n: boolean
   nodes: RunNodeResult[]
 }
+
+/** Een bewaarde demo-run in de historie. */
+export interface HistoryEntry {
+  id: string
+  klant: string
+  createdAt: string
+  recordIndex: number
+  usedRealN8n: boolean
+  nodes: RunNodeResult[]
+}

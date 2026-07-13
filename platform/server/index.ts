@@ -10,6 +10,7 @@ import {
   validateApiKey,
 } from './lib/anthropic.ts'
 import { setStoredApiKey } from './lib/settings.ts'
+import { addRun, clearHistory, deleteRun, listHistory } from './lib/history.ts'
 import { listClients, listDataFiles, readConfig, ROOT } from './lib/clients.ts'
 import { profileClient } from './profiler/index.ts'
 import { generateFeasibility } from './feasibility/index.ts'
@@ -147,7 +148,32 @@ app.post(
       return
     }
     const result = await runWorkflow(name, recordIndex, realN8n)
+    addRun(result) // bewaar in de historie
     res.json(result)
+  }),
+)
+
+// --- Demo-historie ---
+app.get(
+  '/api/history',
+  wrap((req, res) => {
+    const klant = req.query.klant ? String(req.query.klant) : undefined
+    res.json({ entries: listHistory(klant) })
+  }),
+)
+
+app.delete(
+  '/api/history/:id',
+  wrap((req, res) => {
+    res.json({ deleted: deleteRun(String(req.params.id)) })
+  }),
+)
+
+app.delete(
+  '/api/history',
+  wrap((req, res) => {
+    const klant = req.query.klant ? String(req.query.klant) : undefined
+    res.json({ removed: clearHistory(klant) })
   }),
 )
 
