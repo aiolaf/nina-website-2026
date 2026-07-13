@@ -36,6 +36,8 @@ export function addRun(run: RunResult): HistoryEntry {
   const entry: HistoryEntry = {
     id: crypto.randomUUID(),
     klant: run.klant,
+    demoId: run.demoId,
+    demoLabel: run.demoLabel,
     createdAt: new Date().toISOString(),
     recordIndex: run.recordIndex,
     usedRealN8n: run.usedRealN8n,

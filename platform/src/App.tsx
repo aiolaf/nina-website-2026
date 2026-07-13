@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { api, type SettingsResponse } from './lib/api'
 import type {
   ClientConfig,
+  DemoDef,
   FeasibilityReport,
   ProfileResult,
 } from './lib/types'
@@ -34,6 +35,7 @@ export default function App() {
 
   const [selected, setSelected] = useState<string | null>(null)
   const [config, setConfig] = useState<ClientConfig | null>(null)
+  const [demos, setDemos] = useState<DemoDef[]>([])
   const [step, setStep] = useState<Step>(1)
 
   const [profile, setProfile] = useState<ProfileResult | null>(null)
@@ -65,6 +67,7 @@ export default function App() {
     setSelected(name)
     setStep(1)
     setConfig(null)
+    setDemos([])
     setProfile(null)
     setReport(null)
     setProfileError(null)
@@ -78,6 +81,7 @@ export default function App() {
         api.profile(name),
       ])
       setConfig(detail.config)
+      setDemos(detail.demos)
       setProfile(prof)
     } catch (e) {
       setProfileError(e instanceof Error ? e.message : String(e))
@@ -279,7 +283,7 @@ export default function App() {
               overige stappen zijn gemockt met de echte data.
             </p>
           </div>
-          <DemoRunner klant={selected} config={config} hasApiKey={hasApiKey} />
+          <DemoRunner klant={selected} demos={demos} hasApiKey={hasApiKey} />
         </section>
       )}
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { ClientConfig, HistoryEntry, RunResult } from '../lib/types'
+import type { DemoDef, HistoryEntry, RunResult } from '../lib/types'
 import { api } from '../lib/api'
 import { Badge, ErrorNote, Spinner } from './ui'
 import {
@@ -10,23 +10,24 @@ import {
 
 export function DemoRunner({
   klant,
-  config,
+  demos,
   hasApiKey,
 }: {
   klant: string
-  config: ClientConfig
+  demos: DemoDef[]
   hasApiKey: boolean
 }) {
+  const [demoId, setDemoId] = useState(demos[0]?.id ?? 'demo')
+  const demo = demos.find((d) => d.id === demoId) ?? demos[0]
+
   const [recordIndex, setRecordIndex] = useState(0)
   const [total, setTotal] = useState(0)
   const [realN8n, setRealN8n] = useState(false)
   const [running, setRunning] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<RunResult | null>(null)
-  // Tot welke node-index is de "stroom" onthuld (voor de flow-animatie).
   const [revealed, setRevealed] = useState(-1)
   const [history, setHistory] = useState<HistoryEntry[]>([])
-  // Welke bewaarde run bekijken we nu (null = de live/laatste run).
   const [viewingId, setViewingId] = useState<string | null>(null)
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
 
@@ -37,27 +38,38 @@ export function DemoRunner({
       .catch(() => {})
   }
 
-  // Aantal records + historie ophalen bij klantwissel.
+  // Reset selectie als de klant wisselt.
   useEffect(() => {
+    setDemoId(demos[0]?.id ?? 'demo')
+    loadHistory()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [klant])
+
+  // Records + reset bij demo-wissel.
+  useEffect(() => {
+    timers.current.forEach(clearTimeout)
+    setResult(null)
+    setViewingId(null)
+    setRevealed(-1)
+    setError(null)
+    setRecordIndex(0)
     let cancelled = false
     api
-      .record(klant, 0)
+      .record(klant, demoId, 0)
       .then((info) => {
         if (!cancelled) setTotal(info.total)
       })
       .catch(() => {})
-    loadHistory()
     return () => {
       cancelled = true
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [klant])
+  }, [klant, demoId])
 
-  // Ruim timers op bij unmount / opnieuw runnen.
   useEffect(() => () => timers.current.forEach(clearTimeout), [])
 
-  const nodes = config.workflow.length
-    ? config.workflow
+  const nodes = demo?.workflow?.length
+    ? demo.workflow
     : [{ id: 'trigger', label: 'Nieuwe record', kind: 'trigger' as const }]
 
   async function run() {
@@ -69,16 +81,15 @@ export function DemoRunner({
     setRevealed(-1)
     setRunning(true)
     try {
-      const res = await api.run(klant, recordIndex, realN8n)
+      const res = await api.run(klant, demoId, recordIndex, realN8n)
       setResult(res)
-      // Onthul de nodes één voor één zodat de data zichtbaar "stroomt".
       res.nodes.forEach((_, i) => {
         const t = setTimeout(() => setRevealed(i), i * 500)
         timers.current.push(t)
       })
       const done = setTimeout(() => {
         setRunning(false)
-        loadHistory() // net bewaarde run verschijnt in de historie
+        loadHistory()
       }, res.nodes.length * 500)
       timers.current.push(done)
     } catch (err) {
@@ -87,14 +98,18 @@ export function DemoRunner({
     }
   }
 
-  // Een bewaarde run terug in beeld brengen (volledig onthuld, niet lopend).
   function viewEntry(entry: HistoryEntry) {
     timers.current.forEach(clearTimeout)
     timers.current = []
     setError(null)
     setRunning(false)
+    if (entry.demoId && demos.some((d) => d.id === entry.demoId)) {
+      setDemoId(entry.demoId)
+    }
     setResult({
       klant: entry.klant,
+      demoId: entry.demoId,
+      demoLabel: entry.demoLabel,
       recordIndex: entry.recordIndex,
       usedRealN8n: entry.usedRealN8n,
       nodes: entry.nodes,
@@ -141,8 +156,36 @@ export function DemoRunner({
     return 'done'
   }
 
+  const webhookAvailable = Boolean(demo?.n8nWebhookUrl)
+
   return (
     <div className="space-y-5">
+      {/* Demo-kiezer */}
+      {demos.length > 1 && (
+        <div className="flex flex-wrap gap-2">
+          {demos.map((d, i) => (
+            <button
+              key={d.id}
+              onClick={() => setDemoId(d.id)}
+              disabled={running}
+              className={`rounded-xl border px-3 py-2 text-sm transition disabled:opacity-50 ${
+                d.id === demoId
+                  ? 'border-[var(--color-ink)] bg-[var(--color-ink)] text-white'
+                  : 'border-[var(--color-line)] bg-white hover:border-[var(--color-ink-soft)]'
+              }`}
+            >
+              <span className="mr-1.5 opacity-60">{i + 1}</span>
+              {d.label}
+            </button>
+          ))}
+        </div>
+      )}
+      {demo?.beschrijving && (
+        <p className="-mt-2 text-sm text-[var(--color-ink-soft)]">
+          {demo.beschrijving}
+        </p>
+      )}
+
       {/* Bediening */}
       <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-[var(--color-line)] bg-white p-4">
         <button
@@ -174,9 +217,7 @@ export function DemoRunner({
               className="w-32 accent-[var(--color-accent)]"
             />
             <button
-              onClick={() =>
-                setRecordIndex((i) => Math.min(total - 1, i + 1))
-              }
+              onClick={() => setRecordIndex((i) => Math.min(total - 1, i + 1))}
               disabled={running || recordIndex >= total - 1}
               className="rounded-md border border-[var(--color-line)] px-2 py-0.5 text-[var(--color-ink-soft)] transition hover:border-[var(--color-ink-soft)] disabled:opacity-40"
               aria-label="Volgend record"
@@ -191,18 +232,18 @@ export function DemoRunner({
 
         <label
           className={`flex items-center gap-2 text-sm ${
-            config.n8nWebhookUrl ? '' : 'opacity-50'
+            webhookAvailable ? '' : 'opacity-50'
           }`}
           title={
-            config.n8nWebhookUrl
+            webhookAvailable
               ? 'Stuur de payload naar de echte n8n-webhook i.p.v. te mocken'
-              : 'Geen n8nWebhookUrl in config.json'
+              : 'Geen n8nWebhookUrl voor deze demo'
           }
         >
           <input
             type="checkbox"
             checked={realN8n}
-            disabled={running || !config.n8nWebhookUrl}
+            disabled={running || !webhookAvailable}
             onChange={(e) => setRealN8n(e.target.checked)}
             className="h-4 w-4 accent-[var(--color-accent)]"
           />
@@ -217,7 +258,7 @@ export function DemoRunner({
       </div>
 
       {!hasApiKey && !realN8n && (
-        <ErrorNote message="Geen ANTHROPIC_API_KEY gevonden — de AI-stappen werken pas na het invullen van .env. (Real n8n mode werkt wel zonder key.)" />
+        <ErrorNote message="Geen API key ingesteld — de AI-stappen werken pas na het toevoegen van je Anthropic key via Instellingen. (Real n8n mode werkt wel zonder key.)" />
       )}
       {error && <ErrorNote message={error} />}
       {running && revealed < 0 && <Spinner label="Workflow starten…" />}
@@ -280,7 +321,7 @@ export function DemoRunner({
         ))}
       </div>
 
-      {/* Historie van eerdere runs */}
+      {/* Historie van eerdere runs (alle demo's van deze klant) */}
       <HistoryPanel
         history={history}
         viewingId={viewingId}
@@ -371,7 +412,14 @@ function HistoryPanel({
               <span className="w-28 shrink-0 tabular-nums text-[var(--color-ink-soft)]">
                 {formatWhen(e.createdAt)}
               </span>
-              <span className="w-20 shrink-0">record {e.recordIndex + 1}</span>
+              {e.demoLabel && (
+                <span className="w-40 shrink-0 truncate" title={e.demoLabel}>
+                  {e.demoLabel}
+                </span>
+              )}
+              <span className="w-20 shrink-0 text-[var(--color-ink-soft)]">
+                record {e.recordIndex + 1}
+              </span>
               <Badge tone={e.usedRealN8n ? 'accent' : 'neutral'}>
                 {e.usedRealN8n ? 'n8n' : 'lokaal'}
               </Badge>

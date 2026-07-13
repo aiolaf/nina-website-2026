@@ -25,3 +25,38 @@ Herbruikbare startpunten voor nieuwe klant-demos.
 | `output`    | wegschrijven/versturen (gemockt)       | `mockOutput`      |
 
 In `mockOutput` kun je `{{veldnaam}}` gebruiken om waarden uit de lopende data in te vullen.
+
+### Meerdere demo's per klant
+
+Een klant kan meerdere demo's hebben. Gebruik dan `demos` in plaats van (of naast)
+het losse `workflow`-veld. Elke demo heeft een eigen `label`, `workflow` en
+optioneel een eigen `dataFile` (welk databestand de trigger-records levert) en
+`n8nWebhookUrl`:
+
+```json
+{
+  "klant": "Naam",
+  "vraag": "...",
+  "dataFiles": ["a.json", "b.json"],
+  "demos": [
+    {
+      "id": "demo-1",
+      "label": "1 · Eerste demo",
+      "beschrijving": "Korte uitleg die boven de flow verschijnt.",
+      "type": "automation",
+      "dataFile": "a.json",
+      "workflow": [ { "id": "trigger", "label": "...", "kind": "trigger" } ]
+    },
+    {
+      "id": "demo-2",
+      "label": "2 · Tweede demo",
+      "dataFile": "b.json",
+      "workflow": [ ... ]
+    }
+  ]
+}
+```
+
+In de Live demo verschijnt dan een tab per demo. Zonder `demos` valt het platform
+terug op het enkele `workflow`-veld (één demo). Zie `clients/pleijsier-bouw` voor
+een uitgewerkt voorbeeld met drie demo's op echte klantdata.

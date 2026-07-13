@@ -50,14 +50,16 @@ export const api = {
       `/api/clients/${encodeURIComponent(name)}/feasibility`,
       { method: 'POST', body: JSON.stringify({ context }) },
     ),
-  record: (name: string, index: number) =>
+  record: (name: string, demoId: string, index: number) =>
     req<RecordInfo>(
-      `/api/clients/${encodeURIComponent(name)}/record?index=${index}`,
+      `/api/clients/${encodeURIComponent(name)}/record?demo=${encodeURIComponent(
+        demoId,
+      )}&index=${index}`,
     ),
-  run: (name: string, recordIndex: number, realN8n: boolean) =>
+  run: (name: string, demoId: string, recordIndex: number, realN8n: boolean) =>
     req<RunResult>(`/api/clients/${encodeURIComponent(name)}/run`, {
       method: 'POST',
-      body: JSON.stringify({ recordIndex, realN8n }),
+      body: JSON.stringify({ demoId, recordIndex, realN8n }),
     }),
   history: (klant: string) =>
     req<{ entries: HistoryEntry[] }>(

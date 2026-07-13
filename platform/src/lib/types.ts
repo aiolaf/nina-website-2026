@@ -10,11 +10,22 @@ export interface WorkflowNode {
   mockOutput?: string
 }
 
+export interface DemoDef {
+  id: string
+  label: string
+  beschrijving?: string
+  type?: 'automation' | 'agent'
+  dataFile?: string
+  workflow: WorkflowNode[]
+  n8nWebhookUrl?: string
+}
+
 export interface ClientConfig {
   klant: string
   vraag: string
   type: 'automation' | 'agent'
   dataFiles: string[]
+  demos: DemoDef[]
   workflow: WorkflowNode[]
   n8nWebhookUrl?: string
 }
@@ -94,6 +105,8 @@ export interface RunNodeResult {
 
 export interface RunResult {
   klant: string
+  demoId: string
+  demoLabel: string
   recordIndex: number
   usedRealN8n: boolean
   nodes: RunNodeResult[]
@@ -102,6 +115,8 @@ export interface RunResult {
 export interface HistoryEntry {
   id: string
   klant: string
+  demoId: string
+  demoLabel: string
   createdAt: string
   recordIndex: number
   usedRealN8n: boolean
@@ -111,6 +126,7 @@ export interface HistoryEntry {
 export interface ClientDetail {
   config: ClientConfig
   dataFiles: string[]
+  demos: DemoDef[]
 }
 
 export interface RecordInfo {

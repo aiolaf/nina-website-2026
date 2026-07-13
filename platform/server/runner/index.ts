@@ -1,11 +1,16 @@
 import path from 'node:path'
-import { clientDataDir, listDataFiles, readConfig } from '../lib/clients.ts'
+import {
+  clientDataDir,
+  findDemo,
+  listDataFiles,
+  readConfig,
+} from '../lib/clients.ts'
 import { runText } from '../lib/anthropic.ts'
 import { parseFile, type Record_ } from '../profiler/parsers.ts'
 import type { RunNodeResult, RunResult, WorkflowNode } from '../lib/types.ts'
 
-const AI_SYSTEM = (klant: string) =>
-  `Je bent een AI-stap binnen een n8n workflow voor de klant "${klant}".
+const AI_SYSTEM = (klant: string, demo: string) =>
+  `Je bent een AI-stap binnen een n8n workflow voor de klant "${klant}" (demo: "${demo}").
 Voer de instructie exact uit op de aangeleverde data. Antwoord kort en direct,
 zonder inleiding of meta-uitleg. Geef alleen het resultaat van deze stap.`
 
@@ -20,14 +25,20 @@ function renderMock(template: string | undefined, data: unknown): unknown {
   })
 }
 
-/** Haal het n'e record uit het eerste (of opgegeven) databestand van de klant. */
-export function pickRecord(klant: string, recordIndex: number): {
+/** Haal het n'e record uit het databestand van de gekozen demo. */
+export function pickRecord(
+  klant: string,
+  demoId: string | undefined,
+  recordIndex: number,
+): {
   record: Record_ | null
   file: string | null
   total: number
 } {
   const config = readConfig(klant)
-  const files = listDataFiles(klant, config.dataFiles)
+  const demo = findDemo(config, demoId)
+  const only = demo.dataFile ? [demo.dataFile] : config.dataFiles
+  const files = listDataFiles(klant, only)
   if (!files.length) return { record: null, file: null, total: 0 }
   const file = files[0]
   const { records } = parseFile(path.join(clientDataDir(klant), file))
@@ -63,16 +74,26 @@ async function callWebhook(url: string, payload: unknown): Promise<unknown> {
  */
 export async function runWorkflow(
   klant: string,
+  demoId: string | undefined,
   recordIndex: number,
   realN8n: boolean,
 ): Promise<RunResult> {
   const config = readConfig(klant)
-  const { record } = pickRecord(klant, recordIndex)
+  const demo = findDemo(config, demoId)
+  const webhookUrl = demo.n8nWebhookUrl
+  const { record } = pickRecord(klant, demo.id, recordIndex)
   const triggerInput: unknown = record ?? { info: 'geen data — voorbeeldrecord' }
 
+  const base = {
+    klant,
+    demoId: demo.id,
+    demoLabel: demo.label,
+    recordIndex,
+  }
+
   const nodes: RunNodeResult[] = []
-  const workflow = config.workflow.length
-    ? config.workflow
+  const workflow = demo.workflow.length
+    ? demo.workflow
     : ([{ id: 'trigger', label: 'Nieuwe record', kind: 'trigger' }] as WorkflowNode[])
 
   // 1. Trigger-node toont altijd het echte inputrecord.
@@ -90,7 +111,7 @@ export async function runWorkflow(
 
   // 2. Real n8n mode: delegeer de rest aan de echte webhook.
   if (realN8n) {
-    if (!config.n8nWebhookUrl) {
+    if (!webhookUrl) {
       nodes.push({
         id: 'n8n',
         label: 'n8n webhook',
@@ -101,11 +122,11 @@ export async function runWorkflow(
         source: 'n8n',
         error: 'Geen n8nWebhookUrl in config.json — zet real mode uit of vul de URL in.',
       })
-      return { klant, recordIndex, usedRealN8n: true, nodes }
+      return { ...base, usedRealN8n: true, nodes }
     }
     const start = Date.now()
     try {
-      const output = await callWebhook(config.n8nWebhookUrl, triggerInput)
+      const output = await callWebhook(webhookUrl, triggerInput)
       nodes.push({
         id: 'n8n',
         label: 'n8n workflow',
@@ -127,7 +148,7 @@ export async function runWorkflow(
         error: err instanceof Error ? err.message : String(err),
       })
     }
-    return { klant, recordIndex, usedRealN8n: true, nodes }
+    return { ...base, usedRealN8n: true, nodes }
   }
 
   // 3. Lokale uitvoering: loop door de overige nodes.
@@ -142,7 +163,10 @@ export async function runWorkflow(
           null,
           2,
         )}`
-        const output = await runText(AI_SYSTEM(config.klant || klant), prompt)
+        const output = await runText(
+          AI_SYSTEM(config.klant || klant, demo.label),
+          prompt,
+        )
         nodes.push({
           id: node.id,
           label: node.label,
@@ -181,7 +205,7 @@ export async function runWorkflow(
     }
   }
 
-  return { klant, recordIndex, usedRealN8n: false, nodes }
+  return { ...base, usedRealN8n: false, nodes }
 }
 
 /** Voeg de output van een stap toe aan de lopende data zodat volgende stappen erbij kunnen. */

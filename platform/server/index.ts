@@ -11,7 +11,13 @@ import {
 } from './lib/anthropic.ts'
 import { setStoredApiKey } from './lib/settings.ts'
 import { addRun, clearHistory, deleteRun, listHistory } from './lib/history.ts'
-import { listClients, listDataFiles, readConfig, ROOT } from './lib/clients.ts'
+import {
+  listClients,
+  listDataFiles,
+  readConfig,
+  resolveDemos,
+  ROOT,
+} from './lib/clients.ts'
 import { profileClient } from './profiler/index.ts'
 import { generateFeasibility } from './feasibility/index.ts'
 import { pickRecord, runWorkflow } from './runner/index.ts'
@@ -95,7 +101,11 @@ app.get(
   wrap((req, res) => {
     const name = String(req.params.name)
     const config = readConfig(name)
-    res.json({ config, dataFiles: listDataFiles(name, config.dataFiles) })
+    res.json({
+      config,
+      dataFiles: listDataFiles(name, config.dataFiles),
+      demos: resolveDemos(config),
+    })
   }),
 )
 
@@ -129,7 +139,14 @@ app.get(
   '/api/clients/:name/record',
   wrap((req, res) => {
     const index = Number(req.query.index ?? 0)
-    res.json(pickRecord(String(req.params.name), Number.isFinite(index) ? index : 0))
+    const demoId = req.query.demo ? String(req.query.demo) : undefined
+    res.json(
+      pickRecord(
+        String(req.params.name),
+        demoId,
+        Number.isFinite(index) ? index : 0,
+      ),
+    )
   }),
 )
 
@@ -138,16 +155,17 @@ app.post(
   '/api/clients/:name/run',
   wrap(async (req, res) => {
     const name = String(req.params.name)
+    const demoId = req.body?.demoId ? String(req.body.demoId) : undefined
     const recordIndex = Number(req.body?.recordIndex ?? 0)
     const realN8n = Boolean(req.body?.realN8n)
     if (!realN8n && !hasApiKey()) {
       res.status(400).json({
         error:
-          'ANTHROPIC_API_KEY ontbreekt in .env — nodig voor de AI-stappen in de demo.',
+          'ANTHROPIC_API_KEY ontbreekt — nodig voor de AI-stappen in de demo. Voeg de key toe via Instellingen.',
       })
       return
     }
-    const result = await runWorkflow(name, recordIndex, realN8n)
+    const result = await runWorkflow(name, demoId, recordIndex, realN8n)
     addRun(result) // bewaar in de historie
     res.json(result)
   }),

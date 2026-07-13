@@ -13,11 +13,25 @@ export interface WorkflowNode {
   mockOutput?: string
 }
 
+/** Eén demo binnen een klant: eigen label, workflow en (optioneel) databestand. */
+export interface DemoDef {
+  id: string
+  label: string
+  beschrijving?: string
+  type?: 'automation' | 'agent'
+  /** Databestand dat de trigger-records levert (default: eerste dataFile). */
+  dataFile?: string
+  workflow: WorkflowNode[]
+  n8nWebhookUrl?: string
+}
+
 export interface ClientConfig {
   klant: string
   vraag: string
   type: 'automation' | 'agent'
   dataFiles: string[]
+  /** Eén of meer demo's. Backwards-compat: als leeg, wordt `workflow` gebruikt. */
+  demos: DemoDef[]
   workflow: WorkflowNode[]
   n8nWebhookUrl?: string
 }
@@ -106,6 +120,8 @@ export interface RunNodeResult {
 
 export interface RunResult {
   klant: string
+  demoId: string
+  demoLabel: string
   recordIndex: number
   usedRealN8n: boolean
   nodes: RunNodeResult[]
@@ -115,6 +131,8 @@ export interface RunResult {
 export interface HistoryEntry {
   id: string
   klant: string
+  demoId: string
+  demoLabel: string
   createdAt: string
   recordIndex: number
   usedRealN8n: boolean

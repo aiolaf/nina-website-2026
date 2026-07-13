@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { ClientConfig, RawClientConfig } from './types.ts'
+import type { ClientConfig, DemoDef, RawClientConfig } from './types.ts'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 // /platform/server/lib -> /platform
@@ -62,6 +62,7 @@ const DEFAULT_CONFIG: ClientConfig = {
   vraag: '',
   type: 'automation',
   dataFiles: [],
+  demos: [],
   workflow: [],
   n8nWebhookUrl: '',
 }
@@ -75,6 +76,37 @@ export function readConfig(name: string): ClientConfig {
     ...raw,
     klant: raw.klant || name,
     workflow: raw.workflow ?? [],
+    demos: raw.demos ?? [],
     dataFiles: raw.dataFiles ?? [],
   }
+}
+
+/**
+ * Geef de demo's van een klant terug. Backwards-compat: als er geen `demos`
+ * gedefinieerd zijn, maken we er één uit het losse `workflow`-veld.
+ */
+export function resolveDemos(config: ClientConfig): DemoDef[] {
+  if (config.demos.length) {
+    return config.demos.map((d) => ({
+      ...d,
+      type: d.type ?? config.type,
+      dataFile: d.dataFile ?? config.dataFiles[0],
+      n8nWebhookUrl: d.n8nWebhookUrl ?? config.n8nWebhookUrl,
+    }))
+  }
+  return [
+    {
+      id: 'demo',
+      label: 'Demo',
+      type: config.type,
+      dataFile: config.dataFiles[0],
+      workflow: config.workflow,
+      n8nWebhookUrl: config.n8nWebhookUrl,
+    },
+  ]
+}
+
+export function findDemo(config: ClientConfig, demoId?: string): DemoDef {
+  const demos = resolveDemos(config)
+  return demos.find((d) => d.id === demoId) ?? demos[0]
 }
