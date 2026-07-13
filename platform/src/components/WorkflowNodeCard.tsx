@@ -11,35 +11,6 @@ const kindMeta: Record<NodeKind, { icon: string; label: string }> = {
 
 export type NodeStatus = 'idle' | 'running' | 'done' | 'error'
 
-/**
- * Probeer een waarde als gestructureerde data te lezen. AI-stappen geven vaak
- * JSON terug (soms in een ```json codeblok); die tonen we dan als nette key/value
- * i.p.v. een ruwe string.
- */
-function coerce(value: unknown):
-  | { kind: 'text'; text: string }
-  | { kind: 'object'; data: Record<string, unknown> }
-  | { kind: 'json'; text: string } {
-  if (value === null || value === undefined) return { kind: 'text', text: '—' }
-  if (typeof value === 'object') {
-    if (!Array.isArray(value)) {
-      return { kind: 'object', data: value as Record<string, unknown> }
-    }
-    return { kind: 'json', text: JSON.stringify(value, null, 2) }
-  }
-  if (typeof value === 'string') {
-    const parsed = tryParseJson(value)
-    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
-      return { kind: 'object', data: parsed as Record<string, unknown> }
-    }
-    if (parsed && typeof parsed === 'object') {
-      return { kind: 'json', text: JSON.stringify(parsed, null, 2) }
-    }
-    return { kind: 'text', text: value }
-  }
-  return { kind: 'text', text: String(value) }
-}
-
 function tryParseJson(s: string): unknown {
   const trimmed = s.trim()
   // Haal een eventueel ```json ... ``` codeblok eruit.
@@ -51,6 +22,113 @@ function tryParseJson(s: string): unknown {
   } catch {
     return null
   }
+}
+
+// AI-stappen geven vaak JSON terug (soms in een ```json blok); parse dat.
+function parseMaybe(value: unknown): unknown {
+  if (typeof value === 'string') {
+    const p = tryParseJson(value)
+    return p !== null ? p : value
+  }
+  return value
+}
+
+function isPlainObject(v: unknown): v is Record<string, unknown> {
+  return typeof v === 'object' && v !== null && !Array.isArray(v)
+}
+
+function scalarText(v: unknown): string {
+  if (v === null || v === undefined || v === '') return '—'
+  if (typeof v === 'object') return JSON.stringify(v)
+  if (typeof v === 'number') return String(v)
+  return String(v)
+}
+
+/** Cel-inhoud; markeert @@ (afwijkingssignaal uit de AI) met een vlaggetje. */
+function Cell({ value }: { value: unknown }) {
+  const t = scalarText(value)
+  if (t.includes('@@')) {
+    return (
+      <span className="inline-flex items-center gap-1 rounded bg-amber-100 px-1.5 py-0.5 font-medium text-amber-800">
+        ⚑ {t.replace(/@@/g, '').trim() || 'let op'}
+      </span>
+    )
+  }
+  return <>{t}</>
+}
+
+/** Array van objecten → nette vergelijkingstabel (kolommen = velden). */
+function DataTable({ rows }: { rows: Record<string, unknown>[] }) {
+  const cols: string[] = []
+  for (const r of rows) for (const k of Object.keys(r)) if (!cols.includes(k)) cols.push(k)
+  return (
+    <div className="overflow-x-auto rounded-lg border border-black/10 bg-white/60">
+      <table className="w-full border-collapse text-left text-xs">
+        <thead>
+          <tr className="border-b border-black/10">
+            {cols.map((c) => (
+              <th
+                key={c}
+                className="whitespace-nowrap px-2 py-1.5 font-semibold opacity-70"
+              >
+                {c}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr
+              key={i}
+              className="border-b border-black/5 align-top last:border-0"
+            >
+              {cols.map((c) => (
+                <td
+                  key={c}
+                  className="whitespace-pre-wrap break-words px-2 py-1.5"
+                >
+                  <Cell value={r[c]} />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+/** Recursieve weergave: tabellen voor lijsten, key/value voor objecten. */
+function ValueView({ value }: { value: unknown }) {
+  const v = parseMaybe(value)
+
+  if (v === null || v === undefined || v === '')
+    return <span className="opacity-50">—</span>
+
+  if (Array.isArray(v)) {
+    if (v.length > 0 && v.every(isPlainObject)) {
+      return <DataTable rows={v as Record<string, unknown>[]} />
+    }
+    if (v.length === 0) return <span className="opacity-50">—</span>
+    return <span>{v.map((x) => scalarText(x)).join(', ')}</span>
+  }
+
+  if (isPlainObject(v)) {
+    return (
+      <dl className="space-y-1">
+        {Object.entries(v).map(([k, val]) => (
+          <div key={k} className="flex gap-2">
+            <dt className="w-32 shrink-0 font-medium opacity-60">{k}</dt>
+            <dd className="min-w-0 flex-1 break-words">
+              <ValueView value={val} />
+            </dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+
+  return <span className="whitespace-pre-wrap break-words">{String(v)}</span>
 }
 
 export function Connector({ active }: { active: boolean }) {
@@ -138,7 +216,7 @@ export function WorkflowNodeCard({
               {result.error}
             </div>
           ) : (
-            <div className="grid gap-3 md:grid-cols-2">
+            <div className="space-y-3">
               {node.kind !== 'trigger' && (
                 <IoBlock label="Input" value={result.input} muted />
               )}
@@ -146,7 +224,6 @@ export function WorkflowNodeCard({
                 label={node.kind === 'trigger' ? 'Record' : 'Output'}
                 value={result.output}
                 accent={isAi}
-                full={node.kind === 'trigger'}
               />
             </div>
           )}
@@ -169,7 +246,6 @@ function IoBlock({
   accent?: boolean
   full?: boolean
 }) {
-  const c = coerce(value)
   const bg = accent
     ? 'bg-[var(--color-accent-soft)] text-emerald-900'
     : muted
@@ -181,28 +257,11 @@ function IoBlock({
       <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]">
         {label}
       </div>
-      {c.kind === 'object' ? (
-        <dl
-          className={`max-h-56 space-y-1 overflow-auto rounded-lg px-3 py-2 text-xs leading-relaxed ${bg}`}
-        >
-          {Object.entries(c.data).map(([k, v]) => (
-            <div key={k} className="flex gap-2">
-              <dt className="shrink-0 font-medium opacity-70">{k}</dt>
-              <dd className="min-w-0 break-words">
-                {typeof v === 'object' && v !== null
-                  ? JSON.stringify(v)
-                  : String(v)}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      ) : (
-        <pre
-          className={`max-h-56 overflow-auto whitespace-pre-wrap break-words rounded-lg px-3 py-2 text-xs leading-relaxed ${bg}`}
-        >
-          {c.text}
-        </pre>
-      )}
+      <div
+        className={`max-h-80 overflow-auto rounded-lg px-3 py-2 text-xs leading-relaxed ${bg}`}
+      >
+        <ValueView value={value} />
+      </div>
     </div>
   )
 }
