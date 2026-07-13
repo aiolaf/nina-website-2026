@@ -72,6 +72,7 @@ export interface FeasibilityReport {
   watKanNu: string[]
   moetGebouwd: string[]
   kanNietRisico: string[]
+  dataMeerwaarde: string[]
   openVragen: {
     data: string[]
     taak: string[]

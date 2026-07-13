@@ -34,6 +34,25 @@ naar de backend, dus je opent alleen `http://localhost:5173`.
 Zonder API key werkt het profileren gewoon; de haalbaarheidscheck en de
 AI-stappen in de demo hebben de key nodig (real n8n mode werkt wel zonder).
 
+### API key toevoegen
+
+Twee opties:
+
+1. **Via de UI** (aanbevolen) — klik rechtsboven op **⚙ Instellingen**, plak je
+   `sk-ant-...` key en klik _Opslaan & testen_. De key wordt getest met een
+   minimale API-call en lokaal bewaard in `.local/settings.json` (gitignored).
+   Een key die je hier instelt wint van `.env`.
+2. **Via `.env`** — zet `ANTHROPIC_API_KEY=...` in `platform/.env`.
+
+### Werken zonder data: context/briefing
+
+Heb je nog geen (dummy)data voor een klant? Op scherm 2 kun je een groot stuk
+**context/briefing** plakken (doel, proces, voorbeelden, mails, documentatie).
+De haalbaarheidscheck draait dan op die tekst — naast of los van data. Het
+rapport bevat een aparte sectie **"Waar data de demo sterker maakt"** die
+concreet aangeeft welke data de demo overtuigender zou maken en waarom. De
+context wordt per klant lokaal in de browser onthouden (localStorage).
+
 ## De drie modules
 
 ### 1. Data Profiler (`server/profiler`)

@@ -24,16 +24,30 @@ export interface ClientsResponse {
   model: string
 }
 
+export interface SettingsResponse {
+  hasApiKey: boolean
+  source: 'settings' | 'env' | 'none'
+  model?: string
+}
+
 export const api = {
   clients: () => req<ClientsResponse>('/api/clients'),
+  settings: () => req<SettingsResponse>('/api/settings'),
+  setApiKey: (apiKey: string) =>
+    req<SettingsResponse>('/api/settings/api-key', {
+      method: 'POST',
+      body: JSON.stringify({ apiKey }),
+    }),
+  clearApiKey: () =>
+    req<SettingsResponse>('/api/settings/api-key', { method: 'DELETE' }),
   client: (name: string) =>
     req<ClientDetail>(`/api/clients/${encodeURIComponent(name)}`),
   profile: (name: string) =>
     req<ProfileResult>(`/api/clients/${encodeURIComponent(name)}/profile`),
-  feasibility: (name: string) =>
+  feasibility: (name: string, context = '') =>
     req<FeasibilityReport>(
       `/api/clients/${encodeURIComponent(name)}/feasibility`,
-      { method: 'POST', body: '{}' },
+      { method: 'POST', body: JSON.stringify({ context }) },
     ),
   record: (name: string, index: number) =>
     req<RecordInfo>(

@@ -7,10 +7,18 @@ import type {
 
 const SYSTEM = `Je bent een senior AI-automation consultant bij NinA AI Agency.
 Je beoordeelt of een klantvraag haalbaar is als n8n AI-automation of AI-agent,
-op basis van een data-profiel en de klantvraag. Wees concreet, nuchter en eerlijk:
-benoem wat nu al kan, wat nog gebouwd moet worden, en wat niet kan of risicovol is.
-Denk aan koppelingen, auth, datavolume, ground truth en gevoeligheid van beslissingen.
-Schrijf kort en in het Nederlands. Verzin geen data die niet in het profiel staat.`
+op basis van (a) een data-profiel, (b) een klantvraag en (c) optionele vrije
+context/briefing. Wees concreet, nuchter en eerlijk: benoem wat nu al kan, wat
+nog gebouwd moet worden, en wat niet kan of risicovol is. Denk aan koppelingen,
+auth, datavolume, ground truth en gevoeligheid van beslissingen.
+
+Als er weinig of geen data is, baseer je oordeel dan op de klantvraag en de
+context/briefing, en maak expliciet welke aannames je doet. Vul in dat geval
+'dataMeerwaarde' extra zorgvuldig: leg concreet uit welke data (welke velden,
+volume, voorbeelden) de demo aantoonbaar sterker en overtuigender maakt, en
+waarom — toegespitst op déze klantvraag, niet algemeen.
+
+Schrijf kort en in het Nederlands. Verzin geen data die niet is aangeleverd.`
 
 // JSON-schema voor de gestructureerde tool-output.
 const SCHEMA = {
@@ -33,7 +41,8 @@ const SCHEMA = {
     watKanNu: {
       type: 'array',
       items: { type: 'string' },
-      description: 'Concrete dingen die met de huidige data al kunnen.',
+      description:
+        'Concrete dingen die met de huidige data/context al kunnen. Leeg als er nog niets kan.',
     },
     moetGebouwd: {
       type: 'array',
@@ -43,7 +52,14 @@ const SCHEMA = {
     kanNietRisico: {
       type: 'array',
       items: { type: 'string' },
-      description: 'Wat niet kan of risicovol is (te weinig data, geen ground truth, gevoelige beslissing).',
+      description:
+        'Wat niet kan of risicovol is (te weinig data, geen ground truth, gevoelige beslissing).',
+    },
+    dataMeerwaarde: {
+      type: 'array',
+      items: { type: 'string' },
+      description:
+        'Concreet waar échte of méér data deze specifieke demo sterker maakt: welke velden/records/voorbeelden, en welk demo-effect dat oplevert.',
     },
     openVragen: {
       type: 'object',
@@ -63,11 +79,17 @@ const SCHEMA = {
     'watKanNu',
     'moetGebouwd',
     'kanNietRisico',
+    'dataMeerwaarde',
     'openVragen',
   ],
 } as const
 
-function buildUserPrompt(config: ClientConfig, profile: ProfileResult): string {
+function buildUserPrompt(
+  config: ClientConfig,
+  profile: ProfileResult,
+  context: string,
+): string {
+  const heeftData = profile.totalRecords > 0
   const dataSummary = profile.files
     .map((f) => {
       const fields = f.fields
@@ -82,27 +104,39 @@ function buildUserPrompt(config: ClientConfig, profile: ProfileResult): string {
     })
     .join('\n\n')
 
-  return `KLANT: ${config.klant || profile.klant}
-KLANTVRAAG: ${config.vraag || '(niet opgegeven)'}
-VERWACHT TYPE (uit config): ${config.type}
+  const contextBlok = context.trim()
+    ? `\nEXTRA CONTEXT / BRIEFING VAN DE KLANT:\n${context.trim()}\n`
+    : '\n(Geen extra context/briefing aangeleverd.)\n'
 
-DATA-OORDEEL PROFILER: ${profile.verdict.toUpperCase()} — ${profile.verdictReason}
+  const dataBlok = heeftData
+    ? `DATA-OORDEEL PROFILER: ${profile.verdict.toUpperCase()} — ${profile.verdictReason}
 Totaal ${profile.totalRecords} records, ${profile.totalFields} velden.
 ${profile.piiFound.length ? `Gedetecteerde PII: ${profile.piiFound.join(', ')}.` : 'Geen PII gedetecteerd.'}
 
 DATA-PROFIEL:
-${dataSummary || '(geen databestanden)'}
+${dataSummary}`
+    : `DATA: er is nog GEEN (voorbeeld)data aangeleverd. Baseer je oordeel op de
+klantvraag en de context hieronder, en wees expliciet over je aannames.`
 
-Geef een gestructureerd haalbaarheidsrapport via de tool.`
+  return `KLANT: ${config.klant || profile.klant}
+KLANTVRAAG: ${config.vraag || '(niet opgegeven)'}
+VERWACHT TYPE (uit config): ${config.type}
+
+${dataBlok}
+${contextBlok}
+Geef een gestructureerd haalbaarheidsrapport via de tool. Vul altijd
+'dataMeerwaarde' met concrete punten die specifiek voor deze klantvraag laten
+zien waar (meer/echte) data de demo overtuigender maakt.`
 }
 
 export async function generateFeasibility(
   config: ClientConfig,
   profile: ProfileResult,
+  context = '',
 ): Promise<FeasibilityReport> {
   return runStructured<FeasibilityReport>(
     SYSTEM,
-    buildUserPrompt(config, profile),
+    buildUserPrompt(config, profile, context),
     'haalbaarheidsrapport',
     SCHEMA as unknown as Record<string, unknown>,
   )

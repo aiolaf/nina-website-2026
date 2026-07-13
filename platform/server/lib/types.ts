@@ -82,6 +82,8 @@ export interface FeasibilityReport {
   watKanNu: string[]
   moetGebouwd: string[]
   kanNietRisico: string[]
+  /** Concreet waar échte/meer data deze demo sterker maakt. */
+  dataMeerwaarde: string[]
   openVragen: {
     data: string[]
     taak: string[]

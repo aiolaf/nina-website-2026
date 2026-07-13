@@ -1,26 +1,51 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { getStoredApiKey } from './settings.ts'
 
-// Eén gedeelde client. De key komt uit .env (zie server/index.ts dat dotenv laadt).
 // Model is instelbaar via ANTHROPIC_MODEL; default is claude-sonnet-4-6 zoals de
 // NinA-briefing voorschrijft.
 export const MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-6'
 
 let client: Anthropic | null = null
+let clientKey: string | undefined
+
+/** Effectieve key: een via de UI ingestelde key wint van .env. */
+export function effectiveApiKey(): string | undefined {
+  return getStoredApiKey() || process.env.ANTHROPIC_API_KEY || undefined
+}
 
 export function hasApiKey(): boolean {
-  return Boolean(process.env.ANTHROPIC_API_KEY)
+  return Boolean(effectiveApiKey())
+}
+
+export function apiKeySource(): 'settings' | 'env' | 'none' {
+  if (getStoredApiKey()) return 'settings'
+  if (process.env.ANTHROPIC_API_KEY) return 'env'
+  return 'none'
 }
 
 export function getClient(): Anthropic {
-  if (!hasApiKey()) {
+  const key = effectiveApiKey()
+  if (!key) {
     throw new Error(
-      'ANTHROPIC_API_KEY ontbreekt. Kopieer .env.example naar .env en vul je key in.',
+      'ANTHROPIC_API_KEY ontbreekt. Voeg de key toe via Instellingen in de app, of zet hem in .env.',
     )
   }
-  if (!client) {
-    client = new Anthropic()
+  // Herbouw de client als de key is gewijzigd (bv. net via de UI ingesteld).
+  if (!client || clientKey !== key) {
+    client = new Anthropic({ apiKey: key })
+    clientKey = key
   }
   return client
+}
+
+/** Test of een key geldig is met een minimale API-call. */
+export async function validateApiKey(key: string): Promise<void> {
+  const probe = new Anthropic({ apiKey: key })
+  await probe.messages.create({
+    model: MODEL,
+    max_tokens: 1,
+    messages: [{ role: 'user', content: 'hi' }],
+  })
 }
 
 /**

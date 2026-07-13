@@ -108,6 +108,26 @@ export function FeasibilityPanel({ report }: { report: FeasibilityReport }) {
         />
       </div>
 
+      {report.dataMeerwaarde.length > 0 && (
+        <Card className="border-l-4 border-l-[var(--color-accent)] bg-[var(--color-accent-soft)] p-5">
+          <div className="mb-3 flex items-center gap-2">
+            <span aria-hidden>📊</span>
+            <h3 className="font-medium">Waar data de demo sterker maakt</h3>
+          </div>
+          <ul className="space-y-2">
+            {report.dataMeerwaarde.map((it, i) => (
+              <li
+                key={i}
+                className="flex gap-2 text-sm leading-relaxed text-emerald-900"
+              >
+                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--color-accent)]" />
+                <span>{it}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      )}
+
       <Card className="p-5">
         <h3 className="mb-4 font-medium">Open vragen voor de klant</h3>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

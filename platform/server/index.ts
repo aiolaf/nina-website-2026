@@ -3,7 +3,13 @@ import path from 'node:path'
 import fs from 'node:fs'
 import express, { type Request, type Response } from 'express'
 import cors from 'cors'
-import { hasApiKey, MODEL } from './lib/anthropic.ts'
+import {
+  apiKeySource,
+  hasApiKey,
+  MODEL,
+  validateApiKey,
+} from './lib/anthropic.ts'
+import { setStoredApiKey } from './lib/settings.ts'
 import { listClients, listDataFiles, readConfig, ROOT } from './lib/clients.ts'
 import { profileClient } from './profiler/index.ts'
 import { generateFeasibility } from './feasibility/index.ts'
@@ -32,6 +38,47 @@ function wrap(
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, model: MODEL, hasApiKey: hasApiKey() })
 })
+
+// --- Instellingen: API key ---
+app.get(
+  '/api/settings',
+  wrap((_req, res) => {
+    res.json({ hasApiKey: hasApiKey(), source: apiKeySource(), model: MODEL })
+  }),
+)
+
+// Zet (of test) de API key. Body: { apiKey, validate?: boolean }.
+app.post(
+  '/api/settings/api-key',
+  wrap(async (req, res) => {
+    const apiKey = String(req.body?.apiKey ?? '').trim()
+    if (!apiKey) {
+      res.status(400).json({ error: 'Geen API key opgegeven.' })
+      return
+    }
+    // Standaard valideren we de key met een minimale call, tenzij expliciet uit.
+    if (req.body?.validate !== false) {
+      try {
+        await validateApiKey(apiKey)
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err)
+        res.status(400).json({ error: `Key afgekeurd: ${message}` })
+        return
+      }
+    }
+    setStoredApiKey(apiKey)
+    res.json({ hasApiKey: hasApiKey(), source: apiKeySource() })
+  }),
+)
+
+// Wis de via de UI opgeslagen key (valt terug op .env indien aanwezig).
+app.delete(
+  '/api/settings/api-key',
+  wrap((_req, res) => {
+    setStoredApiKey(undefined)
+    res.json({ hasApiKey: hasApiKey(), source: apiKeySource() })
+  }),
+)
 
 // Lijst van klanten + omgevingsstatus.
 app.get(
@@ -68,9 +115,10 @@ app.post(
       return
     }
     const name = String(req.params.name)
+    const context = String(req.body?.context ?? '')
     const config = readConfig(name)
     const profile = profileClient(name)
-    const report = await generateFeasibility(config, profile)
+    const report = await generateFeasibility(config, profile, context)
     res.json(report)
   }),
 )
