@@ -11,6 +11,7 @@ import {
 } from './lib/anthropic.ts'
 import { setStoredApiKey } from './lib/settings.ts'
 import { addRun, clearHistory, deleteRun, listHistory } from './lib/history.ts'
+import { fillExcelForDemo } from './excel/index.ts'
 import {
   listClients,
   listDataFiles,
@@ -131,6 +132,25 @@ app.post(
     const profile = profileClient(name)
     const report = await generateFeasibility(config, profile, context)
     res.json(report)
+  }),
+)
+
+// Vul het Excel-template van een demo in en bied het als download aan.
+app.get(
+  '/api/clients/:name/excel',
+  wrap(async (req, res) => {
+    const name = String(req.params.name)
+    const demoId = req.query.demo ? String(req.query.demo) : undefined
+    const { buffer, filename } = await fillExcelForDemo(name, demoId)
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    )
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${filename.replace(/"/g, '')}"`,
+    )
+    res.send(buffer)
   }),
 )
 

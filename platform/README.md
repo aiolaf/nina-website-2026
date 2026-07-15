@@ -85,6 +85,13 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
   zie je "Eerdere demo's"; je kunt een oude run terugbekijken, losse runs
   verwijderen (✕) of alles wissen. De historie staat lokaal in
   `.local/history.json` (gitignored).
+- **Excel invullen** (optioneel per demo): vul een bestaand Excel-template in en
+  bied het als download aan. Het bestand wordt niet herbouwd — alleen de lege
+  invoercellen worden gevuld; formules (bv. totaal = prijs × hoeveelheid) en de
+  huisstijl blijven behouden, en Excel herrekent bij het openen. Zie de demo
+  "Prijsvergelijk invullen" van `pleijsier-bouw`. Config: zet op de demo
+  `"excel": { "template": "bron/....xlsx", "fill": "data/....json", "filename": "..." }`,
+  waarbij `fill` een `{ sheet, cells: [{ address, value }] }` mapping is.
 
 ## Mappenstructuur
 

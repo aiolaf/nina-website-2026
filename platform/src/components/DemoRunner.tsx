@@ -255,6 +255,16 @@ export function DemoRunner({
             {result.usedRealN8n ? 'via n8n webhook' : 'lokaal (AI + mock)'}
           </Badge>
         )}
+
+        {demo?.excel && (
+          <a
+            href={`/api/clients/${encodeURIComponent(klant)}/excel?demo=${encodeURIComponent(demo.id)}`}
+            className="ml-auto inline-flex items-center gap-2 rounded-xl border border-emerald-300 bg-[var(--color-accent-soft)] px-4 py-2.5 text-sm font-medium text-emerald-800 transition hover:border-emerald-400"
+            title="Vul het bestaande prijsvergelijk-Excel in (formules en huisstijl blijven behouden) en download het"
+          >
+            ⬇ Vul Excel in &amp; download
+          </a>
+        )}
       </div>
 
       {!hasApiKey && !realN8n && (

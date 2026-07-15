@@ -18,6 +18,7 @@ export interface DemoDef {
   dataFile?: string
   workflow: WorkflowNode[]
   n8nWebhookUrl?: string
+  excel?: { template: string; fill: string; filename?: string }
 }
 
 export interface ClientConfig {

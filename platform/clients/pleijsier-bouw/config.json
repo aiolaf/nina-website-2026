@@ -44,6 +44,11 @@
       "beschrijving": "Per begrotingspost: match de aanbiedingen van de leveranciers semantisch, reken om naar €/m2, markeer afwijkingen en ontbrekende posten met @@, en bepaal de gunstigste aanbieding.",
       "type": "automation",
       "dataFile": "prijsvergelijk_regels.json",
+      "excel": {
+        "template": "bron/prijsvergelijk_template.xlsx",
+        "fill": "data/excel_fill.json",
+        "filename": "Prijsvergelijk kanaalplaten Segro Hoofddorp - ingevuld.xlsx"
+      },
       "workflow": [
         { "id": "trigger", "label": "Begrotingspost + aanbiedingen", "kind": "trigger" },
         {

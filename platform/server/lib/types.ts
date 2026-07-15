@@ -23,6 +23,8 @@ export interface DemoDef {
   dataFile?: string
   workflow: WorkflowNode[]
   n8nWebhookUrl?: string
+  /** Optioneel: vul een bestaand Excel-template in en bied het als download aan. */
+  excel?: { template: string; fill: string; filename?: string }
 }
 
 export interface ClientConfig {
