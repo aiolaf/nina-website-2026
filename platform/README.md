@@ -90,8 +90,16 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
   invoercellen worden gevuld; formules (bv. totaal = prijs × hoeveelheid) en de
   huisstijl blijven behouden, en Excel herrekent bij het openen. Zie de demo
   "Prijsvergelijk invullen" van `pleijsier-bouw`. Config: zet op de demo
-  `"excel": { "template": "bron/....xlsx", "fill": "data/....json", "filename": "..." }`,
-  waarbij `fill` een `{ sheet, cells: [{ address, value }] }` mapping is.
+  `"excel": { "template": "bron/....xlsx", "fill": "data/....json", "filename": "...", "viewFilled": "bron/....xlsx" }`,
+  waarbij `fill` een `{ sheet, cells: [{ address, value }] }` mapping is. Met
+  `excel` verschijnt in de demo ook een **Excel-viewer** (toggle leeg template ↔
+  ingevuld, met de automatisch gevulde cellen groen gemarkeerd) plus een
+  download-knop; `viewFilled` is het bestand dat als "ingevuld" wordt getoond.
+- **Brondocumenten-paneel** (optioneel per demo): laat visueel zien dat bestanden
+  automatisch uit een SharePoint-map komen óf zelf geüpload worden. Config:
+  `"sources": { "sharepoint": "pad", "files": [{ "name": "...", "bedrijf": "..." }] }`.
+  (De SharePoint-ophaal en PDF-upload zijn in de demo visueel; de verwerking loopt
+  via de bestaande stappen.)
 
 ## Mappenstructuur
 

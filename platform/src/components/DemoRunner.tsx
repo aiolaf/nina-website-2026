@@ -7,6 +7,8 @@ import {
   WorkflowNodeCard,
   type NodeStatus,
 } from './WorkflowNodeCard'
+import { SourcePanel } from './SourcePanel'
+import { ExcelViewer } from './ExcelViewer'
 
 export function DemoRunner({
   klant,
@@ -186,6 +188,8 @@ export function DemoRunner({
         </p>
       )}
 
+      {demo?.sources && <SourcePanel sources={demo.sources} />}
+
       {/* Bediening */}
       <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-[var(--color-line)] bg-white p-4">
         <button
@@ -255,16 +259,6 @@ export function DemoRunner({
             {result.usedRealN8n ? 'via n8n webhook' : 'lokaal (AI + mock)'}
           </Badge>
         )}
-
-        {demo?.excel && (
-          <a
-            href={`/api/clients/${encodeURIComponent(klant)}/excel?demo=${encodeURIComponent(demo.id)}`}
-            className="ml-auto inline-flex items-center gap-2 rounded-xl border border-emerald-300 bg-[var(--color-accent-soft)] px-4 py-2.5 text-sm font-medium text-emerald-800 transition hover:border-emerald-400"
-            title="Vul het bestaande prijsvergelijk-Excel in (formules en huisstijl blijven behouden) en download het"
-          >
-            ⬇ Vul Excel in &amp; download
-          </a>
-        )}
       </div>
 
       {!hasApiKey && !realN8n && (
@@ -330,6 +324,15 @@ export function DemoRunner({
           </div>
         ))}
       </div>
+
+      {/* Excel-viewer + download (voor demo's met een Excel-template) */}
+      {demo?.excel && (
+        <ExcelViewer
+          klant={klant}
+          demoId={demo.id}
+          downloadHref={api.excelUrl(klant, demo.id)}
+        />
+      )}
 
       {/* Historie van eerdere runs (alle demo's van deze klant) */}
       <HistoryPanel

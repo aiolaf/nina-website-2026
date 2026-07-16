@@ -5,6 +5,7 @@ import type {
   ProfileResult,
   RecordInfo,
   RunResult,
+  SheetGrid,
 } from './types'
 
 async function req<T>(url: string, init?: RequestInit): Promise<T> {
@@ -74,4 +75,12 @@ export const api = {
       `/api/history?klant=${encodeURIComponent(klant)}`,
       { method: 'DELETE' },
     ),
+  excelView: (klant: string, demoId: string, mode: 'template' | 'filled') =>
+    req<SheetGrid>(
+      `/api/clients/${encodeURIComponent(klant)}/excel-view?demo=${encodeURIComponent(
+        demoId,
+      )}&mode=${mode}`,
+    ),
+  excelUrl: (klant: string, demoId: string) =>
+    `/api/clients/${encodeURIComponent(klant)}/excel?demo=${encodeURIComponent(demoId)}`,
 }

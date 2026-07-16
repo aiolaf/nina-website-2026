@@ -47,7 +47,17 @@
       "excel": {
         "template": "bron/prijsvergelijk_template.xlsx",
         "fill": "data/excel_fill.json",
-        "filename": "Prijsvergelijk kanaalplaten Segro Hoofddorp - ingevuld.xlsx"
+        "filename": "Prijsvergelijk kanaalplaten Segro Hoofddorp - ingevuld.xlsx",
+        "viewFilled": "bron/Prijsvergelijk kanaalplaten segro Hoofddorp ML.xlsx"
+      },
+      "sources": {
+        "sharepoint": "SharePoint > Segro Hoofddorp > 04 Inkoop > Kanaalplaatvloeren > Offertes",
+        "files": [
+          { "name": "Offerte Preco - kanaalplaten Segro.pdf", "bedrijf": "Preco" },
+          { "name": "Aanbieding Nieuwpoort kanaalplaten.pdf", "bedrijf": "Nieuwpoort" },
+          { "name": "Olbecon offerte 2231473.pdf", "bedrijf": "Olbecon" },
+          { "name": "VBI 20221206 kanaalplaatvloeren.pdf", "bedrijf": "VBI" }
+        ]
       },
       "workflow": [
         { "id": "trigger", "label": "Begrotingspost + aanbiedingen", "kind": "trigger" },

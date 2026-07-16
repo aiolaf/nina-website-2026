@@ -11,7 +11,7 @@ import {
 } from './lib/anthropic.ts'
 import { setStoredApiKey } from './lib/settings.ts'
 import { addRun, clearHistory, deleteRun, listHistory } from './lib/history.ts'
-import { fillExcelForDemo } from './excel/index.ts'
+import { fillExcelForDemo, sheetGrid } from './excel/index.ts'
 import {
   listClients,
   listDataFiles,
@@ -151,6 +151,17 @@ app.get(
       `attachment; filename="${filename.replace(/"/g, '')}"`,
     )
     res.send(buffer)
+  }),
+)
+
+// Excel-viewer: sheet als grid (mode=template of filled).
+app.get(
+  '/api/clients/:name/excel-view',
+  wrap(async (req, res) => {
+    const name = String(req.params.name)
+    const demoId = req.query.demo ? String(req.query.demo) : undefined
+    const mode = req.query.mode === 'filled' ? 'filled' : 'template'
+    res.json(await sheetGrid(name, demoId, mode))
   }),
 )
 

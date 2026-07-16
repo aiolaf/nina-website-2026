@@ -18,7 +18,22 @@ export interface DemoDef {
   dataFile?: string
   workflow: WorkflowNode[]
   n8nWebhookUrl?: string
-  excel?: { template: string; fill: string; filename?: string }
+  excel?: { template: string; fill: string; filename?: string; viewFilled?: string }
+  sources?: { sharepoint?: string; files: { name: string; bedrijf?: string }[] }
+}
+
+export interface GridCell {
+  c: number
+  addr: string
+  v: string | number
+  filled: boolean
+  cs: number
+  rs: number
+}
+export interface SheetGrid {
+  sheet: string
+  maxCol: number
+  rows: { r: number; cells: GridCell[] }[]
 }
 
 export interface ClientConfig {

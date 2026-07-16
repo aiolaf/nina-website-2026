@@ -24,7 +24,33 @@ export interface DemoDef {
   workflow: WorkflowNode[]
   n8nWebhookUrl?: string
   /** Optioneel: vul een bestaand Excel-template in en bied het als download aan. */
-  excel?: { template: string; fill: string; filename?: string }
+  excel?: {
+    template: string
+    fill: string
+    filename?: string
+    /** Bestand dat als "ingevuld" in de viewer wordt getoond (default: template + fill). */
+    viewFilled?: string
+  }
+  /** Optioneel: brondocumenten-paneel (SharePoint of upload) in de demo. */
+  sources?: {
+    sharepoint?: string
+    files: { name: string; bedrijf?: string }[]
+  }
+}
+
+/** Eén rij in de Excel-viewer. */
+export interface GridCell {
+  c: number
+  addr: string
+  v: string | number
+  filled: boolean
+  cs: number
+  rs: number
+}
+export interface SheetGrid {
+  sheet: string
+  maxCol: number
+  rows: { r: number; cells: GridCell[] }[]
 }
 
 export interface ClientConfig {
