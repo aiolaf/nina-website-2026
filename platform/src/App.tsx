@@ -56,11 +56,14 @@ export default function App() {
         setModel(c.model)
         setSettings(s)
       })
-      .catch((e) =>
+      .catch((e) => {
+        const detail = e instanceof Error ? e.message : String(e)
         setBootError(
-          e instanceof Error ? e.message : 'Kan de backend niet bereiken.',
-        ),
-      )
+          `Kan de API niet bereiken (${detail}). Draait de backend mee? ` +
+            'Start het geheel met "npm run dev". Let op: "npm run preview" ' +
+            'serveert alleen de frontend zonder API — gebruik "npm run dev" of "npm run start".',
+        )
+      })
   }, [])
 
   async function selectClient(name: string) {
@@ -188,6 +191,7 @@ export default function App() {
             selected={selected}
             config={config}
             onSelect={selectClient}
+            loadError={Boolean(bootError)}
           />
           {profileLoading && <Spinner label="Data profileren…" />}
           {profileError && <ErrorNote message={profileError} />}

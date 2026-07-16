@@ -6,11 +6,13 @@ export function ClientPicker({
   selected,
   config,
   onSelect,
+  loadError,
 }: {
   clients: string[]
   selected: string | null
   config: ClientConfig | null
   onSelect: (name: string) => void
+  loadError?: boolean
 }) {
   return (
     <div className="space-y-4">
@@ -19,10 +21,17 @@ export function ClientPicker({
           Klant
         </label>
         {clients.length === 0 ? (
-          <p className="text-sm text-[var(--color-ink-soft)]">
-            Geen klanten gevonden. Maak een map <code>/clients/[naam]</code> met
-            een <code>config.json</code>.
-          </p>
+          loadError ? (
+            <p className="text-sm text-rose-600">
+              Kan de klantenlijst niet laden — zie de foutmelding hierboven. De
+              backend draait waarschijnlijk niet.
+            </p>
+          ) : (
+            <p className="text-sm text-[var(--color-ink-soft)]">
+              Geen klanten gevonden. Maak een map <code>/clients/[naam]</code>{' '}
+              met een <code>config.json</code>.
+            </p>
+          )
         ) : (
           <div className="flex flex-wrap gap-2">
             {clients.map((c) => (

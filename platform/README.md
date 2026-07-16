@@ -120,6 +120,21 @@ Zie `templates/README.md` voor het `config.json`-formaat en de node-types.
 | `npm run start`     | backend in productie (serveert `dist/` mee)     |
 | `npm run typecheck` | TypeScript check van frontend én backend        |
 
+> **Gebruik `npm run dev`** om alles lokaal te draaien (open dan
+> <http://localhost:5173>). Voor productie: eerst `npm run build`, dan
+> `npm run start` (open <http://localhost:8787>).
+
+### Fout 404 / "Geen klanten gevonden"?
+
+Dan draait de **frontend zonder de backend**. De API leeft in de Express-backend;
+alleen de frontend serveren geeft een 404 op `/api/...`. Oplossing:
+
+- Draai `npm run dev` (start frontend én backend) en open `http://localhost:5173`.
+- Of `npm run build` + `npm run start` en open `http://localhost:8787`.
+- `npm run preview` serveert standaard alleen de frontend — start dan óók de
+  backend (`npm run dev:server`) in een tweede terminal; de preview proxyt `/api`
+  daar automatisch naartoe.
+
 ## config.json
 
 ```json
