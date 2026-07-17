@@ -94,7 +94,12 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
   waarbij `fill` een `{ sheet, cells: [{ address, value }] }` mapping is. Met
   `excel` verschijnt in de demo ook een **Excel-viewer** (toggle leeg template ↔
   ingevuld, met de automatisch gevulde cellen groen gemarkeerd) plus een
-  download-knop; `viewFilled` is het bestand dat als "ingevuld" wordt getoond.
+  download-knop; `viewFilled` is het bestand dat als "ingevuld" wordt getoond
+  én dat rechtstreeks als download wordt teruggegeven. Dat laatste is bewust: een
+  door Excel zelf gemaakt bestand teruggeven voorkomt de "we found a problem /
+  recover"-herstelmelding die je krijgt als je een complex werkblad (met o.a.
+  shared formulas) via een library herserialiseert. Zonder `viewFilled` vult het
+  platform het template met ExcelJS (kan bij complexe sheets die melding geven).
 - **Brondocumenten-paneel** (optioneel per demo): laat visueel zien dat bestanden
   automatisch uit een SharePoint-map komen óf zelf geüpload worden. Config:
   `"sources": { "sharepoint": "pad", "files": [{ "name": "...", "bedrijf": "..." }] }`.

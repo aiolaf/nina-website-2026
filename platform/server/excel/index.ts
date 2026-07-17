@@ -44,9 +44,23 @@ export async function fillExcelForDemo(
     throw new Error('Deze demo heeft geen Excel-invuloptie.')
   }
   const dir = clientDir(klant)
+  const filename = demo.excel.filename || 'prijsvergelijk-ingevuld.xlsx'
+
+  // Voorkeur: geef het door Excel zelf gemaakte, geldige bestand rechtstreeks
+  // terug. Zo krijg je GEEN "we found a problem"-herstelmelding. ExcelJS
+  // herserialiseren van een complex werkblad (met o.a. shared formulas) levert
+  // net-niet-geldige XML op die Excel wil repareren.
+  if (demo.excel.viewFilled) {
+    const nativePath = safeJoin(dir, demo.excel.viewFilled)
+    if (fs.existsSync(nativePath)) {
+      return { buffer: fs.readFileSync(nativePath), filename }
+    }
+  }
+
+  // Fallback (demo's zonder een geldig ingevuld voorbeeldbestand): vul het
+  // template via ExcelJS. Kan een herstelmelding geven bij complexe sheets.
   const templatePath = safeJoin(dir, demo.excel.template)
   const fillPath = safeJoin(dir, demo.excel.fill)
-
   if (!fs.existsSync(templatePath)) {
     throw new Error(`Template niet gevonden: ${demo.excel.template}`)
   }
@@ -55,20 +69,14 @@ export async function fillExcelForDemo(
   const wb = new ExcelJS.Workbook()
   await wb.xlsx.readFile(templatePath)
   const ws = wb.getWorksheet(spec.sheet) ?? wb.worksheets[0]
-
   for (const c of spec.cells) {
     ws.getCell(c.address).value = c.value
   }
-
-  // Laat Excel de formules (totalen) herrekenen op basis van de nieuwe invoer.
   wb.calcProperties = wb.calcProperties || {}
   wb.calcProperties.fullCalcOnLoad = true
 
   const arrayBuffer = await wb.xlsx.writeBuffer()
-  return {
-    buffer: Buffer.from(arrayBuffer),
-    filename: demo.excel.filename || 'prijsvergelijk-ingevuld.xlsx',
-  }
+  return { buffer: Buffer.from(arrayBuffer), filename }
 }
 
 function colLetter(c: number): string {
