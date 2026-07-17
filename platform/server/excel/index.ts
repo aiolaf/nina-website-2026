@@ -159,8 +159,9 @@ export async function sheetGrid(
       const addr = colLetter(c) + r
       if (covered.has(addr)) continue
       let v = cellDisplay(ws.getCell(r, c))
-      // In template-modus tonen we de offertekolommen (>=10) leeg vanaf de datarijen.
-      if (mode === 'template' && c >= 10 && r >= 9) v = ''
+      // In template-modus tonen we een écht leeg formulier: alle datarijen (r>=9)
+      // leeg, alleen de koppen/structuur (rijen 1-8) blijven staan.
+      if (mode === 'template' && r >= 9) v = ''
       const sp = span.get(addr) ?? { cs: 1, rs: 1 }
       cells.push({ c, addr, v, filled: fillAddrs.has(addr), cs: sp.cs, rs: sp.rs })
     }
