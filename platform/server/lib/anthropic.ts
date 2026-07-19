@@ -106,3 +106,52 @@ export async function runStructured<T>(
   }
   return toolUse.input as T
 }
+
+/**
+ * Lees een PDF (base64) met Claude en dwing gestructureerde output af via een
+ * tool met JSON-schema. Gebruikt door de offerte-upload: Claude leest de
+ * offerte-PDF echt uit en levert de posten/prijzen als JSON.
+ */
+export async function runStructuredPdf<T>(
+  system: string,
+  user: string,
+  pdfBase64: string,
+  toolName: string,
+  schema: Record<string, unknown>,
+  maxTokens = 4096,
+): Promise<T> {
+  const res = await getClient().messages.create({
+    model: MODEL,
+    max_tokens: maxTokens,
+    system,
+    tools: [
+      {
+        name: toolName,
+        description:
+          'Lever het gevraagde gestructureerde resultaat via dit schema.',
+        input_schema: schema as Anthropic.Tool.InputSchema,
+      },
+    ],
+    tool_choice: { type: 'tool', name: toolName },
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'document',
+            source: { type: 'base64', media_type: 'application/pdf', data: pdfBase64 },
+          },
+          { type: 'text', text: user },
+        ],
+      },
+    ],
+  })
+
+  const toolUse = res.content.find(
+    (b): b is Anthropic.ToolUseBlock => b.type === 'tool_use',
+  )
+  if (!toolUse) {
+    throw new Error('Model kon de PDF niet als gestructureerd antwoord teruggeven.')
+  }
+  return toolUse.input as T
+}

@@ -8,6 +8,7 @@ import {
   type NodeStatus,
 } from './WorkflowNodeCard'
 import { SourcePanel } from './SourcePanel'
+import { OfferUploadPanel } from './OfferUploadPanel'
 import { ExcelViewer } from './ExcelViewer'
 
 export function DemoRunner({
@@ -188,7 +189,11 @@ export function DemoRunner({
         </p>
       )}
 
-      {demo?.sources && <SourcePanel sources={demo.sources} />}
+      {demo?.excel?.upload ? (
+        <OfferUploadPanel klant={klant} demo={demo} hasApiKey={hasApiKey} />
+      ) : (
+        demo?.sources && <SourcePanel sources={demo.sources} />
+      )}
 
       {/* Bediening */}
       <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-[var(--color-line)] bg-white p-4">

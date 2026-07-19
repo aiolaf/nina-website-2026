@@ -12,6 +12,7 @@ import {
 import { setStoredApiKey } from './lib/settings.ts'
 import { addRun, clearHistory, deleteRun, listHistory } from './lib/history.ts'
 import { fillExcelForDemo, sheetGrid } from './excel/index.ts'
+import { fillOffersForDemo } from './excel/offers.ts'
 import {
   listClients,
   listDataFiles,
@@ -27,7 +28,8 @@ const app = express()
 const PORT = Number(process.env.PORT ?? 8787)
 
 app.use(cors())
-app.use(express.json({ limit: '2mb' }))
+// Ruim genoeg voor meerdere geüploade offerte-PDF's als base64 (JSON-body).
+app.use(express.json({ limit: '40mb' }))
 
 // Kleine helper zodat async-route-fouten netjes als JSON terugkomen.
 function wrap(
@@ -151,6 +153,35 @@ app.get(
       `attachment; filename="${filename.replace(/"/g, '')}"`,
     )
     res.send(buffer)
+  }),
+)
+
+// Offerte-upload: lees geüploade PDF's echt uit met Claude en vul het
+// prijsvergelijk-template. Body: { demoId, files: [{ name, base64 }] }.
+app.post(
+  '/api/clients/:name/offers-fill',
+  wrap(async (req, res) => {
+    if (!hasApiKey()) {
+      res.status(400).json({
+        error:
+          'ANTHROPIC_API_KEY ontbreekt — nodig om de PDF-offertes uit te lezen. Voeg de key toe via Instellingen.',
+      })
+      return
+    }
+    const name = String(req.params.name)
+    const demoId = req.body?.demoId ? String(req.body.demoId) : undefined
+    const rawFiles = Array.isArray(req.body?.files) ? req.body.files : []
+    const files = rawFiles
+      .map((f: { name?: unknown; base64?: unknown }) => ({
+        name: String(f?.name ?? 'offerte.pdf'),
+        base64: String(f?.base64 ?? ''),
+      }))
+      .filter((f: { base64: string }) => f.base64.length > 0)
+    if (!files.length) {
+      res.status(400).json({ error: 'Geen PDF-bestanden ontvangen.' })
+      return
+    }
+    res.json(await fillOffersForDemo(name, demoId, files))
   }),
 )
 

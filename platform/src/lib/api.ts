@@ -2,6 +2,7 @@ import type {
   ClientDetail,
   FeasibilityReport,
   HistoryEntry,
+  OfferFillResult,
   ProfileResult,
   RecordInfo,
   RunResult,
@@ -83,4 +84,13 @@ export const api = {
     ),
   excelUrl: (klant: string, demoId: string) =>
     `/api/clients/${encodeURIComponent(klant)}/excel?demo=${encodeURIComponent(demoId)}`,
+  offersFill: (
+    klant: string,
+    demoId: string,
+    files: { name: string; base64: string }[],
+  ) =>
+    req<OfferFillResult>(
+      `/api/clients/${encodeURIComponent(klant)}/offers-fill`,
+      { method: 'POST', body: JSON.stringify({ demoId, files }) },
+    ),
 }

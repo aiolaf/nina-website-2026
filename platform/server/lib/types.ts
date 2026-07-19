@@ -30,12 +30,89 @@ export interface DemoDef {
     filename?: string
     /** Bestand dat als "ingevuld" in de viewer wordt getoond (default: template + fill). */
     viewFilled?: string
+    /** Optioneel: échte offerte-upload → AI-uitlezen → template invullen. */
+    upload?: UploadSpec
   }
   /** Optioneel: brondocumenten-paneel (SharePoint of upload) in de demo. */
   sources?: {
     sharepoint?: string
     files: { name: string; bedrijf?: string }[]
   }
+}
+
+/** Kolom-indeling van één leverancier-blok in het prijsvergelijk-template. */
+export interface UploadBlock {
+  /** Celadres (rij 2) waar de bedrijfsnaam komt, bv. "K2". */
+  naam: string
+  /** Kolomletters binnen dit blok. */
+  hoev: string
+  eenh: string
+  prijs: string
+  totaal: string
+  opm: string
+}
+
+/** Eén begrotingspost (offertekant) met de rij in het template. */
+export interface UploadPost {
+  id: string
+  row: number
+  label: string
+}
+
+/** Config voor de échte offerte-upload van een demo. */
+export interface UploadSpec {
+  /** Leeg template dat gevuld wordt (relatief pad in de klantmap). */
+  base: string
+  sheet: string
+  filename?: string
+  /** Maximaal aantal leveranciers (= aantal blokken). */
+  blocks: UploadBlock[]
+  posten: UploadPost[]
+}
+
+/** Wat de AI per offerte-PDF teruggeeft. */
+export interface ExtractedOffer {
+  bedrijf: string
+  regels: {
+    post_id: string
+    aangeboden: boolean
+    hoeveelheid: number | null
+    eenheid: string | null
+    prijs_per_eenheid: number | null
+    opmerking: string | null
+  }[]
+}
+
+/** Eén cel in de vergelijk-/totaaltabel van de upload-viewer. */
+export interface OfferCompareCell {
+  prijs: number | null
+  hoeveelheid: number | null
+  eenheid: string | null
+  totaal: number | null
+  opmerking: string | null
+  aangeboden: boolean
+  /** true = gunstigste (laagste totaal) voor deze post. */
+  best: boolean
+}
+
+/** Resultaat van een offerte-upload: extractie + vergelijk + download. */
+export interface OfferFillResult {
+  klant: string
+  demoId: string
+  /** Leveranciers in uploadvolgorde (naam per blok). */
+  leveranciers: string[]
+  posten: {
+    id: string
+    label: string
+    cellen: OfferCompareCell[]
+  }[]
+  /** Totaal per leverancier (som van de posten). */
+  totalen: (number | null)[]
+  /** Gunstigste leverancier over het geheel (index in leveranciers), of null. */
+  gunstigsteIndex: number | null
+  /** Het ingevulde .xlsx als base64 (schone, geldige download). */
+  xlsxBase64: string
+  filename: string
 }
 
 /** Eén rij in de Excel-viewer. */

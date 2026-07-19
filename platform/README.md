@@ -103,8 +103,34 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
 - **Brondocumenten-paneel** (optioneel per demo): laat visueel zien dat bestanden
   automatisch uit een SharePoint-map komen óf zelf geüpload worden. Config:
   `"sources": { "sharepoint": "pad", "files": [{ "name": "...", "bedrijf": "..." }] }`.
-  (De SharePoint-ophaal en PDF-upload zijn in de demo visueel; de verwerking loopt
-  via de bestaande stappen.)
+  (De SharePoint-weergave is visueel; de PDF-upload is echt — zie hieronder.)
+- **Offerte-upload → AI-uitlezen → template invullen** (optioneel per demo): een
+  écht werkende upload. Je sleept 1–4 offerte-PDF's erin; elke PDF wordt door
+  Claude (PDF-document-block) uitgelezen naar gestructureerde posten/prijzen, en
+  vervolgens **chirurgisch** in het bestaande prijsvergelijk-template gezet: alleen
+  de prijscellen van de betreffende leverancierskolom worden gevuld, de formules
+  (totaal = prijs × hoeveelheid), gedeelde formules en huisstijl blijven intact.
+  Niet-geüploade leveranciers blijven leeg. In de UI verschijnt direct een
+  vergelijk-tabel (prijs/eenheid, totaal, gunstigste per post groen) met een
+  totaalregel, plus een download van de volledige, geldige `.xlsx`. Omdat we het
+  werkblad niet herserialiseren maar alleen losse cellen aanpassen en met jszip
+  herverpakken, krijg je géén "we found a problem / recover"-melding. Config: zet op
+  de demo onder `excel` een `upload`-blok:
+  ```json
+  "upload": {
+    "base": "bron/leeg_template.xlsx",
+    "sheet": "23.1_Kanaalplaten",
+    "filename": "prijsvergelijk-ingevuld.xlsx",
+    "blocks": [
+      { "naam": "K2", "hoev": "J", "eenh": "K", "prijs": "L", "totaal": "M", "opm": "N" }
+    ],
+    "posten": [{ "id": "begane_grond", "row": 24, "label": "Begane grond ..." }]
+  }
+  ```
+  waarbij elk `blocks`-item één leverancierskolom is (naam-cel in rij 2 + de
+  kolomletters), en `posten` de begrotingsposten koppelt aan hun rij in het
+  template. Leveranciers worden in uploadvolgorde aan de blokken toegewezen.
+  Vereist een Anthropic API key (de PDF's worden echt uitgelezen).
 
 ## Mappenstructuur
 

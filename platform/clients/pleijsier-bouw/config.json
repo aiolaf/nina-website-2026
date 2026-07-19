@@ -48,7 +48,29 @@
         "template": "bron/prijsvergelijk_template.xlsx",
         "fill": "data/excel_fill.json",
         "filename": "Prijsvergelijk kanaalplaten Segro Hoofddorp - ingevuld.xlsx",
-        "viewFilled": "bron/Prijsvergelijk kanaalplaten segro Hoofddorp ML.xlsx"
+        "viewFilled": "bron/Prijsvergelijk kanaalplaten segro Hoofddorp ML.xlsx",
+        "upload": {
+          "base": "bron/prijsvergelijk_template.xlsx",
+          "sheet": "23.1_Kanaalplaten",
+          "filename": "Prijsvergelijk kanaalplaten Segro Hoofddorp - ingevuld.xlsx",
+          "blocks": [
+            { "naam": "K2", "hoev": "J", "eenh": "K", "prijs": "L", "totaal": "M", "opm": "N" },
+            { "naam": "P2", "hoev": "O", "eenh": "P", "prijs": "Q", "totaal": "R", "opm": "S" },
+            { "naam": "U2", "hoev": "T", "eenh": "U", "prijs": "V", "totaal": "W", "opm": "X" },
+            { "naam": "Z2", "hoev": "Y", "eenh": "Z", "prijs": "AA", "totaal": "AB", "opm": "AC" }
+          ],
+          "posten": [
+            { "id": "begane_grond", "row": 24, "label": "Begane grond; 200mm +130 EPSmm (as A-E/1-1.2)" },
+            { "id": "portiersloge", "row": 25, "label": "Portiersloge; 200mm +130 EPSmm" },
+            { "id": "dak_energieplein", "row": 26, "label": "Dak energieplein; 260mm 60 min brandwerend (as G-H/1-2)" },
+            { "id": "balkonvloer", "row": 27, "label": "Balkonvloer; 150 mm (as 1/1.1-2)" },
+            { "id": "v1_kantoor", "row": 28, "label": "1e verdieping kantoor; 320 mm, 30 min brandwerend" },
+            { "id": "v1_mezzanine_30", "row": 29, "label": "1e verdieping mezzanine; 320 mm, 30 min brandwerend" },
+            { "id": "v1_mezzanine_60", "row": 30, "label": "1e verdieping mezzanine; 320 mm, 60 min brandwerend" },
+            { "id": "v2_kantoor", "row": 31, "label": "2e verdieping kantoor; 320 mm, 30 min brandwerend" },
+            { "id": "v2_techniek", "row": 32, "label": "2e verdieping technische ruimte; 320 mm, 30 min brandwerend" }
+          ]
+        }
       },
       "sources": {
         "sharepoint": "SharePoint > Segro Hoofddorp > 04 Inkoop > Kanaalplaatvloeren > Offertes",

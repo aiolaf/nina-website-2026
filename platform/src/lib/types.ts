@@ -18,8 +18,55 @@ export interface DemoDef {
   dataFile?: string
   workflow: WorkflowNode[]
   n8nWebhookUrl?: string
-  excel?: { template: string; fill: string; filename?: string; viewFilled?: string }
+  excel?: {
+    template: string
+    fill: string
+    filename?: string
+    viewFilled?: string
+    upload?: UploadSpec
+  }
   sources?: { sharepoint?: string; files: { name: string; bedrijf?: string }[] }
+}
+
+export interface UploadBlock {
+  naam: string
+  hoev: string
+  eenh: string
+  prijs: string
+  totaal: string
+  opm: string
+}
+export interface UploadPost {
+  id: string
+  row: number
+  label: string
+}
+export interface UploadSpec {
+  base: string
+  sheet: string
+  filename?: string
+  blocks: UploadBlock[]
+  posten: UploadPost[]
+}
+
+export interface OfferCompareCell {
+  prijs: number | null
+  hoeveelheid: number | null
+  eenheid: string | null
+  totaal: number | null
+  opmerking: string | null
+  aangeboden: boolean
+  best: boolean
+}
+export interface OfferFillResult {
+  klant: string
+  demoId: string
+  leveranciers: string[]
+  posten: { id: string; label: string; cellen: OfferCompareCell[] }[]
+  totalen: (number | null)[]
+  gunstigsteIndex: number | null
+  xlsxBase64: string
+  filename: string
 }
 
 export interface GridCell {
