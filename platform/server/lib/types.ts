@@ -72,6 +72,8 @@ export interface UploadSpec {
   base: string
   sheet: string
   filename?: string
+  /** Al genormaliseerde offertes (uit stap 1) om direct in te laden. */
+  normalized?: string
   /** Maximaal aantal leveranciers (= aantal blokken). */
   blocks: UploadBlock[]
   posten: UploadPost[]

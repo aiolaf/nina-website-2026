@@ -110,7 +110,17 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
   `/api/clients/:naam/source-file` (alleen PDF, met path-guard) voor de preview
   wordt geserveerd. De SharePoint/Outlook-weergave is visueel; de PDF-upload is
   echt — zie hieronder.
-- **Offerte-upload → AI-uitlezen → template invullen** (optioneel per demo): een
+- **Genormaliseerde offertes direct laden** (stap 2): de offertes worden in stap 1
+  (Offerte normaliseren) samen uitgelezen en genormaliseerd; stap 2 (Prijsvergelijk)
+  laadt dat resultaat **direct** in het template — zonder opnieuw te uploaden en
+  zonder API key. Config: zet op de demo onder `excel.upload` een `normalized`-pad
+  naar een JSON met de genormaliseerde offertes (`[{ bedrijf, regels: [{ post_id,
+  aangeboden, hoeveelheid, eenheid, prijs_per_eenheid, opmerking }] }]`). Endpoint:
+  `POST /api/clients/:naam/offers-load` → dezelfde vergelijk-tabel + geldige
+  `.xlsx` als de upload-variant. De demodata van `pleijsier-bouw` is afgeleid van
+  de échte offerte-PDF's (Preco, Van Nieuwpoort, Olbecon, VBI) en het door de
+  werkvoorbereider genormaliseerde ML-Excel.
+- **Offerte-upload → AI-uitlezen → template invullen** (optioneel, secundair): een
   écht werkende upload. Je sleept 1–4 offerte-PDF's erin; elke PDF wordt door
   Claude (PDF-document-block) uitgelezen naar gestructureerde posten/prijzen, en
   vervolgens **chirurgisch** in het bestaande prijsvergelijk-template gezet: alleen

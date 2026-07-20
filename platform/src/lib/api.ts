@@ -95,4 +95,9 @@ export const api = {
       `/api/clients/${encodeURIComponent(klant)}/offers-fill`,
       { method: 'POST', body: JSON.stringify({ demoId, files }) },
     ),
+  offersLoad: (klant: string, demoId: string) =>
+    req<OfferFillResult>(
+      `/api/clients/${encodeURIComponent(klant)}/offers-load`,
+      { method: 'POST', body: JSON.stringify({ demoId }) },
+    ),
 }

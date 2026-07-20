@@ -21,9 +21,9 @@
         "outlook": "Inkoop-mailbox > map 'Offertes Segro Hoofddorp'",
         "files": [
           { "name": "Olbecon offerte 2231473.pdf", "bedrijf": "Olbecon", "file": "bron/2231473.pdf" },
-          { "name": "VBI 20221206 kanaalplaatvloeren.pdf", "bedrijf": "VBI", "file": "bron/20221206.1.1.pdf" },
-          { "name": "Offerte Preco - kanaalplaten Segro.pdf", "bedrijf": "Preco" },
-          { "name": "Aanbieding Nieuwpoort kanaalplaten.pdf", "bedrijf": "Nieuwpoort" }
+          { "name": "VBI 221816 kanaalplaatvloeren Segro.pdf", "bedrijf": "VBI", "file": "bron/[221816-1] Segro - DHL distributiecentrum LC4-LC5 SPAA SEGRO Park Amsterdam Airport HOOFDDORP.pdf" },
+          { "name": "Preco offerte 20221206 kanaalplaten Segro.pdf", "bedrijf": "Preco", "file": "bron/20221206.1.1.pdf" },
+          { "name": "Van Nieuwpoort offerte 155654 Segro.pdf", "bedrijf": "Nieuwpoort", "file": "bron/Offerte 155654 Pleijsier Bouw Genemuiden B.V.pdf" }
         ]
       },
       "workflow": [
@@ -63,6 +63,7 @@
           "base": "bron/prijsvergelijk_template.xlsx",
           "sheet": "23.1_Kanaalplaten",
           "filename": "Prijsvergelijk kanaalplaten Segro Hoofddorp - ingevuld.xlsx",
+          "normalized": "data/genormaliseerde_offertes.json",
           "blocks": [
             { "naam": "K2", "hoev": "J", "eenh": "K", "prijs": "L", "totaal": "M", "opm": "N" },
             { "naam": "P2", "hoev": "O", "eenh": "P", "prijs": "Q", "totaal": "R", "opm": "S" },
@@ -86,10 +87,10 @@
         "sharepoint": "SharePoint > Segro Hoofddorp > 04 Inkoop > Kanaalplaatvloeren > Offertes",
         "outlook": "Inkoop-mailbox > map 'Offertes Segro Hoofddorp'",
         "files": [
+          { "name": "Preco offerte 20221206 kanaalplaten Segro.pdf", "bedrijf": "Preco", "file": "bron/20221206.1.1.pdf" },
+          { "name": "Van Nieuwpoort offerte 155654 Segro.pdf", "bedrijf": "Nieuwpoort", "file": "bron/Offerte 155654 Pleijsier Bouw Genemuiden B.V.pdf" },
           { "name": "Olbecon offerte 2231473.pdf", "bedrijf": "Olbecon", "file": "bron/2231473.pdf" },
-          { "name": "VBI 20221206 kanaalplaatvloeren.pdf", "bedrijf": "VBI", "file": "bron/20221206.1.1.pdf" },
-          { "name": "Offerte Preco - kanaalplaten Segro.pdf", "bedrijf": "Preco" },
-          { "name": "Aanbieding Nieuwpoort kanaalplaten.pdf", "bedrijf": "Nieuwpoort" }
+          { "name": "VBI 221816 kanaalplaatvloeren Segro.pdf", "bedrijf": "VBI", "file": "bron/[221816-1] Segro - DHL distributiecentrum LC4-LC5 SPAA SEGRO Park Amsterdam Airport HOOFDDORP.pdf" }
         ]
       },
       "workflow": [

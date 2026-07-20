@@ -49,6 +49,7 @@ export interface UploadSpec {
   base: string
   sheet: string
   filename?: string
+  normalized?: string
   blocks: UploadBlock[]
   posten: UploadPost[]
 }

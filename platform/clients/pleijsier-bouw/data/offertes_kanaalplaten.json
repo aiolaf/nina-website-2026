@@ -1,55 +1,58 @@
 [
   {
     "bedrijf": "Olbecon",
-    "offertedatum": "2022-07-04",
-    "contactpersoon": "calculatie@olbecon.nl",
-    "project": "Segro Park Amsterdam Airport - Hoofddorp",
+    "offertenummer": "2231473",
+    "offertedatum": "2022-07-05",
+    "contactpersoon": "verkoop@olbecon.nl",
+    "project": "Bedrijfspand Segro te Hoofddorp",
     "regels": [
-      { "omschrijving": "Kanaalplaatvloer begane grond, 200mm", "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 59.75, "totaal": 51922.75, "opmerking": "110 isolatie; Rc=3,7" },
-      { "omschrijving": "Kanaalplaatvloer portiersloge 200mm", "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 59.75, "totaal": 1027.7, "opmerking": "" },
-      { "omschrijving": "Dakvloer energieplein 265mm", "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 54.5, "totaal": 13080, "opmerking": "" },
-      { "omschrijving": "Levering deksels kanaalafdichting", "hoeveelheid": 1708, "eenheid": "st", "prijs_per_eenheid": 0.62, "totaal": 1058.96, "opmerking": "" },
-      { "omschrijving": "Uitwerken 3D + sparingen", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." }
+      { "omschrijving": "Beganegrondvloer, geïsoleerde kanaalplaatvloer, dik 20,0 cm, R=3,7 m2K/W (opleg 200+110)", "hoeveelheid": 861, "eenheid": "m2", "prijs_per_eenheid": 59.75, "totaal": 51444.75, "opmerking": "geïsoleerd; grootste plaatlengte 6,50 m1" },
+      { "omschrijving": "1e Verdiepingsvloer energieplein, voorgespannen kanaalplaatvloer, dik 26,0 cm", "hoeveelheid": 252, "eenheid": "m2", "prijs_per_eenheid": 54.5, "totaal": 13734, "opmerking": "druklaag 7 cm door aannemer" },
+      { "omschrijving": "1e/2e Verdiepingsvloer, voorgespannen kanaalplaatvloer, dik 32,0 cm", "hoeveelheid": 4112, "eenheid": "m2", "prijs_per_eenheid": 61.5, "totaal": 252888, "opmerking": "alle 320mm-vloeren samengevoegd in één regel" },
+      { "omschrijving": "Breedplaatvloer (dockboards), dik 250mm", "hoeveelheid": 277, "eenheid": "m2", "prijs_per_eenheid": 75, "totaal": 20775, "opmerking": "ander product, niet vergelijkbaar met kanaalplaat" },
+      { "omschrijving": "Huur klem t.b.v. leggen en lossen", "hoeveelheid": null, "eenheid": "m2", "prijs_per_eenheid": 0.23, "totaal": null, "opmerking": "€0,23/m2/klem, verrekenbaar" },
+      { "omschrijving": "Kanaalstoppen PVC / sparingen", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "1 sparing per 10 m2 incl.; meer €8,00/stuk" }
     ]
   },
   {
     "bedrijf": "VBI",
-    "offertedatum": "2022-06-16",
-    "contactpersoon": "verkoop@vbi.nl",
-    "project": "Segro Hoofddorp",
+    "offertenummer": "221816/1",
+    "offertedatum": "2022-06-17",
+    "contactpersoon": "Frank Kruk",
+    "project": "Segro / DHL distributiecentrum LC4-LC5, SEGRO Park Amsterdam Airport, Hoofddorp",
     "regels": [
-      { "omschrijving": "Kanaalplaatvloer beganegrond 200mm", "hoeveelheid": 869, "eenheid": "m²", "prijs_per_eenheid": 57, "totaal": 49533, "opmerking": "" },
-      { "omschrijving": "Kanaalplaatvloer portiersloge 200mm", "hoeveelheid": 17.5, "eenheid": "m²", "prijs_per_eenheid": 57, "totaal": 997.5, "opmerking": "hoeveelheid afwijkend" },
-      { "omschrijving": "Dakvloer energieplein 265mm", "hoeveelheid": 240, "eenheid": "m²", "prijs_per_eenheid": 67.5, "totaal": 16200, "opmerking": "" },
-      { "omschrijving": "Kraan/klem huur", "hoeveelheid": 1, "eenheid": "post", "prijs_per_eenheid": 3100, "totaal": 3100, "opmerking": "los begroot" },
-      { "omschrijving": "Engineering en sparingen", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." }
+      { "omschrijving": "Isolatieplaatvloer H200 Groen, begane grond kantoor, Rc 3,7, brandvertragend EPS, 200mm", "hoeveelheid": 660, "eenheid": "m2", "prijs_per_eenheid": 53.75, "totaal": 35475, "opmerking": "geïsoleerde kopoplegging 320mm" },
+      { "omschrijving": "Plaatvloer A260 Groen, 1e verdieping energieplein, 260mm", "hoeveelheid": 245, "eenheid": "m2", "prijs_per_eenheid": 63.05, "totaal": 15447.25, "opmerking": "30 min brandwerend; druklaag 70mm" },
+      { "omschrijving": "Plaatvloer AVU32 Groen, 1e verdieping kantoor, 320mm", "hoeveelheid": 465, "eenheid": "m2", "prijs_per_eenheid": 61.55, "totaal": 28620.75, "opmerking": "30 min; 4,00 kN/m2" },
+      { "omschrijving": "Plaatvloer AVU32 Groen, verdieping mezzanine, 320mm", "hoeveelheid": 2945, "eenheid": "m2", "prijs_per_eenheid": 66.5, "totaal": 195842.5, "opmerking": "10,00 kN/m2 cat. E; mezzanine als één post geoffreerd" },
+      { "omschrijving": "Plaatvloer AVU32 Groen, 2e verdieping kantoor, 320mm", "hoeveelheid": 465, "eenheid": "m2", "prijs_per_eenheid": 61.55, "totaal": 28620.75, "opmerking": "30 min; 4,00 kN/m2" },
+      { "omschrijving": "Plaatvloer AVU32 Groen, 2e verdieping technische ruimte, 320mm", "hoeveelheid": 220, "eenheid": "m2", "prijs_per_eenheid": 60.45, "totaal": 13299, "opmerking": "5,00 kN/m2 cat. E" }
     ]
   },
   {
     "bedrijf": "Preco",
-    "offertedatum": "2022-06-14",
+    "offertenummer": "20221206.1.1",
+    "offertedatum": "2022-06-15",
     "contactpersoon": "verkoop@preco.nl",
-    "project": "Segro Hoofddorp - kanaalplaatvloeren",
+    "project": "Segro te Hoofddorp",
     "regels": [
-      { "omschrijving": "Leveren kanaalplaatvloer begane grond 200mm", "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 60, "totaal": 52140, "opmerking": "" },
-      { "omschrijving": "Kanaalplaatvloer portiersloge 200mm", "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 60, "totaal": 1032, "opmerking": "" },
-      { "omschrijving": "Dakvloer energieplein 265mm", "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 54.5, "totaal": 13080, "opmerking": "" },
-      { "omschrijving": "Montage, kraan en klem", "hoeveelheid": 1, "eenheid": "post", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." },
-      { "omschrijving": "Sparingen, kruipgaten en deksels", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." },
-      { "omschrijving": "Engineering / uitwerken in 3D", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." }
+      { "omschrijving": "Kanaalplaatvloeren 200mm + 130EPS", "hoeveelheid": 863, "eenheid": "m2", "prijs_per_eenheid": 60, "totaal": 51780, "opmerking": "incl. kunststof deksels, ontwateringsgaatjes, transport en engineering cat. 4a; 60 min brandwerend" },
+      { "omschrijving": "Kanaalplaatvloeren 265mm", "hoeveelheid": 250, "eenheid": "m2", "prijs_per_eenheid": 54.5, "totaal": 13625, "opmerking": "incl. deksels/transport/engineering; 60 min brandwerend" },
+      { "omschrijving": "Kanaalplaatvloeren 400mm", "hoeveelheid": 3806, "eenheid": "m2", "prijs_per_eenheid": 69, "totaal": 262614, "opmerking": "incl. deksels/transport/engineering; pasplaten als volle plaat" },
+      { "omschrijving": "Transport Apeldoorn - Hoofddorp", "hoeveelheid": 1, "eenheid": "post", "prijs_per_eenheid": 18216, "totaal": 18216, "opmerking": "als aparte post begroot" }
     ]
   },
   {
     "bedrijf": "Nieuwpoort",
-    "offertedatum": "2022-07-04",
-    "contactpersoon": "info@nieuwpoort-beton.nl",
-    "project": "SEGRO Hoofddorp DHL",
+    "offertenummer": "155654",
+    "offertedatum": "2022-07-05",
+    "contactpersoon": "Youssef Akachar",
+    "project": "Nieuwbouw Segro, Hoofddorp",
     "regels": [
-      { "omschrijving": "BG-vloer kanaalplaat dikte 200", "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 58.75, "totaal": 51053.75, "opmerking": "" },
-      { "omschrijving": "Vloer portiersloge 200 mm", "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 60, "totaal": 1032, "opmerking": "" },
-      { "omschrijving": "Dakvloer energieplein", "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 60, "totaal": 14400, "opmerking": "dikte 265mm" },
-      { "omschrijving": "Toeslag isolatie + deksels (niet gespecificeerd)", "hoeveelheid": 1, "eenheid": "post", "prijs_per_eenheid": 2450, "totaal": 2450, "opmerking": "alleen totaalprijs, niet per m2" },
-      { "omschrijving": "Engineering", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." }
+      { "omschrijving": "Orderregel 100 - Begane grondvloeren IVP-200, Rc 3,7, isolatiedikte 133mm", "hoeveelheid": 868, "eenheid": "m2", "prijs_per_eenheid": 58.75, "totaal": 50995, "opmerking": "incl. huur hijsklem, pasplaten, ontwateringsgaatjes, elektradozen" },
+      { "omschrijving": "Orderregel 200 - Verdiepingsvloeren HVP-320, 30 min", "hoeveelheid": 3863, "eenheid": "m2", "prijs_per_eenheid": 61.75, "totaal": 238540.25, "opmerking": "alle 320mm-verdiepingen samengevoegd; huur hijsklem incl." },
+      { "omschrijving": "Kanaalafdichting IVP/HVP 200 kunststofdeksel", "hoeveelheid": null, "eenheid": "m", "prijs_per_eenheid": 50, "totaal": null, "opmerking": "verrekenprijs €50,00/m" },
+      { "omschrijving": "Geen aparte regel voor dak energieplein 260mm of balkonvloer 150mm", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "niet los aangeboden" }
     ]
   }
 ]

@@ -1,0 +1,58 @@
+[
+  {
+    "bedrijf": "Preco",
+    "regels": [
+      { "post_id": "begane_grond", "aangeboden": true, "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 60, "opmerking": "200mm + 130EPS; incl. deksels/transport/engineering" },
+      { "post_id": "portiersloge", "aangeboden": true, "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 60, "opmerking": "zelfde 200mm-prijs" },
+      { "post_id": "dak_energieplein", "aangeboden": true, "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 54.5, "opmerking": "265mm ≈ 260mm" },
+      { "post_id": "balkonvloer", "aangeboden": true, "hoeveelheid": 55.5, "eenheid": "m2", "prijs_per_eenheid": 60, "opmerking": "niet los geoffreerd; ingeschat op 200mm-prijs" },
+      { "post_id": "v1_kantoor", "aangeboden": true, "hoeveelheid": 2422, "eenheid": "m2", "prijs_per_eenheid": 69, "opmerking": "400mm-prijs toegepast op 320mm-posten" },
+      { "post_id": "v1_mezzanine_30", "aangeboden": true, "hoeveelheid": 734, "eenheid": "m2", "prijs_per_eenheid": 69, "opmerking": "" },
+      { "post_id": "v1_mezzanine_60", "aangeboden": true, "hoeveelheid": 272, "eenheid": "m2", "prijs_per_eenheid": 69, "opmerking": "" },
+      { "post_id": "v2_kantoor", "aangeboden": true, "hoeveelheid": 465, "eenheid": "m2", "prijs_per_eenheid": 69, "opmerking": "" },
+      { "post_id": "v2_techniek", "aangeboden": true, "hoeveelheid": 147, "eenheid": "m2", "prijs_per_eenheid": 69, "opmerking": "" }
+    ]
+  },
+  {
+    "bedrijf": "Nieuwpoort",
+    "regels": [
+      { "post_id": "begane_grond", "aangeboden": true, "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 58.75, "opmerking": "IVP-200, Rc 3,7" },
+      { "post_id": "portiersloge", "aangeboden": true, "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 60, "opmerking": "niet los geoffreerd; ingeschat" },
+      { "post_id": "dak_energieplein", "aangeboden": true, "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 60, "opmerking": "@@ 260mm niet los aangeboden; ingeschat" },
+      { "post_id": "balkonvloer", "aangeboden": true, "hoeveelheid": 55.5, "eenheid": "m2", "prijs_per_eenheid": 60, "opmerking": "@@ niet los aangeboden; ingeschat" },
+      { "post_id": "v1_kantoor", "aangeboden": true, "hoeveelheid": 2422, "eenheid": "m2", "prijs_per_eenheid": 61.75, "opmerking": "HVP-320" },
+      { "post_id": "v1_mezzanine_30", "aangeboden": true, "hoeveelheid": 734, "eenheid": "m2", "prijs_per_eenheid": 61.75, "opmerking": "" },
+      { "post_id": "v1_mezzanine_60", "aangeboden": true, "hoeveelheid": 272, "eenheid": "m2", "prijs_per_eenheid": 61.75, "opmerking": "" },
+      { "post_id": "v2_kantoor", "aangeboden": true, "hoeveelheid": 465, "eenheid": "m2", "prijs_per_eenheid": 61.75, "opmerking": "" },
+      { "post_id": "v2_techniek", "aangeboden": true, "hoeveelheid": 147, "eenheid": "m2", "prijs_per_eenheid": 61.75, "opmerking": "" }
+    ]
+  },
+  {
+    "bedrijf": "Olbecon",
+    "regels": [
+      { "post_id": "begane_grond", "aangeboden": true, "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 59.75, "opmerking": "geïsoleerd 200mm +110 EPS, Rc 3,7" },
+      { "post_id": "portiersloge", "aangeboden": true, "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 59.75, "opmerking": "zelfde 200mm-prijs" },
+      { "post_id": "dak_energieplein", "aangeboden": true, "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 54.5, "opmerking": "energieplein 260mm" },
+      { "post_id": "balkonvloer", "aangeboden": true, "hoeveelheid": 55.5, "eenheid": "m2", "prijs_per_eenheid": 60, "opmerking": "@@ niet los aangeboden; ingeschat" },
+      { "post_id": "v1_kantoor", "aangeboden": true, "hoeveelheid": 2422, "eenheid": "m2", "prijs_per_eenheid": 61.5, "opmerking": "320mm (4112 m2 samengevoegd)" },
+      { "post_id": "v1_mezzanine_30", "aangeboden": true, "hoeveelheid": 734, "eenheid": "m2", "prijs_per_eenheid": 61.5, "opmerking": "" },
+      { "post_id": "v1_mezzanine_60", "aangeboden": true, "hoeveelheid": 272, "eenheid": "m2", "prijs_per_eenheid": 61.5, "opmerking": "" },
+      { "post_id": "v2_kantoor", "aangeboden": true, "hoeveelheid": 465, "eenheid": "m2", "prijs_per_eenheid": 61.5, "opmerking": "" },
+      { "post_id": "v2_techniek", "aangeboden": true, "hoeveelheid": 147, "eenheid": "m2", "prijs_per_eenheid": 61.5, "opmerking": "" }
+    ]
+  },
+  {
+    "bedrijf": "VBI",
+    "regels": [
+      { "post_id": "begane_grond", "aangeboden": true, "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 53.75, "opmerking": "Isolatieplaatvloer H200 Groen, Rc 3,7" },
+      { "post_id": "portiersloge", "aangeboden": true, "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 53.75, "opmerking": "zelfde 200mm-prijs" },
+      { "post_id": "dak_energieplein", "aangeboden": true, "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 63.05, "opmerking": "Plaatvloer A260 Groen, 260mm" },
+      { "post_id": "balkonvloer", "aangeboden": false, "hoeveelheid": null, "eenheid": null, "prijs_per_eenheid": null, "opmerking": "@@ 150mm balkonvloer niet aangeboden" },
+      { "post_id": "v1_kantoor", "aangeboden": true, "hoeveelheid": 2422, "eenheid": "m2", "prijs_per_eenheid": 61.55, "opmerking": "AVU32 Groen, 320mm" },
+      { "post_id": "v1_mezzanine_30", "aangeboden": true, "hoeveelheid": 734, "eenheid": "m2", "prijs_per_eenheid": 66.5, "opmerking": "@@ mezzanine als één post (10 kN) geoffreerd" },
+      { "post_id": "v1_mezzanine_60", "aangeboden": true, "hoeveelheid": 272, "eenheid": "m2", "prijs_per_eenheid": 66.5, "opmerking": "@@ mezzanine-prijs toegepast" },
+      { "post_id": "v2_kantoor", "aangeboden": true, "hoeveelheid": 465, "eenheid": "m2", "prijs_per_eenheid": 61.55, "opmerking": "AVU32 Groen, 320mm" },
+      { "post_id": "v2_techniek", "aangeboden": true, "hoeveelheid": 147, "eenheid": "m2", "prijs_per_eenheid": 60.45, "opmerking": "AVU32 Groen, 5 kN" }
+    ]
+  }
+]

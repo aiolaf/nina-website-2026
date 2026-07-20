@@ -204,6 +204,34 @@ export async function fillOffersForDemo(
 }
 
 /**
+ * Laad de al genormaliseerde offertes (uit stap 1) direct in het prijsvergelijk,
+ * zonder opnieuw uploaden of AI. Vereist `excel.upload.normalized` in de config.
+ */
+export async function loadNormalizedForDemo(
+  klant: string,
+  demoId: string | undefined,
+): Promise<OfferFillResult> {
+  const config = readConfig(klant)
+  const demo = findDemo(config, demoId)
+  const spec = demo.excel?.upload
+  if (!spec) throw new Error('Deze demo heeft geen offerte-upload.')
+  if (!spec.normalized) {
+    throw new Error('Er zijn geen genormaliseerde offertes geconfigureerd.')
+  }
+  const dir = clientDir(klant)
+  const basePath = safeJoin(dir, spec.base)
+  if (!fs.existsSync(basePath)) {
+    throw new Error(`Template niet gevonden: ${spec.base}`)
+  }
+  const normPath = safeJoin(dir, spec.normalized)
+  if (!fs.existsSync(normPath)) {
+    throw new Error(`Genormaliseerde offertes niet gevonden: ${spec.normalized}`)
+  }
+  const offers = JSON.parse(fs.readFileSync(normPath, 'utf-8')) as ExtractedOffer[]
+  return injectAndCompare(klant, demo.id, basePath, spec, offers)
+}
+
+/**
  * Chirurgisch invullen van het template + de vergelijk-grid opbouwen. Los van
  * de AI-stap zodat dit deel (de riskante Excel-mechaniek) testbaar is.
  */

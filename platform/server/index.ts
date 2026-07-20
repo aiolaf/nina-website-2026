@@ -12,7 +12,7 @@ import {
 import { setStoredApiKey } from './lib/settings.ts'
 import { addRun, clearHistory, deleteRun, listHistory } from './lib/history.ts'
 import { fillExcelForDemo, sheetGrid } from './excel/index.ts'
-import { fillOffersForDemo } from './excel/offers.ts'
+import { fillOffersForDemo, loadNormalizedForDemo } from './excel/offers.ts'
 import {
   clientDir,
   listClients,
@@ -154,6 +154,17 @@ app.get(
       `attachment; filename="${filename.replace(/"/g, '')}"`,
     )
     res.send(buffer)
+  }),
+)
+
+// Laad de al genormaliseerde offertes (uit stap 1) direct in het prijsvergelijk
+// — geen upload of API key nodig. Body: { demoId }.
+app.post(
+  '/api/clients/:name/offers-load',
+  wrap(async (req, res) => {
+    const name = String(req.params.name)
+    const demoId = req.body?.demoId ? String(req.body.demoId) : undefined
+    res.json(await loadNormalizedForDemo(name, demoId))
   }),
 )
 
