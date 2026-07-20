@@ -86,20 +86,16 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
   verwijderen (✕) of alles wissen. De historie staat lokaal in
   `.local/history.json` (gitignored).
 - **Excel invullen** (optioneel per demo): vul een bestaand Excel-template in en
-  bied het als download aan. Het bestand wordt niet herbouwd — alleen de lege
-  invoercellen worden gevuld; formules (bv. totaal = prijs × hoeveelheid) en de
-  huisstijl blijven behouden, en Excel herrekent bij het openen. Zie de demo
-  "Prijsvergelijk invullen" van `pleijsier-bouw`. Config: zet op de demo
-  `"excel": { "template": "bron/....xlsx", "fill": "data/....json", "filename": "...", "viewFilled": "bron/....xlsx" }`,
-  waarbij `fill` een `{ sheet, cells: [{ address, value }] }` mapping is. Met
-  `excel` verschijnt in de demo ook een **Excel-viewer** (toggle leeg template ↔
-  ingevuld, met de automatisch gevulde cellen groen gemarkeerd) plus een
-  download-knop; `viewFilled` is het bestand dat als "ingevuld" wordt getoond
-  én dat rechtstreeks als download wordt teruggegeven. Dat laatste is bewust: een
-  door Excel zelf gemaakt bestand teruggeven voorkomt de "we found a problem /
-  recover"-herstelmelding die je krijgt als je een complex werkblad (met o.a.
-  shared formulas) via een library herserialiseert. Zonder `viewFilled` vult het
-  platform het template met ExcelJS (kan bij complexe sheets die melding geven).
+  bied het als **echte, gegenereerde** download aan. Het template wordt niet
+  herbouwd — alleen de lege invoercellen worden chirurgisch gevuld met de
+  genormaliseerde waarden (`excel.upload.normalized`); formules (bv. totaal =
+  prijs × hoeveelheid) en de huisstijl blijven behouden. Zie de demo
+  "Prijsvergelijk invullen" van `pleijsier-bouw`. Zowel de download-knop
+  (`/api/clients/:naam/excel`) als de "ingevuld"-weergave van de **Excel-viewer**
+  (toggle leeg template ↔ ingevuld) tonen deze gegenereerde output — nooit een
+  voorbeeld-/inputbestand. Config: `"excel": { "template", "fill", "filename",
+  "upload": { … } }`, waarbij `fill` (`{ sheet, cells: [{ address }] }`) alleen de
+  cellen markeert die groen oplichten in de viewer.
 - **Brondocumenten-paneel** (optioneel per demo): laat zien waar de offerte-PDF's
   vandaan komen — **SharePoint** (automatisch ophalen), **Outlook** (automatische
   n8n-connector op de inkoop-mailbox, ter illustratie) of **zelf uploaden**. Bij

@@ -73,7 +73,6 @@
         "template": "bron/prijsvergelijk_template.xlsx",
         "fill": "data/excel_fill.json",
         "filename": "Prijsvergelijk kanaalplaten Segro Hoofddorp - ingevuld.xlsx",
-        "viewFilled": "bron/Prijsvergelijk kanaalplaten segro Hoofddorp ML.xlsx",
         "upload": {
           "base": "bron/prijsvergelijk_template.xlsx",
           "sheet": "23.1_Kanaalplaten",

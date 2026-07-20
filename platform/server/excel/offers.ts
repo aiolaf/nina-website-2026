@@ -378,6 +378,18 @@ export async function loadNormalizedForDemo(
 }
 
 /**
+ * Genereer het écht ingevulde prijsvergelijk-.xlsx uit de genormaliseerde
+ * offertes (geen voorbeeldbestand). Gebruikt door de download en de viewer.
+ */
+export async function generateNormalizedBuffer(
+  klant: string,
+  demoId: string | undefined,
+): Promise<{ buffer: Buffer; filename: string }> {
+  const r = await loadNormalizedForDemo(klant, demoId)
+  return { buffer: Buffer.from(r.xlsxBase64, 'base64'), filename: r.filename }
+}
+
+/**
  * Chirurgisch invullen van het template + de vergelijk-grid opbouwen. Los van
  * de AI-stap zodat dit deel (de riskante Excel-mechaniek) testbaar is.
  */

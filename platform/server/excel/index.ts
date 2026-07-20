@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { createRequire } from 'node:module'
 import { clientDir, findDemo, readConfig } from '../lib/clients.ts'
+import { generateNormalizedBuffer } from './offers.ts'
 import type { GridCell, SheetGrid } from '../lib/types.ts'
 
 // ExcelJS is CommonJS; via createRequire laden we hem betrouwbaar onder ESM.
@@ -46,15 +47,11 @@ export async function fillExcelForDemo(
   const dir = clientDir(klant)
   const filename = demo.excel.filename || 'prijsvergelijk-ingevuld.xlsx'
 
-  // Voorkeur: geef het door Excel zelf gemaakte, geldige bestand rechtstreeks
-  // terug. Zo krijg je GEEN "we found a problem"-herstelmelding. ExcelJS
-  // herserialiseren van een complex werkblad (met o.a. shared formulas) levert
-  // net-niet-geldige XML op die Excel wil repareren.
-  if (demo.excel.viewFilled) {
-    const nativePath = safeJoin(dir, demo.excel.viewFilled)
-    if (fs.existsSync(nativePath)) {
-      return { buffer: fs.readFileSync(nativePath), filename }
-    }
+  // ECHTE export: genereer het ingevulde bestand uit de genormaliseerde
+  // offertes (chirurgische injectie in het lege template). Nooit het
+  // voorbeeld-/inputbestand teruggeven.
+  if (demo.excel.upload?.normalized) {
+    return generateNormalizedBuffer(klant, demoId)
   }
 
   // Fallback (demo's zonder een geldig ingevuld voorbeeldbestand): vul het
@@ -122,10 +119,16 @@ export async function sheetGrid(
   ) as { sheet: string; cells: { address: string }[] }
   const fillAddrs = new Set(spec.cells.map((c) => c.address))
 
-  const rel =
-    mode === 'filled' ? demo.excel.viewFilled || demo.excel.template : demo.excel.template
   const wb = new ExcelJS.Workbook()
-  await wb.xlsx.readFile(safeJoin(dir, rel))
+  if (mode === 'filled' && demo.excel.upload?.normalized) {
+    // 'Ingevuld' toont de écht gegenereerde export, niet het voorbeeldbestand.
+    const { buffer } = await generateNormalizedBuffer(klant, demoId)
+    await wb.xlsx.load(buffer)
+  } else {
+    const rel =
+      mode === 'filled' ? demo.excel.viewFilled || demo.excel.template : demo.excel.template
+    await wb.xlsx.readFile(safeJoin(dir, rel))
+  }
   const ws = wb.getWorksheet(spec.sheet) ?? wb.worksheets[0]
 
   const MAXR = 40
