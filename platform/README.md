@@ -106,6 +106,12 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
   `/api/clients/:naam/source-file` (alleen PDF, met path-guard) voor de preview
   wordt geserveerd. De SharePoint/Outlook-weergave is visueel; de PDF-upload is
   echt — zie hieronder.
+- **Begroting als startpunt** (stap 1): de werkbegroting (het onderdeel uit de
+  begrotingsscreenshot) wordt als tabel getoond en komt in het prijsvergelijk
+  terug. Je kunt zelf een begroting-afbeelding uploaden (in productie leest de AI
+  die uit). Config: `begroting: { titel, totaal, afbeelding, posten: [{ omschrijving,
+  hoeveelheid, eenheid }] }`. De metadata-kop van de export (opsteller, datum) wordt
+  bij het genereren geneutraliseerd zodat een export nooit op het bronbestand lijkt.
 - **Offertes samen normaliseren** (stap 1): alle offertes worden in één keer samen
   uitgelezen en omgerekend naar vergelijkbare €/m². Een bundel-knop normaliseert de
   hele set (geen API key nodig, leest de kant-en-klare set uit `normalize.normalized`);

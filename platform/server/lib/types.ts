@@ -33,6 +33,14 @@ export interface DemoDef {
     /** Optioneel: échte offerte-upload → AI-uitlezen → template invullen. */
     upload?: UploadSpec
   }
+  /** Optioneel: de werkbegroting die als startpunt getoond/geüpload wordt. */
+  begroting?: {
+    titel?: string
+    totaal?: string
+    /** Relatief pad naar de begroting-afbeelding (voor preview/upload-demo). */
+    afbeelding?: string
+    posten: { omschrijving: string; hoeveelheid: string; eenheid?: string }[]
+  }
   /** Optioneel: offertes samen normaliseren (stap 1). */
   normalize?: {
     /** Pad naar de al genormaliseerde offertes voor de bundel-knop. */
@@ -90,6 +98,8 @@ export interface UploadSpec {
 /** Wat de AI per offerte-PDF teruggeeft. */
 export interface ExtractedOffer {
   bedrijf: string
+  /** Offertedatum (vrije tekst, bv. "17/06/2022") voor de kop van het blok. */
+  offertedatum?: string
   regels: {
     post_id: string
     aangeboden: boolean

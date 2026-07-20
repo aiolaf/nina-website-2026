@@ -233,15 +233,22 @@ app.get(
       res.status(400).json({ error: 'Ongeldig pad.' })
       return
     }
-    if (!/\.pdf$/i.test(p)) {
-      res.status(400).json({ error: 'Alleen PDF-preview toegestaan.' })
+    const ext = (p.match(/\.([a-z0-9]+)$/i)?.[1] || '').toLowerCase()
+    const types: Record<string, string> = {
+      pdf: 'application/pdf',
+      png: 'image/png',
+      jpg: 'image/jpeg',
+      jpeg: 'image/jpeg',
+    }
+    if (!types[ext]) {
+      res.status(400).json({ error: 'Alleen PDF- of afbeeldingspreview toegestaan.' })
       return
     }
     if (!fs.existsSync(p)) {
       res.status(404).json({ error: 'Bestand niet gevonden.' })
       return
     }
-    res.setHeader('Content-Type', 'application/pdf')
+    res.setHeader('Content-Type', types[ext])
     res.setHeader('Content-Disposition', 'inline')
     fs.createReadStream(p).pipe(res)
   }),

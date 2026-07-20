@@ -68,15 +68,23 @@ function setInline(xml: string, addr: string, text: string): string {
   )
 }
 
-/** Behoud de formule, vervang alleen de gecachte <v> (of verwijder hem). */
+/**
+ * Behoud de formule, vervang alleen de gecachte <v> (of verwijder hem). We
+ * isoleren éérst de hele cel (lazy tot de eigen </c>, cellen nesten niet) en
+ * bewerken alleen dáárbinnen — zo kan een gedeelde/zelfsluitende formule
+ * (<f t="shared" si=".."/>) nooit per ongeluk over celgrenzen matchen.
+ */
 function setFormulaCached(xml: string, addr: string, cached: number | null): string {
-  const re = new RegExp(
-    `(<c r="${addr}"[^>]*>)(<f[^>]*(?:/>|>[\\s\\S]*?</f>))(?:<v>[\\s\\S]*?</v>)?(</c>)`,
-  )
+  const re = new RegExp(`<c r="${addr}"[^>]*>[\\s\\S]*?</c>`)
   const m = xml.match(re)
   if (!m) return xml
-  const v = cached === null ? '' : `<v>${cached}</v>`
-  return xml.replace(re, `$1$2${v}$3`)
+  let cell = m[0]
+  // Bestaande gecachte waarde verwijderen.
+  cell = cell.replace(/<v>[\s\S]*?<\/v>/, '')
+  if (cached !== null) {
+    cell = cell.replace(/<\/c>$/, `<v>${cached}</v></c>`)
+  }
+  return xml.replace(re, cell)
 }
 
 function clearCell(xml: string, addr: string): string {
@@ -87,15 +95,26 @@ function clearCell(xml: string, addr: string): string {
   return xml.replace(re, `<c r="${addr}"${attrs}/>`)
 }
 
-/** Lees de (numerieke) gecachte waarde van een cel uit de sheet-XML. */
-function readCachedNumber(xml: string, addr: string): number | null {
-  const m = xml.match(new RegExp(`<c r="${addr}"[^>]*>([\\s\\S]*?)</c>`))
-  if (!m) return null
-  const vm = m[1].match(/<v>([\s\S]*?)<\/v>/)
-  if (!vm) return null
-  const n = Number(vm[1])
-  return Number.isFinite(n) ? n : null
+/** Heeft de cel een formule (<f ...>)? */
+function hasFormula(xml: string, addr: string): boolean {
+  return new RegExp(`<c r="${addr}"[^>]*><f`).test(xml)
 }
+
+/**
+ * Zet de totaalwaarde. Heeft de cel een formule, dan updaten we alleen de
+ * gecachte <v>; anders schrijven we een gewone numerieke waarde (of maken leeg).
+ */
+function setTotaal(xml: string, addr: string, val: number | null): string {
+  if (hasFormula(xml, addr)) return setFormulaCached(xml, addr, val)
+  if (val == null) return clearCell(xml, addr)
+  return setNumeric(xml, addr, val)
+}
+
+/** Kolomletter(s) van een celadres, bv. "K3" -> "K". */
+function colOf(addr: string): string {
+  return addr.replace(/[0-9]+/g, '')
+}
+
 
 // --- AI-extractie per PDF ---------------------------------------------------
 
@@ -405,6 +424,21 @@ export async function injectAndCompare(
   const sheetFile = 'xl/worksheets/sheet1.xml'
   let xml: string = await zip.file(sheetFile).async('string')
 
+  // --- Metadata neutraliseren -------------------------------------------
+  // Het template is afgeleid van het door ML ingevulde voorbeeld en bevat nog
+  // diens kopgegevens. Die horen NIET in een gegenereerde export. Opsteller en
+  // datum leegmaken/vernieuwen; projectnaam/-nummer/onderdeel zijn projectdata
+  // en blijven staan.
+  const vandaag = new Date().toLocaleDateString('nl-NL')
+  xml = clearCell(xml, 'H5') // Opsteller (was "ML")
+  xml = setInline(xml, 'H6', vandaag) // Datum prijsvergelijk = gegenereerd op
+  xml = clearCell(xml, 'K4') // Gewijzigd
+
+  // Rijen waar we de leverancierskolommen volledig schoonmaken vóór het vullen,
+  // zodat er nooit oude offertegegevens uit het voorbeeld blijven staan.
+  const CLEAR_ROWS: number[] = []
+  for (let r = 22; r <= 40; r++) CLEAR_ROWS.push(r)
+
   // Bouw tegelijk de vergelijk-grid voor de viewer.
   const leveranciers: string[] = []
   const perPostCells: Map<string, OfferCompareCell[]> = new Map(
@@ -415,21 +449,39 @@ export async function injectAndCompare(
   for (let bi = 0; bi < spec.blocks.length; bi++) {
     const block = spec.blocks[bi]
     const offer = offers[bi]
+    const dateAddr = colOf(block.naam) + '3'
+
+    // Maak de hele kolom altijd eerst leeg (geen stale voorbeelddata).
+    for (const r of CLEAR_ROWS) {
+      xml = clearCell(xml, block.hoev + r)
+      xml = clearCell(xml, block.eenh + r)
+      xml = clearCell(xml, block.prijs + r)
+      xml = clearCell(xml, block.opm + r)
+      xml = setTotaal(xml, block.totaal + r, null)
+    }
 
     if (!offer) {
-      // Blok niet gebruikt: maak het leeg (naam + datacellen), reset totalen.
       xml = clearCell(xml, block.naam)
+      xml = clearCell(xml, dateAddr)
       for (const post of spec.posten) {
-        xml = clearCell(xml, block.hoev + post.row)
-        xml = clearCell(xml, block.eenh + post.row)
-        xml = clearCell(xml, block.prijs + post.row)
-        xml = setFormulaCached(xml, block.totaal + post.row, null)
+        perPostCells.get(post.id)!.push({
+          prijs: null,
+          hoeveelheid: null,
+          eenheid: null,
+          totaal: null,
+          opmerking: null,
+          aangeboden: false,
+          best: false,
+        })
       }
       continue
     }
 
     leveranciers.push(offer.bedrijf)
     xml = setInline(xml, block.naam, offer.bedrijf)
+    xml = offer.offertedatum
+      ? setInline(xml, dateAddr, offer.offertedatum)
+      : clearCell(xml, dateAddr)
     const regelsById = new Map(offer.regels.map((r) => [r.post_id, r]))
     let blokTotaal = 0
 
@@ -437,17 +489,15 @@ export async function injectAndCompare(
       const r = regelsById.get(post.id)
       const cellsForPost = perPostCells.get(post.id)!
       if (r && r.aangeboden !== false && (r.prijs_per_eenheid != null || r.hoeveelheid != null)) {
-        // Hoeveelheid: AI-waarde, anders de reeds in het template bekende hoev.
-        const templHoev = readCachedNumber(xml, block.hoev + post.row)
-        const hoev = r.hoeveelheid ?? templHoev
+        const hoev = r.hoeveelheid ?? null
         const prijs = r.prijs_per_eenheid ?? null
-        if (r.hoeveelheid != null) xml = setNumeric(xml, block.hoev + post.row, r.hoeveelheid)
+        if (hoev != null) xml = setNumeric(xml, block.hoev + post.row, hoev)
         if (r.eenheid) xml = setInline(xml, block.eenh + post.row, r.eenheid)
         if (prijs != null) xml = setNumeric(xml, block.prijs + post.row, prijs)
         if (r.opmerking) xml = setInline(xml, block.opm + post.row, r.opmerking)
         const totaal =
           prijs != null && hoev != null ? Math.round(prijs * hoev * 100) / 100 : null
-        xml = setFormulaCached(xml, block.totaal + post.row, totaal)
+        xml = setTotaal(xml, block.totaal + post.row, totaal)
         if (totaal != null) blokTotaal += totaal
         cellsForPost.push({
           prijs,
@@ -459,9 +509,6 @@ export async function injectAndCompare(
           best: false,
         })
       } else {
-        // Post niet aangeboden door deze leverancier: cellen leeg.
-        xml = clearCell(xml, block.prijs + post.row)
-        xml = setFormulaCached(xml, block.totaal + post.row, null)
         cellsForPost.push({
           prijs: null,
           hoeveelheid: null,

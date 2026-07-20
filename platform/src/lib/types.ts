@@ -25,6 +25,12 @@ export interface DemoDef {
     viewFilled?: string
     upload?: UploadSpec
   }
+  begroting?: {
+    titel?: string
+    totaal?: string
+    afbeelding?: string
+    posten: { omschrijving: string; hoeveelheid: string; eenheid?: string }[]
+  }
   normalize?: { normalized?: string; min?: number; posten: UploadPost[] }
   sources?: {
     sharepoint?: string

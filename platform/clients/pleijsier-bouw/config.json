@@ -26,19 +26,31 @@
           { "name": "Van Nieuwpoort offerte 155654 Segro.pdf", "bedrijf": "Nieuwpoort", "file": "bron/Offerte 155654 Pleijsier Bouw Genemuiden B.V.pdf" }
         ]
       },
+      "begroting": {
+        "titel": "1B231 Kanaalplaatvloeren",
+        "totaal": "4.423,00 m2",
+        "afbeelding": "bron/image.png",
+        "posten": [
+          { "omschrijving": "aankoop kanaalplaatvloeren dak energieplein dik 260mm", "hoeveelheid": "244,00", "eenheid": "m2" },
+          { "omschrijving": "aankoop kanaalplaatvloeren kantoor dik 320mm, 4kN/m2", "hoeveelheid": "934,00", "eenheid": "m2" },
+          { "omschrijving": "aankoop kanaalplaatvloeren kantoor / mezzanine dik 320mm, 10kN/m2", "hoeveelheid": "3.180,00", "eenheid": "m2" },
+          { "omschrijving": "huur hijsklem", "hoeveelheid": "4.358,00", "eenheid": "m2" },
+          { "omschrijving": "kanaaldeksels (10 per plaat)", "hoeveelheid": "3.640,00", "eenheid": "st" },
+          { "omschrijving": "oplegvilt", "hoeveelheid": "874,00", "eenheid": "m1" },
+          { "omschrijving": "uitwerken in 3D", "hoeveelheid": "4.358,00", "eenheid": "m2" },
+          { "omschrijving": "leggen kanaalplaatvloeren incl. kraan", "hoeveelheid": "4.258,00", "eenheid": "m1" },
+          { "omschrijving": "lasser tbv bevestiging wapening", "hoeveelheid": "80,00", "eenheid": "uur" },
+          { "omschrijving": "overige sparingen en voorzieningen", "hoeveelheid": "4.423,00", "eenheid": "m2" },
+          { "omschrijving": "tijdelijke randbeveiliging en klembalusters", "hoeveelheid": "915,00", "eenheid": "m1" }
+        ]
+      },
       "normalize": {
         "normalized": "data/genormaliseerde_offertes.json",
         "min": 2,
         "posten": [
-          { "id": "begane_grond", "row": 24, "label": "Begane grond; 200mm +130 EPSmm (as A-E/1-1.2)" },
-          { "id": "portiersloge", "row": 25, "label": "Portiersloge; 200mm +130 EPSmm" },
-          { "id": "dak_energieplein", "row": 26, "label": "Dak energieplein; 260mm 60 min brandwerend (as G-H/1-2)" },
-          { "id": "balkonvloer", "row": 27, "label": "Balkonvloer; 150 mm (as 1/1.1-2)" },
-          { "id": "v1_kantoor", "row": 28, "label": "1e verdieping kantoor; 320 mm, 30 min brandwerend" },
-          { "id": "v1_mezzanine_30", "row": 29, "label": "1e verdieping mezzanine; 320 mm, 30 min brandwerend" },
-          { "id": "v1_mezzanine_60", "row": 30, "label": "1e verdieping mezzanine; 320 mm, 60 min brandwerend" },
-          { "id": "v2_kantoor", "row": 31, "label": "2e verdieping kantoor; 320 mm, 30 min brandwerend" },
-          { "id": "v2_techniek", "row": 32, "label": "2e verdieping technische ruimte; 320 mm, 30 min brandwerend" }
+          { "id": "dak_energieplein", "row": 22, "label": "Kanaalplaatvloer dak energieplein, 260mm" },
+          { "id": "kantoor_4kn", "row": 23, "label": "Kanaalplaatvloer kantoor, 320mm, 4 kN/m²" },
+          { "id": "kantoor_mezz_10kn", "row": 24, "label": "Kanaalplaatvloer kantoor / mezzanine, 320mm, 10 kN/m²" }
         ]
       },
       "workflow": [
@@ -85,15 +97,9 @@
             { "naam": "Z2", "hoev": "Y", "eenh": "Z", "prijs": "AA", "totaal": "AB", "opm": "AC" }
           ],
           "posten": [
-            { "id": "begane_grond", "row": 24, "label": "Begane grond; 200mm +130 EPSmm (as A-E/1-1.2)" },
-            { "id": "portiersloge", "row": 25, "label": "Portiersloge; 200mm +130 EPSmm" },
-            { "id": "dak_energieplein", "row": 26, "label": "Dak energieplein; 260mm 60 min brandwerend (as G-H/1-2)" },
-            { "id": "balkonvloer", "row": 27, "label": "Balkonvloer; 150 mm (as 1/1.1-2)" },
-            { "id": "v1_kantoor", "row": 28, "label": "1e verdieping kantoor; 320 mm, 30 min brandwerend" },
-            { "id": "v1_mezzanine_30", "row": 29, "label": "1e verdieping mezzanine; 320 mm, 30 min brandwerend" },
-            { "id": "v1_mezzanine_60", "row": 30, "label": "1e verdieping mezzanine; 320 mm, 60 min brandwerend" },
-            { "id": "v2_kantoor", "row": 31, "label": "2e verdieping kantoor; 320 mm, 30 min brandwerend" },
-            { "id": "v2_techniek", "row": 32, "label": "2e verdieping technische ruimte; 320 mm, 30 min brandwerend" }
+            { "id": "dak_energieplein", "row": 22, "label": "Kanaalplaatvloer dak energieplein, 260mm" },
+            { "id": "kantoor_4kn", "row": 23, "label": "Kanaalplaatvloer kantoor, 320mm, 4 kN/m²" },
+            { "id": "kantoor_mezz_10kn", "row": 24, "label": "Kanaalplaatvloer kantoor / mezzanine, 320mm, 10 kN/m²" }
           ]
         }
       },

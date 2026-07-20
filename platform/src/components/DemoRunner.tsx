@@ -10,6 +10,7 @@ import {
 import { SourcePanel } from './SourcePanel'
 import { OfferUploadPanel } from './OfferUploadPanel'
 import { NormalizePanel } from './NormalizePanel'
+import { BegrotingPanel } from './BegrotingPanel'
 import { ExcelViewer } from './ExcelViewer'
 
 export function DemoRunner({
@@ -189,6 +190,8 @@ export function DemoRunner({
           {demo.beschrijving}
         </p>
       )}
+
+      {demo?.begroting && <BegrotingPanel klant={klant} begroting={demo.begroting} />}
 
       {demo?.normalize ? (
         <NormalizePanel klant={klant} demo={demo} hasApiKey={hasApiKey} />
