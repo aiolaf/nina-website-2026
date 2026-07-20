@@ -13,7 +13,7 @@
     {
       "id": "offerte-normaliseren",
       "label": "1 · Offerte normaliseren",
-      "beschrijving": "Lees één binnengekomen offerte in en zet de regels om naar vergelijkbare eenheidsprijzen (€/m2), herken de posten en zet 'incl.'-posten apart.",
+      "beschrijving": "Lees alle binnengekomen offertes in één keer samen in en zet ze om naar vergelijkbare eenheidsprijzen (€/m2): herken per leverancier de posten, reken totaalprijzen om en markeer wat niet zuiver vergelijkbaar is (@@). Zelf uploaden kan vanaf 2 offertes.",
       "type": "automation",
       "dataFile": "offertes_kanaalplaten.json",
       "sources": {
@@ -24,6 +24,21 @@
           { "name": "VBI 221816 kanaalplaatvloeren Segro.pdf", "bedrijf": "VBI", "file": "bron/[221816-1] Segro - DHL distributiecentrum LC4-LC5 SPAA SEGRO Park Amsterdam Airport HOOFDDORP.pdf" },
           { "name": "Preco offerte 20221206 kanaalplaten Segro.pdf", "bedrijf": "Preco", "file": "bron/20221206.1.1.pdf" },
           { "name": "Van Nieuwpoort offerte 155654 Segro.pdf", "bedrijf": "Nieuwpoort", "file": "bron/Offerte 155654 Pleijsier Bouw Genemuiden B.V.pdf" }
+        ]
+      },
+      "normalize": {
+        "normalized": "data/genormaliseerde_offertes.json",
+        "min": 2,
+        "posten": [
+          { "id": "begane_grond", "row": 24, "label": "Begane grond; 200mm +130 EPSmm (as A-E/1-1.2)" },
+          { "id": "portiersloge", "row": 25, "label": "Portiersloge; 200mm +130 EPSmm" },
+          { "id": "dak_energieplein", "row": 26, "label": "Dak energieplein; 260mm 60 min brandwerend (as G-H/1-2)" },
+          { "id": "balkonvloer", "row": 27, "label": "Balkonvloer; 150 mm (as 1/1.1-2)" },
+          { "id": "v1_kantoor", "row": 28, "label": "1e verdieping kantoor; 320 mm, 30 min brandwerend" },
+          { "id": "v1_mezzanine_30", "row": 29, "label": "1e verdieping mezzanine; 320 mm, 30 min brandwerend" },
+          { "id": "v1_mezzanine_60", "row": 30, "label": "1e verdieping mezzanine; 320 mm, 60 min brandwerend" },
+          { "id": "v2_kantoor", "row": 31, "label": "2e verdieping kantoor; 320 mm, 30 min brandwerend" },
+          { "id": "v2_techniek", "row": 32, "label": "2e verdieping technische ruimte; 320 mm, 30 min brandwerend" }
         ]
       },
       "workflow": [

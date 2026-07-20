@@ -9,6 +9,7 @@ import {
 } from './WorkflowNodeCard'
 import { SourcePanel } from './SourcePanel'
 import { OfferUploadPanel } from './OfferUploadPanel'
+import { NormalizePanel } from './NormalizePanel'
 import { ExcelViewer } from './ExcelViewer'
 
 export function DemoRunner({
@@ -189,12 +190,16 @@ export function DemoRunner({
         </p>
       )}
 
-      {demo?.excel?.upload ? (
+      {demo?.normalize ? (
+        <NormalizePanel klant={klant} demo={demo} hasApiKey={hasApiKey} />
+      ) : demo?.excel?.upload ? (
         <OfferUploadPanel klant={klant} demo={demo} hasApiKey={hasApiKey} />
       ) : (
         demo?.sources && <SourcePanel klant={klant} sources={demo.sources} single />
       )}
 
+      {!demo?.normalize && (
+        <>
       {/* Bediening */}
       <div className="flex flex-wrap items-center gap-4 rounded-2xl border border-[var(--color-line)] bg-white p-4">
         <button
@@ -337,6 +342,8 @@ export function DemoRunner({
           demoId={demo.id}
           downloadHref={api.excelUrl(klant, demo.id)}
         />
+      )}
+        </>
       )}
 
       {/* Historie van eerdere runs (alle demo's van deze klant) */}

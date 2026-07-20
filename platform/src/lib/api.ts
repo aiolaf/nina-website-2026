@@ -2,6 +2,7 @@ import type {
   ClientDetail,
   FeasibilityReport,
   HistoryEntry,
+  OfferCompareResult,
   OfferFillResult,
   ProfileResult,
   RecordInfo,
@@ -99,5 +100,14 @@ export const api = {
     req<OfferFillResult>(
       `/api/clients/${encodeURIComponent(klant)}/offers-load`,
       { method: 'POST', body: JSON.stringify({ demoId }) },
+    ),
+  offersNormalize: (
+    klant: string,
+    demoId: string,
+    files?: { name: string; base64: string }[],
+  ) =>
+    req<OfferCompareResult>(
+      `/api/clients/${encodeURIComponent(klant)}/offers-normalize`,
+      { method: 'POST', body: JSON.stringify({ demoId, files }) },
     ),
 }

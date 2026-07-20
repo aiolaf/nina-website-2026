@@ -25,6 +25,7 @@ export interface DemoDef {
     viewFilled?: string
     upload?: UploadSpec
   }
+  normalize?: { normalized?: string; min?: number; posten: UploadPost[] }
   sources?: {
     sharepoint?: string
     outlook?: string
@@ -72,6 +73,16 @@ export interface OfferFillResult {
   gunstigsteIndex: number | null
   xlsxBase64: string
   filename: string
+}
+
+export interface OfferCompareResult {
+  klant: string
+  demoId: string
+  leveranciers: string[]
+  posten: { id: string; label: string; cellen: OfferCompareCell[] }[]
+  totalen: (number | null)[]
+  gunstigsteIndex: number | null
+  bron: 'bundled' | 'upload'
 }
 
 export interface GridCell {

@@ -33,6 +33,14 @@ export interface DemoDef {
     /** Optioneel: échte offerte-upload → AI-uitlezen → template invullen. */
     upload?: UploadSpec
   }
+  /** Optioneel: offertes samen normaliseren (stap 1). */
+  normalize?: {
+    /** Pad naar de al genormaliseerde offertes voor de bundel-knop. */
+    normalized?: string
+    /** Minimum aantal offertes voor zelf-upload (default 2). */
+    min?: number
+    posten: UploadPost[]
+  }
   /** Optioneel: brondocumenten-paneel (SharePoint / Outlook / upload) in de demo. */
   sources?: {
     sharepoint?: string
@@ -102,6 +110,22 @@ export interface OfferCompareCell {
   aangeboden: boolean
   /** true = gunstigste (laagste totaal) voor deze post. */
   best: boolean
+}
+
+/** Resultaat van het normaliseren: vergelijk-grid zonder Excel-download. */
+export interface OfferCompareResult {
+  klant: string
+  demoId: string
+  leveranciers: string[]
+  posten: {
+    id: string
+    label: string
+    cellen: OfferCompareCell[]
+  }[]
+  totalen: (number | null)[]
+  gunstigsteIndex: number | null
+  /** 'bundled' = kant-en-klaar genormaliseerd; 'upload' = live uitgelezen. */
+  bron: 'bundled' | 'upload'
 }
 
 /** Resultaat van een offerte-upload: extractie + vergelijk + download. */

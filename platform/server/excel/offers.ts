@@ -6,6 +6,7 @@ import { hasApiKey, runStructuredPdf } from '../lib/anthropic.ts'
 import type {
   ExtractedOffer,
   OfferCompareCell,
+  OfferCompareResult,
   OfferFillResult,
   UploadPost,
   UploadSpec,
@@ -141,9 +142,9 @@ function extractionSchema(posten: UploadPost[]): Record<string, unknown> {
 
 async function extractOffer(
   pdfBase64: string,
-  spec: UploadSpec,
+  posten: UploadPost[],
 ): Promise<ExtractedOffer> {
-  const postenLijst = spec.posten
+  const postenLijst = posten
     .map((p) => `- ${p.id}: ${p.label}`)
     .join('\n')
   const system =
@@ -163,7 +164,7 @@ async function extractOffer(
     user,
     pdfBase64,
     'offerte',
-    extractionSchema(spec.posten),
+    extractionSchema(posten),
   )
 }
 
@@ -197,10 +198,155 @@ export async function fillOffersForDemo(
   // Lees elke PDF echt uit met Claude.
   const offers: ExtractedOffer[] = []
   for (const f of used) {
-    offers.push(await extractOffer(f.base64, spec))
+    offers.push(await extractOffer(f.base64, spec.posten))
   }
 
   return injectAndCompare(klant, demo.id, basePath, spec, offers)
+}
+
+/**
+ * Bouw het vergelijk-grid (posten × leveranciers) uit genormaliseerde offertes,
+ * zonder Excel. Elke offerte = één kolom.
+ */
+export function compareOffers(
+  posten: UploadPost[],
+  offers: ExtractedOffer[],
+): Omit<OfferCompareResult, 'klant' | 'demoId' | 'bron'> {
+  const leveranciers: string[] = []
+  const perPost = new Map<string, OfferCompareCell[]>(
+    posten.map((p) => [p.id, []]),
+  )
+  const totalen: (number | null)[] = []
+
+  for (const offer of offers) {
+    if (!offer) continue
+    leveranciers.push(offer.bedrijf)
+    const byId = new Map(offer.regels.map((r) => [r.post_id, r]))
+    let tot = 0
+    let any = false
+    for (const post of posten) {
+      const r = byId.get(post.id)
+      const cells = perPost.get(post.id)!
+      if (
+        r &&
+        r.aangeboden !== false &&
+        (r.prijs_per_eenheid != null || r.hoeveelheid != null)
+      ) {
+        const hoev = r.hoeveelheid ?? null
+        const prijs = r.prijs_per_eenheid ?? null
+        const totaal =
+          prijs != null && hoev != null ? Math.round(prijs * hoev * 100) / 100 : null
+        if (totaal != null) {
+          tot += totaal
+          any = true
+        }
+        cells.push({
+          prijs,
+          hoeveelheid: hoev,
+          eenheid: r.eenheid ?? null,
+          totaal,
+          opmerking: r.opmerking ?? null,
+          aangeboden: true,
+          best: false,
+        })
+      } else {
+        cells.push({
+          prijs: null,
+          hoeveelheid: null,
+          eenheid: null,
+          totaal: null,
+          opmerking: r?.opmerking ?? null,
+          aangeboden: false,
+          best: false,
+        })
+      }
+    }
+    totalen.push(any ? tot : null)
+  }
+
+  for (const post of posten) {
+    const cells = perPost.get(post.id)!
+    let bestIdx = -1
+    let bestVal = Infinity
+    cells.forEach((c, i) => {
+      if (c.totaal != null && c.totaal < bestVal) {
+        bestVal = c.totaal
+        bestIdx = i
+      }
+    })
+    if (bestIdx >= 0) cells[bestIdx].best = true
+  }
+
+  let gunstigsteIndex: number | null = null
+  let laagste = Infinity
+  totalen.forEach((t, i) => {
+    if (t != null && t < laagste) {
+      laagste = t
+      gunstigsteIndex = i
+    }
+  })
+
+  return {
+    leveranciers,
+    posten: posten.map((p) => ({
+      id: p.id,
+      label: p.label,
+      cellen: perPost.get(p.id)!,
+    })),
+    totalen,
+    gunstigsteIndex,
+  }
+}
+
+/**
+ * Normaliseer offertes samen (stap 1). Zonder bestanden: laad de kant-en-klaar
+ * genormaliseerde set (geen key nodig). Met geüploade PDF's: lees ze samen uit
+ * met Claude (min. aantal instelbaar, default 2).
+ */
+export async function normalizeForDemo(
+  klant: string,
+  demoId: string | undefined,
+  files?: { name: string; base64: string }[],
+): Promise<OfferCompareResult> {
+  const config = readConfig(klant)
+  const demo = findDemo(config, demoId)
+  const spec = demo.normalize
+  if (!spec) throw new Error('Deze demo heeft geen normaliseer-stap.')
+  const dir = clientDir(klant)
+
+  let offers: ExtractedOffer[]
+  let bron: 'bundled' | 'upload'
+
+  if (files && files.length) {
+    const min = spec.min ?? 2
+    if (files.length < min) {
+      throw new Error(
+        `Upload minimaal ${min} offertes om ze samen te kunnen normaliseren.`,
+      )
+    }
+    if (!hasApiKey()) {
+      throw new Error(
+        'ANTHROPIC_API_KEY ontbreekt — nodig om de PDF-offertes uit te lezen. Voeg de key toe via Instellingen.',
+      )
+    }
+    offers = []
+    for (const f of files) {
+      offers.push(await extractOffer(f.base64, spec.posten))
+    }
+    bron = 'upload'
+  } else {
+    if (!spec.normalized) {
+      throw new Error('Er zijn geen genormaliseerde offertes geconfigureerd.')
+    }
+    const normPath = safeJoin(dir, spec.normalized)
+    if (!fs.existsSync(normPath)) {
+      throw new Error(`Genormaliseerde offertes niet gevonden: ${spec.normalized}`)
+    }
+    offers = JSON.parse(fs.readFileSync(normPath, 'utf-8')) as ExtractedOffer[]
+    bron = 'bundled'
+  }
+
+  return { klant, demoId: demo.id, ...compareOffers(spec.posten, offers), bron }
 }
 
 /**

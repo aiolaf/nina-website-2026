@@ -12,7 +12,11 @@ import {
 import { setStoredApiKey } from './lib/settings.ts'
 import { addRun, clearHistory, deleteRun, listHistory } from './lib/history.ts'
 import { fillExcelForDemo, sheetGrid } from './excel/index.ts'
-import { fillOffersForDemo, loadNormalizedForDemo } from './excel/offers.ts'
+import {
+  fillOffersForDemo,
+  loadNormalizedForDemo,
+  normalizeForDemo,
+} from './excel/offers.ts'
 import {
   clientDir,
   listClients,
@@ -154,6 +158,25 @@ app.get(
       `attachment; filename="${filename.replace(/"/g, '')}"`,
     )
     res.send(buffer)
+  }),
+)
+
+// Normaliseer offertes samen (stap 1). Zonder files: bundel-knop (geen key).
+// Met files: lees de geüploade PDF's samen uit (min. aantal, vereist key).
+// Body: { demoId, files?: [{ name, base64 }] }.
+app.post(
+  '/api/clients/:name/offers-normalize',
+  wrap(async (req, res) => {
+    const name = String(req.params.name)
+    const demoId = req.body?.demoId ? String(req.body.demoId) : undefined
+    const rawFiles = Array.isArray(req.body?.files) ? req.body.files : []
+    const files = rawFiles
+      .map((f: { name?: unknown; base64?: unknown }) => ({
+        name: String(f?.name ?? 'offerte.pdf'),
+        base64: String(f?.base64 ?? ''),
+      }))
+      .filter((f: { base64: string }) => f.base64.length > 0)
+    res.json(await normalizeForDemo(name, demoId, files.length ? files : undefined))
   }),
 )
 

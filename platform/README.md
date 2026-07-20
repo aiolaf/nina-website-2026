@@ -110,10 +110,16 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
   `/api/clients/:naam/source-file` (alleen PDF, met path-guard) voor de preview
   wordt geserveerd. De SharePoint/Outlook-weergave is visueel; de PDF-upload is
   echt — zie hieronder.
-- **Genormaliseerde offertes direct laden** (stap 2): de offertes worden in stap 1
-  (Offerte normaliseren) samen uitgelezen en genormaliseerd; stap 2 (Prijsvergelijk)
-  laadt dat resultaat **direct** in het template — zonder opnieuw te uploaden en
-  zonder API key. Config: zet op de demo onder `excel.upload` een `normalized`-pad
+- **Offertes samen normaliseren** (stap 1): alle offertes worden in één keer samen
+  uitgelezen en omgerekend naar vergelijkbare €/m². Een bundel-knop normaliseert de
+  hele set (geen API key nodig, leest de kant-en-klare set uit `normalize.normalized`);
+  zelf uploaden kan vanaf `normalize.min` (default 2) PDF's, die dan live door Claude
+  worden uitgelezen. Config: zet op de demo een `normalize`-blok
+  (`{ normalized, min, posten }`). Endpoint: `POST /api/clients/:naam/offers-normalize`
+  (zonder `files` = bundel; met `files` = live upload).
+- **Genormaliseerde offertes direct laden** (stap 2): het resultaat van stap 1 wordt
+  in stap 2 (Prijsvergelijk) **direct** in het template geladen — zonder opnieuw te
+  uploaden en zonder API key. Config: zet op de demo onder `excel.upload` een `normalized`-pad
   naar een JSON met de genormaliseerde offertes (`[{ bedrijf, regels: [{ post_id,
   aangeboden, hoeveelheid, eenheid, prijs_per_eenheid, opmerking }] }]`). Endpoint:
   `POST /api/clients/:naam/offers-load` → dezelfde vergelijk-tabel + geldige
