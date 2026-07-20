@@ -33,10 +33,17 @@ export interface DemoDef {
     /** Optioneel: échte offerte-upload → AI-uitlezen → template invullen. */
     upload?: UploadSpec
   }
-  /** Optioneel: brondocumenten-paneel (SharePoint of upload) in de demo. */
+  /** Optioneel: brondocumenten-paneel (SharePoint / Outlook / upload) in de demo. */
   sources?: {
     sharepoint?: string
-    files: { name: string; bedrijf?: string }[]
+    /** Outlook-mailbox/-map (visueel: automatische n8n-connector). */
+    outlook?: string
+    files: {
+      name: string
+      bedrijf?: string
+      /** Relatief pad naar een echt bestand in de klantmap voor de preview. */
+      file?: string
+    }[]
   }
 }
 

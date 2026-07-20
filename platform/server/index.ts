@@ -14,6 +14,7 @@ import { addRun, clearHistory, deleteRun, listHistory } from './lib/history.ts'
 import { fillExcelForDemo, sheetGrid } from './excel/index.ts'
 import { fillOffersForDemo } from './excel/offers.ts'
 import {
+  clientDir,
   listClients,
   listDataFiles,
   readConfig,
@@ -182,6 +183,33 @@ app.post(
       return
     }
     res.json(await fillOffersForDemo(name, demoId, files))
+  }),
+)
+
+// Brondocument (PDF) inline serveren voor de preview in de bron-panelen.
+app.get(
+  '/api/clients/:name/source-file',
+  wrap((req, res) => {
+    const name = String(req.params.name)
+    const rel = String(req.query.path ?? '')
+    const dir = clientDir(name)
+    const p = path.resolve(dir, rel)
+    // Geen path traversal, en alleen PDF's voor de preview.
+    if (p !== dir && !p.startsWith(dir + path.sep)) {
+      res.status(400).json({ error: 'Ongeldig pad.' })
+      return
+    }
+    if (!/\.pdf$/i.test(p)) {
+      res.status(400).json({ error: 'Alleen PDF-preview toegestaan.' })
+      return
+    }
+    if (!fs.existsSync(p)) {
+      res.status(404).json({ error: 'Bestand niet gevonden.' })
+      return
+    }
+    res.setHeader('Content-Type', 'application/pdf')
+    res.setHeader('Content-Disposition', 'inline')
+    fs.createReadStream(p).pipe(res)
   }),
 )
 

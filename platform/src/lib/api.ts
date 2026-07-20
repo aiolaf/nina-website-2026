@@ -84,6 +84,8 @@ export const api = {
     ),
   excelUrl: (klant: string, demoId: string) =>
     `/api/clients/${encodeURIComponent(klant)}/excel?demo=${encodeURIComponent(demoId)}`,
+  sourceFileUrl: (klant: string, pathRel: string) =>
+    `/api/clients/${encodeURIComponent(klant)}/source-file?path=${encodeURIComponent(pathRel)}`,
   offersFill: (
     klant: string,
     demoId: string,

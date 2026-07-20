@@ -25,7 +25,11 @@ export interface DemoDef {
     viewFilled?: string
     upload?: UploadSpec
   }
-  sources?: { sharepoint?: string; files: { name: string; bedrijf?: string }[] }
+  sources?: {
+    sharepoint?: string
+    outlook?: string
+    files: { name: string; bedrijf?: string; file?: string }[]
+  }
 }
 
 export interface UploadBlock {

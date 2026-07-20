@@ -1,9 +1,11 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { DemoDef, OfferFillResult } from '../lib/types'
 import { api } from '../lib/api'
 import { Badge, ErrorNote, Spinner } from './ui'
+import { PdfPreview } from './PdfPreview'
 
-type Mode = 'sharepoint' | 'upload'
+type Mode = 'sharepoint' | 'outlook' | 'upload'
+type Preview = { url: string; name: string } | null
 
 function fmtEuro(n: number | null): string {
   if (n == null) return '—'
@@ -67,7 +69,31 @@ export function OfferUploadPanel({
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<OfferFillResult | null>(null)
+  const [preview, setPreview] = useState<Preview>(null)
+  const objectUrl = useRef<string | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    return () => {
+      if (objectUrl.current) URL.revokeObjectURL(objectUrl.current)
+    }
+  }, [])
+
+  function previewExample(f: { name: string; file?: string }) {
+    if (!f.file) return
+    if (objectUrl.current) {
+      URL.revokeObjectURL(objectUrl.current)
+      objectUrl.current = null
+    }
+    setPreview({ url: api.sourceFileUrl(klant, f.file), name: f.name })
+  }
+
+  function previewUpload(file: File) {
+    if (objectUrl.current) URL.revokeObjectURL(objectUrl.current)
+    const url = URL.createObjectURL(file)
+    objectUrl.current = url
+    setPreview({ url, name: file.name })
+  }
 
   function addFiles(list: FileList | null) {
     if (!list) return
@@ -115,6 +141,16 @@ export function OfferUploadPanel({
           >
             📁 SharePoint
           </button>
+          {sources?.outlook && (
+            <button
+              onClick={() => setMode('outlook')}
+              className={`rounded-md px-3 py-1 transition ${
+                mode === 'outlook' ? 'bg-white shadow-sm' : 'text-[var(--color-ink-soft)]'
+              }`}
+            >
+              📧 Outlook
+            </button>
+          )}
           <button
             onClick={() => setMode('upload')}
             className={`rounded-md px-3 py-1 transition ${
@@ -127,7 +163,7 @@ export function OfferUploadPanel({
       </div>
 
       <div className="px-5 py-4">
-        {mode === 'sharepoint' ? (
+        {mode === 'sharepoint' && (
           <div>
             <div className="mb-3 flex flex-wrap items-center gap-2 text-sm">
               <span className="text-[var(--color-ink-soft)]">Map:</span>
@@ -142,7 +178,16 @@ export function OfferUploadPanel({
                     <span aria-hidden>📄</span>
                     <span className="min-w-0 flex-1 truncate">{f.name}</span>
                     {f.bedrijf && <Badge>{f.bedrijf}</Badge>}
-                    <span className="text-xs text-[var(--color-ink-soft)]">gevonden</span>
+                    {f.file ? (
+                      <button
+                        onClick={() => previewExample(f)}
+                        className="shrink-0 rounded-md border border-[var(--color-line)] px-2 py-0.5 text-xs transition hover:border-[var(--color-ink-soft)]"
+                      >
+                        👁 preview
+                      </button>
+                    ) : (
+                      <span className="text-xs text-[var(--color-ink-soft)]">gevonden</span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -159,7 +204,61 @@ export function OfferUploadPanel({
               en sleep de PDF's erin — Claude leest ze live uit.
             </p>
           </div>
-        ) : (
+        )}
+
+        {mode === 'outlook' && (
+          <div>
+            <div className="mb-3 flex items-center gap-2 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs text-sky-800">
+              <span aria-hidden>⚡</span>
+              <span>
+                Automatische n8n-connector (voorbeeld): nieuwe offerte-mails in{' '}
+                <strong>{sources?.outlook}</strong> worden herkend en de PDF-bijlagen
+                direct verwerkt.
+              </span>
+            </div>
+            {sources?.files?.length ? (
+              <ul className="divide-y divide-[var(--color-line)] rounded-lg border border-[var(--color-line)]">
+                {sources.files.map((f) => (
+                  <li key={f.name} className="px-3 py-2 text-sm">
+                    <div className="flex items-center gap-2 text-xs text-[var(--color-ink-soft)]">
+                      <span aria-hidden>✉️</span>
+                      <span className="truncate">
+                        {f.bedrijf ? `${f.bedrijf} — ` : ''}offerte kanaalplaten Segro
+                      </span>
+                      <Badge>nieuw</Badge>
+                    </div>
+                    <div className="mt-1 flex items-center gap-3">
+                      <span aria-hidden>📎</span>
+                      <span className="min-w-0 flex-1 truncate">{f.name}</span>
+                      {f.file ? (
+                        <button
+                          onClick={() => previewExample(f)}
+                          className="shrink-0 rounded-md border border-[var(--color-line)] px-2 py-0.5 text-xs transition hover:border-[var(--color-ink-soft)]"
+                        >
+                          👁 preview
+                        </button>
+                      ) : (
+                        <span className="text-xs text-[var(--color-ink-soft)]">bijlage</span>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            <p className="mt-3 text-xs text-[var(--color-ink-soft)]">
+              Wil je het nu <strong>echt</strong> draaien? Kies{' '}
+              <button
+                onClick={() => setMode('upload')}
+                className="underline hover:text-[var(--color-ink)]"
+              >
+                Zelf uploaden
+              </button>{' '}
+              — Claude leest de PDF's live uit.
+            </p>
+          </div>
+        )}
+
+        {mode === 'upload' && (
           <div>
             <button
               onClick={() => fileRef.current?.click()}
@@ -191,6 +290,12 @@ export function OfferUploadPanel({
                     <span className="text-xs text-[var(--color-ink-soft)]">
                       blok {i + 1}
                     </span>
+                    <button
+                      onClick={() => previewUpload(f)}
+                      className="shrink-0 rounded-md border border-[var(--color-line)] px-2 py-0.5 text-xs transition hover:border-[var(--color-ink-soft)]"
+                    >
+                      👁 preview
+                    </button>
                     <button
                       onClick={() => setFiles((prev) => prev.filter((_, j) => j !== i))}
                       aria-label="Verwijder bestand"
@@ -242,6 +347,14 @@ export function OfferUploadPanel({
           <div className="mt-4">
             <ErrorNote message={error} />
           </div>
+        )}
+
+        {preview && (
+          <PdfPreview
+            url={preview.url}
+            name={preview.name}
+            onClose={() => setPreview(null)}
+          />
         )}
       </div>
 

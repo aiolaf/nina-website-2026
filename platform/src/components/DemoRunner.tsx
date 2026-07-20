@@ -192,7 +192,7 @@ export function DemoRunner({
       {demo?.excel?.upload ? (
         <OfferUploadPanel klant={klant} demo={demo} hasApiKey={hasApiKey} />
       ) : (
-        demo?.sources && <SourcePanel sources={demo.sources} />
+        demo?.sources && <SourcePanel klant={klant} sources={demo.sources} single />
       )}
 
       {/* Bediening */}

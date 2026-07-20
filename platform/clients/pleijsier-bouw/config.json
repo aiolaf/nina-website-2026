@@ -16,6 +16,16 @@
       "beschrijving": "Lees één binnengekomen offerte in en zet de regels om naar vergelijkbare eenheidsprijzen (€/m2), herken de posten en zet 'incl.'-posten apart.",
       "type": "automation",
       "dataFile": "offertes_kanaalplaten.json",
+      "sources": {
+        "sharepoint": "SharePoint > Segro Hoofddorp > 04 Inkoop > Kanaalplaatvloeren > Offertes",
+        "outlook": "Inkoop-mailbox > map 'Offertes Segro Hoofddorp'",
+        "files": [
+          { "name": "Olbecon offerte 2231473.pdf", "bedrijf": "Olbecon", "file": "bron/2231473.pdf" },
+          { "name": "VBI 20221206 kanaalplaatvloeren.pdf", "bedrijf": "VBI", "file": "bron/20221206.1.1.pdf" },
+          { "name": "Offerte Preco - kanaalplaten Segro.pdf", "bedrijf": "Preco" },
+          { "name": "Aanbieding Nieuwpoort kanaalplaten.pdf", "bedrijf": "Nieuwpoort" }
+        ]
+      },
       "workflow": [
         { "id": "trigger", "label": "Offerte binnengekomen", "kind": "trigger" },
         {
@@ -74,11 +84,12 @@
       },
       "sources": {
         "sharepoint": "SharePoint > Segro Hoofddorp > 04 Inkoop > Kanaalplaatvloeren > Offertes",
+        "outlook": "Inkoop-mailbox > map 'Offertes Segro Hoofddorp'",
         "files": [
+          { "name": "Olbecon offerte 2231473.pdf", "bedrijf": "Olbecon", "file": "bron/2231473.pdf" },
+          { "name": "VBI 20221206 kanaalplaatvloeren.pdf", "bedrijf": "VBI", "file": "bron/20221206.1.1.pdf" },
           { "name": "Offerte Preco - kanaalplaten Segro.pdf", "bedrijf": "Preco" },
-          { "name": "Aanbieding Nieuwpoort kanaalplaten.pdf", "bedrijf": "Nieuwpoort" },
-          { "name": "Olbecon offerte 2231473.pdf", "bedrijf": "Olbecon" },
-          { "name": "VBI 20221206 kanaalplaatvloeren.pdf", "bedrijf": "VBI" }
+          { "name": "Aanbieding Nieuwpoort kanaalplaten.pdf", "bedrijf": "Nieuwpoort" }
         ]
       },
       "workflow": [

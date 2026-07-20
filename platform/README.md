@@ -100,10 +100,16 @@ Visualiseert de workflow als n8n-achtige nodes (trigger → stappen → output):
   recover"-herstelmelding die je krijgt als je een complex werkblad (met o.a.
   shared formulas) via een library herserialiseert. Zonder `viewFilled` vult het
   platform het template met ExcelJS (kan bij complexe sheets die melding geven).
-- **Brondocumenten-paneel** (optioneel per demo): laat visueel zien dat bestanden
-  automatisch uit een SharePoint-map komen óf zelf geüpload worden. Config:
-  `"sources": { "sharepoint": "pad", "files": [{ "name": "...", "bedrijf": "..." }] }`.
-  (De SharePoint-weergave is visueel; de PDF-upload is echt — zie hieronder.)
+- **Brondocumenten-paneel** (optioneel per demo): laat zien waar de offerte-PDF's
+  vandaan komen — **SharePoint** (automatisch ophalen), **Outlook** (automatische
+  n8n-connector op de inkoop-mailbox, ter illustratie) of **zelf uploaden**. Bij
+  elk bestand zit een **PDF-preview** (👁) — voor geüploade bestanden en voor
+  voorbeeldbestanden die in de klantmap staan. Config:
+  `"sources": { "sharepoint": "pad", "outlook": "mailbox/map", "files": [{ "name": "...", "bedrijf": "...", "file": "bron/echte.pdf" }] }`.
+  Het optionele `file`-veld wijst naar een echt bestand in de klantmap dat via
+  `/api/clients/:naam/source-file` (alleen PDF, met path-guard) voor de preview
+  wordt geserveerd. De SharePoint/Outlook-weergave is visueel; de PDF-upload is
+  echt — zie hieronder.
 - **Offerte-upload → AI-uitlezen → template invullen** (optioneel per demo): een
   écht werkende upload. Je sleept 1–4 offerte-PDF's erin; elke PDF wordt door
   Claude (PDF-document-block) uitgelezen naar gestructureerde posten/prijzen, en
