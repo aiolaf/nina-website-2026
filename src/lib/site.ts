@@ -8,6 +8,8 @@ export const site = {
   linkedinOlaf: "https://www.linkedin.com/in/olaf-lemmens/",
   newsletter: "https://olaflemmens.substack.com/subscribe",
   workshops: "https://workshops.nina-ai.nl",
+  /** TidyCal-pagina achter elke "Plan een kennismaking"-knop. */
+  booking: "https://tidycal.com/olaf/kennismaking-15-minuten-website",
 };
 
 export type Lang = "nl" | "en";
@@ -32,8 +34,8 @@ export const navEn = [
   { label: "About NinA AI", href: "/en/about-nina" },
 ];
 
-export const cta = { label: "Plan een kennismaking", href: "/contact" };
-export const ctaEn = { label: "Book an intro call", href: "/en/contact" };
+export const cta = { label: "Plan een kennismaking", href: site.booking };
+export const ctaEn = { label: "Book an intro call", href: site.booking };
 
 /** Footer-kolommen; header houdt alleen de hoofditems. */
 export const footerNav = {

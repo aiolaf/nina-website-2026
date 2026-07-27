@@ -51,8 +51,20 @@ export default function CountUp({
     return () => io.disconnect();
   }, [to, duration]);
 
+  // Ruimte reserveren voor de eindwaarde: zonder dit wordt de span breder
+  // terwijl hij optelt, wat de rest van de pagina verschuift (CLS).
+  const eind = `${prefix}${to.toLocaleString("nl-NL")}${suffix}`;
+
   return (
-    <span ref={ref} className={className}>
+    <span
+      ref={ref}
+      className={className}
+      style={{
+        display: "inline-block",
+        minWidth: `${eind.length}ch`,
+        fontVariantNumeric: "tabular-nums",
+      }}
+    >
       {prefix}
       {value.toLocaleString("nl-NL")}
       {suffix}

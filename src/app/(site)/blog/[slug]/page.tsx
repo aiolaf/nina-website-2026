@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: Props) {
               AI-agents.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <MagneticButton href="/contact">
+              <MagneticButton href={site.booking}>
                 Plan een kennismaking
               </MagneticButton>
               <MagneticButton href="/blog" variant="ghost">

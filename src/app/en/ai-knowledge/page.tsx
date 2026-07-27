@@ -61,7 +61,7 @@ export default function AiKnowledgePageEn() {
                 <p className="mt-3 leading-relaxed text-text-muted">
                   In your inbox 3 to 5 times a week: what happened in AI this
                   week, new tools tested in practice and step-by-step
-                  tutorials — from building your own Chrome extensions to a
+                  tutorials, from building your own Chrome extensions to a
                   free AI intern that does your research every morning.
                 </p>
                 <div className="mt-auto pt-6">
@@ -111,7 +111,7 @@ export default function AiKnowledgePageEn() {
               <MagneticButton href="/en/workshops">
                 View the workshops
               </MagneticButton>
-              <MagneticButton href="/en/contact" variant="ghost">
+              <MagneticButton href={site.booking} variant="ghost">
                 Book an intro call
               </MagneticButton>
             </div>

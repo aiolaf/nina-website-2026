@@ -54,7 +54,7 @@ export default function WorkshopsPageEn() {
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
               No theory lectures, but doing it yourself: practical sessions
               with AI tools, prompt engineering and concrete exercises.
-              Sessions are rated 9.3 on average and more than 100+ companies
+              Sessions are rated 9.3 on average and more than 100 companies
               preceded you.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -139,7 +139,7 @@ export default function WorkshopsPageEn() {
               <MagneticButton href={site.workshops}>
                 To workshop platform
               </MagneticButton>
-              <MagneticButton href="/en/contact" variant="ghost">
+              <MagneticButton href={site.booking} variant="ghost">
                 Book an intro call
               </MagneticButton>
             </div>

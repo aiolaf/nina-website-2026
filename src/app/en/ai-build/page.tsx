@@ -55,7 +55,7 @@ export default function AiBuildEn() {
                 5,200, development at EUR 130 per hour.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                <MagneticButton href="/en/contact">
+                <MagneticButton href={site.booking}>
                   Book an intro call
                 </MagneticButton>
               </div>
@@ -143,7 +143,7 @@ export default function AiBuildEn() {
         <Reveal delay={0.15}>
           <div className="mt-5 rounded-2xl border border-border bg-bg-card p-7">
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-              The AI bridge
+              Where the agent sits
             </p>
             <div className="mt-5 flex flex-col items-stretch gap-3 text-center sm:flex-row sm:items-center">
               <div className="flex-1 rounded-xl border border-border bg-bg-alt p-4 text-sm">
@@ -231,7 +231,7 @@ export default function AiBuildEn() {
               delivers, in hours and euros.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <MagneticButton href="/en/contact">
+              <MagneticButton href={site.booking}>
                 Book an intro call
               </MagneticButton>
               <MagneticButton href={`mailto:${site.email}`} variant="ghost">

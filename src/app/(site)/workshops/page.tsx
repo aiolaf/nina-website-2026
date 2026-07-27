@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Workshops & Training",
   description:
-    "Van intro tot deep-dive: hands-on AI-workshops die je team AI-vaardig maken. Bekijk het volledige workshop-aanbod en schrijf je direct in.",
+    "Hands-on AI-workshops die je team AI-vaardig maken. Bekijk het volledige workshop-aanbod en schrijf je direct in.",
   alternates: { canonical: "/workshops" },
 };
 
@@ -48,13 +48,13 @@ export default function WorkshopsPage() {
               Workshops &amp; Training
             </p>
             <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-              Van intro tot deep-dive: hands-on workshops die je team{" "}
+              Hands-on workshops die je team{" "}
               <Em>AI-vaardig</Em> maken.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
               Geen theorieles, maar zelf doen: praktische sessies met AI-tools,
               prompt engineering en concrete oefeningen. Sessies worden
-              beoordeeld met een 9.3 en meer dan 100+ bedrijven gingen je voor.
+              beoordeeld met een 9,3 en meer dan 100 bedrijven gingen je voor.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <MagneticButton href={site.workshops}>

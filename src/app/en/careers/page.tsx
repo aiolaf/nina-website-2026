@@ -76,7 +76,7 @@ export default function CareersPage() {
                   <h2 className="font-display mt-3 text-xl font-bold leading-snug">
                     {v.titelEn}
                     {v.niveauEn ? (
-                      <span className="text-text-muted"> — {v.niveauEn}</span>
+                      <span className="text-text-muted"> · {v.niveauEn}</span>
                     ) : null}
                   </h2>
                   <p className="mt-3 text-sm leading-relaxed text-text-muted">

@@ -47,7 +47,7 @@ export default function AboutNinaEn() {
               About NinA AI Agency
             </p>
             <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
-              The bridge from AI knowledge <Em>to application</Em>.
+              We make sure AI <Em>actually gets used</Em>.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
               Too many Dutch companies are falling behind in the AI
@@ -68,7 +68,7 @@ export default function AboutNinaEn() {
             From AI knowledge to <Em>working AI agents</Em>.
           </>
         }
-        sub="NinA AI Agency helps organizations go from AI knowledge to working AI agents. From Amsterdam, since 2024. Founded by Olaf Lemmens, who noticed during his keynotes that organizations are eager to innovate with AI but lack the tools to get started. We build that bridge from knowledge to application every day."
+        sub="NinA AI Agency helps organizations go from AI knowledge to working AI agents. From Amsterdam, since 2024. Founded by Olaf Lemmens, who noticed during his keynotes that organizations are eager to work with AI but have no idea where to start. That is what we do every day: turn the plan into something a team actually uses."
       />
 
       <Section
@@ -172,7 +172,7 @@ export default function AboutNinaEn() {
               even if it&apos;s not a project yet.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <MagneticButton href="/en/contact">
+              <MagneticButton href={site.booking}>
                 Book an intro call
               </MagneticButton>
               <MagneticButton href={`mailto:${site.email}`} variant="ghost">

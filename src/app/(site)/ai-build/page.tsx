@@ -5,6 +5,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
 import WorkflowCompare from "@/components/sections/WorkflowCompare";
 import CtaSection from "@/components/sections/CtaSection";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Build",
@@ -36,7 +37,7 @@ export default function AiBuild() {
               EUR 5.200, development EUR 130 per uur.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href="/contact">Plan een kennismaking</MagneticButton>
+              <MagneticButton href={site.booking}>Plan een kennismaking</MagneticButton>
             </div>
           </div>
           <div className="reveal-now hidden [animation-delay:0.2s] lg:block">
@@ -122,7 +123,7 @@ export default function AiBuild() {
         <Reveal delay={0.15}>
           <div className="mt-5 rounded-2xl border border-border bg-bg-card p-7">
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-              De AI-brug
+              Waar de agent zit
             </p>
             <div className="mt-5 flex flex-col items-stretch gap-3 text-center sm:flex-row sm:items-center">
               <div className="flex-1 rounded-xl border border-border bg-bg-alt p-4 text-sm">

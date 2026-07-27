@@ -73,7 +73,7 @@ export default function N8nEn() {
               services, from setup to management.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href="/en/contact">
+              <MagneticButton href={site.booking}>
                 Book an intro call
               </MagneticButton>
             </div>
@@ -153,7 +153,7 @@ export default function N8nEn() {
               automated right away.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <MagneticButton href="/en/contact">
+              <MagneticButton href={site.booking}>
                 Book an intro call
               </MagneticButton>
               <MagneticButton href={`mailto:${site.email}`} variant="ghost">

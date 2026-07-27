@@ -4,6 +4,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import CountUp from "@/components/ui/CountUp";
 import Section, { Em } from "@/components/ui/Section";
 import CtaSection from "@/components/sections/CtaSection";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "n8n Experts",
@@ -76,7 +77,7 @@ export default function N8n() {
               wij complete n8n diensten, van setup tot beheer.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href="/contact">Plan een kennismaking</MagneticButton>
+              <MagneticButton href={site.booking}>Plan een kennismaking</MagneticButton>
             </div>
           </div>
         </div>

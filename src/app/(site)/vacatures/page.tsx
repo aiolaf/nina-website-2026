@@ -9,7 +9,7 @@ import { openSollicitatie, vacatures } from "@/content/vacatures";
 export const metadata: Metadata = {
   title: "Vacatures",
   description:
-    "We zijn een ambitieus en innovatieve organisatie waar ruimte is voor jouw talentontwikkeling. Bekijk onze openstaande vacatures en versterk ons team in Amsterdam.",
+    "Werken bij NinA AI Agency in Amsterdam: bouw AI-agents en automatiseringen die bij klanten in productie draaien. Bekijk de openstaande vacatures.",
   alternates: { canonical: "/vacatures" },
 };
 
@@ -29,11 +29,12 @@ export default function VacaturesPage() {
                 We&rsquo;re hiring!
               </p>
               <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-                We zoeken naar <Em>talent</Em>
+                Kom bij ons <Em>AI bouwen</Em>.
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
-                We zijn een ambitieus en innovatieve organisatie waar ruimte is
-                voor jouw talentontwikkeling.
+                We zijn een jong bedrijf in Amsterdam dat hard groeit. Je krijgt
+                veel ruimte en verantwoordelijkheid, en je werk staat meestal
+                binnen een week bij klanten in productie.
               </p>
               <div className="mt-8">
                 <MagneticButton href="#vacatures">
@@ -78,7 +79,7 @@ export default function VacaturesPage() {
                   <h2 className="font-display mt-3 text-xl font-bold leading-snug">
                     {v.titel}
                     {v.niveau ? (
-                      <span className="text-text-muted"> — {v.niveau}</span>
+                      <span className="text-text-muted"> · {v.niveau}</span>
                     ) : null}
                   </h2>
                   <p className="mt-3 text-sm leading-relaxed text-text-muted">

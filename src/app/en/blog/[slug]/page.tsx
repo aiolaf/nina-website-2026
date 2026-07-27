@@ -79,7 +79,7 @@ export default async function BlogPostPageEn({ params }: Props) {
             organization: lectures, workshops, automations and AI agents.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <MagneticButton href="/en/contact">
+            <MagneticButton href={site.booking}>
               Book an intro call
             </MagneticButton>
             <MagneticButton href="/en/blog" variant="ghost">

@@ -26,7 +26,7 @@ export default function CtaSection({
             {sub}
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <MagneticButton href="/contact">
+            <MagneticButton href={site.booking}>
               Plan een kennismaking
             </MagneticButton>
             <MagneticButton href={`mailto:${site.email}`} variant="ghost">

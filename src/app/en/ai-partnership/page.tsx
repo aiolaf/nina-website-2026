@@ -112,8 +112,8 @@ export default function AiPartnershipEn() {
                 The AI Partnership
               </p>
               <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
-                The escalator that takes your organization up,{" "}
-                <Em>step by step</Em>.
+                A dedicated AI partner for{" "}
+                <Em>every stage of AI adoption</Em>.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
                 Organizations don&apos;t get stuck on knowledge, but on
@@ -124,7 +124,7 @@ export default function AiPartnershipEn() {
                 running.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                <MagneticButton href="/en/contact">
+                <MagneticButton href={site.booking}>
                   Book an intro call
                 </MagneticButton>
                 <MagneticButton href="#packages" variant="ghost">
@@ -371,7 +371,7 @@ export default function AiPartnershipEn() {
               means for your processes.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <MagneticButton href="/en/contact">
+              <MagneticButton href={site.booking}>
                 Book an intro call
               </MagneticButton>
               <MagneticButton href={`mailto:${site.email}`} variant="ghost">

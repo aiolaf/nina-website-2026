@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { site } from "@/lib/site";
 
 /**
  * "Ga spelen met AI": speelbare mini-automation in de hero. Tik of klik een
@@ -264,12 +264,14 @@ export default function AgentPlayground() {
             </span>{" "}
             Zo voelt spelen met AI. Wij bouwen dit dagelijks, in het echt.
           </p>
-          <Link
-            href="/contact"
+          <a
+            href={site.booking}
+            target="_blank"
+            rel="noopener noreferrer"
             className="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-semibold text-[#2a2130] transition-colors hover:bg-[#c270b5] hover:text-white"
           >
             Plan een kennismaking
-          </Link>
+          </a>
         </div>
       </div>
 

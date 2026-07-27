@@ -4,6 +4,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
 import AgentDemo from "@/components/demo/AgentDemo";
 import CtaSection from "@/components/sections/CtaSection";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Agents",
@@ -72,7 +73,7 @@ export default function AiAgents() {
               mens in de loop.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href="/contact">Plan een kennismaking</MagneticButton>
+              <MagneticButton href={site.booking}>Plan een kennismaking</MagneticButton>
               <MagneticButton href="#demo" variant="ghost">
                 Zie een agent werken
               </MagneticButton>

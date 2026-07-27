@@ -3,6 +3,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { Em } from "@/components/ui/Section";
+import { site } from "@/lib/site";
 
 /**
  * Ligt buiten de (site)/(landing) routegroepen (Next.js resolvet een
@@ -30,7 +31,7 @@ export default function NotFound() {
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <MagneticButton href="/">Naar de homepage</MagneticButton>
-              <MagneticButton href="/contact" variant="ghost">
+              <MagneticButton href={site.booking} variant="ghost">
                 Plan een kennismaking
               </MagneticButton>
             </div>

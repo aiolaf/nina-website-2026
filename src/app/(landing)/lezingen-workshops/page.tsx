@@ -265,10 +265,10 @@ export default function LezingenWorkshops() {
           <Reveal>
             <div>
               <p className="max-w-2xl leading-relaxed text-text-muted">
-                Tijdens zijn lezingen merkte Olaf dat organisaties graag
-                willen innoveren met AI, maar de handvatten missen. Die brug
-                van kennis naar toepassing, dat is precies waar hij goed in
-                is. Praktisch, prikkelend en altijd op maat.
+                Tijdens zijn lezingen merkte Olaf dat organisaties wel met AI
+                willen, maar niet weten waar ze moeten beginnen. Daar is hij
+                goed in: uitleggen wat AI betekent voor jouw werk, zo concreet
+                dat je team er maandag mee aan de slag kan.
               </p>
               <div className="mt-8 flex flex-wrap gap-8">
                 <div>

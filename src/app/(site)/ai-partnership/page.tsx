@@ -5,6 +5,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
 import PartnershipTiers from "@/components/sections/PartnershipTiers";
 import CtaSection from "@/components/sections/CtaSection";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Partnership",
@@ -69,8 +70,8 @@ export default function AiPartnership() {
               Het AI Partnership
             </p>
             <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
-              De roltrap die je organisatie{" "}
-              <Em>stap voor stap omhoog</Em> brengt.
+              Een vaste AI partner die je bijstaat in{" "}
+              <Em>alle fasen van AI Adoptie</Em>.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
               Achterblijvers lopen niet vast op kennis, maar op integratie en
@@ -80,7 +81,7 @@ export default function AiPartnership() {
               samenbrengt en draaiend houdt.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href="/contact">
+              <MagneticButton href={site.booking}>
                 Plan een kennismaking
               </MagneticButton>
               <MagneticButton href="#pakketten" variant="ghost">
@@ -106,7 +107,7 @@ export default function AiPartnership() {
         variant="alt"
         title={
           <>
-            Vier treden: Kickoff, Bouw, Schaal en <Em>Verankeren</Em>.
+            Kickoff, bouwen, opschalen en <Em>verankeren</Em>.
           </>
         }
       >

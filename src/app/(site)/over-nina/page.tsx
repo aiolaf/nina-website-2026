@@ -56,7 +56,7 @@ export default function OverNina() {
               Over NinA AI Agency
             </p>
             <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
-              De brug van AI-kennis <Em>naar toepassing</Em>.
+              Wij zorgen dat AI bij jullie <Em>echt gebruikt wordt</Em>.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
               Te veel Nederlandse bedrijven blijven achter in de
@@ -76,7 +76,7 @@ export default function OverNina() {
             Van AI-kennis naar <Em>werkende AI-agents</Em>.
           </>
         }
-        sub="NinA AI Agency helpt organisaties om van AI-kennis naar werkende AI-agents te gaan. Vanuit Amsterdam, sinds 2024. Opgericht door Olaf Lemmens, die tijdens zijn lezingen merkte dat organisaties graag willen innoveren met AI, maar de handvatten missen. Die brug van kennis naar toepassing bouwen we elke dag."
+        sub="NinA AI Agency helpt organisaties om van AI-kennis naar werkende AI-agents te gaan. Vanuit Amsterdam, sinds 2024. Opgericht door Olaf Lemmens, die tijdens zijn lezingen merkte dat organisaties wel met AI willen, maar niet weten waar ze moeten beginnen. Dat is wat we elke dag doen: van plan naar iets dat een team ook echt gebruikt."
       />
 
       <Section

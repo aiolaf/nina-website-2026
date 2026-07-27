@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Cases",
@@ -204,7 +205,7 @@ export default function CasesPage() {
               en ambities.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <MagneticButton href="/contact">
+              <MagneticButton href={site.booking}>
                 Plan een kennismaking
               </MagneticButton>
               <MagneticButton href="/ai-partnership" variant="ghost">

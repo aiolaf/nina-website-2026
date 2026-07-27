@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "AI Kennis",
   description:
-    "Drie tot 5 keer per week inzichten over AI-implementaties, nieuwe ontwikkelingen en praktische AI tips. Abonneer op de Substack of lees de blog.",
+    "Drie tot vijf keer per week inzichten over AI-implementaties, nieuwe ontwikkelingen en praktische AI tips. Abonneer op de Substack of lees de blog.",
   alternates: { canonical: "/ai-kennis" },
 };
 
@@ -26,12 +26,12 @@ export default function AiKennisPage() {
               AI Kennis
             </p>
             <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-              Drie tot 5 keer per week <Em>praktische AI-inzichten</Em>.
+              Drie tot vijf keer per week <Em>praktische AI-inzichten</Em>.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
               Inzichten over AI-implementaties, nieuwe ontwikkelingen en
-              praktische AI tips ontvangen? Abonneer op de Substack van Olaf
-              Lemmens, of duik in de artikelen op de blog.
+              praktische AI-tips ontvangen? Abonneer op de Substack van Olaf
+              Lemmens, of lees de artikelen op de blog.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <MagneticButton href={site.newsletter}>
@@ -58,9 +58,9 @@ export default function AiKennisPage() {
                   Dit was de week in AI
                 </h2>
                 <p className="mt-3 leading-relaxed text-text-muted">
-                  Drie tot 5 keer per week in je inbox: wat er deze week
+                  Drie tot vijf keer per week in je inbox: wat er deze week
                   gebeurde in AI, nieuwe tools getest in de praktijk en
-                  stap-voor-stap tutorials — van je eigen Chrome-extensies
+                  stap-voor-stap tutorials, van je eigen Chrome-extensies
                   bouwen tot een gratis AI-stagiair die elke ochtend research
                   voor je doet.
                 </p>
@@ -111,7 +111,7 @@ export default function AiKennisPage() {
               <MagneticButton href="/workshops">
                 Bekijk de workshops
               </MagneticButton>
-              <MagneticButton href="/contact" variant="ghost">
+              <MagneticButton href={site.booking} variant="ghost">
                 Plan een kennismaking
               </MagneticButton>
             </div>

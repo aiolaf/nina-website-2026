@@ -89,7 +89,7 @@ export default function AiAgentsEn() {
               the loop.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href="/en/contact">
+              <MagneticButton href={site.booking}>
                 Book an intro call
               </MagneticButton>
               <MagneticButton href="#demo" variant="ghost">
@@ -229,7 +229,7 @@ export default function AiAgentsEn() {
               which process pays for itself fastest at your organization.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <MagneticButton href="/en/contact">
+              <MagneticButton href={site.booking}>
                 Book an intro call
               </MagneticButton>
               <MagneticButton href={`mailto:${site.email}`} variant="ghost">

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const v = getVacatureEn(slug);
   if (!v) return {};
-  const title = v.niveauEn ? `${v.titelEn} — ${v.niveauEn}` : v.titelEn;
+  const title = v.niveauEn ? `${v.titelEn}, ${v.niveauEn}` : v.titelEn;
   return {
     title: `${title} vacancy`,
     description: `${v.taglineEn} ${v.kaartTekstEn}`,

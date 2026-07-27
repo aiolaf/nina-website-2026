@@ -13,7 +13,7 @@ const COPY = {
     ctaSub:
       "Wij helpen organisaties van AI-kennis naar een werkende AI-organisatie: lezingen, workshops, automatiseringen en AI-agents.",
     ctaPrimary: "Plan een kennismaking",
-    ctaPrimaryHref: "/contact",
+    ctaPrimaryHref: site.booking,
     ctaSecondary: "Meer freebies",
     bel: "Of bel direct:",
   },
@@ -24,7 +24,7 @@ const COPY = {
     ctaSub:
       "We help organizations go from AI knowledge to a working AI organization: lectures, workshops, automations and AI agents.",
     ctaPrimary: "Book an intro call",
-    ctaPrimaryHref: "/en/contact",
+    ctaPrimaryHref: site.booking,
     ctaSecondary: "More freebies",
     bel: "Or call directly:",
   },

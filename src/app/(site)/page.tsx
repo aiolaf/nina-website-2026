@@ -28,6 +28,7 @@ import GlowCard from "@/components/ui/GlowCard";
 import OlafCard from "@/components/sections/OlafCard";
 import CtaSection from "@/components/sections/CtaSection";
 import { getAllPosts } from "@/lib/blog";
+import { site } from "@/lib/site";
 
 const PRODUCTEN = [
   {
@@ -124,7 +125,7 @@ export default function Home() {
                   om te gooien. Jullie vaste AI-partner.
                 </p>
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                  <MagneticButton href="/contact">
+                  <MagneticButton href={site.booking}>
                     Plan een kennismaking
                   </MagneticButton>
                   <MagneticButton href="/lezingen-workshops" variant="ghost">
@@ -215,8 +216,8 @@ export default function Home() {
           variant="alt"
           title={
             <>
-              Drie producten die je organisatie <Em>trede voor trede</Em>{" "}
-              omhoog brengen.
+              Drie manieren om te beginnen, afhankelijk van{" "}
+              <Em>waar je nu staat</Em>.
             </>
           }
         >

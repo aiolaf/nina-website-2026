@@ -69,12 +69,16 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
               {item.label}
             </Link>
           ))}
-          <Link
+          {/* Externe boekingspagina, dus een gewone anchor met target en rel
+              in plaats van next/link. */}
+          <a
             href={action.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-ink-deep hover:text-white"
           >
             {action.label}
-          </Link>
+          </a>
           <Link
             href={switchHref}
             aria-label={
@@ -132,12 +136,14 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
               {item.label}
             </Link>
           ))}
-          <Link
+          <a
             href={action.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-4 rounded-full bg-primary px-5 py-3 text-center text-base font-semibold text-white"
           >
             {action.label}
-          </Link>
+          </a>
           <Link
             href={switchHref}
             className="mt-2 rounded-lg px-3 py-3 text-sm font-medium text-text-muted"

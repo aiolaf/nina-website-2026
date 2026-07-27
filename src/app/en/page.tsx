@@ -181,7 +181,7 @@ export default function HomeEn() {
                 landscape. Your dedicated AI partner.
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <MagneticButton href="/en/contact">
+                <MagneticButton href={site.booking}>
                   Book an intro call
                 </MagneticButton>
                 <MagneticButton href="/en/workshops" variant="ghost">
@@ -329,8 +329,8 @@ export default function HomeEn() {
         variant="alt"
         title={
           <>
-            Three products that take your organization up,{" "}
-            <Em>step by step</Em>.
+            Three ways to start, depending on{" "}
+            <Em>where you are now</Em>.
           </>
         }
       >
@@ -710,7 +710,7 @@ export default function HomeEn() {
               workshop right away.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <MagneticButton href="/en/contact">
+              <MagneticButton href={site.booking}>
                 Book an intro call
               </MagneticButton>
               <MagneticButton href={`mailto:${site.email}`} variant="ghost">
