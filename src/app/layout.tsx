@@ -23,7 +23,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.nina-ai.nl"),
+  // Canonieke host is nina-ai.nl zonder www; www stuurt daarheen door.
+  metadataBase: new URL("https://nina-ai.nl"),
   title: {
     default: "NinA AI Agency | Van idee naar werkende AI-agent",
     template: "%s | NinA AI Agency",

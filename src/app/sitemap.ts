@@ -3,7 +3,7 @@ import { getAllPosts, parseDutchDate } from "@/lib/blog";
 import { freebies } from "@/content/freebies";
 import { vacatures } from "@/content/vacatures";
 
-const BASE = "https://www.nina-ai.nl";
+const BASE = "https://nina-ai.nl";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
