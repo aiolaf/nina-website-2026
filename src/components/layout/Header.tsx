@@ -49,9 +49,9 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
         <Link
           href={home}
-          className="font-display text-lg font-bold tracking-tight"
+          className="font-display flex h-7 items-center text-lg font-bold leading-none tracking-tight"
         >
-          NinA<span className="text-primary"> AI</span>
+          NinA<span className="text-primary">&nbsp;AI</span>
         </Link>
 
         <nav

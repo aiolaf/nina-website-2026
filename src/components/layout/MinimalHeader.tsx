@@ -30,8 +30,11 @@ export default function MinimalHeader() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <span className="font-display select-none text-lg font-bold tracking-tight">
-          NinA<span className="text-primary"> AI</span>
+        {/* Vaste hoogte en leading-none: zonder dat verandert de doos van het
+            woordmerk zodra Bricolage inlaadt, en schuift deze fixed header
+            zichtbaar (CLS 0,14 op mobiel gemeten). */}
+        <span className="font-display flex h-7 select-none items-center text-lg font-bold leading-none tracking-tight">
+          NinA<span className="text-primary">&nbsp;AI</span>
         </span>
         <a
           href={site.phoneHref}
