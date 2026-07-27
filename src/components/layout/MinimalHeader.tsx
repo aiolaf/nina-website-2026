@@ -36,9 +36,12 @@ export default function MinimalHeader() {
         <span className="font-display flex h-7 select-none items-center text-lg font-bold leading-none tracking-tight">
           NinA<span className="text-primary">&nbsp;AI</span>
         </span>
+        {/* Vaste maten en tabular-nums: het nummer is de breedste tekst in
+            deze balk, dus zonder dit bepaalt de fontmetriek de breedte en
+            verschuift de pil bij het inladen van het font. */}
         <a
           href={site.phoneHref}
-          className="rounded-full border border-border px-4 py-1.5 text-sm text-text-muted transition-colors hover:border-primary hover:text-primary"
+          className="flex h-8 w-[11.5rem] items-center justify-center rounded-full border border-border text-sm leading-none text-text-muted tabular-nums transition-colors hover:border-primary hover:text-primary"
         >
           {site.phone}
         </a>
