@@ -1,0 +1,634 @@
+{
+  "name": "LinkedIn Post Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "={{ $('Get Data from Sheets1').item.json.Afbeelding }}",
+        "options": {}
+      },
+      "id": "774ae272-c874-49d7-96d4-9c36ededd760",
+      "name": "Get Image1",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        -656,
+        1776
+      ],
+      "typeVersion": 4.2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "06ae3b51-6570-48b0-ad33-1703f07b61b9",
+      "name": "Schedule Trigger1",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        -2512,
+        2256
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "99a7b56a-6ebe-4cc2-9f19-55eb5aad84c1",
+      "name": "OpenAI Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        -2112,
+        2496
+      ],
+      "typeVersion": 1.2,
+      "credentials": {
+        "openAiApi": {
+          "id": "vzAipRmXoEwtFWxi",
+          "name": "OpenAi account - n8n demo 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1eumg-89VBBsMoMNBe5m5Z43AYdg6VRJOADL28e-EaOU",
+          "mode": "list",
+          "cachedResultName": "LinkedIn Post Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eumg-89VBBsMoMNBe5m5Z43AYdg6VRJOADL28e-EaOU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Blad1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eumg-89VBBsMoMNBe5m5Z43AYdg6VRJOADL28e-EaOU/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "Pending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fa4674de-0453-44f9-a73d-fd098f04e81b",
+      "name": "Get Data from Sheets1",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -2288,
+        2256
+      ],
+      "typeVersion": 4.5,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "nRNcPx3A1pXw2Vn5",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# LinkedIn Post Generatie\n\n## Post Beschrijving:\n{{ $json[\"Post Omschrijving\"] }}\n\n## Instructies:\n{{ $json[\"Instructies\"] }}\n\n---\n\n**Taak:**\nGebruik de bovenstaande informatie om de inhoud voor een LinkedIn-post te genereren:\n- Gebruik de Beschrijving en de Instructies om een nieuwe post te maken.\n- Zorg dat de output positief, professioneel, duidelijk is en alle gegeven instructies en feedback volgt.\n- Voeg geen uitleg toe, alleen de uiteindelijke postinhoud, klaar om direct op LinkedIn te plaatsen.\n- Beperk tot maximaal 1300 tekens.\n- Als in de instructies expliciet staat dat de originele beschrijving behouden moet blijven, gebruik dan exact de Post Beschrijving en geef deze als eindresultaat.\n\n# De eerste zin is het allerbelangrijkste element.\n- Trek de aandacht van iemand die voorbij scrollt.\n- Gebruik bij voorkeur cijfers die opvallen.\n- Verzin nooit cijfers!\n- Zorg dat deze zin niet langer is dan 87 characters, daar zit namelijk de lees meer knop achter.\n\n# Gebruik zo min mogelijk emoji's. Alleen als het echt relevant is.\n\n# Opbouw\n- Gebruik veel witruimte\n- Gebruik korte zinnen\n- Maak gebruik van opsommingen\n\n# Storytelling\n- Gebruik in je schrijfstijl een persoonlijke aanpak\n- Gebruik storytelling om de lezer mee te nemen\n- Zorg dat de lezer zichzelf herkent\n\n# Stijl\n- Vermijd AI jargon zoals: \"in de wondere wereld van..\"\n- Maak het menselijk\n\n# Eindig altijd met een vraag aan het publiek",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are an expert social media and LinkedIn content writer.\n\nYou will be provided with:\n- A brief post description\n- Specific instructions from the user\n\nPlease follow these steps:\n\n1. Initial Creation:\nIf you are given a post description and instructions, write a polished, professionally worded LinkedIn post suitable for sharing. Strictly follow the instructions and ensure the message is engaging and succinct.\nIf instructed, add a call to action or particular phrase (for example, \"Connect with me\" at the bottom).\n\n2. Formatting:\nKeep the tone positive, inclusive, and professional.\nAdd relevant hashtags in small case.\nLimit the content to within 1300 characters.\nPlace the call to action or special instruction at the end if requested.\nOutput ONLY the final LinkedIn post content. Do NOT include any explanations, markdown, headings, or commentary—just the post text, ready to copy and share on LinkedIn."
+            }
+          ]
+        }
+      },
+      "id": "3f1cd70c-3fed-4452-833f-8aa849b888ab",
+      "name": "Generate Post Content1",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        -2064,
+        2256
+      ],
+      "typeVersion": 1.6
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bded6f56",
+              "name": "Post Content",
+              "type": "string",
+              "value": "={{ $json.text }}"
+            },
+            {
+              "id": "c222c42e",
+              "name": "Post Description",
+              "type": "string",
+              "value": "={{ $('Get Data from Sheets1').item.json['Post Omschrijving'] }}"
+            },
+            {
+              "id": "14775ff7",
+              "name": "Instructions",
+              "type": "string",
+              "value": "={{ $('Get Data from Sheets1').item.json.Instructies }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "46c6f700-d3ec-499a-920a-59fede9ad2d7",
+      "name": "Data Formatting",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -1696,
+        2256
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "developer@nina-ai.nl",
+        "subject": "Goedkeuring voor LinkedIn Post",
+        "message": "=Gegenereerde Post:\n{{ $json['Post Content'] }}\n\n----------\n\nPost Beschrijving:\n{{ $json['Post Description'] }}\n\n----------\n\nInstructies:\n{{ $json.Instructions }}",
+        "responseType": "customForm",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Bevestig Content?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Ja"
+                  },
+                  {
+                    "option": "Nee"
+                  },
+                  {
+                    "option": "Annuleren"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Enige wijzigingen?",
+              "fieldType": "textarea"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0104b392-a935-4c27-bbfe-27327ab250c1",
+      "name": "Send Content Confirmation1",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        -1472,
+        2160
+      ],
+      "webhookId": "29614d41-05c1-44af-93a6-4831a27f9331",
+      "typeVersion": 2.1,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NsoXYT352VzkZEvK",
+          "name": "Developer Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "99ec185e",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $json.data['Bevestig Content?'] }}",
+                    "rightValue": "Ja"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Yes"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "77031007",
+                    "operator": {
+                      "name": "filter.operator.equals",
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $json.data['Bevestig Content?'] }}",
+                    "rightValue": "Nee"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "No"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "e94de530",
+                    "operator": {
+                      "name": "filter.operator.equals",
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "leftValue": "={{ $json.data['Bevestig Content?'] }}",
+                    "rightValue": "Annuleren"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Cancel"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "74215b51-b157-4695-83d7-3304f9e07910",
+      "name": "Content Confirmation Logic1",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        -1248,
+        2160
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Pas de gevraagde wijzigingen toe op de volgende LinkedIn-post. Naast het toepassen van de gevraagde aanpassingen, geef dezelfde LinkedIn-post terug.\n\nLinkedIn-post:\n{{ $('Data Formatting ').item.json['Post Content'] }}\n\nWijzigingsverzoeken:\n{{ $('Send Content Confirmation1').item.json.data['Any Changes?'] }}\n\n**Taak:**\nGebruik de bovenstaande informatie om de LinkedIn-postinhoud bij te werken:\n- Voeg geen uitleg toe, alleen de uiteindelijke postinhoud (met alle wijzigingen toegepast), klaar om direct op LinkedIn te plaatsen.\n- Beperk tot maximaal 1300 tekens.\n- Als in de instructies expliciet staat dat de originele beschrijving behouden moet blijven, gebruik dan exact de Post Beschrijving en geef deze als eindresultaat."
+      },
+      "id": "b815c7d4-e280-4b9a-9da5-34b0f9c115f5",
+      "name": "Regenerate Post Content1",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        -1040,
+        2336
+      ],
+      "typeVersion": 1.6
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "9a78220d",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              },
+              "leftValue": "={{ $('Get Data from Sheets1').item.json.Afbeelding }}",
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7b1f68b6-1ed2-4fc8-901d-05c43bb33fd0",
+      "name": "If Image Provided1",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -960,
+        1888
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "person": "pM247vR8Se",
+        "text": "={{ $('Data Formatting ').item.json['Post Content'] }}",
+        "shareMediaCategory": "IMAGE",
+        "additionalFields": {}
+      },
+      "id": "a2aeebf2-5b01-456c-92ad-dc1a4b0d6c94",
+      "name": "Post With Image1",
+      "type": "n8n-nodes-base.linkedIn",
+      "position": [
+        -432,
+        1776
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "person": "pM247vR8Se",
+        "text": "={{ $('Data Formatting ').item.json['Post Content'] }}",
+        "additionalFields": {}
+      },
+      "id": "54c17426-452b-4c8b-87ba-7f7b2a5f6eff",
+      "name": "Post Without Image1",
+      "type": "n8n-nodes-base.linkedIn",
+      "position": [
+        -432,
+        1968
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1eumg-89VBBsMoMNBe5m5Z43AYdg6VRJOADL28e-EaOU",
+          "mode": "list",
+          "cachedResultName": "LinkedIn Post Automation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eumg-89VBBsMoMNBe5m5Z43AYdg6VRJOADL28e-EaOU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Blad1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eumg-89VBBsMoMNBe5m5Z43AYdg6VRJOADL28e-EaOU/edit#gid=0"
+        },
+        "columns": {
+          "value": {
+            "Output": "={{ $json.urn }}",
+            "Status": "=Completed",
+            "Post Link": "={{ $json.urn }}",
+            "row_number": "={{ $('Get Data from Sheets1').item.json.row_number }}"
+          },
+          "schema": [
+            {
+              "id": "Status",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "required": false,
+              "displayName": "Status",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Output",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Output",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Post Link",
+              "type": "string",
+              "display": true,
+              "required": false,
+              "displayName": "Post Link",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "type": "string",
+              "display": true,
+              "removed": false,
+              "readOnly": true,
+              "required": false,
+              "displayName": "row_number",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "row_number"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "391726e0-8a93-4f98-9f2c-d0917669db9c",
+      "name": "Update Google Sheet1",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -32,
+        2096
+      ],
+      "typeVersion": 4.5,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "nRNcPx3A1pXw2Vn5",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get Image1": {
+      "main": [
+        [
+          {
+            "node": "Post With Image1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Get Data from Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Regenerate Post Content1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data from Sheets1": {
+      "main": [
+        [
+          {
+            "node": "Generate Post Content1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Post Content1": {
+      "main": [
+        [
+          {
+            "node": "Data Formatting ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Formatting ": {
+      "main": [
+        [
+          {
+            "node": "Send Content Confirmation1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Content Confirmation1": {
+      "main": [
+        [
+          {
+            "node": "Content Confirmation Logic1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Content Confirmation Logic1": {
+      "main": [
+        [
+          {
+            "node": "If Image Provided1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Regenerate Post Content1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Google Sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Regenerate Post Content1": {
+      "main": [
+        [
+          {
+            "node": "Data Formatting ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Image Provided1": {
+      "main": [
+        [
+          {
+            "node": "Get Image1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Post Without Image1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post With Image1": {
+      "main": [
+        [
+          {
+            "node": "Update Google Sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post Without Image1": {
+      "main": [
+        [
+          {
+            "node": "Update Google Sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "03d8aa77-c00a-46ff-bf4e-97115b739686",
+  "meta": {
+    "instanceId": "12503e15ecf13227b3ba751bc7b2fcdaf2d55ae6cdf7295a1c0184e3b8c65b95"
+  },
+  "id": "mrSTYoY4cuZ6VbU9",
+  "tags": []
+}

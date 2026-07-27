@@ -1,0 +1,384 @@
+{
+  "name": "Slack Demo",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const b = $json.body || $json;\nconst parts = (b.text || \"\").trim().split(/\\s+/);\n\nreturn [{\n  topic: parts[0] || \"BigTall\",\n  lookbackDays: parseInt(parts[1] || \"365\", 10),\n  responseUrl: b.response_url,\n  channelId: b.channel_id,\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9242e300-ac67-41de-8b90-5974b97c17cc",
+      "name": "Parse Slash Params"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1aqO3DcacWjT1ijCr2wQGW6ScVH73zFux3wmjD5p3zm8",
+          "mode": "list",
+          "cachedResultName": "Customer Reviews",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aqO3DcacWjT1ijCr2wQGW6ScVH73zFux3wmjD5p3zm8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Reviews",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aqO3DcacWjT1ijCr2wQGW6ScVH73zFux3wmjD5p3zm8/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        432,
+        0
+      ],
+      "id": "1fd2d536-90a4-4f20-a1f2-89fd6af9e420",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "nRNcPx3A1pXw2Vn5",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function fromSlash() {\n  try {\n    const body = $items('Slack Webhook')[0].json.body || {};\n    const raw = (body.text || '').toString().trim();\n    const m = raw.match(/--days\\s+(\\d+)/i);\n    const lookbackDays = m ? parseInt(m[1], 10) : 365;\n    const topic = raw.replace(/--days\\s+\\d+/ig, '').trim().toLowerCase();\n    return { topic, lookbackDays };\n  } catch (_) {\n    return { topic: '', lookbackDays: 365 };\n  }\n}\n\nconst params = fromSlash();\nconst topic = params.topic;\nconst lookbackDays = params.lookbackDays;\nconst since = Date.now() - (lookbackDays * 86400000);\n\nconst kept = [];\nfor (const row of items) {\n  const r = row.json || {};\n  const ts = new Date(r.date).getTime();\n  if (!Number.isFinite(ts) || ts < since) continue;\n  const blob = ((r.text || '') + ' ' + (r.title || '')).toLowerCase();\n  if (!topic || blob.includes(topic)) kept.push(r);\n}\n\nconst out = (kept.length ? kept : items.map(i => i.json)).slice(0, 100);\nreturn [{ json: { topic, lookbackDays, reviews: out } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        656,
+        0
+      ],
+      "id": "76e79a93-0876-48da-b9f6-beed32a71327",
+      "name": "Filter Reviews"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "f7a54644-d1c8-49ab-8d36-a877830ca83c",
+        "options": {
+          "noResponseBody": true
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -240,
+        208
+      ],
+      "id": "fb9d0148-d7ed-40a8-9dc5-13cf1e9668ab",
+      "name": "Slack Webhook",
+      "webhookId": "f7a54644-d1c8-49ab-8d36-a877830ca83c"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.responseUrl }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"response_type\": \"ephemeral\",\n  \"text\": \"Working on it…\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "63be5e27-70d7-4495-b267-456fc9351d94",
+      "name": "Ack to Slack"
+    },
+    {
+      "parameters": {
+        "jsCode": "const resp = $items('Parse Slash Params')[0].json || {};\nconst { reviews = [], topic, lookbackDays } = $json;\nconst compact = reviews.slice(0, 60).map(r => ({\n  date: r.date, stars: r.rating, title: r.title || '',\n  text: (r.text || '').slice(0, 400), url: r.url || ''\n}));\nreturn [{ json: { responseUrl: resp.responseUrl, channelId: resp.channelId, topic, lookbackDays, reviews: compact } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        272
+      ],
+      "id": "578e735f-c867-4326-a6a1-6f3843e5f834",
+      "name": "Prep for LLM"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"phrases\": [\n    { \"text\": \"finally sleeves that reach my wrists\", \"label\": \"length\" }\n  ],\n  \"headlines\": [\n    \"Jeans that actually reach your ankles\",\n    \"Finally: long inseams that fit\"\n  ]\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        464
+      ],
+      "id": "cbf56487-91ee-4613-95ea-0bb0db4eac93",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Topic: {{ $json.topic }}\nWindow (days): {{ $json.lookbackDays }}\n\nReviews (JSON):\n{{ JSON.stringify($json.reviews) }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You analyze apparel reviews for a given search topic and return JSON ONLY matching the provided schema (no prose).\nTASKS\n1) Extract up to 20 short, verbatim phrases customers actually use (no rewriting). Label each: fit, length, comfort, quality, confidence, price, durability.\n2) Write 10 paid-social headlines (4–10 words) using only those phrases."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        176,
+        288
+      ],
+      "id": "be3bbada-6867-4fb8-8e1e-56f460d4f11b",
+      "name": "LLM: Phrases + Headlines"
+    },
+    {
+      "parameters": {
+        "jsCode": "const out = $json.output || {};\nconst phrases = Array.isArray(out.phrases) ? out.phrases.slice(0, 10) : [];\nconst headlines = Array.isArray(out.headlines) ? out.headlines.slice(0, 10) : [];\nconst ctx = ($items('Prep for LLM')[0]?.json) || {};\nconst { responseUrl, topic, lookbackDays } = ctx;\nconst phraseLines = phrases.map(p => \"• \" + p.text + \"  _(\" + p.label + \")_\").join('\\n');\nconst headlineLines = headlines.map((h, i) => (i + 1) + \". \" + h).join('\\n');\nconst blocks = [\n  { type: \"header\", text: { type: \"plain_text\", text: \"Review Mining: \" + (topic || '—') } },\n  { type: \"section\", text: { type: \"mrkdwn\", text: \"*Source:* Google Sheet  ·  *Window:* past \" + (lookbackDays || 365) + \" days\\n*Results:* \" + headlines.length + \" headlines\" } },\n  { type: \"divider\" },\n  { type: \"section\", text: { type: \"mrkdwn\", text: \"*Top customer phrases*\\n\" + phraseLines } },\n  { type: \"divider\" },\n  { type: \"section\", text: { type: \"mrkdwn\", text: \"*10 Headline Ideas*\\n\" + headlineLines } }\n];\nreturn [{ json: { responseUrl, blocks } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        288
+      ],
+      "id": "963c97c7-2e57-4675-b015-0fa1726803c8",
+      "name": "Build Slack Blocks"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "={{ $items('Parse Slash Params')[0].json.channelId }}",
+          "mode": "id"
+        },
+        "messageType": "block",
+        "blocksUi": "={{ { text: 'Review Mining results', blocks: $json.blocks } }}",
+        "text": "Review Mining results",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        672,
+        272
+      ],
+      "id": "5e678854-7c13-4939-ad88-60690c0e8198",
+      "name": "Send a message",
+      "webhookId": "213b13f6-45aa-4dfb-a7ae-4f4e9e6fb1f5",
+      "credentials": {
+        "slackApi": {
+          "id": "WnKmj8nHtDHIxLF7",
+          "name": "Slack account dev"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -128,
+        576
+      ],
+      "id": "f343f88c-03fc-4a0c-845b-a896b7554cdf",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "vzAipRmXoEwtFWxi",
+          "name": "OpenAi account - n8n demo 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        672
+      ],
+      "id": "e8fd08c1-e4f3-4325-931c-638c3a179662",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "vzAipRmXoEwtFWxi",
+          "name": "OpenAi account - n8n demo 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Parse Slash Params": {
+      "main": [
+        [
+          {
+            "node": "Ack to Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Filter Reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Slash Params",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ack to Slack": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Reviews": {
+      "main": [
+        [
+          {
+            "node": "Prep for LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep for LLM": {
+      "main": [
+        [
+          {
+            "node": "LLM: Phrases + Headlines",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "LLM: Phrases + Headlines",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM: Phrases + Headlines": {
+      "main": [
+        [
+          {
+            "node": "Build Slack Blocks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Slack Blocks": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "LLM: Phrases + Headlines",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a03d5aca-8b96-414c-bdae-708922f0015e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "12503e15ecf13227b3ba751bc7b2fcdaf2d55ae6cdf7295a1c0184e3b8c65b95"
+  },
+  "id": "c8KtHsI7hYsChEeb",
+  "tags": []
+}

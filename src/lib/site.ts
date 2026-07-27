@@ -10,13 +10,111 @@ export const site = {
   workshops: "https://workshops.nina-ai.nl",
 };
 
+export type Lang = "nl" | "en";
+
 export const nav = [
   { label: "AI Partnership", href: "/ai-partnership" },
   { label: "Lezingen & Workshops", href: "/lezingen-workshops" },
   { label: "AI Agents", href: "/ai-agents" },
   { label: "AI Build", href: "/ai-build" },
-  { label: "n8n", href: "/n8n" },
+  { label: "Blog", href: "/blog" },
+  { label: "Freebies", href: "/freebies" },
   { label: "Over NinA AI", href: "/over-nina" },
 ];
 
+export const navEn = [
+  { label: "AI Partnership", href: "/en/ai-partnership" },
+  { label: "Workshops", href: "/en/workshops" },
+  { label: "AI Agents", href: "/en/ai-agents" },
+  { label: "AI Build", href: "/en/ai-build" },
+  { label: "Blog", href: "/en/blog" },
+  { label: "Freebies", href: "/en/freebies" },
+  { label: "About NinA AI", href: "/en/about-nina" },
+];
+
 export const cta = { label: "Plan een kennismaking", href: "/contact" };
+export const ctaEn = { label: "Book an intro call", href: "/en/contact" };
+
+/** Footer-kolommen; header houdt alleen de hoofditems. */
+export const footerNav = {
+  nl: {
+    diensten: [
+      { label: "AI Partnership", href: "/ai-partnership" },
+      { label: "Lezingen & Workshops", href: "/lezingen-workshops" },
+      { label: "AI Agents", href: "/ai-agents" },
+      { label: "AI Build", href: "/ai-build" },
+      { label: "n8n Automations", href: "/n8n" },
+      { label: "Workshops", href: "/workshops" },
+    ],
+    content: [
+      { label: "Blog", href: "/blog" },
+      { label: "Freebies", href: "/freebies" },
+      { label: "Cases", href: "/cases" },
+      { label: "AI Kennis", href: "/ai-kennis" },
+    ],
+    bedrijf: [
+      { label: "Over NinA AI", href: "/over-nina" },
+      { label: "Vacatures", href: "/vacatures" },
+      { label: "Contact", href: "/contact" },
+      { label: "Privacyverklaring", href: "/privacy" },
+    ],
+  },
+  en: {
+    diensten: [
+      { label: "AI Partnership", href: "/en/ai-partnership" },
+      { label: "AI Agents", href: "/en/ai-agents" },
+      { label: "AI Build", href: "/en/ai-build" },
+      { label: "n8n Automations", href: "/en/n8n" },
+      { label: "Workshops", href: "/en/workshops" },
+    ],
+    content: [
+      { label: "Blog", href: "/en/blog" },
+      { label: "Freebies", href: "/en/freebies" },
+      { label: "Cases", href: "/en/cases" },
+      { label: "AI Knowledge", href: "/en/ai-knowledge" },
+    ],
+    bedrijf: [
+      { label: "About NinA AI", href: "/en/about-nina" },
+      { label: "Careers", href: "/en/careers" },
+      { label: "Contact", href: "/en/contact" },
+      { label: "Privacy policy", href: "/en/privacy" },
+    ],
+  },
+};
+
+/**
+ * NL-pad <-> EN-pad voor de taalswitcher. Paden zonder mapping vallen
+ * terug op de homepage van de andere taal.
+ */
+export const langPairs: [string, string][] = [
+  ["/", "/en"],
+  ["/ai-partnership", "/en/ai-partnership"],
+  ["/lezingen-workshops", "/en/workshops"],
+  ["/workshops", "/en/workshops"],
+  ["/ai-agents", "/en/ai-agents"],
+  ["/ai-build", "/en/ai-build"],
+  ["/n8n", "/en/n8n"],
+  ["/blog", "/en/blog"],
+  ["/freebies", "/en/freebies"],
+  ["/cases", "/en/cases"],
+  ["/ai-kennis", "/en/ai-knowledge"],
+  ["/over-nina", "/en/about-nina"],
+  ["/vacatures", "/en/careers"],
+  ["/contact", "/en/contact"],
+  ["/privacy", "/en/privacy"],
+];
+
+export function switchLangPath(pathname: string, to: Lang): string {
+  if (to === "en") {
+    if (pathname.startsWith("/blog/")) return `/en${pathname}`;
+    if (pathname.startsWith("/freebies/")) return `/en${pathname}`;
+    if (pathname.startsWith("/vacatures/")) return "/en/careers";
+    const hit = langPairs.find(([nl]) => nl === pathname);
+    return hit ? hit[1] : "/en";
+  }
+  if (pathname.startsWith("/en/blog/")) return pathname.slice(3);
+  if (pathname.startsWith("/en/freebies/")) return pathname.slice(3);
+  if (pathname.startsWith("/en/careers/")) return "/vacatures";
+  const hit = langPairs.find(([, en]) => en === pathname);
+  return hit ? hit[0] : "/";
+}

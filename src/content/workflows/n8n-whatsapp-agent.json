@@ -1,0 +1,776 @@
+{
+  "name": "whatsapp demo",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {
+          "messageStatusUpdates": [
+            "all"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1168,
+        0
+      ],
+      "id": "2e634538-9c4a-45f7-abed-92ad77c51b5f",
+      "name": "WhatsApp Trigger",
+      "webhookId": "719d3dfd-b042-4202-8b69-0de3bc62de23",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "A1kSXPDfIvd6t8Bx",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Je bent een whatshap assistent je hebt als tools informatie over de vragen mee gekregen. Gebruik deze informatie om antwoorden te genereren. Pak eerst de base schema zodat je weet hoe een base eruit ziet. Je mag geen antwoord verzinnen, je antwoord moet gebasseerd zijn op de verkregen data. Als er onvoldoende data beschikbaar is geef dan als antwoord in de JSON HumanInTheLoop: \"True\".\n\nGeef je antwoord in JSON: \n\n{\n  \"HumanInTheLoop\": \"True\" (als Human in the loop nodig is) \"Fasle\" (als er al antwoord kan worden gegeven op de vraag),\n  \"antwoord\": \"antwoord op de klant\",\n  \"vraag\": \"de vraag van de klant\"\n}\n\nHet whatshap bericht:\n {{ $json.messages[0].text.body }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -560,
+        0
+      ],
+      "id": "c9a70b0a-083f-4eab-b71a-b243980675d6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -928,
+        208
+      ],
+      "id": "6d3f1642-372d-48e0-80b9-17f7d7a1153a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "vzAipRmXoEwtFWxi",
+          "name": "OpenAi account - n8n demo 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -768,
+        192
+      ],
+      "id": "e01a5ec9-c91c-476c-86ae-9172d14d8ea8",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Hier kan je de FAQ ophalen van de klantenservice.",
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appLNVdKGHX73X6Pc",
+          "mode": "list",
+          "cachedResultName": "Demo - NinA AI",
+          "cachedResultUrl": "https://airtable.com/appLNVdKGHX73X6Pc"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblAhvRKbghopZpiX",
+          "mode": "list",
+          "cachedResultName": "FAQ",
+          "cachedResultUrl": "https://airtable.com/appLNVdKGHX73X6Pc/tblAhvRKbghopZpiX"
+        },
+        "filterByFormula": "=",
+        "returnAll": "={{ $fromAI('Return_All', '', 'boolean') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        -496,
+        224
+      ],
+      "id": "6daa9920-9a7a-4f06-91da-262c0356fed7",
+      "name": "Search records in Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "eKXXh0lqaWewSGpp",
+          "name": "All bases"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "499727726557144",
+        "recipientPhoneNumber": "=+{{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "textBody": "={{ $json.message.content }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        -144
+      ],
+      "id": "00138714-4069-4ab5-aba5-b2375ae44019",
+      "name": "Send message",
+      "webhookId": "2e5f4122-eda2-422c-b416-4d40ae787c86",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "cCNiysrevlYc1ZhQ",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "base",
+        "operation": "getSchema",
+        "base": {
+          "__rl": true,
+          "value": "appLNVdKGHX73X6Pc",
+          "mode": "list",
+          "cachedResultName": "Demo - NinA AI",
+          "cachedResultUrl": "https://airtable.com/appLNVdKGHX73X6Pc"
+        }
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        -624,
+        208
+      ],
+      "id": "ba8b3a5b-ff81-429c-abdf-9be90593f6c6",
+      "name": "Get base schema in Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "eKXXh0lqaWewSGpp",
+          "name": "All bases"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Hier kan je orders uit de orderlijsten halen.",
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appLNVdKGHX73X6Pc",
+          "mode": "list",
+          "cachedResultName": "Demo - NinA AI",
+          "cachedResultUrl": "https://airtable.com/appLNVdKGHX73X6Pc"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblWpFCGTnCsOEhSh",
+          "mode": "list",
+          "cachedResultName": "Orders",
+          "cachedResultUrl": "https://airtable.com/appLNVdKGHX73X6Pc/tblWpFCGTnCsOEhSh"
+        },
+        "filterByFormula": "={{ $fromAI('Filter_By_Formula', '', 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        272
+      ],
+      "id": "d13d5304-4634-490d-9b24-fed889ea0ebf",
+      "name": "Search records in Airtable1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "eKXXh0lqaWewSGpp",
+          "name": "All bases"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let rawOutput = items[0].json.output;\nrawOutput = rawOutput.trim();\nif ((rawOutput.startsWith(\"'''\") && rawOutput.endsWith(\"'''\")) || (rawOutput.startsWith('```') && rawOutput.endsWith('```'))) {\n  rawOutput = rawOutput.slice(3, -3).trim();\n}\nlet parsedOutput;\ntry {\n  parsedOutput = JSON.parse(rawOutput);\n} catch (err) {\n  throw new Error(\"Kon de JSON niet parsen: \" + err.message);\n}\nreturn [{ json: { HumanInTheLoop: parsedOutput.HumanInTheLoop, antwoord: parsedOutput.antwoord, vraag: parsedOutput.vraag } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -208,
+        0
+      ],
+      "id": "8fcbcd49-3802-44eb-a03b-14d69ddb39cd",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "81acc93b",
+              "leftValue": "={{ $json.HumanInTheLoop }}",
+              "rightValue": "True",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        32,
+        0
+      ],
+      "id": "6d8f12e1-1603-4b48-a9c4-d9feae51df92",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "00f73f4e",
+              "leftValue": "={{ $json.data.FAQ }}",
+              "rightValue": "Ja, opslaan als FAQ",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": "=false",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        688,
+        -128
+      ],
+      "id": "b73d8311-5c9d-4a4f-87e3-869eb968b150",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appLNVdKGHX73X6Pc",
+          "mode": "list",
+          "cachedResultName": "Demo - NinA AI",
+          "cachedResultUrl": "https://airtable.com/appLNVdKGHX73X6Pc"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblAhvRKbghopZpiX",
+          "mode": "list",
+          "cachedResultName": "FAQ",
+          "cachedResultUrl": "https://airtable.com/appLNVdKGHX73X6Pc/tblAhvRKbghopZpiX"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Vraag": "={{ $('If').item.json.vraag }}",
+            "Antwoord": "={{ $json.data.antwoord }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "FAQ ID",
+              "displayName": "FAQ ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Vraag",
+              "displayName": "Vraag",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Antwoord",
+              "displayName": "Antwoord",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        912,
+        -224
+      ],
+      "id": "f41ae356-2668-42f4-ab04-34ffc5501759",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "eKXXh0lqaWewSGpp",
+          "name": "All bases"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Je bent een vraag en antwoord assistent:\n\nJe vraag was: {{ $json.fields.Vraag }}\n\nHet gegeven antwoord in de FAQ database: {{ $json.fields.Antwoord }}\n\nStuur geen intro of outro. Enkel een klantenservice whatshap bericht."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1120,
+        -224
+      ],
+      "id": "f5137d84-e0ec-4b11-a3a0-b48b3dd24b49",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "vzAipRmXoEwtFWxi",
+          "name": "OpenAi account - n8n demo 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "499727726557144",
+        "recipientPhoneNumber": "=+{{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "textBody": "={{ $json.message.content }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        1488,
+        80
+      ],
+      "id": "804d5b76-f26a-4109-8f1c-6f768cfc5112",
+      "name": "Send message1",
+      "webhookId": "2e5f4122-eda2-422c-b416-4d40ae787c86",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "cCNiysrevlYc1ZhQ",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Je bent een vraag en antwoord assistent:\n\nJe vraag was:\n{{ $('If').item.json.vraag }}\n\nHet gegeven antwoord in de FAQ database: {{ $json.data.antwoord }}\n\nStuur geen intro of outro. Enkel een klantenservice whatshap bericht."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1008,
+        -16
+      ],
+      "id": "cd51ed87-3da9-41a2-8843-6863f1a548b9",
+      "name": "Message a model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "vzAipRmXoEwtFWxi",
+          "name": "OpenAi account - n8n demo 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "499727726557144",
+        "recipientPhoneNumber": "=+{{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "textBody": "={{ $json.antwoord }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        512,
+        144
+      ],
+      "id": "4ca9f587-6414-4513-aaff-b7f1e03976fa",
+      "name": "Send message2",
+      "webhookId": "2e5f4122-eda2-422c-b416-4d40ae787c86",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "cCNiysrevlYc1ZhQ",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "sendAndWait",
+        "user": {
+          "__rl": true,
+          "value": "U07V2HC2T99",
+          "mode": "list",
+          "cachedResultName": "wolf"
+        },
+        "message": "=Hoi Medewerker,\n\nDe ai assistent kwam er niet uit:\n\nDe vraag:\n {{ $json.vraag }}\n\nGeef in je antwoord aan of je antwoord wel/niet in de FAQ database opgeslagen moet worden.",
+        "responseType": "customForm",
+        "defineForm": "json",
+        "jsonOutput": "[{\"fieldLabel\": \"antwoord\", \"placeholder\": \"Geef hier je antwoord\", \"requiredField\": true, \"fieldType\": \"textarea\"}, {\"fieldLabel\": \"FAQ\", \"fieldType\": \"dropdown\", \"fieldOptions\": {\"values\": [{\"option\": \"Ja, opslaan als FAQ\"}, {\"option\": \"Nee, niet opslaan\"}]}, \"requiredField\": true}]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        352,
+        -80
+      ],
+      "id": "d1436642-1d2c-4dc3-9799-7869c623132e",
+      "name": "Send a message",
+      "webhookId": "185f13e4-20a3-4ef8-aed3-239f4b74ad03",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "TcxdXIHOslUeyrhP",
+          "name": "Developer account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "807a0b39",
+              "leftValue": "={{ $json.messages[0].text.body }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -944,
+        0
+      ],
+      "id": "a4daa3bb-8432-4c5d-9137-23ca68f27345",
+      "name": "If2"
+    }
+  ],
+  "pinData": {
+    "WhatsApp Trigger": [
+      {
+        "json": {
+          "messaging_product": "whatsapp",
+          "metadata": {
+            "display_phone_number": "15551511948",
+            "phone_number_id": "499727726557144"
+          },
+          "contacts": [
+            {
+              "profile": {
+                "name": "Olaf"
+              },
+              "wa_id": "31651007956"
+            }
+          ],
+          "messages": [
+            {
+              "from": "31651007956",
+              "id": "wamid.HBgLMzE2NTEwMDc5NTYVAgASGBQzQTU0RENFQTI3MTRBNzc1QThDNgA=",
+              "timestamp": "1753094119",
+              "text": {
+                "body": "Hoi, waar kan je me mee helpen?"
+              },
+              "type": "text"
+            }
+          ],
+          "field": "messages"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records in Airtable": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get base schema in Airtable": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records in Airtable1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Message a model1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model1": {
+      "main": [
+        [
+          {
+            "node": "Send message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ba340f0d-e040-4af0-8dda-f858db7ff995",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "12503e15ecf13227b3ba751bc7b2fcdaf2d55ae6cdf7295a1c0184e3b8c65b95"
+  },
+  "id": "FzVR65Qet8uSUSwV",
+  "tags": []
+}

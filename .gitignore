@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+# iCloud sloopt node_modules door bestanden te evicten; de echte map heet
+# .nosync (iCloud negeert die suffix) met /node_modules als symlink ernaartoe.
+/node_modules.nosync
 /.pnp
 .pnp.*
 .yarn/*

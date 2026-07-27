@@ -1,7 +1,37 @@
 import Link from "next/link";
-import { nav, site } from "@/lib/site";
+import { footerNav, site, type Lang } from "@/lib/site";
 
-export default function Footer() {
+const COPY = {
+  nl: {
+    tagline1: "Van AI-kennis naar een werkende AI-organisatie. Jullie vaste AI-partner.",
+    tagline2: "Verantwoorde AI. Transparant. Mens plus machine.",
+    diensten: "Diensten",
+    content: "Content",
+    bedrijf: "Bedrijf",
+    contact: "Contact",
+    volgOns: "Volg ons",
+    linkedin: "LinkedIn Olaf Lemmens",
+    nieuwsbrief: "AI nieuwsbrief",
+    rechten: "Alle rechten voorbehouden.",
+  },
+  en: {
+    tagline1: "From AI knowledge to a working AI organization. Your dedicated AI partner.",
+    tagline2: "Responsible AI. Transparent. Human plus machine.",
+    diensten: "Services",
+    content: "Content",
+    bedrijf: "Company",
+    contact: "Contact",
+    volgOns: "Follow us",
+    linkedin: "LinkedIn Olaf Lemmens",
+    nieuwsbrief: "AI newsletter",
+    rechten: "All rights reserved.",
+  },
+};
+
+export default function Footer({ lang = "nl" }: { lang?: Lang }) {
+  const t = COPY[lang];
+  const cols = footerNav[lang];
+
   return (
     <footer className="relative overflow-hidden border-t border-border bg-bg-alt">
       <div
@@ -9,24 +39,19 @@ export default function Footer() {
         className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent"
       />
       <div aria-hidden="true" className="footer-watermark" />
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="sm:col-span-2 lg:col-span-1">
           <p className="font-display text-lg font-bold">
             NinA<span className="text-primary"> AI</span> Agency
           </p>
-          <p className="mt-3 text-sm text-text-muted">
-            Van AI-kennis naar een werkende AI-organisatie. Jullie vaste
-            AI-partner.
-          </p>
-          <p className="mt-3 text-sm text-text-muted">
-            Verantwoorde AI. Transparant. Mens plus machine.
-          </p>
+          <p className="mt-3 text-sm text-text-muted">{t.tagline1}</p>
+          <p className="mt-3 text-sm text-text-muted">{t.tagline2}</p>
         </div>
 
         <div>
-          <p className="text-sm font-semibold">Diensten</p>
+          <p className="text-sm font-semibold">{t.diensten}</p>
           <ul className="mt-3 space-y-2">
-            {nav.map((item) => (
+            {cols.diensten.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
@@ -40,7 +65,36 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-sm font-semibold">Contact</p>
+          <p className="text-sm font-semibold">{t.content}</p>
+          <ul className="mt-3 space-y-2">
+            {cols.content.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="text-sm text-text-muted transition-colors hover:text-primary"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-sm font-semibold">{t.bedrijf}</p>
+          <ul className="mt-3 space-y-2">
+            {cols.bedrijf.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="text-sm text-text-muted transition-colors hover:text-primary"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-sm font-semibold">{t.contact}</p>
           <ul className="mt-3 space-y-2 text-sm text-text-muted">
             <li>
               <a
@@ -64,7 +118,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-sm font-semibold">Volg ons</p>
+          <p className="text-sm font-semibold">{t.volgOns}</p>
           <ul className="mt-3 space-y-2 text-sm text-text-muted">
             <li>
               <a
@@ -73,7 +127,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-primary"
               >
-                LinkedIn Olaf Lemmens
+                {t.linkedin}
               </a>
             </li>
             <li>
@@ -83,7 +137,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-primary"
               >
-                AI nieuwsbrief
+                {t.nieuwsbrief}
               </a>
             </li>
           </ul>
@@ -91,17 +145,14 @@ export default function Footer() {
       </div>
       <div className="flex flex-col items-center justify-center gap-2 border-t border-border py-5 text-center text-xs text-text-muted sm:flex-row sm:gap-6">
         <span>
-          © {new Date().getFullYear()} NinA AI Agency. Alle rechten
-          voorbehouden.
+          © {new Date().getFullYear()} NinA AI Agency. {t.rechten}
         </span>
-        <a
-          href="https://nina-ai.nl/privacy"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href={lang === "en" ? "/en/privacy" : "/privacy"}
           className="transition-colors hover:text-primary"
         >
-          Privacyverklaring
-        </a>
+          {lang === "en" ? "Privacy policy" : "Privacyverklaring"}
+        </Link>
       </div>
     </footer>
   );

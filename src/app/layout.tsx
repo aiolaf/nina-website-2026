@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import CursorGlow from "@/components/ui/CursorGlow";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import "./globals.css";
@@ -68,9 +66,7 @@ export default function RootLayout({
         />
         <ScrollProgress />
         <CursorGlow />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

@@ -27,6 +27,7 @@ import MottoMarquee from "@/components/sections/MottoMarquee";
 import GlowCard from "@/components/ui/GlowCard";
 import OlafCard from "@/components/sections/OlafCard";
 import CtaSection from "@/components/sections/CtaSection";
+import { getAllPosts } from "@/lib/blog";
 
 const PRODUCTEN = [
   {
@@ -435,6 +436,67 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-5 pb-20 sm:pb-28">
           <OlafCard />
         </section>
+
+        {/* Laatste blogposts, interne linking naar de kennislaag */}
+        <Section
+          variant="alt"
+          kicker="Blog"
+          title={
+            <>
+              Elke week een <Em>eerlijk verhaal</Em> uit de AI-praktijk.
+            </>
+          }
+          sub="Geen hype, wel wat werkt. Lees mee met de nieuwste inzichten."
+        >
+          <div className="grid gap-6 sm:grid-cols-3">
+            {getAllPosts()
+              .slice(0, 3)
+              .map((post, i) => (
+                <Reveal key={post.slug} delay={i * 0.08}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-bg-card shadow-sm transition-shadow hover:shadow-md"
+                  >
+                    {post.image && (
+                      <div className="relative aspect-[16/9]">
+                        <Image
+                          src={post.image}
+                          alt={post.title}
+                          fill
+                          sizes="(min-width: 640px) 33vw, 100vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-1 flex-col p-6">
+                      {post.category && (
+                        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
+                          {post.category}
+                        </p>
+                      )}
+                      <h3 className="font-display mt-2 text-lg font-bold leading-snug">
+                        {post.title}
+                      </h3>
+                      <p className="mt-auto pt-5 text-xs text-text-muted">
+                        {post.date}
+                        {post.readTime ? ` · ${post.readTime}` : ""}
+                      </p>
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+          </div>
+          <Reveal delay={0.2}>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <MagneticButton href="/blog" variant="ghost">
+                Alle artikelen
+              </MagneticButton>
+              <MagneticButton href="/freebies" variant="ghost">
+                Gratis frameworks & tools
+              </MagneticButton>
+            </div>
+          </Reveal>
+        </Section>
 
       <CtaSection />
     </>

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import CountUp from "@/components/ui/CountUp";
 import Section, { Em } from "@/components/ui/Section";
-import CtaSection from "@/components/sections/CtaSection";
+import FilloutEmbed from "@/components/ui/FilloutEmbed";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -81,52 +80,55 @@ const PRIJZEN = [
   },
 ];
 
-const REIS = [
-  {
-    label: "Nu",
-    naam: "Lezing & Workshop",
-    tekst: "Kennis, enthousiasme en een eerste werkend resultaat.",
-  },
-  {
-    label: "Verdieping",
-    naam: "AI Design",
-    tekst: "Kansen in kaart, een geprioriteerd AI Future Plan.",
-  },
-  {
-    label: "Bouwen",
-    naam: "AI Build",
-    tekst: "Werkende automatiseringen en agents op maat.",
-  },
+const VOORSTEL_PUNTEN = [
+  "Volledig afgestemd op jullie sector, doelgroep en kennisniveau",
+  "Voorbeelden en oefeningen die direct relevant zijn voor jullie werk",
+  "Praktisch en toepasbaar, geen standaard verhaal maar maatwerk",
 ];
 
 export default function LezingenWorkshops() {
   return (
     <>
-      {/* Hero */}
+      {/* Hero: pitch + formulier direct zichtbaar, geen scroll nodig om te converteren */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
         />
-        <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-36 sm:pb-24">
-          <div className="reveal-now">
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-bg-card/70 px-4 py-1.5 text-xs font-medium text-text-muted backdrop-blur">
-              Sessies beoordeeld met een{" "}
-              <span className="font-semibold text-gold">9,3</span>
-            </p>
-            <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
-              Maak je organisatie <Em>AI Ready</Em>.
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
-              Een prikkelende lezing en een hands-on workshop, op maat voor
-              jullie sector en team. Twee manieren om je team in beweging te
-              krijgen.
-            </p>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href="/contact">Plan een kennismaking</MagneticButton>
-              <MagneticButton href="#aanbod" variant="ghost">
-                Bekijk het aanbod
-              </MagneticButton>
+        <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-24 sm:pb-20">
+          <div className="grid items-start gap-10 lg:grid-cols-[1.1fr_1fr]">
+            <div className="reveal-now">
+              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-bg-card/70 px-4 py-1.5 text-xs font-medium text-text-muted backdrop-blur">
+                Sessies beoordeeld met een{" "}
+                <span className="font-semibold text-gold">9,3</span>
+              </p>
+              <h1 className="font-display max-w-xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+                Maak je organisatie <Em>AI Ready</Em>.
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
+                Een prikkelende lezing en een hands-on workshop, op maat voor
+                jullie sector en team. Vraag hiernaast een vrijblijvend
+                voorstel aan.
+              </p>
+              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+                <MagneticButton href="#aanvraag">
+                  Vraag een voorstel aan
+                </MagneticButton>
+                <MagneticButton href="#aanbod" variant="ghost">
+                  Bekijk het aanbod
+                </MagneticButton>
+              </div>
+              <p className="mt-4 text-xs text-text-muted">
+                Vrijblijvend, binnen 24 uur een reactie.
+              </p>
+            </div>
+            <div id="aanvraag" className="reveal-now [animation-delay:0.15s]">
+              <FilloutEmbed
+                formId="sxmVnPbAUcus"
+                title="Vraag een voorstel aan voor een lezing of workshop"
+                height={520}
+                deferMs={250}
+              />
             </div>
           </div>
         </div>
@@ -383,7 +385,7 @@ export default function LezingenWorkshops() {
                   ))}
                 </ul>
                 <MagneticButton
-                  href="/contact"
+                  href="#aanvraag"
                   variant={p.featured ? "primary" : "ghost"}
                   className="mt-7 w-full"
                 >
@@ -395,60 +397,50 @@ export default function LezingenWorkshops() {
         </div>
       </Section>
 
-      {/* Klantreis */}
+      {/* Vraag een voorstel aan */}
       <Section
+        variant="alt"
         title={
           <>
-            De lezing is het startpunt. <Em>Daarna begint het pas</Em>.
+            Vraag een <Em>voorstel op maat</Em> aan.
           </>
         }
+        sub="Vul het formulier in en ontvang een vrijblijvend voorstel voor een lezing of workshop op maat."
       >
-        <div className="grid gap-5 sm:grid-cols-3">
-          {REIS.map((r, idx) => (
-            <Reveal key={r.naam} delay={idx * 0.08}>
-              <div className="h-full rounded-2xl border border-border bg-bg-card p-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                  {r.label}
-                </span>
-                <h3 className="font-display mt-2 text-lg font-bold">
-                  {r.naam}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                  {r.tekst}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal delay={0.2}>
-          <Link
-            href="/ai-partnership"
-            className="group mt-5 flex flex-col gap-3 rounded-2xl border border-primary/50 bg-bg-muted p-7 transition-colors hover:border-primary sm:flex-row sm:items-center sm:justify-between"
-          >
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
+          <Reveal>
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                Jullie vaste AI-partner
-              </span>
-              <h3 className="font-display mt-2 text-xl font-bold">
-                AI Partnership
-              </h3>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
-                Wil je na de workshop echt doorbouwen? Dan word je
-                AI-partner: vaste capaciteit per maand die kennis, bouw en
-                begeleiding samenbrengt en draaiend houdt.
-              </p>
+              <ul className="space-y-3">
+                {VOORSTEL_PUNTEN.map((p) => (
+                  <li key={p} className="flex items-start gap-2.5 text-sm">
+                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[10px] text-primary">
+                      ✓
+                    </span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 rounded-2xl border border-border bg-bg-card p-5">
+                <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+                  Liever snel bellen?
+                </p>
+                <a
+                  href={site.phoneHref}
+                  className="mt-1 block text-lg font-semibold text-primary hover:underline"
+                >
+                  {site.phone}
+                </a>
+              </div>
             </div>
-            <span className="shrink-0 rounded-full border border-primary px-5 py-2.5 text-sm font-semibold text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-              Vraag naar de mogelijkheden
-            </span>
-          </Link>
-        </Reveal>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <FilloutEmbed
+              formId="sxmVnPbAUcus"
+              title="Vraag een voorstel aan voor een lezing of workshop"
+            />
+          </Reveal>
+        </div>
       </Section>
-
-      <CtaSection
-        title="Prik een datum voor jullie lezing of workshop."
-        sub="We stemmen de sessie samen af op jullie sector en team. Binnen 24 uur een vrijblijvende reactie."
-      />
     </>
   );
 }
