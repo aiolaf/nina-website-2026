@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
-import { formatDateEn, getAllPosts } from "@/lib/blog";
+import { formatDateEn, getAllPostsEn } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPageEn() {
-  const posts = getAllPosts();
+  const posts = getAllPostsEn();
   const [latest, ...rest] = posts;
 
   return (

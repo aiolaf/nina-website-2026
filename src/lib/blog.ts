@@ -54,6 +54,16 @@ export function getPost(slug: string): BlogPost | undefined {
   return (posts as BlogPost[]).find((p) => p.slug === slug);
 }
 
+/**
+ * Alleen posts met een Engelse tekst. Nieuwere posts uit de Substack-import
+ * zijn nog niet vertaald; zonder deze filter zou de Engelse index ze met
+ * Nederlandse titels tonen en op een 404 uitkomen, omdat de detailroute
+ * alleen pagina's genereert voor posts met contentHtmlEn.
+ */
+export function getAllPostsEn(): BlogPost[] {
+  return getAllPosts().filter((p) => p.contentHtmlEn && p.titleEn);
+}
+
 /** Lazy-loading op alle content-afbeeldingen behalve de eerste (vaak LCP). */
 export function withLazyImages(html: string): string {
   let first = true;
