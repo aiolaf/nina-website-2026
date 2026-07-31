@@ -15,7 +15,7 @@ const COPY = {
     ctaPrimary: "Plan een kennismaking",
     ctaPrimaryHref: site.booking,
     ctaSecondary: "Meer freebies",
-    bel: "Of bel direct:",
+    bel: "Liever direct schakelen?",
   },
   en: {
     terug: "Freebies",
@@ -26,7 +26,7 @@ const COPY = {
     ctaPrimary: "Book an intro call",
     ctaPrimaryHref: site.booking,
     ctaSecondary: "More freebies",
-    bel: "Or call directly:",
+    bel: "Rather talk right away?",
   },
 };
 
@@ -111,8 +111,13 @@ export default function FreebieDetail({
           </div>
           <p className="mt-5 text-xs text-text-muted">
             {t.bel}{" "}
-            <a href={site.phoneHref} className="text-primary hover:underline">
-              {site.phone}
+            <a
+              href={lang === "en" ? site.whatsappEn : site.whatsappNl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              {lang === "en" ? "Send a WhatsApp" : "Stuur een WhatsApp"}
             </a>
           </p>
         </aside>

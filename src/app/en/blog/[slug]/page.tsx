@@ -87,9 +87,14 @@ export default async function BlogPostPageEn({ params }: Props) {
             </MagneticButton>
           </div>
           <p className="mt-5 text-xs text-text-muted">
-            Or call directly:{" "}
-            <a href={site.phoneHref} className="text-primary hover:underline">
-              {site.phone}
+            Rather talk right away?{" "}
+            <a
+              href={site.whatsappEn}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Send a WhatsApp
             </a>
           </p>
         </aside>

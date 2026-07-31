@@ -84,9 +84,14 @@ export default async function BlogPostPage({ params }: Props) {
               </MagneticButton>
             </div>
             <p className="mt-5 text-xs text-text-muted">
-              Of bel direct:{" "}
-              <a href={site.phoneHref} className="text-primary hover:underline">
-                {site.phone}
+              Liever direct schakelen?{" "}
+              <a
+                href={site.whatsappNl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                Stuur een WhatsApp
               </a>
             </p>
           </aside>
