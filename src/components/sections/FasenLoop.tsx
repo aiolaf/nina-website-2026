@@ -102,6 +102,34 @@ export default function FasenLoop() {
     setActive(idx);
   }
 
+  /**
+   * Eén faseknop. Wordt twee keer gerenderd: op de ring vanaf sm, en als
+   * chip-rij daaronder op mobiel. CSS laat er altijd precies één zien, dus
+   * ook assistive tech ziet er één (display:none verbergt de andere).
+   */
+  function FaseKnop({ f, idx, opRing }: { f: Fase; idx: number; opRing: boolean }) {
+    const isActive = idx === active;
+    return (
+      <button
+        role="tab"
+        aria-selected={isActive}
+        tabIndex={isActive ? 0 : -1}
+        onClick={() => pick(idx)}
+        style={opRing ? { left: f.pos.left, top: f.pos.top } : undefined}
+        className={`whitespace-nowrap rounded-full border px-3.5 py-2 text-xs font-semibold transition-all sm:text-sm ${
+          opRing ? "absolute -translate-x-1/2 -translate-y-1/2" : ""
+        } ${
+          isActive
+            ? "scale-110 border-primary bg-primary text-white shadow-[0_8px_24px_rgba(97,68,121,0.35)]"
+            : "border-border bg-bg-card text-text hover:border-primary hover:text-primary"
+        }`}
+      >
+        <span className="mr-1.5 opacity-60">{f.nr}</span>
+        {f.kort}
+      </button>
+    );
+  }
+
   function onKeyDown(e: React.KeyboardEvent) {
     if (e.key === "ArrowRight" || e.key === "ArrowDown") {
       e.preventDefault();
@@ -115,14 +143,18 @@ export default function FasenLoop() {
 
   return (
     <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
-      {/* De ring */}
+      {/* De ring. Tablist zit op deze wrapper zodat zowel de knoppen op de
+          ring als de mobiele chip-rij eronder erbinnen vallen. */}
       <div
         ref={rootRef}
-        className="relative mx-auto aspect-square w-full max-w-105 p-14 sm:p-16"
+        className="mx-auto w-full max-w-105"
         role="tablist"
         aria-label="De vier fasen van AI-adoptie, als doorlopende loop"
         onKeyDown={onKeyDown}
       >
+      {/* Minder padding op mobiel: die ruimte was er voor de ringknoppen,
+          die daar nu niet meer staan. */}
+      <div className="relative aspect-square w-full p-4 sm:p-16">
         <svg viewBox="0 0 400 400" className="h-full w-full" aria-hidden="true">
           <defs>
             <linearGradient id="loopgrad" x1="0" y1="0" x2="1" y2="1">
@@ -193,28 +225,22 @@ export default function FasenLoop() {
           <p className="mt-0.5 text-[10px] text-white/70">Fase {fase.nr} van 4</p>
         </div>
 
-        {/* fase-knoppen op de ring */}
-        {FASEN.map((f, idx) => {
-          const isActive = idx === active;
-          return (
-            <button
-              key={f.nr}
-              role="tab"
-              aria-selected={isActive}
-              tabIndex={isActive ? 0 : -1}
-              onClick={() => pick(idx)}
-              style={{ left: f.pos.left, top: f.pos.top }}
-              className={`absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border px-3.5 py-2 text-xs font-semibold transition-all sm:text-sm ${
-                isActive
-                  ? "scale-110 border-primary bg-primary text-white shadow-[0_8px_24px_rgba(97,68,121,0.35)]"
-                  : "border-border bg-bg-card text-text hover:border-primary hover:text-primary"
-              }`}
-            >
-              <span className="mr-1.5 opacity-60">{f.nr}</span>
-              {f.kort}
-            </button>
-          );
-        })}
+        {/* Knoppen op de ring: alleen vanaf sm. Op smallere schermen steekt
+            de knop op left:100% half buiten de container en werd het hele
+            document breder dan de viewport. */}
+        <div className="hidden sm:block">
+          {FASEN.map((f, idx) => (
+            <FaseKnop key={f.nr} f={f} idx={idx} opRing />
+          ))}
+        </div>
+      </div>
+
+      {/* Mobiel: dezelfde fasen als omlopende chip-rij onder de ring. */}
+      <div className="mt-6 flex flex-wrap justify-center gap-2 sm:hidden">
+        {FASEN.map((f, idx) => (
+          <FaseKnop key={f.nr} f={f} idx={idx} opRing={false} />
+        ))}
+      </div>
       </div>
 
       {/* detailpaneel */}

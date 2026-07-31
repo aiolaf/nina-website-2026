@@ -5,6 +5,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import CountUp from "@/components/ui/CountUp";
 import Section, { Em } from "@/components/ui/Section";
 import FilloutEmbed from "@/components/ui/FilloutEmbed";
+import { IconWhatsApp } from "@/components/ui/icons";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -422,13 +423,18 @@ export default function LezingenWorkshops() {
               </ul>
               <div className="mt-8 rounded-2xl border border-border bg-bg-card p-5">
                 <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                  Liever snel bellen?
+                  Liever even kort schakelen?
                 </p>
+                {/* Geen telefoonnummer in de HTML: deze pagina trekt betaald
+                    verkeer en het nummer werd zo gratis buit voor scrapers. */}
                 <a
-                  href={site.phoneHref}
-                  className="mt-1 block text-lg font-semibold text-primary hover:underline"
+                  href={site.whatsappNl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex items-center gap-2 text-lg font-semibold text-primary hover:underline"
                 >
-                  {site.phone}
+                  <IconWhatsApp className="h-5 w-5" aria-hidden="true" />
+                  Stuur een WhatsApp
                 </a>
               </div>
             </div>

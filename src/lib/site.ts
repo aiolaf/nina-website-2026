@@ -10,6 +10,21 @@ export const site = {
   workshops: "https://workshops.nina-ai.nl",
   /** TidyCal-pagina achter elke "Plan een kennismaking"-knop. */
   booking: "https://tidycal.com/olaf/kennismaking-15-minuten-website",
+  /**
+   * WhatsApp in plaats van een zichtbaar telefoonnummer. Op pagina's die
+   * betaald verkeer trekken staat het nummer niet meer als tekst in de HTML,
+   * zodat scrapers het niet oppikken; bezoekers klikken op een label en
+   * openen WhatsApp met een startbericht.
+   */
+  whatsapp: "https://wa.me/31642558526",
+  whatsappNl:
+    "https://wa.me/31642558526?text=" +
+    encodeURIComponent(
+      "Hoi Olaf, ik heb een vraag over een AI-lezing of workshop."
+    ),
+  whatsappEn:
+    "https://wa.me/31642558526?text=" +
+    encodeURIComponent("Hi Olaf, I have a question about an AI talk or workshop."),
 };
 
 export type Lang = "nl" | "en";

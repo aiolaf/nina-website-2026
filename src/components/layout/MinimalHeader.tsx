@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { IconWhatsApp } from "@/components/ui/icons";
 import { site } from "@/lib/site";
 
 /**
@@ -36,14 +37,18 @@ export default function MinimalHeader() {
         <span className="font-display flex h-7 select-none items-center text-lg font-bold leading-none tracking-tight">
           NinA<span className="text-primary">&nbsp;AI</span>
         </span>
-        {/* Vaste maten en tabular-nums: het nummer is de breedste tekst in
-            deze balk, dus zonder dit bepaalt de fontmetriek de breedte en
-            verschuift de pil bij het inladen van het font. */}
+        {/* WhatsApp in plaats van het telefoonnummer: op deze pagina komt
+            betaald verkeer binnen en stond het nummer als platte tekst in de
+            HTML, wat het gratis oogst voor scrapers. Vaste maten houden de
+            fixed header stabiel als het font inlaadt. */}
         <a
-          href={site.phoneHref}
-          className="flex h-8 w-[11.5rem] items-center justify-center rounded-full border border-border text-sm leading-none text-text-muted tabular-nums transition-colors hover:border-primary hover:text-primary"
+          href={site.whatsappNl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex h-8 w-[8.5rem] items-center justify-center gap-1.5 rounded-full border border-border text-sm leading-none text-text-muted transition-colors hover:border-primary hover:text-primary"
         >
-          {site.phone}
+          <IconWhatsApp className="h-4 w-4" aria-hidden="true" />
+          WhatsApp
         </a>
       </div>
     </header>

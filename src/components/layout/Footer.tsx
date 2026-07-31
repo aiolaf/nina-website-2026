@@ -104,12 +104,18 @@ export default function Footer({ lang = "nl" }: { lang?: Lang }) {
                 {site.email}
               </a>
             </li>
+            {/* WhatsApp in plaats van het nummer: de footer zit in de HTML van
+                elke pagina, dus een nummer als platte tekst hier maakt het
+                sitebreed oogstbaar voor scrapers. Het echte nummer staat nog
+                op de contactpagina. */}
             <li>
               <a
-                href={site.phoneHref}
+                href={lang === "en" ? site.whatsappEn : site.whatsappNl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="transition-colors hover:text-primary"
               >
-                {site.phone}
+                {lang === "en" ? "WhatsApp us" : "Stuur een WhatsApp"}
               </a>
             </li>
             <li>{site.address}</li>

@@ -140,20 +140,26 @@ export default function Home() {
                 <AgentPlayground />
               </div>
             </div>
+
+            {/* Klantlogo's in de hero: dit is de sterkste social proof, dus
+                zichtbaar zonder te scrollen in plaats van in een sectie
+                verderop. */}
+            <div className="reveal-now mt-14 [animation-delay:0.35s]">
+              <p className="mb-5 text-center text-sm text-text-muted">
+                Onder andere deze organisaties gingen je voor
+              </p>
+              <LogoMarquee />
+            </div>
           </div>
         </section>
 
         {/* Motto */}
         <MottoMarquee />
 
-        {/* Logos + stats */}
+        {/* Cijfers */}
         <section className="border-b border-border bg-bg-alt py-12">
           <div className="mx-auto max-w-6xl px-5">
-            <p className="mb-6 text-center text-sm text-text-muted">
-              Onder andere deze organisaties gingen je voor
-            </p>
-            <LogoMarquee />
-            <div className="mt-12 grid grid-cols-2 gap-6 text-center lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-6 text-center lg:grid-cols-4">
               <div className="flex flex-col items-center">
                 <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] text-white shadow-[0_6px_18px_rgba(97,68,121,0.3)]">
                   <IconBuilding className="h-5.5 w-5.5" />
@@ -181,9 +187,11 @@ export default function Home() {
                   <IconGlobe className="h-5.5 w-5.5" />
                 </span>
                 <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
-                  2.9M
+                  <CountUp to={160} suffix="+" />
                 </p>
-                <p className="mt-1 text-sm text-text-muted">LinkedIn-bereik</p>
+                <p className="mt-1 text-sm text-text-muted">
+                  organisaties geholpen
+                </p>
               </div>
               <div className="flex flex-col items-center">
                 <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] text-white shadow-[0_6px_18px_rgba(97,68,121,0.3)]">

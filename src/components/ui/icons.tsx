@@ -17,4 +17,5 @@ export {
   Globe as IconGlobe,
   UsersThree as IconUsers,
   ArrowsClockwise as IconArrowLoop,
+  WhatsappLogo as IconWhatsApp,
 } from "@phosphor-icons/react/dist/ssr";
