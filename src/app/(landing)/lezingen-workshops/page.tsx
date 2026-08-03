@@ -127,6 +127,43 @@ const VORMEN = [
   },
 ];
 
+/* Niveaus. In de praktijk lopen de niveaus binnen één zaal sterk uiteen, en
+   er zijn aparte sessies op gevorderd niveau; dat moest van de pagina
+   afleesbaar zijn in plaats van alleen uit de FAQ. */
+const NIVEAUS = [
+  {
+    naam: "Beginners",
+    kop: "Nog nooit verder gekomen dan een vraag intypen",
+    tekst:
+      "We beginnen bij hoe een taalmodel eigenlijk werkt en waarom het soms onzin verkoopt. Daarna direct aan de slag met het werk dat op hun eigen bureau ligt.",
+    punten: [
+      "Goede prompts schrijven zonder jargon",
+      "Documenten, mail en verslagen versnellen",
+      "Wat je wel en niet in een AI-tool zet",
+    ],
+  },
+  {
+    naam: "Gevorderd",
+    kop: "Al ver, en op zoek naar de volgende stap",
+    tekst:
+      "Voor teams die de basis voorbij zijn geven we specifieke sessies op gevorderd niveau. Hier gaat het over bouwen en automatiseren in plaats van kennismaken.",
+    punten: [
+      "AI Automation: workflows die taken overnemen",
+      "AI-agents die zelfstandig werk afmaken",
+      "Vibecoding: bouwen zonder developer te zijn",
+    ],
+  },
+];
+
+/* Welke modellen aan bod komen. Bewust breed: bedrijven zitten vast aan de
+   tool die ze al hebben, en dat bepaalt de inhoud van de sessie. */
+const MODELLEN = [
+  "Microsoft Copilot",
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+];
+
 /* Zorg en onderwijs zijn de twee sectoren die in het zoekwoordonderzoek
    consistent terugkomen bij "spreker AI"; bedrijfsleven is de restcategorie. */
 const SECTOREN = [
@@ -175,7 +212,11 @@ const FAQ = [
   },
   {
     v: "Is de lezing geschikt voor mensen zonder technische kennis?",
-    a: "Ja. De sessies zijn juist bedoeld voor mensen die met AI moeten werken zonder achtergrond in techniek. Voorkennis is niet nodig; we stemmen het niveau vooraf af tijdens een korte intake.",
+    a: "Ja, en ook voor mensen die al ver zijn. Voorkennis is niet nodig, maar het is geen beginnersverhaal per definitie. In de praktijk zit in bijna elke zaal een groot verschil in niveau: van collega's die ChatGPT nog nooit hebben geopend tot mensen die al met agents en API's werken. Olaf is daaraan gewend en houdt beide groepen aangehaakt. Voor teams die al verder zijn geven we ook specifieke sessies op gevorderd niveau, bijvoorbeeld over AI Automation, AI-agents en vibecoding. Wat het wordt bepalen we in een korte intake vooraf; elke sessie is maatwerk.",
+  },
+  {
+    v: "Werken jullie met de AI-tools die wij al gebruiken?",
+    a: "Ja. We behandelen het taalmodel dat binnen jullie organisatie in gebruik is, of dat nu Microsoft Copilot, ChatGPT, Claude of Gemini is. Dat maakt het verschil tussen een interessant verhaal en iets waar je team de volgende dag mee verder kan, in de omgeving waar het toch al mee werkt. Weet je nog niet wat de beste keuze is, dan gaan we juist daarop in en vergelijken we de modellen voor jullie situatie.",
   },
   {
     v: "In welke taal geeft Olaf zijn lezingen?",
@@ -215,7 +256,13 @@ const SCHEMA = {
         "AI-adoptie",
         "AI in de zorg",
         "AI in het onderwijs",
-        "Automatisering",
+        "AI Automation",
+        "AI-agents",
+        "Vibecoding",
+        "Microsoft Copilot",
+        "ChatGPT",
+        "Claude",
+        "Google Gemini",
       ],
     },
     {
@@ -495,8 +542,78 @@ export default function LezingenWorkshops() {
         </div>
       </Section>
 
+      {/* Niveau en tools. Het niveauverschil binnen één groep is de vraag die
+          het vaakst terugkomt, en de tool die een bedrijf al gebruikt bepaalt
+          wat een sessie waard is. */}
+      <Section
+        id="niveau"
+        kicker="Beginners en gevorderden"
+        title={
+          <>
+            Van eerste prompt tot <Em>eigen AI-agents</Em>.
+          </>
+        }
+        sub="In vrijwel elke zaal zit een groot verschil in niveau. Olaf is daaraan gewend en houdt beide groepen aangehaakt. En voor teams die de basis voorbij zijn geven we aparte sessies op gevorderd niveau."
+      >
+        <div className="grid gap-6 md:grid-cols-2">
+          {NIVEAUS.map((n, i) => (
+            <Reveal key={n.naam} delay={i * 0.08}>
+              <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 shadow-sm">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
+                  {n.naam}
+                </p>
+                <h3 className="font-display mt-2 text-xl font-bold leading-snug">
+                  {n.kop}
+                </h3>
+                <p className="mt-3 leading-relaxed text-text-muted">{n.tekst}</p>
+                <ul className="mt-5 space-y-2">
+                  {n.punten.map((p) => (
+                    <li
+                      key={p}
+                      className="flex items-start gap-2.5 text-sm text-text-muted"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                      />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={0.16}>
+          <div className="mt-8 rounded-2xl border border-border bg-bg-card p-7">
+            <h3 className="font-display text-lg font-bold">
+              We werken met het model dat jullie al gebruiken
+            </h3>
+            <p className="mt-3 max-w-2xl leading-relaxed text-text-muted">
+              Zit je organisatie op Microsoft Copilot, dan gaat de sessie over
+              Copilot. Werkt iedereen met ChatGPT, Claude of Gemini, dan doen we
+              dat. Zo kan je team de volgende dag verder in de omgeving die er
+              toch al staat. Twijfel je nog over de keuze, dan vergelijken we de
+              modellen juist voor jullie situatie.
+            </p>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {MODELLEN.map((m) => (
+                <li
+                  key={m}
+                  className="rounded-full border border-border bg-bg-alt px-4 py-1.5 text-sm text-text-muted"
+                >
+                  {m}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
+      </Section>
+
       {/* Olaf */}
       <Section
+        variant="alt"
         kicker="Genomineerd AI Person of the Year"
         title={
           <>
