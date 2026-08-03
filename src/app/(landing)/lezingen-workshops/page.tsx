@@ -60,7 +60,7 @@ const WORKSHOP_PUNTEN = [
 const PRIJZEN = [
   {
     naam: "AI Lezing",
-    prijs: "EUR 2.250",
+    prijs: "EUR 2.450",
     periode: "per lezing, excl. BTW",
     punten: [
       "1 uur op locatie",
@@ -71,7 +71,7 @@ const PRIJZEN = [
   },
   {
     naam: "AI Workshop",
-    prijs: "EUR 3.650",
+    prijs: "EUR 3.950",
     periode: "eenmalig, excl. BTW",
     punten: [
       "3 uur op locatie",
@@ -205,7 +205,7 @@ const AFDELINGEN = [
 const FAQ = [
   {
     v: "Wat kost het inhuren van een AI spreker?",
-    a: "Een AI-lezing start vanaf € 2.250 exclusief BTW en reiskosten. Een hands-on workshop vanaf € 3.500. Het definitieve bedrag hangt af van de vorm, de duur en hoeveel voorbereiding op maat je wilt. Je krijgt altijd eerst een vrijblijvend voorstel.",
+    a: "Een AI-lezing start vanaf € 2.450 exclusief BTW en reiskosten. Een hands-on workshop vanaf € 3.950. Het definitieve bedrag hangt af van de vorm, de duur en hoeveel voorbereiding op maat je wilt. Je krijgt altijd eerst een vrijblijvend voorstel.",
   },
   {
     v: "Hoe snel kan een AI spreker geboekt worden?",
@@ -280,10 +280,10 @@ const SCHEMA = {
       offers: {
         "@type": "Offer",
         priceCurrency: "EUR",
-        price: "2250",
+        price: "2450",
         priceSpecification: {
           "@type": "PriceSpecification",
-          minPrice: "2250",
+          minPrice: "2450",
           priceCurrency: "EUR",
           valueAddedTaxIncluded: false,
         },
@@ -418,7 +418,7 @@ export default function LezingenWorkshops() {
               </ul>
               <p className="mt-6 border-t border-border pt-4 text-sm text-text-muted">
                 Startpunt voor een duidelijke AI-strategie · vanaf{" "}
-                <span className="font-semibold text-text">EUR 2.250</span>{" "}
+                <span className="font-semibold text-text">EUR 2.450</span>{" "}
                 excl. BTW
               </p>
             </article>
