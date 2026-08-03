@@ -34,7 +34,8 @@ const PRODUCTEN = [
   {
     fase: "Fase 1",
     naam: "AI Knowledge",
-    resultaat: "Van 'wat is AI' naar 'wat kan ik er morgen mee'.",
+    resultaat:
+      "Een AI-spreker op je podium: van 'wat is AI' naar 'wat kan ik er morgen mee'.",
     href: "/lezingen-workshops",
     Icon: IconPresentation,
     foto: "/images/foto-lezing.webp",

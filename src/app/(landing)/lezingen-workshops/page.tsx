@@ -9,9 +9,20 @@ import { IconWhatsApp } from "@/components/ui/icons";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Lezingen & Workshops",
+  /* Zoekwoordonderzoek (Google-suggesties, NL): de kop-termen zijn "AI
+     spreker", "spreker over AI" en "AI spreker inhuren"; de sterkste
+     staartzoekopdrachten zijn sectorgebonden (zorg, onderwijs). Die staan
+     hieronder en in de koppen op de pagina zelf. */
+  title: "AI spreker inhuren | Olaf Lemmens, keynote en workshop",
   description:
-    "Maak je organisatie AI Ready. Een prikkelende lezing en een hands-on workshop, op maat voor jullie sector en team.",
+    "Op zoek naar een AI spreker? Olaf Lemmens geeft keynotes en workshops over AI, op maat voor jouw sector. 160+ organisaties, sessies beoordeeld met een 9,3. Vraag een voorstel aan.",
+  alternates: { canonical: "/lezingen-workshops" },
+  openGraph: {
+    title: "AI spreker inhuren: Olaf Lemmens",
+    description:
+      "Keynotes en workshops over AI, op maat voor jouw sector. 160+ organisaties, beoordeeld met een 9,3.",
+    url: "/lezingen-workshops",
+  },
 };
 
 const MARKT = [
@@ -87,9 +98,169 @@ const VOORSTEL_PUNTEN = [
   "Praktisch en toepasbaar, geen standaard verhaal maar maatwerk",
 ];
 
+/* De vormen waarin naar een spreker wordt gezocht: keynote, gastspreker,
+   dagvoorzitter, workshop. */
+const VORMEN = [
+  {
+    naam: "AI keynote",
+    duur: "30 tot 60 minuten",
+    tekst:
+      "Een prikkelend openingsverhaal voor een congres, kick-off of relatie-event. Zet de zaal aan het denken en geeft richting.",
+  },
+  {
+    naam: "Gastspreker",
+    duur: "45 tot 90 minuten",
+    tekst:
+      "Onderdeel van een groter programma, bijvoorbeeld een directiedag of ledenbijeenkomst. Met ruimte voor vragen uit de zaal.",
+  },
+  {
+    naam: "Dagvoorzitter",
+    duur: "Halve of hele dag",
+    tekst:
+      "Olaf leidt je AI-programma, verbindt de sprekers en houdt de rode draad vast van opening tot afsluiting.",
+  },
+  {
+    naam: "Hands-on workshop",
+    duur: "Dagdeel",
+    tekst:
+      "Zelf aan de slag met AI-tools. Maximaal 15 tot 20 deelnemers, iedereen gaat naar huis met iets dat werkt.",
+  },
+];
+
+/* Zorg en onderwijs zijn de twee sectoren die in het zoekwoordonderzoek
+   consistent terugkomen bij "spreker AI"; bedrijfsleven is de restcategorie. */
+const SECTOREN = [
+  {
+    naam: "AI-spreker voor de zorg",
+    tekst:
+      "Zorgmedewerkers hebben weinig tijd en veel regels. Een sessie over AI in de zorg gaat daarom over verslaglegging, triage en administratie, niet over robots.",
+    punten: [
+      "Wat mag en niet mag met patiëntgegevens",
+      "Tijd terugwinnen op rapportage en overdracht",
+      "Voorbeelden uit ziekenhuizen en zorginstellingen",
+    ],
+  },
+  {
+    naam: "AI-spreker voor het onderwijs",
+    tekst:
+      "Docenten zitten met dezelfde vraag: wat doe ik met leerlingen die ChatGPT gebruiken? En hoe helpt AI mij in plaats van dat het werk oplevert?",
+    punten: [
+      "AI in de klas: toetsing, feedback en spieken",
+      "Lesvoorbereiding en nakijkwerk versnellen",
+      "Voor docenten, opleidingsmanagers en besturen",
+    ],
+  },
+  {
+    naam: "AI-spreker voor het bedrijfsleven",
+    tekst:
+      "Van directietafel tot operations. Hier gaat het over processen die geld of tijd kosten, en waar AI daar echt iets aan verandert.",
+    punten: [
+      "Sales, marketing, finance, HR en operations",
+      "Wat AI kost en wat het oplevert",
+      "Van kennis naar een concreet vervolgplan",
+    ],
+  },
+];
+
+/* FAQ; de vragen komen uit de zoeksuggesties rond "AI spreker". Ook als
+   FAQPage-schema aan de pagina meegegeven. */
+const FAQ = [
+  {
+    v: "Wat kost het inhuren van een AI spreker?",
+    a: "Een AI-lezing start vanaf € 2.250 exclusief BTW en reiskosten. Een hands-on workshop vanaf € 3.500. Het definitieve bedrag hangt af van de vorm, de duur en hoeveel voorbereiding op maat je wilt. Je krijgt altijd eerst een vrijblijvend voorstel.",
+  },
+  {
+    v: "Hoe snel kan een AI spreker geboekt worden?",
+    a: "Je krijgt binnen 24 uur een reactie op je aanvraag. In de praktijk plannen we sessies meestal drie tot zes weken vooruit, maar bij een gaatje in de agenda kan het sneller.",
+  },
+  {
+    v: "Is de lezing geschikt voor mensen zonder technische kennis?",
+    a: "Ja. De sessies zijn juist bedoeld voor mensen die met AI moeten werken zonder achtergrond in techniek. Voorkennis is niet nodig; we stemmen het niveau vooraf af tijdens een korte intake.",
+  },
+  {
+    v: "In welke taal geeft Olaf zijn lezingen?",
+    a: "Nederlands en Engels. Voor internationale teams of een Engelstalig programma is Engels geen probleem.",
+  },
+  {
+    v: "Werkt hij door heel Nederland en België?",
+    a: "Ja, door heel Nederland en in België. Reiskosten worden apart in het voorstel opgenomen. Online of hybride sessies zijn ook mogelijk.",
+  },
+  {
+    v: "Kan de lezing gecombineerd worden met een workshop?",
+    a: "Dat is de meest geboekte combinatie. De lezing zorgt voor draagvlak bij de hele groep, de workshop daarna laat een kernteam er echt mee werken. Voor die combinatie geldt een pakketprijs.",
+  },
+];
+
+/**
+ * Structured data zodat Google Olaf als spreker-entiteit kan koppelen aan de
+ * dienst, en de FAQ in beeld kan brengen als uitgebreid zoekresultaat.
+ * Rendering volgens de Next-handleiding json-ld.md, inclusief het escapen
+ * van "<" tegen injectie.
+ */
+const SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nina-ai.nl/#olaf",
+      name: "Olaf Lemmens",
+      jobTitle: "AI-spreker en founder",
+      description:
+        "Spreker over kunstmatige intelligentie. Geeft keynotes, lezingen en workshops over AI voor organisaties in Nederland en België.",
+      worksFor: { "@type": "Organization", name: "NinA AI Agency" },
+      url: "https://nina-ai.nl/lezingen-workshops",
+      sameAs: ["https://www.linkedin.com/in/olaf-lemmens/"],
+      knowsAbout: [
+        "Kunstmatige intelligentie",
+        "AI-adoptie",
+        "AI in de zorg",
+        "AI in het onderwijs",
+        "Automatisering",
+      ],
+    },
+    {
+      "@type": "Service",
+      name: "AI spreker inhuren: keynote, lezing of workshop",
+      serviceType: "AI keynote en workshop",
+      provider: { "@id": "https://nina-ai.nl/#olaf" },
+      areaServed: [
+        { "@type": "Country", name: "Nederland" },
+        { "@type": "Country", name: "België" },
+      ],
+      description:
+        "Keynotes, lezingen en hands-on workshops over AI, op maat voor de sector en het kennisniveau van de groep.",
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "EUR",
+        price: "2250",
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          minPrice: "2250",
+          priceCurrency: "EUR",
+          valueAddedTaxIncluded: false,
+        },
+      },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: FAQ.map((f) => ({
+        "@type": "Question",
+        name: f.v,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+
 export default function LezingenWorkshops() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(SCHEMA).replace(/</g, "\\u003c"),
+        }}
+      />
       {/* Hero: pitch + formulier direct zichtbaar, geen scroll nodig om te converteren */}
       <section className="relative overflow-hidden">
         <div
@@ -104,12 +275,14 @@ export default function LezingenWorkshops() {
                 <span className="font-semibold text-gold">9,3</span>
               </p>
               <h1 className="font-display max-w-xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-                Maak je organisatie <Em>AI Ready</Em>.
+                <Em>AI spreker</Em> inhuren die je team ook echt in beweging
+                krijgt.
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
-                Een prikkelende lezing en een hands-on workshop, op maat voor
-                jullie sector en team. Vraag hiernaast een vrijblijvend
-                voorstel aan.
+                Olaf Lemmens geeft keynotes, lezingen en hands-on workshops over
+                AI, op maat voor jullie sector en team. Van directietafel tot de
+                werkvloer in de zorg of het onderwijs. Vraag hiernaast een
+                vrijblijvend voorstel aan.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton href="#aanvraag">
@@ -252,9 +425,78 @@ export default function LezingenWorkshops() {
         </div>
       </Section>
 
+      {/* Vormen: keynote, gastspreker, dagvoorzitter, workshop. Dit zijn de
+          woorden waarop gezocht wordt; ze stonden nergens op de pagina. */}
+      <Section
+        id="vormen"
+        kicker="In welke vorm"
+        title={
+          <>
+            Van korte keynote tot <Em>dagvoorzitter</Em>.
+          </>
+        }
+        sub="Wat je nodig hebt hangt af van je programma. Dit zijn de vormen waarin Olaf het vaakst wordt geboekt."
+      >
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {VORMEN.map((v, i) => (
+            <Reveal key={v.naam} delay={Math.min(i, 3) * 0.06}>
+              <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-6 shadow-sm">
+                <h3 className="font-display text-lg font-bold">{v.naam}</h3>
+                <p className="mt-1 font-mono text-xs text-text-muted">
+                  {v.duur}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                  {v.tekst}
+                </p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* Sectoren: zorg en onderwijs zijn aantoonbaar de sterkste
+          staartzoekopdrachten rond "spreker AI". */}
+      <Section
+        id="sectoren"
+        variant="alt"
+        kicker="Op maat per sector"
+        title={
+          <>
+            Een verhaal dat past bij <Em>jullie werk</Em>.
+          </>
+        }
+        sub="Een AI-lezing voor een ziekenhuis gaat over andere dingen dan een sessie voor een bouwbedrijf. Olaf bouwt elke sessie op rond voorbeelden uit je eigen sector."
+      >
+        <div className="grid gap-6 md:grid-cols-3">
+          {SECTOREN.map((s, i) => (
+            <Reveal key={s.naam} delay={Math.min(i, 2) * 0.08}>
+              <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 shadow-sm">
+                <h3 className="font-display text-xl font-bold">{s.naam}</h3>
+                <p className="mt-3 leading-relaxed text-text-muted">
+                  {s.tekst}
+                </p>
+                <ul className="mt-5 space-y-2">
+                  {s.punten.map((p) => (
+                    <li
+                      key={p}
+                      className="flex items-start gap-2.5 text-sm text-text-muted"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                      />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
       {/* Olaf */}
       <Section
-        variant="alt"
         kicker="Genomineerd AI Person of the Year"
         title={
           <>
@@ -393,6 +635,39 @@ export default function LezingenWorkshops() {
                   Vraag voorstel aan
                 </MagneticButton>
               </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* FAQ: beantwoordt de vragen waarop gezocht wordt en levert via het
+          FAQPage-schema onderaan kans op uitgebreide zoekresultaten. */}
+      <Section
+        id="faq"
+        kicker="Veelgestelde vragen"
+        title={
+          <>
+            Een AI spreker inhuren: <Em>wat je wil weten</Em>.
+          </>
+        }
+      >
+        <div className="mx-auto max-w-3xl divide-y divide-border">
+          {FAQ.map((f, i) => (
+            <Reveal key={f.v} delay={Math.min(i, 3) * 0.05}>
+              <details className="group py-5">
+                <summary className="flex cursor-pointer items-start justify-between gap-4 text-left font-semibold marker:content-none [&::-webkit-details-marker]:hidden">
+                  <h3 className="font-display text-lg leading-snug">{f.v}</h3>
+                  <span
+                    aria-hidden="true"
+                    className="mt-1 shrink-0 text-primary transition-transform group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 max-w-2xl leading-relaxed text-text-muted">
+                  {f.a}
+                </p>
+              </details>
             </Reveal>
           ))}
         </div>

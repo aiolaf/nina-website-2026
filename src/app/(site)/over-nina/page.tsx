@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
@@ -148,7 +149,15 @@ export default function OverNina() {
                 <p className="mt-2 max-w-xl text-sm leading-relaxed text-text-muted">
                   Als oprichter van NinA AI Agency deelt Olaf dagelijks
                   praktische AI-inzichten op LinkedIn, met een bereik van 2.9
-                  miljoen. Genomineerd als AI Person of the Year.
+                  miljoen. Genomineerd als AI Person of the Year. Hij staat
+                  regelmatig op podia:{" "}
+                  <Link
+                    href="/lezingen-workshops"
+                    className="text-primary underline-offset-4 hover:underline"
+                  >
+                    Olaf als AI spreker inhuren
+                  </Link>
+                  .
                 </p>
               </div>
             </div>
