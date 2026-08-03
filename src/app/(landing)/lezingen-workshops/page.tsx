@@ -11,7 +11,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   /* Zoekwoordonderzoek (Google-suggesties, NL): de kop-termen zijn "AI
      spreker", "spreker over AI" en "AI spreker inhuren"; de sterkste
-     staartzoekopdrachten zijn sectorgebonden (zorg, onderwijs). Die staan
+     staartzoekopdrachten lopen via afdeling (AI workshop marketing, AI sales
+     workshop, AI workshop HR, AI training voor medewerkers). Die staan
      hieronder en in de koppen op de pagina zelf. */
   title: "AI spreker inhuren | Olaf Lemmens, keynote en workshop",
   description:
@@ -164,38 +165,38 @@ const MODELLEN = [
   "Gemini",
 ];
 
-/* Zorg en onderwijs zijn de twee sectoren die in het zoekwoordonderzoek
-   consistent terugkomen bij "spreker AI"; bedrijfsleven is de restcategorie. */
-const SECTOREN = [
+/* Afdelingen. Zie de toelichting bij de sectie: op afdelingstermen wordt
+   daadwerkelijk gezocht, op gelegenheden niet. */
+const AFDELINGEN = [
   {
-    naam: "AI-spreker voor de zorg",
+    naam: "Marketing",
     tekst:
-      "Zorgmedewerkers hebben weinig tijd en veel regels. Een sessie over AI in de zorg gaat daarom over verslaglegging, triage en administratie, niet over robots.",
-    punten: [
-      "Wat mag en niet mag met patiëntgegevens",
-      "Tijd terugwinnen op rapportage en overdracht",
-      "Voorbeelden uit ziekenhuizen en zorginstellingen",
-    ],
+      "Content die niet als AI leest, campagnes sneller de deur uit, en beeld en video zonder bureau. Inclusief waar het misgaat als je het model zijn gang laat gaan.",
   },
   {
-    naam: "AI-spreker voor het onderwijs",
+    naam: "Sales",
     tekst:
-      "Docenten zitten met dezelfde vraag: wat doe ik met leerlingen die ChatGPT gebruiken? En hoe helpt AI mij in plaats van dat het werk oplevert?",
-    punten: [
-      "AI in de klas: toetsing, feedback en spieken",
-      "Lesvoorbereiding en nakijkwerk versnellen",
-      "Voor docenten, opleidingsmanagers en besturen",
-    ],
+      "Research vóór het gesprek, voorstellen die niet elke keer opnieuw worden getypt, en opvolging die niet blijft liggen.",
   },
   {
-    naam: "AI-spreker voor het bedrijfsleven",
+    naam: "Operations",
     tekst:
-      "Van directietafel tot operations. Hier gaat het over processen die geld of tijd kosten, en waar AI daar echt iets aan verandert.",
-    punten: [
-      "Sales, marketing, finance, HR en operations",
-      "Wat AI kost en wat het oplevert",
-      "Van kennis naar een concreet vervolgplan",
-    ],
+      "De administratie rond het echte werk: orders, planningen, rapportages. Hier zit vaak de grootste tijdwinst en de minste weerstand.",
+  },
+  {
+    naam: "Finance",
+    tekst:
+      "Facturen en data uitlezen, afwijkingen opsporen, rapportages en analyses die anders een dag kosten.",
+  },
+  {
+    naam: "HR en recruitment",
+    tekst:
+      "Vacatures, screening en onboarding. Plus het gesprek dat er toch komt: wat spreken we intern af over AI-gebruik?",
+  },
+  {
+    naam: "Directie en MT",
+    tekst:
+      "Minder tools, meer richting. Waar liggen de kansen, wat kost het, en hoe voorkom je dat er straks tien losse experimenten draaien.",
   },
 ];
 
@@ -212,11 +213,11 @@ const FAQ = [
   },
   {
     v: "Is de lezing geschikt voor mensen zonder technische kennis?",
-    a: "Ja, en ook voor mensen die al ver zijn. Voorkennis is niet nodig, maar het is geen beginnersverhaal per definitie. In de praktijk zit in bijna elke zaal een groot verschil in niveau: van collega's die ChatGPT nog nooit hebben geopend tot mensen die al met agents en API's werken. Olaf is daaraan gewend en houdt beide groepen aangehaakt. Voor teams die al verder zijn geven we ook specifieke sessies op gevorderd niveau, bijvoorbeeld over AI Automation, AI-agents en vibecoding. Wat het wordt bepalen we in een korte intake vooraf; elke sessie is maatwerk.",
+    a: "Ja, en ook voor mensen die al ver zijn. In bijna elke zaal zit een groot verschil in niveau, van collega's die ChatGPT nog nooit openden tot mensen die met agents werken. Olaf houdt beide groepen aangehaakt. Voor teams die de basis voorbij zijn geven we aparte sessies over AI Automation, AI-agents en vibecoding. Het niveau bepalen we in een korte intake.",
   },
   {
     v: "Werken jullie met de AI-tools die wij al gebruiken?",
-    a: "Ja. We behandelen het taalmodel dat binnen jullie organisatie in gebruik is, of dat nu Microsoft Copilot, ChatGPT, Claude of Gemini is. Dat maakt het verschil tussen een interessant verhaal en iets waar je team de volgende dag mee verder kan, in de omgeving waar het toch al mee werkt. Weet je nog niet wat de beste keuze is, dan gaan we juist daarop in en vergelijken we de modellen voor jullie situatie.",
+    a: "Ja: Microsoft Copilot, ChatGPT, Claude of Gemini. Dat maakt het verschil tussen een interessant verhaal en iets waar je team morgen mee verder kan. Twijfel je nog over de keuze, dan vergelijken we de modellen voor jullie situatie.",
   },
   {
     v: "In welke taal geeft Olaf zijn lezingen?",
@@ -254,8 +255,8 @@ const SCHEMA = {
       knowsAbout: [
         "Kunstmatige intelligentie",
         "AI-adoptie",
-        "AI in de zorg",
-        "AI in het onderwijs",
+        "AI voor marketing en sales",
+        "AI in bedrijfsprocessen",
         "AI Automation",
         "AI-agents",
         "Vibecoding",
@@ -327,9 +328,9 @@ export default function LezingenWorkshops() {
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
                 Olaf Lemmens geeft keynotes, lezingen en hands-on workshops over
-                AI, op maat voor jullie sector en team. Van directietafel tot de
-                werkvloer in de zorg of het onderwijs. Vraag hiernaast een
-                vrijblijvend voorstel aan.
+                AI, op maat voor jullie organisatie. Van directietafel tot
+                marketing, sales en operations. Vraag hiernaast een vrijblijvend
+                voorstel aan.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton href="#aanvraag">
@@ -472,8 +473,9 @@ export default function LezingenWorkshops() {
         </div>
       </Section>
 
-      {/* Vormen: keynote, gastspreker, dagvoorzitter, workshop. Dit zijn de
-          woorden waarop gezocht wordt; ze stonden nergens op de pagina. */}
+      {/* Vormen. Compact naast een podiumfoto: de losse kaarten hierboven
+          overlapten met het aanbod en maakten de pagina een aaneenschakeling
+          van kaartenrijen. */}
       <Section
         id="vormen"
         kicker="In welke vorm"
@@ -482,64 +484,80 @@ export default function LezingenWorkshops() {
             Van korte keynote tot <Em>dagvoorzitter</Em>.
           </>
         }
-        sub="Wat je nodig hebt hangt af van je programma. Dit zijn de vormen waarin Olaf het vaakst wordt geboekt."
+        sub="Wat je nodig hebt hangt af van je programma."
       >
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {VORMEN.map((v, i) => (
-            <Reveal key={v.naam} delay={Math.min(i, 3) * 0.06}>
-              <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-6 shadow-sm">
-                <h3 className="font-display text-lg font-bold">{v.naam}</h3>
-                <p className="mt-1 font-mono text-xs text-text-muted">
-                  {v.duur}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-text-muted">
-                  {v.tekst}
-                </p>
-              </article>
-            </Reveal>
-          ))}
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
+          <Reveal>
+            <dl className="divide-y divide-border">
+              {VORMEN.map((v) => (
+                <div
+                  key={v.naam}
+                  className="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-4"
+                >
+                  <dt className="font-display text-lg font-bold">{v.naam}</dt>
+                  <span className="font-mono text-xs text-text-muted">
+                    {v.duur}
+                  </span>
+                  <dd className="w-full text-sm leading-relaxed text-text-muted">
+                    {v.tekst}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <figure>
+              <Image
+                src="/images/foto-lezing.webp"
+                alt="Olaf Lemmens als AI-spreker op het podium voor een volle zaal"
+                width={900}
+                height={499}
+                className="w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(42,33,48,0.12)]"
+              />
+              <figcaption className="mt-3 text-xs text-text-muted">
+                Keynote voor een volle zaal. Sessies beoordeeld met een 9,3.
+              </figcaption>
+            </figure>
+          </Reveal>
         </div>
       </Section>
 
-      {/* Sectoren: zorg en onderwijs zijn aantoonbaar de sterkste
-          staartzoekopdrachten rond "spreker AI". */}
+      {/* Afdelingen in plaats van sectoren. Zoekonderzoek: op gelegenheid
+          ("congres", "personeelsdag", "directiedag") komt geen enkele
+          suggestie terug, op afdeling wel: AI workshop marketing, AI sales
+          workshop, AI workshop HR, AI workshop finance, AI training voor
+          medewerkers. Dat is dus de as waarop bedrijven ons vinden. */}
       <Section
-        id="sectoren"
+        id="afdelingen"
         variant="alt"
-        kicker="Op maat per sector"
+        kicker="Per afdeling"
         title={
           <>
-            Een verhaal dat past bij <Em>jullie werk</Em>.
+            Voorbeelden uit <Em>hun eigen werk</Em>.
           </>
         }
-        sub="Een AI-lezing voor een ziekenhuis gaat over andere dingen dan een sessie voor een bouwbedrijf. Olaf bouwt elke sessie op rond voorbeelden uit je eigen sector."
+        sub="Een sessie landt pas als de voorbeelden over hun eigen werk gaan. Marketing heeft andere vragen dan finance. Olaf stemt de inhoud af op de afdelingen die in de zaal zitten."
       >
-        <div className="grid gap-6 md:grid-cols-3">
-          {SECTOREN.map((s, i) => (
-            <Reveal key={s.naam} delay={Math.min(i, 2) * 0.08}>
-              <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 shadow-sm">
-                <h3 className="font-display text-xl font-bold">{s.naam}</h3>
-                <p className="mt-3 leading-relaxed text-text-muted">
-                  {s.tekst}
+        <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+          {AFDELINGEN.map((a, i) => (
+            <Reveal key={a.naam} delay={Math.min(i % 3, 2) * 0.06}>
+              <div>
+                <h3 className="font-display text-lg font-bold">{a.naam}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-muted">
+                  {a.tekst}
                 </p>
-                <ul className="mt-5 space-y-2">
-                  {s.punten.map((p) => (
-                    <li
-                      key={p}
-                      className="flex items-start gap-2.5 text-sm text-text-muted"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
-                      />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+              </div>
             </Reveal>
           ))}
         </div>
+        <Reveal delay={0.2}>
+          <p className="mt-10 max-w-2xl text-sm leading-relaxed text-text-muted">
+            Zit er een mix van afdelingen in de zaal, dan werkt dat juist goed:
+            iedereen ziet waar bij de buurafdeling tijd te winnen valt. Voor een
+            AI-training voor medewerkers van één team maken we het smaller en
+            gaan we de diepte in.
+          </p>
+        </Reveal>
       </Section>
 
       {/* Niveau en tools. Het niveauverschil binnen één groep is de vraag die
@@ -586,7 +604,8 @@ export default function LezingenWorkshops() {
         </div>
 
         <Reveal delay={0.16}>
-          <div className="mt-8 rounded-2xl border border-border bg-bg-card p-7">
+          <div className="mt-8 grid items-center gap-8 rounded-2xl border border-border bg-bg-card p-7 lg:grid-cols-[1.1fr_1fr]">
+            <div>
             <h3 className="font-display text-lg font-bold">
               We werken met het model dat jullie al gebruiken
             </h3>
@@ -607,6 +626,19 @@ export default function LezingenWorkshops() {
                 </li>
               ))}
             </ul>
+            </div>
+            <figure>
+              <Image
+                src="/images/foto-workshop.webp"
+                alt="Deelnemers werken in een hands-on AI-workshop met hun eigen laptop"
+                width={900}
+                height={682}
+                className="w-full rounded-2xl border border-border object-cover"
+              />
+              <figcaption className="mt-2 text-xs text-text-muted">
+                Hands-on: iedereen werkt in de tool die het bedrijf al gebruikt.
+              </figcaption>
+            </figure>
           </div>
         </Reveal>
       </Section>
