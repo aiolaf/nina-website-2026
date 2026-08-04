@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import CursorGlow from "@/components/ui/CursorGlow";
 import ScrollProgress from "@/components/ui/ScrollProgress";
@@ -57,7 +58,22 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${inter.variable} ${bricolage.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      {/* Google Tag Manager. Via de Next-component in plaats van het
+          losse snippet: die laadt het script na hydratie en houdt de
+          dataLayer bij client-side navigatie in stand, wat met App Router
+          nodig is omdat er dan geen volledige paginalading meer plaatsvindt. */}
+      <GoogleTagManager gtmId="GTM-58FHHD5V" />
       <body className="grain relative min-h-full flex flex-col bg-bg text-text">
+        {/* GTM-fallback voor bezoekers zonder JavaScript. */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-58FHHD5V"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+            title="Google Tag Manager"
+          />
+        </noscript>
         {/* Sentinel voor de header: zodra dit element uit beeld is, is er
             gescrold. IntersectionObserver in plaats van scroll-listener. */}
         <div
