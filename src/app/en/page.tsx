@@ -385,9 +385,9 @@ export default function HomeEn() {
                 The AI Partnership
               </h3>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
-                Everything you need in one fixed monthly collaboration:
-                Kickoff, Build, Scale and Embed. Step in at phase 1, 2 or 3;
-                the partnership brings it together and keeps it running.
+                We audit your business, find the processes where the work
+                piles up and shut them down. Fixed capacity in tokens per
+                month, on a yearly basis.
               </p>
             </div>
             <span className="shrink-0 rounded-full border border-primary px-5 py-2.5 text-sm font-semibold text-primary transition-colors group-hover:bg-primary group-hover:text-white">

@@ -1,100 +1,168 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
+import LogoMarquee from "@/components/ui/LogoMarquee";
+import CountUp from "@/components/ui/CountUp";
+import IjkpuntLijn from "@/components/ui/IjkpuntLijn";
+import PartnershipTiers from "@/components/sections/PartnershipTiers";
+import TokenMenukaart from "@/components/sections/TokenMenukaart";
+import SavingsChart from "@/components/sections/SavingsChart";
 import { site } from "@/lib/site";
 
+const MODEL = "AI Partnership";
+
 export const metadata: Metadata = {
-  title: "AI Partnership",
+  title: MODEL,
   description:
-    "Everything you need in one fixed monthly collaboration: Kickoff, Build, Scale and Embed. From EUR 2,500 per month.",
+    "We audit your business, find the processes where work piles up and shut them down. Fixed capacity in tokens per month, on a yearly basis. From EUR 2,500 per month.",
   alternates: { canonical: "/en/ai-partnership" },
 };
+
+const FIRES = [
+  "Two people know how to write that report. Everyone else shadows them for a week.",
+  "Requests come in by email and get retyped by hand.",
+  "Customer service searches manuals nobody keeps current.",
+  "Every Monday a day disappears into reports nobody reads.",
+  "One department structurally works into the evening. That gets called being busy.",
+  "For the hard questions: ask Pete. And Pete goes on holiday.",
+];
+
+const PROCESSES = [
+  {
+    name: "Documents from expert knowledge",
+    pain: "The knowledge to write a grant application or advisory report sits in two heads.",
+    build:
+      "We capture that knowledge with hundreds of examples of earlier work, and generate documents in your own standard.",
+    figure: "90%",
+    figureLabel: "fewer data entry errors",
+  },
+  {
+    name: "Requests into ERP or CRM",
+    pain: "Something arrives by email or form and someone retypes it into another system.",
+    build:
+      "The incoming flow gets read, filtered and placed in your own systems. A human approves.",
+    figure: "192 hours",
+    figureLabel: "back per month at Van Berkel Professionals",
+  },
+  {
+    name: "Customer service and tickets",
+    pain: "High volumes, questions that keep returning, and the hard cases go to that one person.",
+    build:
+      "Recurring questions get handled. If the AI cannot, a human answers and that answer goes into the database. Next time it happens automatically.",
+    figure: "45%",
+    figureLabel: "fewer support tickets",
+  },
+];
+
+const GUARANTEES = [
+  {
+    title: "There is always a human in it",
+    text: "We do not build a single workflow that is purely AI. At minimum a human as the final check. The automation removes the looking up and retyping, not the craft.",
+  },
+  {
+    title: "Your data stays in the Netherlands",
+    text: "Own infrastructure, servers in Amsterdam, fully GDPR-compliant and compatible with ISO 27001 and NEN 7510. Optionally Azure OpenAI for extra safeguards.",
+  },
+  {
+    title: "No lock-in, you own the IP",
+    text: "Everything runs in your own environment and stays yours. If the partnership ends, you can carry on independently.",
+  },
+];
+
+const IS = [
+  "Fixed capacity per month, to spend wherever it pays off most",
+  "A team that knows your processes, so no ramp-up time per question",
+  "Quarterly review: what did it deliver, what is top of the list now",
+  "Training for your own people, so the dependency shrinks",
+];
+
+const IS_NOT = [
+  "Not a support subscription and not a helpdesk",
+  "Not staffing by the hour",
+  "Not a software licence we also sell to a hundred others",
+  "Not a one-off workshop. If that is all you want, we have talks and workshops",
+];
 
 const STEPS = [
   {
     step: "01",
     name: "Kickoff",
-    text: "The first, intensive month. On-site scan, workshop for the core team, n8n environment and a roadmap with prioritized business cases.",
+    text: "A day on-site through your processes, plus a workshop with your core team. You get a prioritized list of what each bottleneck costs.",
   },
   {
     step: "02",
     name: "Build",
-    text: "Fixed capacity every month to build workflows and agents that deliver value in your processes right away.",
+    text: "Capacity every month to work down that list, from the top.",
   },
   {
     step: "03",
     name: "Scale",
-    text: "What works, we roll out to more teams and processes. Quarterly reviews keep the direction sharp.",
+    text: "What works for one team, we roll out to the rest.",
   },
   {
     step: "04",
     name: "Embed",
-    text: "Train-the-trainer, AI ambassadors and anchoring in the organization. The goal: an organization that can do it on its own.",
+    text: "Your own people take it over. The goal is an organization that can do it itself.",
   },
 ];
 
-/** EN pricing tiers (static variant of the Dutch PartnershipTiers component). */
-const TIERS = [
+const MILESTONES = [
+  { maand: "Month 1", naam: "Foundation" },
+  { maand: "Month 3", naam: "Workshop" },
+  { maand: "Month 6", naam: "Half-year review" },
+  { maand: "Month 9", naam: "Follow-up workshop" },
+  { maand: "Month 12", naam: "Next year's roadmap" },
+];
+
+const FOR_YOU = [
+  "You are growing, roughly 30 employees or more, ideally heading toward 100",
+  "The question is not how to shed people, but how to hit the revenue target without hiring ten more",
+  "There are several systems that ought to talk to each other and do not",
+];
+
+const NOT_FOR_YOU = [
+  "You want one standalone workshop. We have those, without a partnership",
+  "Off-the-shelf software solves your problem. Buy that, it is faster and cheaper",
+  "You want to keep it at a pilot and look again next year",
+];
+
+const NEXT_STEPS = [
   {
-    label: "Entry",
-    name: "AI Partner Light",
-    price: "EUR 2,500",
-    period: "per month",
-    kickoff: "Kickoff Phase Light, one-off EUR 3,750",
-    forWho: "SMEs or a single team",
-    points: [
-      "1 day per month of fixed capacity",
-      "1 quick win per month",
-      "Support and hosting",
-    ],
-    featured: false,
+    step: "01",
+    title: "One conversation, one hour",
+    text: "What is going on, and where the bottlenecks in your processes sit.",
   },
   {
-    label: "Most popular",
-    name: "AI Partner Standard",
-    price: "EUR 4,950",
-    period: "per month",
-    kickoff: "Kickoff Phase, one-off EUR 7,500",
-    forWho: "Mid-market and scale-ups",
-    points: [
-      "2 days per month of fixed capacity",
-      "Continuous building of workflows and agents",
-      "You own the IP and hosting",
-      "Quarterly review and train-the-trainer",
-    ],
-    featured: true,
+    step: "02",
+    title: "Proposal within two working days",
+    text: "Prioritized list and business case: what it costs, what it delivers.",
   },
   {
-    label: "Org-wide",
-    name: "AI Partner Enterprise",
-    price: "EUR 7,500+",
-    period: "per month",
-    kickoff: "Custom Kickoff Phase, from EUR 7,500",
-    forWho: "Acceleration program across teams",
-    points: [
-      "Dedicated team of developer and strategist",
-      "Organization-wide anchoring and AI ambassadors",
-      "Security, compliance and SLA",
-    ],
-    featured: false,
+    step: "03",
+    title: "One follow-up conversation",
+    text: "In which we decide. Yes or no, not a six-week process.",
   },
 ];
 
-const KICKOFF_STANDARD = [
-  "AI Readiness Scan: 1 full day of on-site process analysis",
-  "AI Workshop for the core team (half day)",
-  "n8n automation environment: setup and configuration",
-  "Report with roadmap and prioritized business cases",
-  "AI maturity assessment: baseline across strategy, vision and data",
-];
+function Check() {
+  return (
+    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[10px] text-primary">
+      ✓
+    </span>
+  );
+}
 
-const KICKOFF_LIGHT = [
-  "AI Workshop for the core team (half day), with the AI Readiness as the end product",
-  "n8n automation environment: setup and configuration",
-  "Report with roadmap and prioritized business cases",
-];
+function Dash() {
+  return (
+    <span
+      aria-hidden="true"
+      className="mt-2 h-px w-3 shrink-0 bg-text-muted/60"
+    />
+  );
+}
 
 export default function AiPartnershipEn() {
   return (
@@ -105,32 +173,33 @@ export default function AiPartnershipEn() {
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
         />
-        <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-24 sm:pb-24">
+        <div className="relative mx-auto max-w-6xl px-5 pb-10 pt-24">
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
             <div className="reveal-now">
               <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                The AI Partnership
+                The {MODEL}
               </p>
               <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
-                A dedicated AI partner for{" "}
-                <Em>every stage of AI adoption</Em>.
+                Every euro you put into AI has to bring{" "}
+                <Em>more than one back out</Em>.
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
-                Organizations don&apos;t get stuck on knowledge, but on
-                integration and adoption: after the workshop the energy fades,
-                after the first build nobody keeps building. The AI
-                Partnership closes that gap with fixed monthly capacity that
-                brings knowledge, building and guidance together and keeps it
-                running.
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
+                Everyone has AI on the agenda, almost nobody knows where to
+                start. We audit your business, find the processes where the work
+                piles up, and shut them down.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton href={site.booking}>
                   Book an intro call
                 </MagneticButton>
                 <MagneticButton href="#packages" variant="ghost">
-                  View the packages
+                  What it costs
                 </MagneticButton>
               </div>
+              <p className="mt-4 text-xs text-text-muted">
+                One conversation of an hour. Proposal with a business case
+                within two working days.
+              </p>
             </div>
             <div className="reveal-now hidden [animation-delay:0.2s] lg:block">
               <Image
@@ -142,23 +211,208 @@ export default function AiPartnershipEn() {
               />
             </div>
           </div>
+
+          <Reveal delay={0.15}>
+            <dl className="mt-14 grid gap-6 border-y border-border py-8 sm:grid-cols-3">
+              <div>
+                <dd className="font-display text-3xl font-bold text-primary sm:text-4xl">
+                  <CountUp to={192} suffix=" hours" />
+                </dd>
+                <dt className="mt-1 text-sm text-text-muted">
+                  saved per month at Van Berkel Professionals
+                </dt>
+              </div>
+              <div>
+                <dd className="font-display text-3xl font-bold text-primary sm:text-4xl">
+                  <CountUp to={100} suffix="+" />
+                </dd>
+                <dt className="mt-1 text-sm text-text-muted">
+                  requests a day processed automatically
+                </dt>
+              </div>
+              <div>
+                <dd className="font-display text-3xl font-bold text-primary sm:text-4xl">
+                  <CountUp to={160} suffix="+" />
+                </dd>
+                <dt className="mt-1 text-sm text-text-muted">
+                  organizations helped, sessions rated 9.3
+                </dt>
+              </div>
+            </dl>
+          </Reveal>
+        </div>
+        <div className="relative mx-auto max-w-6xl px-5 pb-14">
+          <LogoMarquee />
         </div>
       </section>
 
-      {/* Four steps */}
+      {/* Recognition */}
       <Section
         variant="alt"
         title={
           <>
-            Four steps: Kickoff, Build, Scale and <Em>Embed</Em>.
+            Every business has <Em>small fires</Em>.
           </>
         }
+        sub="Places where the work piles up. Not spectacular, but back again every week."
+      >
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {FIRES.map((f, idx) => (
+            <li key={f} className="h-full">
+              <Reveal
+                delay={idx * 0.05}
+                className="h-full rounded-xl border border-border bg-bg-card p-4 text-sm leading-snug transition-colors hover:border-primary/50"
+              >
+                {f}
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+        <Reveal delay={0.1}>
+          <p className="mt-8 max-w-xl text-lg text-text-muted">
+            Not IT problems. Processes that have been done by hand for too long.
+            AI is the means, never the goal.
+          </p>
+        </Reveal>
+      </Section>
+
+      {/* Three processes */}
+      <Section
+        title={
+          <>
+            Three processes where we do this <Em>most often</Em>.
+          </>
+        }
+        sub="Not because we cannot do anything else, but because we have built the most here and therefore get to a result fastest."
+      >
+        <div className="grid gap-5 lg:grid-cols-3">
+          {PROCESSES.map((p, idx) => (
+            <Reveal key={p.name} delay={idx * 0.08}>
+              <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-6">
+                <h3 className="font-display text-lg font-bold">{p.name}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                  {p.pain}
+                </p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed">{p.build}</p>
+                <p className="mt-5 border-t border-border pt-4">
+                  <span className="font-display text-2xl font-bold text-gold">
+                    {p.figure}
+                  </span>
+                  <span className="ml-2 text-sm text-text-muted">
+                    {p.figureLabel}
+                  </span>
+                </p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_1fr]">
+          <Reveal delay={0.1}>
+            <SavingsChart />
+          </Reveal>
+          <Reveal delay={0.15}>
+            <Image
+              src="/images/foto-build.webp"
+              alt="Live demo of an n8n workflow during a NinA session"
+              width={900}
+              height={600}
+              className="h-full w-full rounded-2xl border border-border object-cover"
+            />
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* The three questions every board asks */}
+      <Section
+        variant="alt"
+        title={
+          <>
+            People, data and <Em>ownership</Em>.
+          </>
+        }
+        sub="The three questions every board asks, before the business case even comes up."
+      >
+        <div className="grid gap-5 lg:grid-cols-3">
+          {GUARANTEES.map((g, idx) => (
+            <Reveal key={g.title} delay={idx * 0.08}>
+              <div className="h-full rounded-2xl border border-border bg-bg-card p-6">
+                <h3 className="font-display text-lg font-bold">{g.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                  {g.text}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* What it is and is not */}
+      <Section
+        title={
+          <>
+            What you <Em>actually get</Em>.
+          </>
+        }
+        sub="The way you have an accountant and an IT partner, that is how we have set up AI. One familiar face, fixed capacity per month, and someone who already knows your business when you call."
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          <Reveal>
+            <div className="h-full rounded-2xl border border-primary/50 bg-bg-card p-7">
+              <h3 className="font-display text-lg font-bold">What it is</h3>
+              <ul className="mt-5 space-y-3">
+                {IS.map((w) => (
+                  <li
+                    key={w}
+                    className="flex items-start gap-2.5 text-sm leading-relaxed"
+                  >
+                    <Check />
+                    {w}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-alt p-7">
+              <h3 className="font-display text-lg font-bold">What it is not</h3>
+              <ul className="mt-5 flex-1 space-y-3">
+                {IS_NOT.map((n) => (
+                  <li
+                    key={n}
+                    className="flex items-start gap-3 text-sm leading-relaxed text-text-muted"
+                  >
+                    <Dash />
+                    {n}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/en/workshops"
+                className="mt-5 inline-block border-t border-border pt-4 text-sm font-semibold text-primary hover:underline"
+              >
+                View talks and workshops
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Kickoff and the year */}
+      <Section
+        variant="alt"
+        title={
+          <>
+            It starts with the <Em>Kickoff</Em>, then a year.
+          </>
+        }
+        sub="An audit of your organization: where does the work pile up, what is solving it worth, in what order. Then we build."
       >
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((t, idx) => (
             <li key={t.name} className="h-full">
               <Reveal
-                delay={idx * 0.1}
+                delay={idx * 0.08}
                 className="relative h-full rounded-2xl border border-border bg-bg-card p-6 pt-8 transition-colors hover:border-primary/50"
               >
                 <span className="font-display absolute -top-4 left-6 rounded-full border border-primary/50 bg-bg px-3 py-1 text-sm font-bold text-primary">
@@ -172,205 +426,187 @@ export default function AiPartnershipEn() {
             </li>
           ))}
         </ol>
-      </Section>
 
-      {/* Packages */}
-      <Section
-        id="packages"
-        kicker="Ways to start"
-        title={
-          <>
-            Choose the partnership that <Em>fits your organization</Em>.
-          </>
-        }
-        sub="Every partnership starts with a mandatory, one-off Kickoff Phase. Minimum term 6 months, cancellable monthly after that. All amounts exclude VAT, as starting anchors."
-      >
-        <div className="grid gap-5 lg:grid-cols-3 lg:items-end">
-          {TIERS.map((tier, idx) => (
-            <Reveal key={tier.name} delay={idx * 0.1}>
-              <div
-                className={`flex flex-col rounded-2xl border p-6 transition-shadow sm:p-7 ${
-                  tier.featured
-                    ? "border-glow border-primary/60 bg-bg-muted shadow-[0_12px_44px_rgba(97,68,121,0.14)] lg:pb-10 lg:pt-9"
-                    : "border-border bg-bg-card hover:border-primary/40"
-                }`}
-              >
-                <span
-                  className={`w-fit rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider ${
-                    tier.featured
-                      ? "bg-gold/15 text-gold"
-                      : "bg-bg-muted text-text-muted"
-                  }`}
-                >
-                  {tier.label}
-                </span>
-                <h3 className="font-display mt-4 text-xl font-bold">
-                  {tier.name}
-                </h3>
-                <p className="mt-1 text-sm text-text-muted">{tier.forWho}</p>
-                <p className="mt-5">
-                  <span className="font-display text-3xl font-bold">
-                    {tier.price}
-                  </span>
-                  <span className="ml-2 text-sm text-text-muted">
-                    {tier.period}
-                  </span>
-                </p>
-                <p className="mt-1 text-xs text-text-muted">{tier.kickoff}</p>
-                <ul className="mt-6 flex-1 space-y-2.5">
-                  {tier.points.map((p) => (
-                    <li key={p} className="flex items-start gap-2.5 text-sm">
-                      <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[10px] text-primary">
-                        ✓
-                      </span>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-                <MagneticButton
-                  href="/en/contact"
-                  variant={tier.featured ? "primary" : "ghost"}
-                  className="mt-7 w-full"
-                >
-                  Book an intro call
-                </MagneticButton>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      {/* Kickoff phase */}
-      <Section
-        variant="alt"
-        title={
-          <>
-            Every partnership starts with a <Em>Kickoff Phase</Em>.
-          </>
-        }
-        sub="The Kickoff is the first, intensive month; after that the monthly partnership starts. The goal: from baseline to 4 out of 5 maturity within 12 months."
-      >
-        <div className="grid gap-5 lg:grid-cols-2">
-          <Reveal>
-            <div className="h-full rounded-2xl border border-primary/50 bg-bg-card p-7">
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="font-display text-xl font-bold">
+        <Reveal delay={0.1}>
+          <div className="mt-5 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+            <div className="bg-bg-card p-6">
+              <div className="flex items-baseline justify-between gap-3">
+                <h3 className="font-display text-lg font-bold">
                   Kickoff Phase
                 </h3>
-                <p className="font-display text-2xl font-bold text-gold">
+                <p className="font-display text-xl font-bold text-gold">
                   EUR 7,500
                 </p>
               </div>
-              <p className="mt-1 text-sm text-text-muted">
-                3-week turnaround · mandatory with Standard and Enterprise
+              <p className="mt-2 text-sm leading-relaxed text-text-muted">
+                3 weeks. A full day of on-site process analysis, core team
+                workshop, n8n environment, roadmap with business cases and a
+                baseline of your AI maturity. Mandatory with Standard and
+                Enterprise.
               </p>
-              <ul className="mt-6 space-y-2.5">
-                {KICKOFF_STANDARD.map((k) => (
-                  <li key={k} className="flex items-start gap-2.5 text-sm">
-                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[10px] text-primary">
-                      ✓
-                    </span>
-                    {k}
-                  </li>
-                ))}
-              </ul>
             </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="font-display text-xl font-bold">
+            <div className="bg-bg-card p-6">
+              <div className="flex items-baseline justify-between gap-3">
+                <h3 className="font-display text-lg font-bold">
                   Kickoff Phase Light
                 </h3>
-                <p className="font-display text-2xl font-bold">EUR 3,750</p>
+                <p className="font-display text-xl font-bold">EUR 3,750</p>
               </div>
-              <p className="mt-1 text-sm text-text-muted">
-                2-week turnaround · mandatory with AI Partner Light
-              </p>
-              <ul className="mt-6 space-y-2.5">
-                {KICKOFF_LIGHT.map((k) => (
-                  <li key={k} className="flex items-start gap-2.5 text-sm">
-                    <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[10px] text-primary">
-                      ✓
-                    </span>
-                    {k}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-5 border-t border-border pt-4 text-sm text-text-muted">
-                The AI Readiness rolls out of the workshop itself, no separate
-                scan days needed.
+              <p className="mt-2 text-sm leading-relaxed text-text-muted">
+                2 weeks. Core team workshop with the AI Readiness as the end
+                product, n8n environment and roadmap. No separate scan days.
+                Mandatory with Light.
               </p>
             </div>
-          </Reveal>
-        </div>
-      </Section>
+          </div>
+        </Reveal>
 
-      {/* Comparison */}
-      <Section
-        title={
-          <>
-            Buying separately or a partnership: the partnership is{" "}
-            <Em>cheaper and continuous</Em>.
-          </>
-        }
-      >
-        <div className="grid gap-5 sm:grid-cols-2">
-          <Reveal>
-            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
-              <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                Buying everything separately
-              </p>
-              <p className="font-display mt-3 text-3xl font-bold">
-                EUR 35,000 to 40,000
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-text-muted">
-                Workshop, AI Design, consulting hours and a standalone build.
-                Starting over every time, without continuous guidance.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="h-full rounded-2xl border border-primary/50 bg-bg-muted p-7">
-              <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                AI Partnership, 6 months
-              </p>
-              <p className="font-display mt-3 text-3xl font-bold text-gold">
-                ± EUR 30,000
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-text-muted">
-                Kickoff plus 6 months of AI Partner Standard. Continuous
-                knowledge, consulting and building in one, with quarterly
-                reviews and your own IP.
-              </p>
-            </div>
-          </Reveal>
-        </div>
         <Reveal delay={0.15}>
-          <p className="mt-8 max-w-2xl text-text-muted">
-            A measurable growth target: your organization&apos;s AI maturity
-            from a baseline around 2.7 to 4.0 or higher within 12 months,
-            measured across strategy, vision and data.
+          <p className="mt-10 max-w-2xl text-lg">
+            After that we work on a yearly basis. Developing an organization
+            takes a year, and one workshop is not a workshop.
+          </p>
+          <p className="mt-3 max-w-2xl text-text-muted">
+            So the rhythm is set before the year starts. Target: from the
+            baseline to 4 out of 5 AI maturity within twelve months.
+          </p>
+        </Reveal>
+
+        <div className="mt-8">
+          <IjkpuntLijn
+            items={MILESTONES}
+            label="Five milestones in twelve months"
+          />
+        </div>
+
+        <Reveal delay={0.1}>
+          <p className="mt-6 text-text-muted">
+            Would you rather work per project? That is possible too. Just say so
+            and we will do it that way.
           </p>
         </Reveal>
       </Section>
 
-      {/* CTA */}
+      {/* Packages and tokens */}
+      <Section
+        id="packages"
+        kicker="What it costs"
+        title={
+          <>
+            Three levels, <Em>one unit of account</Em>.
+          </>
+        }
+        sub="You are not buying hours, you are buying tokens: a fixed number per month, to spend month after month wherever it pays off most. All amounts exclude VAT."
+      >
+        <PartnershipTiers lang="en" />
+        <div className="mt-14">
+          <TokenMenukaart lang="en" />
+        </div>
+      </Section>
+
+      {/* Who this is for */}
+      <Section
+        variant="alt"
+        title={
+          <>
+            Who this <Em>works for</Em>.
+          </>
+        }
+      >
+        <div className="grid gap-5 lg:grid-cols-2">
+          <Reveal>
+            <div className="h-full rounded-2xl border border-primary/50 bg-bg-card p-7">
+              <h3 className="font-display text-lg font-bold">
+                This is about you if
+              </h3>
+              <ul className="mt-5 space-y-3">
+                {FOR_YOU.map((v) => (
+                  <li
+                    key={v}
+                    className="flex items-start gap-2.5 text-sm leading-relaxed"
+                  >
+                    <Check />
+                    {v}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
+              <h3 className="font-display text-lg font-bold">
+                Not for you if
+              </h3>
+              <ul className="mt-5 space-y-3">
+                {NOT_FOR_YOU.map((n) => (
+                  <li
+                    key={n}
+                    className="flex items-start gap-3 text-sm leading-relaxed text-text-muted"
+                  >
+                    <Dash />
+                    {n}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 border-t border-border pt-4 text-sm leading-relaxed">
+                Custom is the right call when you need to connect systems that
+                know nothing about each other, your knowledge is too valuable
+                for a SaaS platform, or you tried a SaaS product that does not
+                do what you need.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Closing */}
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(97,68,121,0.09),transparent_65%)]"
         />
-        <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
+        <div className="relative mx-auto max-w-4xl px-5 py-24 sm:py-28">
           <Reveal>
             <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
-              Ready to become AI partners?
+              Two questions to start with.
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-text-muted sm:text-lg">
-              Book a free intro call. We&apos;ll show you what a partnership
-              means for your processes.
+            <div className="mt-8 space-y-4">
+              <p className="font-display border-l-2 border-primary pl-5 text-xl leading-snug sm:text-2xl">
+                What is coming up for you over the next year?
+              </p>
+              <p className="font-display border-l-2 border-primary pl-5 text-xl leading-snug sm:text-2xl">
+                How have you seen AI change over the past year?
+              </p>
+            </div>
+            <p className="mt-6 text-text-muted">
+              Answer that second question honestly and you know why a year is
+              short.
             </p>
-            <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          </Reveal>
+
+          <ol className="mt-14 grid gap-5 sm:grid-cols-3">
+            {NEXT_STEPS.map((s, idx) => (
+              <li key={s.step} className="h-full">
+                <Reveal
+                  delay={idx * 0.08}
+                  className="relative h-full rounded-2xl border border-border bg-bg-card p-6 pt-8"
+                >
+                  <span className="font-display absolute -top-4 left-6 rounded-full border border-primary/50 bg-bg px-3 py-1 text-sm font-bold text-primary">
+                    {s.step}
+                  </span>
+                  <h3 className="font-display text-base font-bold">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-text-muted">
+                    {s.text}
+                  </p>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+
+          <Reveal delay={0.2}>
+            <div className="mt-12 flex flex-col gap-4 sm:flex-row">
               <MagneticButton href={site.booking}>
                 Book an intro call
               </MagneticButton>
@@ -378,9 +614,23 @@ export default function AiPartnershipEn() {
                 Email {site.email}
               </MagneticButton>
             </div>
-            <p className="mt-4 text-xs text-text-muted">
-              No strings attached, reply within 24 hours.
-            </p>
+            <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-border pt-6 text-sm text-text-muted">
+              <li>
+                <span className="font-semibold text-text">160+</span>{" "}
+                organizations
+              </li>
+              <li>
+                Rated <span className="font-semibold text-text">9.3</span>
+              </li>
+              <li>
+                <span className="font-semibold text-text">Amsterdam</span>, EU
+                hosting
+              </li>
+              <li>
+                <span className="font-semibold text-text">Your own IP</span>, no
+                lock-in
+              </li>
+            </ul>
           </Reveal>
         </div>
       </section>

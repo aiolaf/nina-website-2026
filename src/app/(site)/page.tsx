@@ -281,10 +281,9 @@ export default function Home() {
                   Het AI Partnership
                 </h3>
                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
-                  Alles wat je nodig hebt in een vaste maandelijkse
-                  samenwerking: Kickoff, Bouw, Schaal en Verankeren. Stap in
-                  bij fase 1, 2 of 3; het partnership brengt het samen en
-                  houdt het draaiend.
+                  Wij lopen als een audit door je bedrijf, zoeken de processen
+                  waar het opstroomt en zetten die dicht. Vaste capaciteit in
+                  tokens per maand, op jaarbasis.
                 </p>
               </div>
               <span className="shrink-0 rounded-full border border-primary px-5 py-2.5 text-sm font-semibold text-primary transition-colors group-hover:bg-primary group-hover:text-white">
