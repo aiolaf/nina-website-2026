@@ -1,3 +1,4 @@
+import ConsentHeropenen from "@/components/layout/ConsentHeropenen";
 import { site } from "@/lib/site";
 
 /**
@@ -28,6 +29,9 @@ export default function MinimalFooter() {
           >
             Privacyverklaring
           </a>
+          {/* Ook hier: een cookiekeuze moet herroepbaar zijn, ook op een
+              pagina die verder bewust geen uitgaande links heeft. */}
+          <ConsentHeropenen label="Cookievoorkeuren" />
         </div>
       </div>
     </footer>

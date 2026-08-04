@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import CookieBanner from "@/components/layout/CookieBanner";
+import { CONSENT_DEFAULT_SCRIPT } from "@/lib/consent";
 import CursorGlow from "@/components/ui/CursorGlow";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import "./globals.css";
@@ -58,6 +61,14 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${inter.variable} ${bricolage.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      {/* Consent Mode v2. Moet met beforeInteractive draaien, dus vóór het
+          GTM-script: staat de default te laat, dan mogen tags in dat gaatje
+          alsnog opslaan. Alles start op denied tot de bezoeker kiest. */}
+      <Script
+        id="consent-default"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SCRIPT }}
+      />
       {/* Google Tag Manager. Via de Next-component in plaats van het
           losse snippet: die laadt het script na hydratie en houdt de
           dataLayer bij client-side navigatie in stand, wat met App Router
@@ -84,6 +95,7 @@ export default function RootLayout({
         <ScrollProgress />
         <CursorGlow />
         {children}
+        <CookieBanner />
       </body>
     </html>
   );

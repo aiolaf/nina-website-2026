@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ConsentHeropenen from "@/components/layout/ConsentHeropenen";
 import { footerNav, site, type Lang } from "@/lib/site";
 
 const COPY = {
@@ -159,6 +160,9 @@ export default function Footer({ lang = "nl" }: { lang?: Lang }) {
         >
           {lang === "en" ? "Privacy policy" : "Privacyverklaring"}
         </Link>
+        <ConsentHeropenen
+          label={lang === "en" ? "Cookie preferences" : "Cookievoorkeuren"}
+        />
       </div>
     </footer>
   );
