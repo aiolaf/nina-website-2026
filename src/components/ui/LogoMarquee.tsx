@@ -26,12 +26,19 @@ export default function LogoMarquee() {
     >
       {LOGOS.map((logo) => (
         <li key={logo.alt} className="shrink-0">
+          {/* Bewust geen loading="lazy". De tweede, gedupliceerde rij staat
+              ver buiten het scherm en werd daardoor nooit geladen; zodra de
+              animatie die rij in beeld schoof bleven de logo's leeg, het
+              duidelijkst op mobiel waar bijna alles buiten beeld begint.
+              fetchPriority laag houdt ze uit de weg van de LCP; alle tien
+              logo's samen zijn ruim 60 kB. */}
           <img
             src={logo.src}
             alt={ariaHidden ? "" : logo.alt}
             width={logo.w}
             height={logo.h}
-            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
             className="max-h-10 w-auto [filter:grayscale(1)_opacity(0.6)] transition-[filter] duration-300 hover:[filter:grayscale(0)_opacity(1)]"
           />
         </li>

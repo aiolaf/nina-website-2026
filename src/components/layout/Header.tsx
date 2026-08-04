@@ -84,11 +84,35 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
             aria-label={
               lang === "en" ? "Bekijk in het Nederlands" : "View in English"
             }
-            className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted transition-colors hover:text-primary"
+            hrefLang={otherLang}
+            className="flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-text-muted transition-colors hover:text-primary"
           >
+            <span aria-hidden="true" className="text-base leading-none">
+              {otherLang === "en" ? "🇬🇧" : "🇳🇱"}
+            </span>
             {otherLang.toUpperCase()}
           </Link>
         </nav>
+
+        {/* Taalwissel naast de hamburger. Stond eerder alleen ín het
+            uitgeklapte menu, waardoor je op mobiel niet kon zien dat er een
+            Engelse versie bestaat. */}
+        <div className="flex items-center gap-1 lg:hidden">
+          <Link
+            href={switchHref}
+            hrefLang={otherLang}
+            aria-label={
+              lang === "en"
+                ? "Bekijk deze pagina in het Nederlands"
+                : "View this page in English"
+            }
+            className="flex h-10 items-center gap-1.5 rounded-full border border-border px-3 text-xs font-semibold text-text-muted transition-colors hover:border-primary hover:text-primary"
+          >
+            <span aria-hidden="true" className="text-base leading-none">
+              {otherLang === "en" ? "🇬🇧" : "🇳🇱"}
+            </span>
+            {otherLang.toUpperCase()}
+          </Link>
 
         <button
           type="button"
@@ -103,7 +127,7 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
                 ? "Open menu"
                 : "Menu openen"
           }
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5"
         >
           <span
             className={`h-0.5 w-6 bg-text transition-transform ${
@@ -116,6 +140,7 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
             }`}
           />
         </button>
+        </div>
       </div>
 
       {open && (
