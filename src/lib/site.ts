@@ -29,8 +29,12 @@ export const site = {
 
 export type Lang = "nl" | "en";
 
+/**
+ * `uitgelicht` markeert het hoofdproduct. De header geeft dat item een
+ * accent, zodat het partnership op elke pagina opvalt tussen de rest.
+ */
 export const nav = [
-  { label: "AI Partnership", href: "/ai-partnership" },
+  { label: "AI Partnership", href: "/ai-partnership", uitgelicht: true },
   { label: "Lezingen & Workshops", href: "/lezingen-workshops" },
   { label: "AI Agents", href: "/ai-agents" },
   { label: "AI Build", href: "/ai-build" },
@@ -40,7 +44,7 @@ export const nav = [
 ];
 
 export const navEn = [
-  { label: "AI Partnership", href: "/en/ai-partnership" },
+  { label: "AI Partnership", href: "/en/ai-partnership", uitgelicht: true },
   { label: "Workshops", href: "/en/workshops" },
   { label: "AI Agents", href: "/en/ai-agents" },
   { label: "AI Build", href: "/en/ai-build" },

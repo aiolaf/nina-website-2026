@@ -7,6 +7,7 @@ import LogoMarquee from "@/components/ui/LogoMarquee";
 import Section, { Em } from "@/components/ui/Section";
 import FasenLoop from "@/components/sections/FasenLoop";
 import SavingsChart from "@/components/sections/SavingsChart";
+import MaturityQuickScan from "@/components/sections/MaturityQuickScan";
 import {
   IconBuilding,
   IconPresentation,
@@ -129,12 +130,21 @@ export default function Home() {
                   <MagneticButton href={site.booking}>
                     Plan een kennismaking
                   </MagneticButton>
-                  <MagneticButton href="/lezingen-workshops" variant="ghost">
-                    Vraag een lezing aan
+                  {/* Het partnership is het hoofdproduct, dus dat is de tweede
+                      knop. De lezing blijft bereikbaar als tekstlink. */}
+                  <MagneticButton href="/ai-partnership" variant="ghost">
+                    Bekijk het AI Partnership
                   </MagneticButton>
                 </div>
                 <p className="mt-4 text-xs text-text-muted">
-                  Vrijblijvend, 15 minuten, binnen 24 uur reactie.
+                  Vrijblijvend, 15 minuten, binnen 24 uur reactie. Of{" "}
+                  <Link
+                    href="/lezingen-workshops"
+                    className="font-semibold text-primary hover:underline"
+                  >
+                    vraag een lezing aan
+                  </Link>
+                  .
                 </p>
               </div>
               <div className="reveal-now [animation-delay:0.25s]">
@@ -153,6 +163,23 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* AI Maturity Quick Scan: het startpunt van het partnership, hier
+            interactief zodat een bezoeker zijn eigen profiel ziet en van
+            daaruit doorklikt. */}
+        <Section
+          id="quick-scan"
+          variant="alt"
+          kicker="Gratis, in twee minuten"
+          title={
+            <>
+              Waar staat jouw organisatie <Em>nu</Em>?
+            </>
+          }
+          sub="Zeven vragen, één per dimensie van AI-volwassenheid. Geef een score van 1 tot 5 en het web beweegt mee. De gestreepte lijn is waar we in een AI Partnership binnen twaalf maanden naartoe werken."
+        >
+          <MaturityQuickScan />
+        </Section>
 
         {/* Motto */}
         <MottoMarquee />

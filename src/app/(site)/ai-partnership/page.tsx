@@ -10,6 +10,7 @@ import IjkpuntLijn from "@/components/ui/IjkpuntLijn";
 import PartnershipTiers from "@/components/sections/PartnershipTiers";
 import TokenMenukaart from "@/components/sections/TokenMenukaart";
 import SavingsChart from "@/components/sections/SavingsChart";
+import MaturityScan from "@/components/sections/MaturityScan";
 import { site } from "@/lib/site";
 
 /** Modelnaam op één plek, zodat wijzigen één regel is. */
@@ -279,6 +280,26 @@ export default function AiPartnership() {
           <p className="mt-8 max-w-xl text-lg text-text-muted">
             Geen IT-problemen. Processen die te lang met de hand gaan. AI is
             daarbij het middel, nooit het doel.
+          </p>
+        </Reveal>
+      </Section>
+
+      {/* Nulmeting en doel: het start- en eindpunt van het partnership */}
+      <Section
+        kicker="Nulmeting en doel"
+        title={
+          <>
+            Eerst weten waar je staat. Dan <Em>waar je heen gaat</Em>.
+          </>
+        }
+        sub="In de Kickoff meten we je AI-volwassenheid op zeven dimensies. Dat levert één plaat op met een startpunt en een doel: waar staat de organisatie nu, en waar moet ze over twaalf maanden staan. Elk kwartaal meten we opnieuw, zodat je ziet of het werkt."
+      >
+        <MaturityScan />
+        <Reveal delay={0.15}>
+          <p className="mt-6 max-w-3xl text-sm text-text-muted">
+            Het profiel hierboven is een representatief voorbeeld, geen
+            klantcijfer. Jullie eigen nulmeting rolt uit de Kickoff, samen met
+            de geprioriteerde lijst waar we het jaar mee beginnen.
           </p>
         </Reveal>
       </Section>

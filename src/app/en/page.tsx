@@ -8,6 +8,7 @@ import CountUp from "@/components/ui/CountUp";
 import LogoMarquee from "@/components/ui/LogoMarquee";
 import GlowCard from "@/components/ui/GlowCard";
 import Section, { Em } from "@/components/ui/Section";
+import MaturityQuickScan from "@/components/sections/MaturityQuickScan";
 import {
   IconBuilding,
   IconPresentation,
@@ -184,12 +185,21 @@ export default function HomeEn() {
                 <MagneticButton href={site.booking}>
                   Book an intro call
                 </MagneticButton>
-                <MagneticButton href="/en/workshops" variant="ghost">
-                  Request a keynote
+                {/* The partnership is the main product, so it gets the second
+                    button. The keynote stays reachable as a text link. */}
+                <MagneticButton href="/en/ai-partnership" variant="ghost">
+                  See the AI Partnership
                 </MagneticButton>
               </div>
               <p className="mt-4 text-xs text-text-muted">
-                No strings attached, 15 minutes, reply within 24 hours.
+                No strings attached, 15 minutes, reply within 24 hours. Or{" "}
+                <Link
+                  href="/en/workshops"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  request a keynote
+                </Link>
+                .
               </p>
             </div>
             <div className="reveal-now [animation-delay:0.25s]">
@@ -286,6 +296,22 @@ export default function HomeEn() {
           </div>
         </div>
       </section>
+
+      {/* AI Maturity Quick Scan: the partnership's starting point, interactive
+          so a visitor sees their own profile and clicks through from there. */}
+      <Section
+        id="quick-scan"
+        variant="alt"
+        kicker="Free, in two minutes"
+        title={
+          <>
+            Where does your organisation stand <Em>today</Em>?
+          </>
+        }
+        sub="Seven questions, one per dimension of AI maturity. Score from 1 to 5 and the web moves with you. The dashed line is where an AI Partnership gets you within twelve months."
+      >
+        <MaturityQuickScan lang="en" />
+      </Section>
 
       {/* Four phases (static EN variant of the interactive loop) */}
       <Section

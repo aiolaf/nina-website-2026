@@ -10,6 +10,7 @@ import IjkpuntLijn from "@/components/ui/IjkpuntLijn";
 import PartnershipTiers from "@/components/sections/PartnershipTiers";
 import TokenMenukaart from "@/components/sections/TokenMenukaart";
 import SavingsChart from "@/components/sections/SavingsChart";
+import MaturityScan from "@/components/sections/MaturityScan";
 import { site } from "@/lib/site";
 
 const MODEL = "AI Partnership";
@@ -272,6 +273,26 @@ export default function AiPartnershipEn() {
           <p className="mt-8 max-w-xl text-lg text-text-muted">
             Not IT problems. Processes that have been done by hand for too long.
             AI is the means, never the goal.
+          </p>
+        </Reveal>
+      </Section>
+
+      {/* Baseline and target: the start and end point of the partnership */}
+      <Section
+        kicker="Baseline and target"
+        title={
+          <>
+            First know where you stand. Then <Em>where you are going</Em>.
+          </>
+        }
+        sub="During the Kickoff we measure your AI maturity across seven dimensions. That gives you one picture with a starting point and a target: where the organisation stands now, and where it needs to be twelve months from now. We measure again every quarter, so you can see whether it works."
+      >
+        <MaturityScan lang="en" />
+        <Reveal delay={0.15}>
+          <p className="mt-6 max-w-3xl text-sm text-text-muted">
+            The profile above is a representative example, not a client figure.
+            Your own baseline comes out of the Kickoff, together with the
+            prioritized list we start the year with.
           </p>
         </Reveal>
       </Section>

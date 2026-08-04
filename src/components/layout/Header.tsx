@@ -58,17 +58,34 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
           className="hidden items-center gap-5 lg:flex"
           aria-label={lang === "en" ? "Main navigation" : "Hoofdnavigatie"}
         >
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`text-sm transition-colors hover:text-primary ${
-                pathname === item.href ? "text-primary" : "text-text-muted"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {items.map((item) =>
+            /* Het hoofdproduct krijgt een omlijnd accent, de rest blijft
+               platte tekst. Zo valt het partnership op zonder dat de nav
+               een rij knoppen wordt. */
+            item.uitgelicht ? (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors ${
+                  pathname === item.href
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-primary/40 text-primary hover:border-primary hover:bg-primary/10"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-sm transition-colors hover:text-primary ${
+                  pathname === item.href ? "text-primary" : "text-text-muted"
+                }`}
+              >
+                {item.label}
+              </Link>
+            )
+          )}
           {/* Externe boekingspagina, dus een gewone anchor met target en rel
               in plaats van next/link. */}
           <a
@@ -153,9 +170,11 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
               key={item.href}
               href={item.href}
               className={`rounded-lg px-3 py-3 text-lg font-medium ${
-                pathname === item.href
-                  ? "bg-bg-muted text-primary"
-                  : "text-text"
+                item.uitgelicht
+                  ? "border border-primary/40 font-semibold text-primary"
+                  : pathname === item.href
+                    ? "bg-bg-muted text-primary"
+                    : "text-text"
               }`}
             >
               {item.label}
