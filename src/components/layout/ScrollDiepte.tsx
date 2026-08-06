@@ -40,6 +40,11 @@ export default function ScrollDiepte() {
           gehaald.current.add(drempel);
           stuurEvent("scroll_diepte", {
             waarde: drempel,
+            // Ook als tekst mee, in de parameter "keuze". GA4 staat dezelfde
+            // parameter niet toe als dimensie en als statistiek, en voor de
+            // verdeling 25/50/75/100 heb je een dimensie nodig. Zo hoeft er
+            // geen nieuwe variabele en parameter in GTM bij.
+            keuze: String(drempel),
             locatie: window.location.pathname,
             soort: "scroll",
             taal: document.documentElement.lang || "nl",
