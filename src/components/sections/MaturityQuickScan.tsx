@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import MaturityRadar from "@/components/ui/MaturityRadar";
 import { site, type Lang } from "@/lib/site";
+import { stuurEvent } from "@/lib/analytics";
 import {
   DIMS_EN,
   DIMS_NL,
@@ -127,9 +128,29 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
     t.duiding.find((d) => gemiddeldGetal <= d.max) ??
     t.duiding[t.duiding.length - 1];
 
+  /**
+   * Meten of de scan gebruikt wordt, niet wat iemand antwoordt. Er gaan drie
+   * events naar de dataLayer: de eerste klik, het moment dat alle zeven
+   * dimensies zijn aangeraakt, en een klik op een van de twee CTA's. Geen
+   * scores, geen dimensienamen.
+   */
+  const gestart = useRef(false);
+  const afgerond = useRef(false);
+  const aangeraakteDims = useRef(new Set<number>());
+
   function zet(i: number, waarde: number) {
     setAangeraakt(true);
     setScores((huidig) => huidig.map((v, idx) => (idx === i ? waarde : v)));
+
+    if (!gestart.current) {
+      gestart.current = true;
+      stuurEvent("quick_scan_start", { taal: lang });
+    }
+    aangeraakteDims.current.add(i);
+    if (!afgerond.current && aangeraakteDims.current.size === dims.length) {
+      afgerond.current = true;
+      stuurEvent("quick_scan_afgerond", { taal: lang });
+    }
   }
 
   const partnershipHref =
@@ -236,13 +257,30 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
 
         <div className="rounded-2xl border border-border bg-bg-alt p-6 sm:p-7">
           <div className="flex flex-col gap-3 sm:flex-row">
-            <MagneticButton href={partnershipHref} className="w-full sm:w-auto">
+            <MagneticButton
+              href={partnershipHref}
+              className="w-full sm:w-auto"
+              onClick={() =>
+                stuurEvent("quick_scan_cta", {
+                  keuze: "partnership",
+                  taal: lang,
+                  ingevuld: gestart.current,
+                })
+              }
+            >
               {t.ctaPartnership}
             </MagneticButton>
             <MagneticButton
               href={site.booking}
               variant="ghost"
               className="w-full sm:w-auto"
+              onClick={() =>
+                stuurEvent("quick_scan_cta", {
+                  keuze: "kennismaking",
+                  taal: lang,
+                  ingevuld: gestart.current,
+                })
+              }
             >
               {t.ctaBooking}
             </MagneticButton>
@@ -253,6 +291,9 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
               onClick={() => {
                 setScores(START);
                 setAangeraakt(false);
+                gestart.current = false;
+                afgerond.current = false;
+                aangeraakteDims.current = new Set();
               }}
               className="mt-4 text-xs font-semibold text-primary hover:underline"
             >

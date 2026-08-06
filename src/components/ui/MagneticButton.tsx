@@ -13,6 +13,8 @@ type Props = {
   children: ReactNode;
   variant?: "primary" | "ghost";
   className?: string;
+  /** Optioneel, bijvoorbeeld om een dataLayer-event te sturen bij een klik. */
+  onClick?: () => void;
 };
 
 /**
@@ -25,6 +27,7 @@ export default function MagneticButton({
   children,
   variant = "primary",
   className = "",
+  onClick,
 }: Props) {
   const ref = useRef<HTMLAnchorElement>(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -51,6 +54,7 @@ export default function MagneticButton({
   const shared = {
     ref,
     onPointerMove,
+    onClick,
     onPointerLeave: () => setOffset({ x: 0, y: 0 }),
     className: `${base} ${variants[variant]} ${className}`,
     style: {
