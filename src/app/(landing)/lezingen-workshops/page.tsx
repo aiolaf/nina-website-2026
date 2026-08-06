@@ -360,15 +360,9 @@ export default function LezingenWorkshops() {
             </div>
 
             <div className="reveal-now [animation-delay:0.1s] lg:col-start-1 lg:row-start-2">
+              {/* Geen "Vraag een voorstel aan" meer: het formulier staat er
+                  vlak naast, dus die knop wees naar zichzelf. */}
               <div className="flex flex-col gap-4 sm:flex-row">
-                {/* Op mobiel staat het formulier hierboven, dus een knop die
-                    ernaartoe springt is dan onzin. */}
-                <MagneticButton
-                  href="#aanvraag"
-                  className="hidden lg:inline-flex"
-                >
-                  Vraag een voorstel aan
-                </MagneticButton>
                 <MagneticButton href="#aanbod" variant="ghost">
                   Bekijk het aanbod
                 </MagneticButton>
