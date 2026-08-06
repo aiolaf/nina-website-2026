@@ -652,6 +652,21 @@ export default function HomeEn() {
               <p className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold/15 px-4 py-1.5 text-sm font-semibold text-gold">
                 Sessions rated 9.3
               </p>
+              <p className="mt-6">
+                <Link
+                  href="/en/cases"
+                  className="group inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                  data-cta="review_naar_cases"
+                >
+                  See all client cases
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </Link>
+              </p>
             </div>
           </figure>
         </Reveal>

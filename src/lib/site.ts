@@ -38,6 +38,9 @@ export const nav = [
   { label: "Lezingen & Workshops", href: "/lezingen-workshops" },
   { label: "AI Agents", href: "/ai-agents" },
   { label: "AI Build", href: "/ai-build" },
+  // Bewijs hoort tussen de diensten en de kennislaag: wie een dienst
+  // bekijkt, wil daarna zien dat het ergens gewerkt heeft.
+  { label: "Cases", href: "/cases" },
   { label: "Blog", href: "/blog" },
   { label: "Freebies", href: "/freebies" },
   { label: "Over NinA AI", href: "/over-nina" },
@@ -48,6 +51,7 @@ export const navEn = [
   { label: "Workshops", href: "/en/workshops" },
   { label: "AI Agents", href: "/en/ai-agents" },
   { label: "AI Build", href: "/en/ai-build" },
+  { label: "Cases", href: "/en/cases" },
   { label: "Blog", href: "/en/blog" },
   { label: "Freebies", href: "/en/freebies" },
   { label: "About NinA AI", href: "/en/about-nina" },
@@ -55,6 +59,15 @@ export const navEn = [
 
 export const cta = { label: "Plan een kennismaking", href: site.booking };
 export const ctaEn = { label: "Book an intro call", href: site.booking };
+
+/**
+ * Kortere variant van dezelfde knop, alleen voor de header. De volledige
+ * balk is op 1024px exact vol: logo 62px plus nav 922px is de hele
+ * binnenbreedte. Met "Plan een kennismaking" (187px) erin past er geen
+ * nav-item meer bij, met "Kennismaken" wel.
+ */
+export const ctaKort = { label: "Kennismaken", href: site.booking };
+export const ctaKortEn = { label: "Intro call", href: site.booking };
 
 /** Footer-kolommen; header houdt alleen de hoofditems. */
 export const footerNav = {

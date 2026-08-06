@@ -5,6 +5,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import CountUp from "@/components/ui/CountUp";
 import Section, { Em } from "@/components/ui/Section";
 import FilloutEmbed from "@/components/ui/FilloutEmbed";
+import MobielCTA from "@/components/layout/MobielCTA";
 import { IconWhatsApp } from "@/components/ui/icons";
 import { site } from "@/lib/site";
 
@@ -315,9 +316,17 @@ export default function LezingenWorkshops() {
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
         />
-        <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-24 sm:pb-20">
-          <div className="grid items-start gap-10 lg:grid-cols-[1.1fr_1fr]">
-            <div className="reveal-now">
+        {/* Deze pagina heeft geen header, dus die 96px bovenmarge kost op
+            mobiel alleen fold-ruimte voor het formulier. */}
+        <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-12 sm:pb-20 sm:pt-24">
+          {/* Drie blokken in plaats van twee kolommen. Op mobiel is de
+              leesorde kop, formulier, knoppen: het formulier begon anders op
+              685px terwijl het scherm 812px hoog is, dus de conversie van
+              betaald verkeer stond onder de fold. Op lg staan kop en knoppen
+              weer onder elkaar in kolom 1 en spant het formulier beide rijen
+              in kolom 2, precies zoals eerst. */}
+          <div className="grid items-start gap-x-10 gap-y-8 lg:grid-cols-[1.1fr_1fr] lg:grid-rows-[auto_1fr]">
+            <div className="reveal-now lg:col-start-1 lg:row-start-1">
               <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-bg-card/70 px-4 py-1.5 text-xs font-medium text-text-muted backdrop-blur">
                 Sessies beoordeeld met een{" "}
                 <span className="font-semibold text-gold">9,3</span>
@@ -326,14 +335,38 @@ export default function LezingenWorkshops() {
                 <Em>AI spreker</Em> inhuren die je team ook echt in beweging
                 krijgt.
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-text-muted sm:mt-6 sm:text-lg">
                 Olaf Lemmens geeft keynotes, lezingen en hands-on workshops over
                 AI, op maat voor jullie organisatie. Van directietafel tot
-                marketing, sales en operations. Vraag hiernaast een vrijblijvend
-                voorstel aan.
+                marketing, sales en operations. Vraag een vrijblijvend voorstel
+                aan.
               </p>
-              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                <MagneticButton href="#aanvraag">
+            </div>
+
+            <div
+              id="aanvraag"
+              className="reveal-now [animation-delay:0.15s] lg:col-start-2 lg:row-span-2 lg:row-start-1"
+            >
+              <FilloutEmbed
+                formId="sxmVnPbAUcus"
+                title="Vraag een voorstel aan voor een lezing of workshop"
+                /* Het formulier meldt zelf zijn hoogte; 640 is wat het op
+                   mobiel nodig heeft, dus daar verschuift er niets meer
+                   zodra het iframe de plaatshouder vervangt. */
+                height={640}
+                deferMs={250}
+                meting="lezing_aanvraag_hero"
+              />
+            </div>
+
+            <div className="reveal-now [animation-delay:0.1s] lg:col-start-1 lg:row-start-2">
+              <div className="flex flex-col gap-4 sm:flex-row">
+                {/* Op mobiel staat het formulier hierboven, dus een knop die
+                    ernaartoe springt is dan onzin. */}
+                <MagneticButton
+                  href="#aanvraag"
+                  className="hidden lg:inline-flex"
+                >
                   Vraag een voorstel aan
                 </MagneticButton>
                 <MagneticButton href="#aanbod" variant="ghost">
@@ -343,15 +376,6 @@ export default function LezingenWorkshops() {
               <p className="mt-4 text-xs text-text-muted">
                 Vrijblijvend, binnen 24 uur een reactie.
               </p>
-            </div>
-            <div id="aanvraag" className="reveal-now [animation-delay:0.15s]">
-              <FilloutEmbed
-                formId="sxmVnPbAUcus"
-                title="Vraag een voorstel aan voor een lezing of workshop"
-                height={520}
-                deferMs={250}
-                meting="lezing_aanvraag_hero"
-              />
             </div>
           </div>
         </div>
@@ -825,6 +849,7 @@ export default function LezingenWorkshops() {
 
       {/* Vraag een voorstel aan */}
       <Section
+        id="voorstel"
         variant="alt"
         title={
           <>
@@ -873,6 +898,16 @@ export default function LezingenWorkshops() {
           </Reveal>
         </div>
       </Section>
+
+      {/* Deze pagina heeft geen header en is 13.000px lang: zonder vaste
+          balk is er na de hero geen knop meer in beeld. */}
+      <MobielCTA
+        label="Vraag een voorstel aan"
+        href="#voorstel"
+        sub="Vrijblijvend, binnen 24 uur een reactie"
+        meting="landing_lezing_balk"
+        verbergBij="#voorstel"
+      />
     </>
   );
 }

@@ -36,8 +36,14 @@ const FILLOUT_ORIGIN = "https://form.fillout.com";
  * dat contract hier over in plaats van het pakket te installeren, zodat de
  * lazy mount en de deferMs-tuning blijven staan.
  *
+ * Meegroeien: met fillout-embed-dynamic-resize=true in de URL meldt het
+ * formulier zijn eigen hoogte via type "form_resized" met size in pixels.
+ * Zonder dat scrolde je bínnen het iframe naar de verzendknop, en dat is op
+ * een aanvraagformulier precies de knop die niet gemist mag worden. De
+ * height-prop is daarmee de starthoogte, niet de eindhoogte.
+ *
  * Origin en embedId checken we allebei: zonder die twee kan elke andere
- * iframe of tab een verzending faken.
+ * iframe of tab een verzending faken, of de hoogte laten springen.
  */
 export default function FilloutEmbed({
   formId,
@@ -56,6 +62,9 @@ export default function FilloutEmbed({
    * tijdens render is onzuiver en zou server en client laten verschillen.
    */
   const [embedId, setEmbedId] = useState<string>();
+
+  /** Door het formulier zelf gemelde hoogte; undefined tot de eerste melding. */
+  const [gemeldeHoogte, setGemeldeHoogte] = useState<number>();
 
   useEffect(() => {
     const el = ref.current;
@@ -93,11 +102,21 @@ export default function FilloutEmbed({
     function opBericht(e: MessageEvent) {
       if (e.origin !== FILLOUT_ORIGIN) return;
       const data = e.data as
-        | { type?: string; embedId?: string }
+        | { type?: string; embedId?: string; size?: unknown }
         | null
         | undefined;
       if (!data || typeof data !== "object") return;
       if (data.embedId !== embedId) return;
+
+      if (data.type === "form_resized") {
+        // Elke stap van het formulier meldt zijn eigen hoogte, dus dit komt
+        // meerdere keren langs; steeds de laatste waarde volgen.
+        if (typeof data.size === "number" && data.size > 0) {
+          setGemeldeHoogte(data.size);
+        }
+        return;
+      }
+
       if (data.type !== "form_submit") return;
       // Fillout kan bij een meerstapsformulier meer dan één keer melden.
       if (gemeld) return;
@@ -117,20 +136,32 @@ export default function FilloutEmbed({
     return () => window.removeEventListener("message", opBericht);
   }, [visible, embedId, formId, meting]);
 
-  const src = `${FILLOUT_ORIGIN}/t/${formId}?v=2&fillout-embed-id=${embedId}`;
+  const src =
+    `${FILLOUT_ORIGIN}/t/${formId}?v=2&fillout-embed-id=${embedId}` +
+    `&fillout-embed-dynamic-resize=true`;
+
+  const hoogte = gemeldeHoogte ?? height;
 
   return (
     <div
       ref={ref}
       className={`overflow-hidden rounded-2xl border border-border ${className}`}
-      style={{ minHeight: height }}
+      // Voor de eerste hoogtemelding houdt de plaatshouder height vast, zodat
+      // de pagina niet verschuift; daarna mag hij ook kleiner worden dan dat.
+      style={{ minHeight: gemeldeHoogte ? undefined : height }}
     >
       {visible && embedId ? (
         <iframe
           src={src}
           title={title}
           allowFullScreen
-          style={{ width: "100%", height, border: "none", display: "block" }}
+          style={{
+            width: "100%",
+            height: hoogte,
+            border: "none",
+            display: "block",
+            transition: "height 150ms ease",
+          }}
         />
       ) : (
         <div

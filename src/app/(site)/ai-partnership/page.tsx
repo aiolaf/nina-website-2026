@@ -11,6 +11,7 @@ import PartnershipTiers from "@/components/sections/PartnershipTiers";
 import TokenMenukaart from "@/components/sections/TokenMenukaart";
 import SavingsChart from "@/components/sections/SavingsChart";
 import MaturityScan from "@/components/sections/MaturityScan";
+import MobielCTA from "@/components/layout/MobielCTA";
 import { site } from "@/lib/site";
 
 /** Modelnaam op één plek, zodat wijzigen één regel is. */
@@ -594,7 +595,7 @@ export default function AiPartnership() {
       </Section>
 
       {/* Slot: twee vragen, drie stappen */}
-      <section className="relative overflow-hidden">
+      <section id="afsluiter" className="relative overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(97,68,121,0.09),transparent_65%)]"
@@ -646,6 +647,22 @@ export default function AiPartnership() {
                 Mail {site.email}
               </MagneticButton>
             </div>
+            {/* Wie nog niet wil praten, wil bewijs. */}
+            <p className="mt-6 text-sm">
+              <Link
+                href="/cases"
+                className="group inline-flex items-center gap-2 font-semibold text-primary hover:underline"
+                data-cta="partnership_naar_cases"
+              >
+                Liever eerst zien wat het oplevert? Bekijk de klantcases
+                <span
+                  aria-hidden="true"
+                  className="transition-transform group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </Link>
+            </p>
             <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-border pt-6 text-sm text-text-muted">
               <li>
                 <span className="font-semibold text-text">160+</span>{" "}
@@ -666,6 +683,16 @@ export default function AiPartnership() {
           </Reveal>
         </div>
       </section>
+
+      {/* Lange pagina met de beslissing pas onderaan; op mobiel blijft de
+          kennismaking zo binnen bereik. */}
+      <MobielCTA
+        label="Plan kennismaking"
+        href={site.booking}
+        sub="15 minuten, vrijblijvend"
+        meting="partnership_balk"
+        verbergBij="#afsluiter"
+      />
     </>
   );
 }

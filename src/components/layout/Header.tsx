@@ -3,7 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav, navEn, cta, ctaEn, switchLangPath, type Lang } from "@/lib/site";
+import {
+  nav,
+  navEn,
+  cta,
+  ctaEn,
+  ctaKort,
+  ctaKortEn,
+  switchLangPath,
+  type Lang,
+} from "@/lib/site";
 
 export default function Header({ lang = "nl" }: { lang?: Lang }) {
   const pathname = usePathname();
@@ -12,6 +21,9 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
 
   const items = lang === "en" ? navEn : nav;
   const action = lang === "en" ? ctaEn : cta;
+  // Desktopbalk gebruikt het korte label, het mobiele menu heeft de ruimte
+  // voor het volledige.
+  const actionKort = lang === "en" ? ctaKortEn : ctaKort;
   const home = lang === "en" ? "/en" : "/";
   const otherLang: Lang = lang === "en" ? "nl" : "en";
   const switchHref = switchLangPath(pathname, otherLang);
@@ -55,7 +67,10 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
         </Link>
 
         <nav
-          className="hidden items-center gap-5 lg:flex"
+          /* Op precies 1024px is de balk het krapst: logo 62px plus de nav
+             moet binnen 984px blijven. Met gap-3.5 houdt hij ~30px over,
+             vanaf xl is er ruimte voor de normale gap-5. */
+          className="hidden items-center gap-3.5 lg:flex xl:gap-5"
           aria-label={lang === "en" ? "Main navigation" : "Hoofdnavigatie"}
         >
           {items.map((item) =>
@@ -66,7 +81,7 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors ${
+                className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors ${
                   pathname === item.href
                     ? "border-primary bg-primary/10 text-primary"
                     : "border-primary/40 text-primary hover:border-primary hover:bg-primary/10"
@@ -78,7 +93,7 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm transition-colors hover:text-primary ${
+                className={`whitespace-nowrap text-sm transition-colors hover:text-primary ${
                   pathname === item.href ? "text-primary" : "text-text-muted"
                 }`}
               >
@@ -92,9 +107,10 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
             href={action.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-ink-deep hover:text-white"
+            className="whitespace-nowrap rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-ink-deep hover:text-white xl:px-5"
+            data-cta="header_kennismaking"
           >
-            {action.label}
+            {actionKort.label}
           </a>
           <Link
             href={switchHref}

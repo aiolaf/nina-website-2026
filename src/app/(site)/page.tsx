@@ -472,6 +472,23 @@ export default function Home() {
                 <p className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold/15 px-4 py-1.5 text-sm font-semibold text-gold">
                   Sessies beoordeeld met een 9,3
                 </p>
+                {/* Vanuit het bewijsblok door naar de rest van het bewijs.
+                    Naar /cases liep tot nu toe geen enkele interne link. */}
+                <p className="mt-6">
+                  <Link
+                    href="/cases"
+                    className="group inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                    data-cta="review_naar_cases"
+                  >
+                    Bekijk alle klantcases
+                    <span
+                      aria-hidden="true"
+                      className="transition-transform group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
+                  </Link>
+                </p>
               </div>
             </figure>
           </Reveal>
