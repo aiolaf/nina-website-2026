@@ -61,6 +61,9 @@ export default function CookieBanner() {
       role="dialog"
       aria-modal="false"
       aria-label="Cookievoorkeuren"
+      /* De keuze wordt al als consent_keuze gemeten, dus de generieke
+         klikmeting slaat dit blok over. */
+      data-geen-meting=""
       className="fixed inset-x-0 bottom-0 z-[80] p-4 sm:p-5"
     >
       <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-bg-card p-5 shadow-[0_20px_60px_rgba(42,33,48,0.22)] sm:p-6">

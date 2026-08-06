@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { stuurEvent } from "@/lib/analytics";
 
 type Props = {
   formId: string;
@@ -8,7 +9,14 @@ type Props = {
   height?: number;
   className?: string;
   deferMs?: number;
+  /**
+   * Machinenaam voor de meting, bijvoorbeeld "lezing_aanvraag". Zonder deze
+   * naam meten we op formId, wat in GA4 minder leesbaar is.
+   */
+  meting?: string;
 };
+
+const FILLOUT_ORIGIN = "https://form.fillout.com";
 
 /**
  * Fillout-formulier, lazy gemount pas als de kaart in beeld komt (scheelt
@@ -20,6 +28,16 @@ type Props = {
  * kaart al bij mount in beeld staat (hero). Zo strijdt de derde-partij
  * fetch niet met de kritieke lettertype-download om bandbreedte, wat op
  * getest mobiel (Lighthouse) zowel LCP als de font-swap CLS verlaagde.
+ *
+ * Verzendmeting: Fillout stuurt een postMessage naar de parent zodra iemand
+ * het formulier afrondt. Het contract komt uit hun eigen embed-pakket
+ * (@fillout/react): het iframe krijgt een fillout-embed-id mee, en de
+ * boodschap heeft type "form_submit" met datzelfde embedId erin. We nemen
+ * dat contract hier over in plaats van het pakket te installeren, zodat de
+ * lazy mount en de deferMs-tuning blijven staan.
+ *
+ * Origin en embedId checken we allebei: zonder die twee kan elke andere
+ * iframe of tab een verzending faken.
  */
 export default function FilloutEmbed({
   formId,
@@ -27,9 +45,17 @@ export default function FilloutEmbed({
   height = 560,
   className = "",
   deferMs = 0,
+  meting,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+
+  /**
+   * Eén id per gemonteerd formulier, zodat we onze eigen iframe herkennen.
+   * Pas gezet in de observer-callback, niet tijdens render: Math.random
+   * tijdens render is onzuiver en zou server en client laten verschillen.
+   */
+  const [embedId, setEmbedId] = useState<string>();
 
   useEffect(() => {
     const el = ref.current;
@@ -38,6 +64,11 @@ export default function FilloutEmbed({
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          setEmbedId(
+            String(
+              Math.floor(Math.random() * 8_999_999_999_999) + 1_000_000_000_000
+            )
+          );
           if (deferMs > 0) {
             timer = setTimeout(() => setVisible(true), deferMs);
           } else {
@@ -55,15 +86,48 @@ export default function FilloutEmbed({
     };
   }, [deferMs]);
 
+  useEffect(() => {
+    if (!visible || !embedId) return;
+    let gemeld = false;
+
+    function opBericht(e: MessageEvent) {
+      if (e.origin !== FILLOUT_ORIGIN) return;
+      const data = e.data as
+        | { type?: string; embedId?: string }
+        | null
+        | undefined;
+      if (!data || typeof data !== "object") return;
+      if (data.embedId !== embedId) return;
+      if (data.type !== "form_submit") return;
+      // Fillout kan bij een meerstapsformulier meer dan één keer melden.
+      if (gemeld) return;
+      gemeld = true;
+
+      // generate_lead is een aanbevolen GA4-naam, dus je kunt hem in GA4 als
+      // sleutelgebeurtenis markeren en naar Ads exporteren.
+      stuurEvent("generate_lead", {
+        naam: meting || formId,
+        soort: "formulier",
+        locatie: window.location.pathname,
+        taal: document.documentElement.lang || "nl",
+      });
+    }
+
+    window.addEventListener("message", opBericht);
+    return () => window.removeEventListener("message", opBericht);
+  }, [visible, embedId, formId, meting]);
+
+  const src = `${FILLOUT_ORIGIN}/t/${formId}?v=2&fillout-embed-id=${embedId}`;
+
   return (
     <div
       ref={ref}
       className={`overflow-hidden rounded-2xl border border-border ${className}`}
       style={{ minHeight: height }}
     >
-      {visible ? (
+      {visible && embedId ? (
         <iframe
-          src={`https://form.fillout.com/t/${formId}?v=2`}
+          src={src}
           title={title}
           allowFullScreen
           style={{ width: "100%", height, border: "none", display: "block" }}

@@ -216,6 +216,7 @@ export default async function VacaturePage({ params }: Props) {
       >
         <div className="max-w-3xl">
           <FilloutEmbed
+            meting="vacature_sollicitatie"
             formId={v.filloutFormId}
             title={`Sollicitatieformulier ${v.titel}`}
             height={700}

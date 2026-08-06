@@ -196,10 +196,19 @@ export default function AiPartnership() {
                 processen waar het opstroomt, en zetten die dicht.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                <MagneticButton href={site.booking}>
+                <MagneticButton
+                  href={site.booking}
+                  data-cta="partnership_hero_kennismaking"
+                  data-cta-soort="hero"
+                >
                   Plan een kennismaking
                 </MagneticButton>
-                <MagneticButton href="#pakketten" variant="ghost">
+                <MagneticButton
+                  href="#pakketten"
+                  variant="ghost"
+                  data-cta="partnership_hero_prijs"
+                  data-cta-soort="hero"
+                >
                   Wat het kost
                 </MagneticButton>
               </div>

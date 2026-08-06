@@ -260,6 +260,8 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
             <MagneticButton
               href={partnershipHref}
               className="w-full sm:w-auto"
+              data-cta="quickscan_partnership"
+              data-cta-soort="quickscan"
               onClick={() =>
                 stuurEvent("quick_scan_cta", {
                   keuze: "partnership",
@@ -274,6 +276,8 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
               href={site.booking}
               variant="ghost"
               className="w-full sm:w-auto"
+              data-cta="quickscan_kennismaking"
+              data-cta-soort="quickscan"
               onClick={() =>
                 stuurEvent("quick_scan_cta", {
                   keuze: "kennismaking",

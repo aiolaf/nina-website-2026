@@ -127,12 +127,21 @@ export default function Home() {
                   om te gooien. Jullie vaste AI-partner.
                 </p>
                 <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                  <MagneticButton href={site.booking}>
+                  <MagneticButton
+                    href={site.booking}
+                    data-cta="home_hero_kennismaking"
+                    data-cta-soort="hero"
+                  >
                     Plan een kennismaking
                   </MagneticButton>
                   {/* Het partnership is het hoofdproduct, dus dat is de tweede
                       knop. De lezing blijft bereikbaar als tekstlink. */}
-                  <MagneticButton href="/ai-partnership" variant="ghost">
+                  <MagneticButton
+                    href="/ai-partnership"
+                    variant="ghost"
+                    data-cta="home_hero_partnership"
+                    data-cta-soort="hero"
+                  >
                     Bekijk het AI Partnership
                   </MagneticButton>
                 </div>

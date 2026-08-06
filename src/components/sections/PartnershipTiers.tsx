@@ -5,6 +5,8 @@ import type { Lang } from "@/lib/site";
 
 type Tier = {
   label: string;
+  /** Machinenaam voor de klikmeting, bijvoorbeeld "pakket_standaard". */
+  meting: string;
   naam: string;
   tokens: string;
   /** Aantal munten in de stapel; bij Enterprise met een plus erachter. */
@@ -28,6 +30,7 @@ type Tier = {
 const TIERS_NL: Tier[] = [
   {
     label: "Instap",
+    meting: "pakket_light",
     naam: "AI Partner Light",
     tokens: "10",
     stapel: 10,
@@ -45,6 +48,7 @@ const TIERS_NL: Tier[] = [
   },
   {
     label: "Meest gekozen",
+    meting: "pakket_standaard",
     naam: "AI Partner Standaard",
     tokens: "20",
     stapel: 20,
@@ -63,6 +67,7 @@ const TIERS_NL: Tier[] = [
   },
   {
     label: "Org-breed",
+    meting: "pakket_enterprise",
     naam: "AI Partner Enterprise",
     tokens: "30+",
     stapel: 30,
@@ -85,6 +90,7 @@ const TIERS_NL: Tier[] = [
 const TIERS_EN: Tier[] = [
   {
     label: "Entry",
+    meting: "pakket_light",
     naam: "AI Partner Light",
     tokens: "10",
     stapel: 10,
@@ -102,6 +108,7 @@ const TIERS_EN: Tier[] = [
   },
   {
     label: "Most popular",
+    meting: "pakket_standaard",
     naam: "AI Partner Standard",
     tokens: "20",
     stapel: 20,
@@ -120,6 +127,7 @@ const TIERS_EN: Tier[] = [
   },
   {
     label: "Org-wide",
+    meting: "pakket_enterprise",
     naam: "AI Partner Enterprise",
     tokens: "30+",
     stapel: 30,
@@ -207,6 +215,8 @@ export default function PartnershipTiers({ lang = "nl" }: { lang?: Lang }) {
               href={href}
               variant={tier.featured ? "primary" : "ghost"}
               className="mt-7 w-full"
+              data-cta={tier.meting}
+              data-cta-soort="pakket"
             >
               {cta}
             </MagneticButton>

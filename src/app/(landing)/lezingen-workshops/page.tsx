@@ -350,6 +350,7 @@ export default function LezingenWorkshops() {
                 title="Vraag een voorstel aan voor een lezing of workshop"
                 height={520}
                 deferMs={250}
+                meting="lezing_aanvraag_hero"
               />
             </div>
           </div>
@@ -867,6 +868,7 @@ export default function LezingenWorkshops() {
             <FilloutEmbed
               formId="sxmVnPbAUcus"
               title="Vraag een voorstel aan voor een lezing of workshop"
+              meting="lezing_aanvraag_slot"
             />
           </Reveal>
         </div>

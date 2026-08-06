@@ -3,6 +3,8 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import Script from "next/script";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import CookieBanner from "@/components/layout/CookieBanner";
+import KlikMeting from "@/components/layout/KlikMeting";
+import ScrollDiepte from "@/components/layout/ScrollDiepte";
 import { CONSENT_DEFAULT_SCRIPT } from "@/lib/consent";
 import CursorGlow from "@/components/ui/CursorGlow";
 import ScrollProgress from "@/components/ui/ScrollProgress";
@@ -96,6 +98,10 @@ export default function RootLayout({
         <CursorGlow />
         {children}
         <CookieBanner />
+        {/* Meetlaag: klikken op elke knop of link, en scrolldiepte per
+            pagina. Beide renderen niets. */}
+        <KlikMeting />
+        <ScrollDiepte />
       </body>
     </html>
   );

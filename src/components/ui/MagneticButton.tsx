@@ -15,6 +15,10 @@ type Props = {
   className?: string;
   /** Optioneel, bijvoorbeeld om een dataLayer-event te sturen bij een klik. */
   onClick?: () => void;
+  /** Vaste machinenaam voor de klikmeting; zie KlikMeting. */
+  "data-cta"?: string;
+  /** Categorie voor de klikmeting, bijvoorbeeld "hero". */
+  "data-cta-soort"?: string;
 };
 
 /**
@@ -28,6 +32,7 @@ export default function MagneticButton({
   variant = "primary",
   className = "",
   onClick,
+  ...meting
 }: Props) {
   const ref = useRef<HTMLAnchorElement>(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -52,6 +57,7 @@ export default function MagneticButton({
 
   const isInternal = href.startsWith("/") || href.startsWith("#");
   const shared = {
+    ...meting,
     ref,
     onPointerMove,
     onClick,
