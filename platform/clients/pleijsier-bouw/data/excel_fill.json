@@ -1,0 +1,897 @@
+{
+ "sheet": "23.1_Kanaalplaten",
+ "cells": [
+  {
+   "address": "J10",
+   "value": "Waar inclusief staat, of een bedrag dan is dit opgenomen in de totaalsom, of akkoord bevonden door de opdrachtnemer. "
+  },
+  {
+   "address": "O10",
+   "value": "Waar inclusief staat, of een bedrag dan is dit opgenomen in de totaalsom, of akkoord bevonden door de opdrachtnemer. "
+  },
+  {
+   "address": "T10",
+   "value": "Waar inclusief staat, of een bedrag dan is dit opgenomen in de totaalsom, of akkoord bevonden door de opdrachtnemer. "
+  },
+  {
+   "address": "Y10",
+   "value": "Waar inclusief staat, of een bedrag dan is dit opgenomen in de totaalsom, of akkoord bevonden door de opdrachtnemer. "
+  },
+  {
+   "address": "M12",
+   "value": "incl."
+  },
+  {
+   "address": "R12",
+   "value": "incl."
+  },
+  {
+   "address": "W12",
+   "value": "incl."
+  },
+  {
+   "address": "AB12",
+   "value": "incl."
+  },
+  {
+   "address": "M13",
+   "value": "incl."
+  },
+  {
+   "address": "R13",
+   "value": "incl."
+  },
+  {
+   "address": "W13",
+   "value": "incl."
+  },
+  {
+   "address": "AB13",
+   "value": "incl."
+  },
+  {
+   "address": "M14",
+   "value": "incl."
+  },
+  {
+   "address": "R14",
+   "value": "incl."
+  },
+  {
+   "address": "W14",
+   "value": "incl."
+  },
+  {
+   "address": "AB14",
+   "value": "incl."
+  },
+  {
+   "address": "M15",
+   "value": "incl."
+  },
+  {
+   "address": "R15",
+   "value": "incl."
+  },
+  {
+   "address": "W15",
+   "value": "incl."
+  },
+  {
+   "address": "AB15",
+   "value": "incl."
+  },
+  {
+   "address": "M16",
+   "value": "incl."
+  },
+  {
+   "address": "R16",
+   "value": "incl."
+  },
+  {
+   "address": "W16",
+   "value": "incl."
+  },
+  {
+   "address": "AB16",
+   "value": "incl."
+  },
+  {
+   "address": "M17",
+   "value": "incl."
+  },
+  {
+   "address": "R17",
+   "value": "incl."
+  },
+  {
+   "address": "W17",
+   "value": "incl."
+  },
+  {
+   "address": "AB17",
+   "value": "incl."
+  },
+  {
+   "address": "M18",
+   "value": "incl."
+  },
+  {
+   "address": "R18",
+   "value": "incl."
+  },
+  {
+   "address": "W18",
+   "value": "incl."
+  },
+  {
+   "address": "AB18",
+   "value": "incl."
+  },
+  {
+   "address": "M19",
+   "value": "incl."
+  },
+  {
+   "address": "R19",
+   "value": "incl."
+  },
+  {
+   "address": "W19",
+   "value": "incl."
+  },
+  {
+   "address": "AB19",
+   "value": "."
+  },
+  {
+   "address": "M20",
+   "value": "incl."
+  },
+  {
+   "address": "R20",
+   "value": "incl."
+  },
+  {
+   "address": "W20",
+   "value": "incl."
+  },
+  {
+   "address": "AB20",
+   "value": "incl."
+  },
+  {
+   "address": "M21",
+   "value": "incl."
+  },
+  {
+   "address": "R21",
+   "value": "incl."
+  },
+  {
+   "address": "W21",
+   "value": "incl."
+  },
+  {
+   "address": "AB21",
+   "value": "."
+  },
+  {
+   "address": "AB23",
+   "value": "."
+  },
+  {
+   "address": "L24",
+   "value": 60
+  },
+  {
+   "address": "Q24",
+   "value": 58.75
+  },
+  {
+   "address": "V24",
+   "value": 59.75
+  },
+  {
+   "address": "X24",
+   "value": "110 isolatie; Rc=3.7"
+  },
+  {
+   "address": "Z24",
+   "value": "m2"
+  },
+  {
+   "address": "AA24",
+   "value": 57
+  },
+  {
+   "address": "J25",
+   "value": "17,2"
+  },
+  {
+   "address": "L25",
+   "value": 60
+  },
+  {
+   "address": "O25",
+   "value": "17,2"
+  },
+  {
+   "address": "Q25",
+   "value": 60
+  },
+  {
+   "address": "T25",
+   "value": "17,2"
+  },
+  {
+   "address": "V25",
+   "value": 59.75
+  },
+  {
+   "address": "Y25",
+   "value": 17.5
+  },
+  {
+   "address": "Z25",
+   "value": "m2"
+  },
+  {
+   "address": "AA25",
+   "value": 57
+  },
+  {
+   "address": "J26",
+   "value": "240"
+  },
+  {
+   "address": "L26",
+   "value": 54.5
+  },
+  {
+   "address": "N26",
+   "value": "265 mm"
+  },
+  {
+   "address": "O26",
+   "value": "240"
+  },
+  {
+   "address": "Q26",
+   "value": 60
+  },
+  {
+   "address": "T26",
+   "value": "240"
+  },
+  {
+   "address": "V26",
+   "value": 54.5
+  },
+  {
+   "address": "Y26",
+   "value": "240"
+  },
+  {
+   "address": "Z26",
+   "value": "m2"
+  },
+  {
+   "address": "AA26",
+   "value": 67.5
+  },
+  {
+   "address": "J27",
+   "value": "55,5"
+  },
+  {
+   "address": "L27",
+   "value": 60
+  },
+  {
+   "address": "O27",
+   "value": "55,5"
+  },
+  {
+   "address": "Q27",
+   "value": 60
+  },
+  {
+   "address": "T27",
+   "value": "55,5"
+  },
+  {
+   "address": "V27",
+   "value": 60
+  },
+  {
+   "address": "Y27",
+   "value": 55
+  },
+  {
+   "address": "Z27",
+   "value": "m2"
+  },
+  {
+   "address": "AA27",
+   "value": 50
+  },
+  {
+   "address": "L28",
+   "value": 69
+  },
+  {
+   "address": "N28",
+   "value": "400 mm"
+  },
+  {
+   "address": "Q28",
+   "value": 61.75
+  },
+  {
+   "address": "V28",
+   "value": 61.5
+  },
+  {
+   "address": "Y28",
+   "value": 465
+  },
+  {
+   "address": "Z28",
+   "value": "m2"
+  },
+  {
+   "address": "AA28",
+   "value": 66
+  },
+  {
+   "address": "L29",
+   "value": 69
+  },
+  {
+   "address": "Q29",
+   "value": 61.75
+  },
+  {
+   "address": "V29",
+   "value": 61.5
+  },
+  {
+   "address": "Z29",
+   "value": "m2"
+  },
+  {
+   "address": "AA29",
+   "value": 71
+  },
+  {
+   "address": "J30",
+   "value": 272
+  },
+  {
+   "address": "L30",
+   "value": 69
+  },
+  {
+   "address": "O30",
+   "value": 272
+  },
+  {
+   "address": "Q30",
+   "value": 61.75
+  },
+  {
+   "address": "T30",
+   "value": 272
+  },
+  {
+   "address": "V30",
+   "value": 61.5
+  },
+  {
+   "address": "Y30",
+   "value": 272
+  },
+  {
+   "address": "Z30",
+   "value": "m2"
+  },
+  {
+   "address": "AA30",
+   "value": 71
+  },
+  {
+   "address": "J31",
+   "value": "465"
+  },
+  {
+   "address": "L31",
+   "value": 69
+  },
+  {
+   "address": "O31",
+   "value": "465"
+  },
+  {
+   "address": "Q31",
+   "value": 61.75
+  },
+  {
+   "address": "T31",
+   "value": "465"
+  },
+  {
+   "address": "V31",
+   "value": 61.5
+  },
+  {
+   "address": "Y31",
+   "value": "465"
+  },
+  {
+   "address": "Z31",
+   "value": "m2"
+  },
+  {
+   "address": "AA31",
+   "value": 66
+  },
+  {
+   "address": "J32",
+   "value": "147"
+  },
+  {
+   "address": "L32",
+   "value": 69
+  },
+  {
+   "address": "O32",
+   "value": "147"
+  },
+  {
+   "address": "Q32",
+   "value": 61.75
+  },
+  {
+   "address": "T32",
+   "value": "147"
+  },
+  {
+   "address": "V32",
+   "value": 61.5
+  },
+  {
+   "address": "Y32",
+   "value": "147"
+  },
+  {
+   "address": "Z32",
+   "value": "m2"
+  },
+  {
+   "address": "AA32",
+   "value": 65
+  },
+  {
+   "address": "AB33",
+   "value": "."
+  },
+  {
+   "address": "AB34",
+   "value": "incl"
+  },
+  {
+   "address": "AB35",
+   "value": "incl"
+  },
+  {
+   "address": "AB36",
+   "value": "incl"
+  },
+  {
+   "address": "AB37",
+   "value": "incl"
+  },
+  {
+   "address": "M38",
+   "value": "incl."
+  },
+  {
+   "address": "R38",
+   "value": "incl"
+  },
+  {
+   "address": "AB38",
+   "value": "incl"
+  },
+  {
+   "address": "M39",
+   "value": "incl."
+  },
+  {
+   "address": "R39",
+   "value": "incl"
+  },
+  {
+   "address": "AB39",
+   "value": "incl"
+  },
+  {
+   "address": "L40",
+   "value": 8
+  },
+  {
+   "address": "Q40",
+   "value": 6.5
+  },
+  {
+   "address": "R40",
+   "value": "incl"
+  },
+  {
+   "address": "X40",
+   "value": "inclusief 1 sparing of centraaldoos per 10 m2 per nivo"
+  },
+  {
+   "address": "AB40",
+   "value": "incl"
+  },
+  {
+   "address": "M41",
+   "value": "."
+  },
+  {
+   "address": "W41",
+   "value": "."
+  },
+  {
+   "address": "AB41",
+   "value": "incl"
+  },
+  {
+   "address": "AB42",
+   "value": "."
+  },
+  {
+   "address": "J43",
+   "value": 0.5
+  },
+  {
+   "address": "K43",
+   "value": "pst"
+  },
+  {
+   "address": "L43",
+   "value": 18216
+  },
+  {
+   "address": "N43",
+   "value": "transport totaal €18.216,- voor al het prefab "
+  },
+  {
+   "address": "AB43",
+   "value": "incl"
+  },
+  {
+   "address": "M44",
+   "value": "incl."
+  },
+  {
+   "address": "AB44",
+   "value": "."
+  },
+  {
+   "address": "M46",
+   "value": "incl."
+  },
+  {
+   "address": "W46",
+   "value": "incl."
+  },
+  {
+   "address": "Y46",
+   "value": 1
+  },
+  {
+   "address": "Z46",
+   "value": "st"
+  },
+  {
+   "address": "AA46",
+   "value": 937
+  },
+  {
+   "address": "J47",
+   "value": 1708
+  },
+  {
+   "address": "M47",
+   "value": "incl."
+  },
+  {
+   "address": "N47",
+   "value": "265 mm"
+  },
+  {
+   "address": "O47",
+   "value": 1708
+  },
+  {
+   "address": "P47",
+   "value": "st"
+  },
+  {
+   "address": "Q47",
+   "value": 0.52
+  },
+  {
+   "address": "W47",
+   "value": "incl."
+  },
+  {
+   "address": "AB47",
+   "value": "incl"
+  },
+  {
+   "address": "M48",
+   "value": "incl."
+  },
+  {
+   "address": "N48",
+   "value": "400 mm"
+  },
+  {
+   "address": "W48",
+   "value": "incl."
+  },
+  {
+   "address": "AB48",
+   "value": "incl"
+  },
+  {
+   "address": "M49",
+   "value": "incl."
+  },
+  {
+   "address": "P49",
+   "value": "st"
+  },
+  {
+   "address": "Q49",
+   "value": 0.9
+  },
+  {
+   "address": "W49",
+   "value": "incl."
+  },
+  {
+   "address": "AB49",
+   "value": "incl"
+  },
+  {
+   "address": "K50",
+   "value": "m1"
+  },
+  {
+   "address": "L50",
+   "value": 3
+  },
+  {
+   "address": "N50",
+   "value": "40x3 mm"
+  },
+  {
+   "address": "P50",
+   "value": "m"
+  },
+  {
+   "address": "Q50",
+   "value": 1.2
+  },
+  {
+   "address": "S50",
+   "value": " Centreerstrip SBR 40x3 mm t.b.v. HVP 150/200 (rol van 10 m) "
+  },
+  {
+   "address": "Z50",
+   "value": "m1"
+  },
+  {
+   "address": "AA50",
+   "value": 1.3
+  },
+  {
+   "address": "AB50",
+   "value": "-"
+  },
+  {
+   "address": "AC50",
+   "value": "verrekenbaar"
+  },
+  {
+   "address": "K51",
+   "value": "kg"
+  },
+  {
+   "address": "L51",
+   "value": 4
+  },
+  {
+   "address": "R51",
+   "value": "zie prijslijst"
+  },
+  {
+   "address": "U51",
+   "value": "st"
+  },
+  {
+   "address": "V51",
+   "value": 449.8
+  },
+  {
+   "address": "AC51",
+   "value": "verrekenbaar"
+  },
+  {
+   "address": "K52",
+   "value": "kg"
+  },
+  {
+   "address": "L52",
+   "value": 4.5
+  },
+  {
+   "address": "R52",
+   "value": "zie prijslijst"
+  },
+  {
+   "address": "AC52",
+   "value": "verrekenbaar"
+  },
+  {
+   "address": "L53",
+   "value": "op aanvraag"
+  },
+  {
+   "address": "AC53",
+   "value": "verrekenbaar"
+  },
+  {
+   "address": "K54",
+   "value": "st"
+  },
+  {
+   "address": "L54",
+   "value": 2.5
+  },
+  {
+   "address": "AB54",
+   "value": "incl"
+  },
+  {
+   "address": "K55",
+   "value": "st"
+  },
+  {
+   "address": "L55",
+   "value": 8
+  },
+  {
+   "address": "M55",
+   "value": "."
+  },
+  {
+   "address": "R55",
+   "value": "incl."
+  },
+  {
+   "address": "W55",
+   "value": "."
+  },
+  {
+   "address": "AB55",
+   "value": "incl"
+  },
+  {
+   "address": "K56",
+   "value": "st"
+  },
+  {
+   "address": "L56",
+   "value": 8
+  },
+  {
+   "address": "M56",
+   "value": "incl."
+  },
+  {
+   "address": "W56",
+   "value": "incl"
+  },
+  {
+   "address": "AB56",
+   "value": "incl"
+  },
+  {
+   "address": "K57",
+   "value": "st"
+  },
+  {
+   "address": "L57",
+   "value": 6
+  },
+  {
+   "address": "M57",
+   "value": "incl."
+  },
+  {
+   "address": "W57",
+   "value": "incl"
+  },
+  {
+   "address": "AB57",
+   "value": "incl"
+  },
+  {
+   "address": "K58",
+   "value": "m1"
+  },
+  {
+   "address": "L58",
+   "value": 35
+  },
+  {
+   "address": "AB58",
+   "value": "NVT"
+  },
+  {
+   "address": "K59",
+   "value": "m2"
+  },
+  {
+   "address": "L59",
+   "value": 0.5
+  },
+  {
+   "address": "R59",
+   "value": "incl"
+  },
+  {
+   "address": "U59",
+   "value": "m2"
+  },
+  {
+   "address": "V59",
+   "value": 0.23
+  },
+  {
+   "address": "AB59",
+   "value": "incl"
+  },
+  {
+   "address": "P60",
+   "value": "m2"
+  },
+  {
+   "address": "Q60",
+   "value": 58
+  },
+  {
+   "address": "Z60",
+   "value": "m2"
+  },
+  {
+   "address": "AA60",
+   "value": 71
+  },
+  {
+   "address": "AB60",
+   "value": "-"
+  },
+  {
+   "address": "AC60",
+   "value": "verrekenbaar"
+  }
+ ]
+}

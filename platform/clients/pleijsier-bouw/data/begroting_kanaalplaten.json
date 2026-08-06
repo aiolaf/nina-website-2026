@@ -1,0 +1,21 @@
+{
+  "project": "Segro DHL distributiecentrum LC4-LC5, Hoofddorp",
+  "projectnummer": "122002",
+  "onderdeel": "232 Kanaalplaatvloeren",
+  "opsteller": "ML",
+  "posten": [
+    { "bewakingscode": "232", "onderdeel": "Geisoleerde kanaalplaatvloer (leveren en aanbrengen)", "hoeveelheid": 878, "eenheid": "m2", "prijs_per_eenheid": 56.44, "totaal": 49554.32 },
+    { "bewakingscode": "232", "onderdeel": "orderkosten isolatievloer", "hoeveelheid": 1, "eenheid": "post", "prijs_per_eenheid": 937, "totaal": 937 },
+    { "bewakingscode": "232", "onderdeel": "uitwerken in 3D", "hoeveelheid": 878, "eenheid": "st", "prijs_per_eenheid": 0.3, "totaal": 263.4 },
+    { "bewakingscode": "232", "onderdeel": "deksels voor kanaalafdichting", "hoeveelheid": 1708, "eenheid": "st", "prijs_per_eenheid": 0.65, "totaal": 1110.2 },
+    { "bewakingscode": "232", "onderdeel": "huur klem", "hoeveelheid": 878, "eenheid": "st", "prijs_per_eenheid": 0.65, "totaal": 570.7 },
+    { "bewakingscode": "232", "onderdeel": "kruipgaten", "hoeveelheid": 4, "eenheid": "st", "prijs_per_eenheid": 66, "totaal": 264 },
+    { "bewakingscode": "232", "onderdeel": "raveelijzers; kruipgaten", "hoeveelheid": 8, "eenheid": "st", "prijs_per_eenheid": 500, "totaal": 4000 },
+    { "bewakingscode": "232", "onderdeel": "sparingen", "hoeveelheid": 878, "eenheid": "st", "prijs_per_eenheid": 1, "totaal": 878 },
+    { "bewakingscode": "232", "onderdeel": "aankoop kanaalplaatvloer 200mm", "hoeveelheid": 244, "eenheid": "m2", "prijs_per_eenheid": 63.48, "totaal": 15489.12 },
+    { "bewakingscode": "232", "onderdeel": "aankoop kanaalplaatvloer 260mm", "hoeveelheid": 934, "eenheid": "m2", "prijs_per_eenheid": 64.63, "totaal": 60364.42 },
+    { "bewakingscode": "232", "onderdeel": "aankoop kanaalplaatvloer 320mm", "hoeveelheid": 3180, "eenheid": "m2", "prijs_per_eenheid": 69.83, "totaal": 222059.4 },
+    { "bewakingscode": "232", "onderdeel": "huur hijsklem", "hoeveelheid": 4358, "eenheid": "st", "prijs_per_eenheid": 0.65, "totaal": 2832.7 },
+    { "bewakingscode": "232", "onderdeel": "kanaaldeksels 10 per plaat", "hoeveelheid": 3640, "eenheid": "st", "prijs_per_eenheid": 1.1, "totaal": 4004 }
+  ]
+}

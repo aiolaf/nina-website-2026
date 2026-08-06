@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+.env.local
+.local
+*.log
+.DS_Store
+
+# De root-.gitignore negeert .env* — maar .env.example moet juist mee de repo in.
+!.env.example

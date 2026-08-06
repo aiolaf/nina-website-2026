@@ -1,0 +1,173 @@
+{
+  "klant": "Pleijsier Bouw",
+  "vraag": "Bij inkoop van bouwonderdelen (hier: kanaalplaatvloeren voor project Segro Hoofddorp) komen meerdere offertes binnen die vergeleken moeten worden met de werkbegroting. Leveranciers noemen posten anders, gebruiken andere eenheden (per m2 of alleen een totaalprijs) en laten posten weg of nemen ze 'incl.' mee. Nu kost dat een werkvoorbereider soms twee dagen handwerk. We willen dat automatisch laten invullen in het bestaande prijsvergelijk-Excel (contractdocument, met formules en huisstijl), met markering van afwijkingen en een onderbouwd inkoopadvies en inkoopresultaat t.o.v. de begroting.",
+  "type": "automation",
+  "dataFiles": [
+    "begroting_kanaalplaten.json",
+    "offertes_kanaalplaten.json",
+    "prijsvergelijk_regels.json",
+    "inkoop_job.json"
+  ],
+  "n8nWebhookUrl": "",
+  "demos": [
+    {
+      "id": "offerte-normaliseren",
+      "label": "1 · Offerte normaliseren",
+      "beschrijving": "Lees alle binnengekomen offertes in één keer samen in en zet ze om naar vergelijkbare eenheidsprijzen (€/m2): herken per leverancier de posten, reken totaalprijzen om en markeer wat niet zuiver vergelijkbaar is (@@). Zelf uploaden kan vanaf 2 offertes.",
+      "type": "automation",
+      "dataFile": "offertes_kanaalplaten.json",
+      "sources": {
+        "sharepoint": "SharePoint > Segro Hoofddorp > 04 Inkoop > Kanaalplaatvloeren > Offertes",
+        "outlook": "Inkoop-mailbox > map 'Offertes Segro Hoofddorp'",
+        "files": [
+          { "name": "Olbecon offerte 2231473.pdf", "bedrijf": "Olbecon", "file": "bron/2231473.pdf" },
+          { "name": "VBI 221816 kanaalplaatvloeren Segro.pdf", "bedrijf": "VBI", "file": "bron/[221816-1] Segro - DHL distributiecentrum LC4-LC5 SPAA SEGRO Park Amsterdam Airport HOOFDDORP.pdf" },
+          { "name": "Preco offerte 20221206 kanaalplaten Segro.pdf", "bedrijf": "Preco", "file": "bron/20221206.1.1.pdf" },
+          { "name": "Van Nieuwpoort offerte 155654 Segro.pdf", "bedrijf": "Nieuwpoort", "file": "bron/Offerte 155654 Pleijsier Bouw Genemuiden B.V.pdf" }
+        ]
+      },
+      "begroting": {
+        "titel": "1B231 Kanaalplaatvloeren",
+        "totaal": "4.423,00 m2",
+        "afbeelding": "bron/image.png",
+        "posten": [
+          { "omschrijving": "aankoop kanaalplaatvloeren dak energieplein dik 260mm", "hoeveelheid": "244,00", "eenheid": "m2" },
+          { "omschrijving": "aankoop kanaalplaatvloeren kantoor dik 320mm, 4kN/m2", "hoeveelheid": "934,00", "eenheid": "m2" },
+          { "omschrijving": "aankoop kanaalplaatvloeren kantoor / mezzanine dik 320mm, 10kN/m2", "hoeveelheid": "3.180,00", "eenheid": "m2" },
+          { "omschrijving": "huur hijsklem", "hoeveelheid": "4.358,00", "eenheid": "m2" },
+          { "omschrijving": "kanaaldeksels (10 per plaat)", "hoeveelheid": "3.640,00", "eenheid": "st" },
+          { "omschrijving": "oplegvilt", "hoeveelheid": "874,00", "eenheid": "m1" },
+          { "omschrijving": "uitwerken in 3D", "hoeveelheid": "4.358,00", "eenheid": "m2" },
+          { "omschrijving": "leggen kanaalplaatvloeren incl. kraan", "hoeveelheid": "4.258,00", "eenheid": "m1" },
+          { "omschrijving": "lasser tbv bevestiging wapening", "hoeveelheid": "80,00", "eenheid": "uur" },
+          { "omschrijving": "overige sparingen en voorzieningen", "hoeveelheid": "4.423,00", "eenheid": "m2" },
+          { "omschrijving": "tijdelijke randbeveiliging en klembalusters", "hoeveelheid": "915,00", "eenheid": "m1" }
+        ]
+      },
+      "normalize": {
+        "normalized": "data/genormaliseerde_offertes.json",
+        "min": 2,
+        "posten": [
+          { "id": "dak_energieplein", "row": 22, "label": "Kanaalplaatvloer dak energieplein, 260mm" },
+          { "id": "kantoor_4kn", "row": 23, "label": "Kanaalplaatvloer kantoor, 320mm, 4 kN/m²" },
+          { "id": "kantoor_mezz_10kn", "row": 24, "label": "Kanaalplaatvloer kantoor / mezzanine, 320mm, 10 kN/m²" }
+        ]
+      },
+      "workflow": [
+        { "id": "trigger", "label": "Offerte binnengekomen", "kind": "trigger" },
+        {
+          "id": "normaliseer",
+          "label": "Regels normaliseren & posten herkennen",
+          "kind": "ai",
+          "prompt": "Je krijgt één binnengekomen offerte voor kanaalplaatvloeren. Normaliseer elke regel naar een vergelijkbare eenheidsprijs per m2 waar mogelijk (reken totaalprijzen zo nodig om met de hoeveelheid). Herken per regel de begrotingspost (begane grond vloer, portiersloge, dakvloer, deksels, isolatie/orderkosten, sparingen, engineering, kraan/klem). Zet posten die 'incl.' zijn apart met inbegrepen=true. Geef compacte JSON: { bedrijf, genormaliseerde_regels: [ { post, omschrijving_origineel, hoeveelheid, eenheid, prijs_per_m2, totaal, inbegrepen, opmerking } ] }."
+        },
+        {
+          "id": "verzamel",
+          "label": "Klaarzetten voor vergelijk",
+          "kind": "transform",
+          "mockOutput": "Genormaliseerde offerte van {{bedrijf}} toegevoegd aan het prijsvergelijk (gemockt)."
+        },
+        {
+          "id": "output",
+          "label": "Wegschrijven naar prijsvergelijk",
+          "kind": "output",
+          "mockOutput": "Regels van {{bedrijf}} weggeschreven in de juiste kolom van het prijsvergelijk-Excel (gemockt)."
+        }
+      ]
+    },
+    {
+      "id": "prijsvergelijk",
+      "label": "2 · Prijsvergelijk invullen",
+      "beschrijving": "Per begrotingspost: match de aanbiedingen van de leveranciers semantisch, reken om naar €/m2, markeer afwijkingen en ontbrekende posten met @@, en bepaal de gunstigste aanbieding.",
+      "type": "automation",
+      "dataFile": "prijsvergelijk_regels.json",
+      "excel": {
+        "template": "bron/prijsvergelijk_template.xlsx",
+        "fill": "data/excel_fill.json",
+        "filename": "Prijsvergelijk kanaalplaten Segro Hoofddorp - ingevuld.xlsx",
+        "upload": {
+          "base": "bron/prijsvergelijk_template.xlsx",
+          "sheet": "23.1_Kanaalplaten",
+          "filename": "Prijsvergelijk kanaalplaten Segro Hoofddorp - ingevuld.xlsx",
+          "normalized": "data/genormaliseerde_offertes.json",
+          "blocks": [
+            { "naam": "K2", "hoev": "J", "eenh": "K", "prijs": "L", "totaal": "M", "opm": "N" },
+            { "naam": "P2", "hoev": "O", "eenh": "P", "prijs": "Q", "totaal": "R", "opm": "S" },
+            { "naam": "U2", "hoev": "T", "eenh": "U", "prijs": "V", "totaal": "W", "opm": "X" },
+            { "naam": "Z2", "hoev": "Y", "eenh": "Z", "prijs": "AA", "totaal": "AB", "opm": "AC" }
+          ],
+          "posten": [
+            { "id": "dak_energieplein", "row": 22, "label": "Kanaalplaatvloer dak energieplein, 260mm" },
+            { "id": "kantoor_4kn", "row": 23, "label": "Kanaalplaatvloer kantoor, 320mm, 4 kN/m²" },
+            { "id": "kantoor_mezz_10kn", "row": 24, "label": "Kanaalplaatvloer kantoor / mezzanine, 320mm, 10 kN/m²" }
+          ]
+        }
+      },
+      "sources": {
+        "sharepoint": "SharePoint > Segro Hoofddorp > 04 Inkoop > Kanaalplaatvloeren > Offertes",
+        "outlook": "Inkoop-mailbox > map 'Offertes Segro Hoofddorp'",
+        "files": [
+          { "name": "Preco offerte 20221206 kanaalplaten Segro.pdf", "bedrijf": "Preco", "file": "bron/20221206.1.1.pdf" },
+          { "name": "Van Nieuwpoort offerte 155654 Segro.pdf", "bedrijf": "Nieuwpoort", "file": "bron/Offerte 155654 Pleijsier Bouw Genemuiden B.V.pdf" },
+          { "name": "Olbecon offerte 2231473.pdf", "bedrijf": "Olbecon", "file": "bron/2231473.pdf" },
+          { "name": "VBI 221816 kanaalplaatvloeren Segro.pdf", "bedrijf": "VBI", "file": "bron/[221816-1] Segro - DHL distributiecentrum LC4-LC5 SPAA SEGRO Park Amsterdam Airport HOOFDDORP.pdf" }
+        ]
+      },
+      "workflow": [
+        { "id": "trigger", "label": "Begrotingspost + aanbiedingen", "kind": "trigger" },
+        {
+          "id": "match",
+          "label": "Semantisch matchen & vergelijken",
+          "kind": "ai",
+          "prompt": "Voor deze begrotingspost krijg je de begrotingsregel en de aanbiedingen van meerdere leveranciers. Omschrijvingen, eenheden en opmerkingen verschillen. (1) Bepaal per leverancier de vergelijkbare eenheidsprijs in euro per m2; reken totaalprijzen om waar nodig. (2) Bereken per leverancier het verschil t.o.v. de begrotingsprijs in procenten (positief = duurder dan begroot). (3) Zet in het veld 'markering' de tekst '@@' als de aanbieding niet zuiver vergelijkbaar is (andere dikte, andere hoeveelheid, afwijkende Rc/isolatie, alleen een totaalprijs, of een leverancier die deze post niet los aanbiedt), anders laat je 'markering' leeg. (4) Bepaal de gunstigste leverancier. Antwoord UITSLUITEND met compacte JSON in exact deze vorm (geen extra tekst): { \"onderdeel\": \"...\", \"begroting_prijs_per_m2\": <getal>, \"per_leverancier\": [ { \"bedrijf\": \"...\", \"prijs_per_m2\": <getal of null>, \"totaal\": <getal of null>, \"verschil_pct\": \"...\", \"markering\": \"@@ of leeg\", \"opmerking\": \"...\" } ], \"gunstigste\": \"...\", \"toelichting\": \"...\" }. Zet de leveranciers in per_leverancier in dezelfde volgorde als in de aanbiedingen."
+        },
+        {
+          "id": "markeer",
+          "label": "Afwijkingen markeren (@@)",
+          "kind": "route",
+          "mockOutput": "Regels met @@ gemarkeerd zodat de werkvoorbereider ze nakijkt (gemockt)."
+        },
+        {
+          "id": "invullen",
+          "label": "In Excel-template zetten (met formules)",
+          "kind": "output",
+          "mockOutput": "Post '{{onderdeel}}' ingevuld in het prijsvergelijk-Excel; formules en huisstijl blijven behouden (gemockt)."
+        }
+      ]
+    },
+    {
+      "id": "inkoopadvies",
+      "label": "3 · Inkoopadvies & inkoopresultaat",
+      "beschrijving": "Op basis van het volledige prijsvergelijk: kies per post de beste aanbieding (prijs én voorwaarden), bereken het inkoopresultaat t.o.v. de begroting en schrijf een onderbouwing voor de directie.",
+      "type": "agent",
+      "dataFile": "inkoop_job.json",
+      "workflow": [
+        { "id": "trigger", "label": "Volledig prijsvergelijk", "kind": "trigger" },
+        {
+          "id": "kies",
+          "label": "Beste aanbieding per post kiezen",
+          "kind": "ai",
+          "prompt": "Je krijgt het volledige prijsvergelijk van de kanaalplaatvloeren: per post de begroting en de totalen per leverancier inclusief voorwaarden. Kies per post de beste aanbieding: laagste prijs met acceptabele voorwaarden. Benoem expliciet als een keuze afhangt van voorwaarden (bv. Olbecon rekent isolatie in de vloerprijs). Geef JSON: { keuzes: [ { post, gekozen_leverancier, totaal, reden } ] }."
+        },
+        {
+          "id": "resultaat",
+          "label": "Inkoopresultaat berekenen",
+          "kind": "ai",
+          "prompt": "Bereken op basis van de gekozen aanbiedingen het totale inkoopbedrag en het inkoopresultaat t.o.v. de begroting (gebruik begroting_totaal per post en begroting_totaal_pakket). Geef het inkoopbedrag, het resultaat in euro's en in procenten, en of het binnen begroting valt."
+        },
+        {
+          "id": "onderbouwing",
+          "label": "Onderbouwing voor directie",
+          "kind": "ai",
+          "prompt": "Schrijf een korte, zakelijke onderbouwing (maximaal 6 zinnen, Nederlands) voor de directie ter goedkeuring van de inkoop: gekozen leveranciers, het inkoopresultaat t.o.v. begroting, en de belangrijkste aandachtspunten/voorwaarden."
+        },
+        {
+          "id": "contract",
+          "label": "Contract-Excel klaarzetten",
+          "kind": "output",
+          "mockOutput": "Inkoopadvies, inkoopresultaat en onderbouwing klaargezet in de contract-Excel in Pleijsier-huisstijl (gemockt)."
+        }
+      ]
+    }
+  ]
+}
