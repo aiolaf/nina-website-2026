@@ -127,6 +127,19 @@ body {
 .reveal:not(.is-visible) .title-blur {
   filter: blur(8px);
 }
+/* Zonder scripting of onder reduced motion krijgt .reveal wel opacity 1,
+   maar bleef .is-visible uit, waardoor koppen permanent blurred bleven. Die
+   twee regels moeten hier dus mee. */
+@media (scripting: none) {
+  .reveal:not(.is-visible) .title-blur {
+    filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal:not(.is-visible) .title-blur {
+    filter: none;
+  }
+}
 
 /* Draaiende conic-gradient rand voor uitgelichte kaarten */
 .border-glow {

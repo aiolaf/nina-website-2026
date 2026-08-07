@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { formatDateEn, getAllPosts, getPost, withLazyImages } from "@/lib/blog";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.titleEn ?? post.title,
     description: post.metaDescriptionEn ?? post.excerptEn ?? undefined,
-    alternates: { canonical: `/en/blog/${post.slug}` },
+    alternates: alternatesVoor(`/en/blog/${post.slug}`),
     openGraph: {
       type: "article",
       title: post.titleEn ?? post.title,

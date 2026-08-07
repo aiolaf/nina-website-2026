@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Knowledge",
   description:
     "Insights on AI implementations, new developments and practical AI tips, 3 to 5 times a week. Subscribe on Substack or read the blog.",
-  alternates: { canonical: "/en/ai-knowledge" },
+  alternates: alternatesVoor("/en/ai-knowledge"),
 };
 
 export default function AiKnowledgePageEn() {

@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
     "Book a free 15-minute intro call, or come have coffee at our office in Amsterdam.",
-  alternates: { canonical: "/en/contact" },
+  alternates: alternatesVoor("/en/contact"),
 };
 
 const OPTIONS = [

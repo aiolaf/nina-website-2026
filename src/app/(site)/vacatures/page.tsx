@@ -5,12 +5,13 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
 import { openSollicitatie, vacatures } from "@/content/vacatures";
+import { alternatesVoor } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Vacatures",
   description:
     "Werken bij NinA AI Agency in Amsterdam: bouw AI-agents en automatiseringen die bij klanten in productie draaien. Bekijk de openstaande vacatures.",
-  alternates: { canonical: "/vacatures" },
+  alternates: alternatesVoor("/vacatures"),
 };
 
 export default function VacaturesPage() {

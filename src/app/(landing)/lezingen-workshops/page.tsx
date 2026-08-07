@@ -7,7 +7,7 @@ import Section, { Em } from "@/components/ui/Section";
 import FilloutEmbed from "@/components/ui/FilloutEmbed";
 import MobielCTA from "@/components/layout/MobielCTA";
 import { IconWhatsApp } from "@/components/ui/icons";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   /* Zoekwoordonderzoek (Google-suggesties, NL): de kop-termen zijn "AI
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "AI spreker inhuren | Olaf Lemmens, keynote en workshop",
   description:
     "Op zoek naar een AI spreker? Olaf Lemmens geeft keynotes en workshops over AI, op maat voor jouw sector. 160+ organisaties, sessies beoordeeld met een 9,3. Vraag een voorstel aan.",
-  alternates: { canonical: "/lezingen-workshops" },
+  alternates: alternatesVoor("/lezingen-workshops"),
   openGraph: {
     title: "AI spreker inhuren: Olaf Lemmens",
     description:
@@ -27,18 +27,36 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Elk cijfer heeft een bron, in een eigen veld zodat er geen getal zonder
+ * herkomst tussen kan glippen. Wat hier eerder stond klopte niet:
+ *
+ * - "80% heeft nog geen plan rondom AI" had geen bron. Vervangen door het
+ *   CBS-cijfer: "In 2024 gebruikte 22,7 procent van de bedrijven met 10 of
+ *   meer werkzame personen een of meer AI-technologieën", dus 77 procent
+ *   niet.
+ * - "70%+ tijdsbesparing" overdreef McKinsey. Die zeggen dat 60 tot 70
+ *   procent van de wérktijd uit activiteiten bestaat die technisch te
+ *   automatiseren zijn, wat iets anders is dan gerealiseerde besparing.
+ */
 const MARKT = [
   {
-    cijfer: "80%",
-    tekst: "van de bedrijven heeft nog geen plan rondom AI",
+    cijfer: "77%",
+    tekst:
+      "van de Nederlandse bedrijven met 10 of meer medewerkers gebruikte in 2024 nog geen AI",
+    bron: "CBS, AI-monitor 2024",
   },
   {
-    cijfer: "70%+",
-    tekst: "tijdsbesparing mogelijk door AI slim in te zetten (McKinsey)",
+    cijfer: "60-70%",
+    tekst:
+      "van de werktijd bestaat uit activiteiten die met de AI van nu technisch te automatiseren zijn",
+    bron: "McKinsey Global Institute, 2023",
   },
   {
     cijfer: "300M",
-    tekst: "banen wereldwijd beïnvloed door AI (Goldman Sachs)",
+    tekst:
+      "voltijdbanen wereldwijd die generatieve AI kan raken",
+    bron: "Goldman Sachs, 2023",
   },
 ];
 
@@ -391,6 +409,9 @@ export default function LezingenWorkshops() {
                   <p className="mt-2 text-sm leading-relaxed text-text-muted">
                     {m.tekst}
                   </p>
+                  <p className="mt-2 text-xs text-text-muted/80">
+                    Bron: {m.bron}
+                  </p>
                 </div>
               </Reveal>
             ))}
@@ -684,9 +705,11 @@ export default function LezingenWorkshops() {
               <div className="mt-8 flex flex-wrap gap-8">
                 <div>
                   <p className="font-display text-2xl font-bold text-primary">
-                    2.9M
+                    9,3
                   </p>
-                  <p className="text-sm text-text-muted">LinkedIn-bereik</p>
+                  <p className="text-sm text-text-muted">
+                    gemiddelde beoordeling
+                  </p>
                 </div>
                 <div>
                   <p className="font-display text-2xl font-bold text-primary">
@@ -703,6 +726,12 @@ export default function LezingenWorkshops() {
                   <p className="text-sm text-text-muted">organisaties</p>
                 </div>
               </div>
+              {/* Waar de 9,3 vandaan komt. Stond nergens, en dat is precies
+                  wat een inkoper als eerste vraagt. */}
+              <p className="mt-4 text-xs text-text-muted/80">
+                Beoordeling uit de evaluaties die deelnemers na een sessie
+                invullen.
+              </p>
               <a
                 href={site.linkedinOlaf}
                 target="_blank"

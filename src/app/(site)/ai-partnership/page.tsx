@@ -12,12 +12,13 @@ import TokenMenukaart from "@/components/sections/TokenMenukaart";
 import SavingsChart from "@/components/sections/SavingsChart";
 import MaturityScan from "@/components/sections/MaturityScan";
 import MobielCTA from "@/components/layout/MobielCTA";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 /** Modelnaam op één plek, zodat wijzigen één regel is. */
 const MODEL = "AI Partnership";
 
 export const metadata: Metadata = {
+  alternates: alternatesVoor("/ai-partnership"),
   title: MODEL,
   description:
     "Wij lopen als een audit door je bedrijf, zoeken de processen waar het opstroomt en zetten die dicht. Vaste capaciteit in tokens per maand, op jaarbasis. Vanaf EUR 2.500 per maand.",
@@ -361,6 +362,41 @@ export default function AiPartnership() {
             />
           </Reveal>
         </div>
+
+        {/* Menselijk bewijs. Deze pagina had nul quotes, terwijl het het
+            duurste product op de site is. Het label zegt eerlijk dat dit uit
+            een workshop komt en niet uit een partnership: dat is de enige
+            met naam vrijgegeven quote die er nu is. */}
+        <Reveal delay={0.2}>
+          <figure className="mt-5 rounded-2xl border border-border bg-bg-card p-6 sm:p-8">
+            <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center">
+              <Image
+                src="/images/foto-da-drogist.webp"
+                alt="Het team van DA Drogist na de AI-workshop van NinA"
+                width={320}
+                height={240}
+                className="h-32 w-full rounded-xl object-cover sm:w-44"
+              />
+              <div>
+                <blockquote className="font-display text-lg leading-snug sm:text-xl">
+                  &ldquo;De energie was voelbaar. Ons hele team liep naar buiten
+                  met concrete ideeën die we dezelfde week nog zijn gaan
+                  gebruiken.&rdquo;
+                </blockquote>
+                <figcaption className="mt-4 text-sm text-text-muted">
+                  <span className="font-semibold text-text">
+                    Judi van den Berg
+                  </span>{" "}
+                  · Category Manager, DA Drogist
+                  <span className="mt-1 block text-xs text-text-muted/80">
+                    Na een AI-workshop. Zo begint een partnership vaak: eerst
+                    het team mee, dan bouwen.
+                  </span>
+                </figcaption>
+              </div>
+            </div>
+          </figure>
+        </Reveal>
       </Section>
 
       {/* De drie vragen die een beslisser altijd stelt */}

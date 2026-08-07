@@ -3,13 +3,13 @@ import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About NinA AI",
   description:
     "NinA AI Agency helps organizations go from AI knowledge to working AI agents. Practical over hype, human plus machine.",
-  alternates: { canonical: "/en/about-nina" },
+  alternates: alternatesVoor("/en/about-nina"),
 };
 
 const VALUES = [

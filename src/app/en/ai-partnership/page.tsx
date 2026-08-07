@@ -12,7 +12,7 @@ import TokenMenukaart from "@/components/sections/TokenMenukaart";
 import SavingsChart from "@/components/sections/SavingsChart";
 import MaturityScan from "@/components/sections/MaturityScan";
 import MobielCTA from "@/components/layout/MobielCTA";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 const MODEL = "AI Partnership";
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: MODEL,
   description:
     "We audit your business, find the processes where work piles up and shut them down. Fixed capacity in tokens per month, on a yearly basis. From EUR 2,500 per month.",
-  alternates: { canonical: "/en/ai-partnership" },
+  alternates: alternatesVoor("/en/ai-partnership"),
 };
 
 const FIRES = [

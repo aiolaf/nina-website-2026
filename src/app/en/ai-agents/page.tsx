@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Agents",
   description:
     "Digital colleagues that work 24/7. AI agents for document processing, orders into your ERP and customer support, securely hosted in Amsterdam.",
-  alternates: { canonical: "/en/ai-agents" },
+  alternates: alternatesVoor("/en/ai-agents"),
 };
 
 const USE_CASES = [

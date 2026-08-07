@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import FreebiesIndex from "@/components/sections/FreebiesIndex";
+import { alternatesVoor } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Freebies",
   description:
     "Exclusieve frameworks, templates en tools om je AI-vaardigheden naar een hoger niveau te tillen. Gratis van NinA AI Agency.",
-  alternates: { canonical: "/freebies" },
+  alternates: alternatesVoor("/freebies"),
 };
 
 export default function FreebiesPage() {

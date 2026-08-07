@@ -5,9 +5,10 @@ import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
 import CtaSection from "@/components/sections/CtaSection";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: alternatesVoor("/over-nina"),
   title: "Over NinA AI",
   description:
     "NinA AI Agency helpt organisaties om van AI-kennis naar werkende AI-agents te gaan. Praktisch boven hype, mens plus machine.",

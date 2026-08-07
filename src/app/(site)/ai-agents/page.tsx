@@ -4,9 +4,10 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
 import AgentDemo from "@/components/demo/AgentDemo";
 import CtaSection from "@/components/sections/CtaSection";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: alternatesVoor("/ai-agents"),
   title: "AI Agents",
   description:
     "Digitale collega's die 24/7 werken. AI-agents voor documentverwerking, orders naar ERP en klantenservice, veilig gehost in Amsterdam.",

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "NinA AI Agency values the protection of your personal data. Read what data we collect, why, how long we retain it, and what rights you have.",
-  alternates: { canonical: "/en/privacy" },
+  alternates: alternatesVoor("/en/privacy"),
 };
 
 const downloadHref = "/downloads/privacyverklaring-nina-ai.docx";

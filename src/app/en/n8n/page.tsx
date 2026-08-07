@@ -3,13 +3,13 @@ import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import CountUp from "@/components/ui/CountUp";
 import Section, { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "n8n Experts",
   description:
     "We are the n8n experts of the Netherlands. Securely hosted in Amsterdam, 7000+ integrations, your own n8n environment without lock-in.",
-  alternates: { canonical: "/en/n8n" },
+  alternates: alternatesVoor("/en/n8n"),
 };
 
 const REASONS = [

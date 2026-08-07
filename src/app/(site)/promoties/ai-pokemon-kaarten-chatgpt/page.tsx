@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Em } from "@/components/ui/Section";
+import { alternatesVoor } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Custom Pokemon kaart maken met ChatGPT",
   description:
     "Genereer je eigen custom Pokemon kaart in ChatGPT: stap-voor-stap instructies, twee kant-en-klare prompts en voorbeeldresultaten.",
-  alternates: { canonical: "/promoties/ai-pokemon-kaarten-chatgpt" },
+  alternates: alternatesVoor("/promoties/ai-pokemon-kaarten-chatgpt"),
 };
 
 const prompt1 = `Create image Generate a Pokémon-style trading card of [Character Name]: vertical close-up held between thumb and finger, classic 1999 gold holo-foil frame; three-quarter portrait lit by a rim light that matches the character's signature colors, against a backdrop of subtle icons or elements tied to their story or abilities; auto-assign HP [number], element icon [element type], one concise red-label ability, and one attack (damage scaled to fit the HP), plus weakness x2, resistance, and retreat cost; render card and fingers tack-sharp, background softly blurred, with studio lighting sparkling on the foil.`;

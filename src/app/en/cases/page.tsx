@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Cases",
   description:
     "Proven AI results from SME to mid-market: concrete AI solutions that directly impact efficiency, costs and quality.",
-  alternates: { canonical: "/en/cases" },
+  alternates: alternatesVoor("/en/cases"),
 };
 
 type Case = {

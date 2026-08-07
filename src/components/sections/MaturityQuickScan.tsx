@@ -25,6 +25,10 @@ const COPY = {
     sprongUitleg: "je laagste score, dus de grootste winst",
     ctaPartnership: "Bekijk het AI Partnership",
     ctaBooking: "Plan een kennismaking",
+    ctaMail: "Stuur mijn profiel naar NinA",
+    mailHint:
+      "Opent je eigen mailprogramma met de scores erin. Je verstuurt hem zelf, wij slaan niets op.",
+    mailSubject: "Mijn AI Maturity Quick Scan",
     reset: "Begin opnieuw",
     disclaimer:
       "Indicatief en niet opgeslagen: we bewaren je antwoorden niet. De echte nulmeting doen we on-site in de Kickoff, over alle zeven dimensies.",
@@ -70,6 +74,10 @@ const COPY = {
     sprongUitleg: "your lowest score, so the biggest gain",
     ctaPartnership: "See the AI Partnership",
     ctaBooking: "Book an intro call",
+    ctaMail: "Send my profile to NinA",
+    mailHint:
+      "Opens your own mail app with the scores filled in. You send it yourself, we store nothing.",
+    mailSubject: "My AI Maturity Quick Scan",
     reset: "Start over",
     disclaimer:
       "Indicative and not stored: we do not keep your answers. The real baseline we do on-site during the Kickoff, across all seven dimensions.",
@@ -155,6 +163,32 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
 
   const partnershipHref =
     lang === "en" ? "/en/ai-partnership" : "/ai-partnership";
+
+  /**
+   * De scan levert nu ook iets tastbaars op zonder dat wij iets bewaren: een
+   * mailto met de scores erin. De bezoeker verstuurt hem zelf uit zijn eigen
+   * mailprogramma, dus er komt geen formulier, geen opslag en geen extra
+   * verwerker bij, en er ligt wel een lead in de inbox.
+   */
+  const mailBody = [
+    lang === "en"
+      ? "My AI Maturity Quick Scan on nina-ai.nl:"
+      : "Mijn AI Maturity Quick Scan op nina-ai.nl:",
+    "",
+    ...dims.map((d, i) => `- ${d.naam}: ${scores[i]} / 5`),
+    "",
+    lang === "en"
+      ? `Average: ${gem} out of 5. Lowest: ${dims[laagsteIndex].naam}.`
+      : `Gemiddelde: ${gem} van 5. Laagste: ${dims[laagsteIndex].naam}.`,
+    "",
+    lang === "en"
+      ? "I would like to talk about where to start."
+      : "Ik wil graag bespreken waar we het beste beginnen.",
+  ].join("\n");
+
+  const mailHref = `mailto:${site.email}?subject=${encodeURIComponent(
+    t.mailSubject
+  )}&body=${encodeURIComponent(mailBody)}`;
 
   return (
     <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)]">
@@ -289,6 +323,30 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
               {t.ctaBooking}
             </MagneticButton>
           </div>
+          {/* Pas zichtbaar zodra er iets is ingevuld: een leeg profiel
+              opsturen heeft voor niemand zin. */}
+          {aangeraakt && (
+            <div className="mt-4 border-t border-border pt-4">
+              <a
+                href={mailHref}
+                data-cta="quickscan_mail_profiel"
+                data-cta-soort="quickscan"
+                onClick={() =>
+                  stuurEvent("quick_scan_cta", {
+                    keuze: "mail_profiel",
+                    taal: lang,
+                    ingevuld: gestart.current,
+                  })
+                }
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                {t.ctaMail} →
+              </a>
+              <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
+                {t.mailHint}
+              </p>
+            </div>
+          )}
           {aangeraakt && (
             <button
               type="button"

@@ -4,9 +4,10 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import CountUp from "@/components/ui/CountUp";
 import Section, { Em } from "@/components/ui/Section";
 import CtaSection from "@/components/sections/CtaSection";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: alternatesVoor("/n8n"),
   title: "n8n Experts",
   description:
     "Wij zijn de n8n experts van Nederland. Veilig gehost in Amsterdam, 7000+ integraties, jullie eigen n8n omgeving zonder lock-in.",

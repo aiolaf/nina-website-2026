@@ -5,12 +5,13 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
 import { openSollicitatie, vacatures } from "@/content/vacatures";
+import { alternatesVoor } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Careers",
   description:
     "We are an ambitious and innovative organization where there is room for your talent development. Check out our open positions and join our team in Amsterdam.",
-  alternates: { canonical: "/en/careers" },
+  alternates: alternatesVoor("/en/careers"),
 };
 
 export default function CareersPage() {

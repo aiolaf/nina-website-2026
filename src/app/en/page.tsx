@@ -12,7 +12,6 @@ import MaturityQuickScan from "@/components/sections/MaturityQuickScan";
 import {
   IconBuilding,
   IconPresentation,
-  IconGlobe,
   IconUsers,
   IconShield,
   IconPattern,
@@ -23,13 +22,14 @@ import {
   IconPrompt,
   IconBot,
 } from "@/components/ui/icons";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
+import { homepageSchema, jsonLd } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "NinA AI Agency | From idea to working AI agent",
   description:
     "NinA AI Agency helps B2B organizations automate processes with smart AI agents and workflows, without overhauling your entire IT landscape.",
-  alternates: { canonical: "/en" },
+  alternates: alternatesVoor("/en"),
 };
 
 const PRODUCTS = [
@@ -80,8 +80,8 @@ const USPS = [
     Icon: IconHammer,
   },
   {
-    title: "Reach and proof",
-    text: "2.9M reach, 160+ organizations, 100+ workshops, since 2024.",
+    title: "Proof from practice",
+    text: "160+ organizations, 100+ workshops, since 2024.",
     Icon: IconMegaphone,
   },
 ];
@@ -146,6 +146,13 @@ const WORKFLOW_STEPS = [
 export default function HomeEn() {
   return (
     <>
+      {/* Organization en WebSite: wie NinA is, waar het bedrijf zit
+          en welke diensten er zijn. Zonder dit blok staat dat nergens
+          machineleesbaar op de site. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(homepageSchema("en")) }}
+      />
       {/* Hero */}
       <section className="relative flex min-h-[100svh] items-center overflow-hidden">
         <div
@@ -165,7 +172,7 @@ export default function HomeEn() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.25fr_1fr]">
             <div className="reveal-now">
               <p className="mb-6 inline-flex items-center rounded-full border border-border bg-bg-card/70 px-4 py-1.5 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary backdrop-blur">
-                The #1 AI agency in the Netherlands
+                On our way to the #1 AI agency in the Netherlands
               </p>
               <h1 className="font-display max-w-3xl text-[2.6rem] font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
                 <span className="reveal-now inline-block">From AI knowledge</span>{" "}
@@ -258,10 +265,10 @@ export default function HomeEn() {
                 <IconBuilding className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
-                #1
+                <CountUp to={160} suffix="+" />
               </p>
               <p className="mt-1 text-sm text-text-muted">
-                AI agency in the Netherlands
+                organizations helped
               </p>
             </div>
             <div className="flex flex-col items-center">
@@ -277,12 +284,12 @@ export default function HomeEn() {
             </div>
             <div className="flex flex-col items-center">
               <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] text-white shadow-[0_6px_18px_rgba(97,68,121,0.3)]">
-                <IconGlobe className="h-5.5 w-5.5" />
+                <IconSpark className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
-                2.9M
+                9.3
               </p>
-              <p className="mt-1 text-sm text-text-muted">LinkedIn reach</p>
+              <p className="mt-1 text-sm text-text-muted">average rating</p>
             </div>
             <div className="flex flex-col items-center">
               <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] text-white shadow-[0_6px_18px_rgba(97,68,121,0.3)]">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import FreebieDetail from "@/components/sections/FreebieDetail";
 import { freebies, getFreebie } from "@/content/freebies";
+import { alternatesVoor } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: freebie.title.nl,
     description: freebie.description.nl,
-    alternates: { canonical: `/freebies/${freebie.slug}` },
+    alternates: alternatesVoor(`/freebies/${freebie.slug}`),
     openGraph: {
       title: freebie.title.nl,
       description: freebie.description.nl,

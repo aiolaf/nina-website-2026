@@ -6,6 +6,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Reveal from "@/components/ui/Reveal";
 import Section from "@/components/ui/Section";
 import { getVacatureEn, vacatures } from "@/content/vacatures";
+import { alternatesVoor } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${title} vacancy`,
     description: `${v.taglineEn} ${v.kaartTekstEn}`,
-    alternates: { canonical: `/en/careers/${v.slugEn}` },
+    alternates: alternatesVoor(`/en/careers/${v.slugEn}`),
   };
 }
 

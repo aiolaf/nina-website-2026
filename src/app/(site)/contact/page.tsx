@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: alternatesVoor("/contact"),
   title: "Contact",
   description:
     "Plan een vrijblijvend kennismakingsgesprek van 15 minuten, of kom koffie drinken bij ons op kantoor in Amsterdam.",

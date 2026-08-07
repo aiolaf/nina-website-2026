@@ -4,12 +4,13 @@ import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
 import { formatDateEn, getAllPostsEn } from "@/lib/blog";
+import { alternatesVoor } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Blog",
   description:
     "Weekly insights on AI, automation and the practice of AI implementation at Dutch companies. By Olaf Lemmens, founder of NinA AI Agency.",
-  alternates: { canonical: "/en/blog" },
+  alternates: alternatesVoor("/en/blog"),
 };
 
 export default function BlogPageEn() {

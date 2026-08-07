@@ -1,20 +1,28 @@
 import type { Metadata } from "next";
 import MagneticButton from "@/components/ui/MagneticButton";
+import LogoMarquee from "@/components/ui/LogoMarquee";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Cases",
   description:
     "Bewezen AI-resultaten van MKB tot mid-market: concrete AI-oplossingen die direct impact maken op efficiëntie, kosten en kwaliteit.",
-  alternates: { canonical: "/cases" },
+  alternates: alternatesVoor("/cases"),
 };
 
 type Case = {
   tag: string;
   company: string;
   industry: string;
+  /**
+   * Of de opdrachtgever met naam genoemd mag worden. Zonder dit onderscheid
+   * lezen "MKB Consultancy" en "E-commerce Retailer" als placeholders in
+   * plaats van als een bewuste keuze, en dat kost precies het vertrouwen dat
+   * een case moet opbouwen.
+   */
+  naamGenoemd?: boolean;
   uitdaging: string;
   oplossing: string;
   resultaten: string[];
@@ -25,6 +33,7 @@ const cases: Case[] = [
     tag: "AI Build",
     company: "Wens Chalets",
     industry: "Hospitality",
+    naamGenoemd: true,
     uitdaging:
       "Veel handmatige administratie, repetitieve communicatie met gasten, versnipperde systemen voor boekingen en rapportages.",
     oplossing:
@@ -130,6 +139,15 @@ export default function CasesPage() {
               maken op efficiëntie, kosten en kwaliteit.
             </p>
           </div>
+
+          {/* De logowall stond alleen op de homepage, terwijl dit de pagina is
+              waar iemand naartoe komt om te zien wíe er al mee werkt. */}
+          <div className="reveal-now mt-12 [animation-delay:0.15s]">
+            <p className="mb-5 text-sm text-text-muted">
+              Onder andere deze organisaties werken met NinA
+            </p>
+            <LogoMarquee />
+          </div>
         </div>
       </section>
 
@@ -146,7 +164,14 @@ export default function CasesPage() {
                   <h2 className="font-display mt-2 text-2xl font-bold leading-snug">
                     {c.company}
                   </h2>
-                  <p className="mt-1 text-sm text-text-muted">{c.industry}</p>
+                  <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                    <p className="text-sm text-text-muted">{c.industry}</p>
+                    {!c.naamGenoemd && (
+                      <span className="rounded-full bg-bg-muted px-2.5 py-0.5 text-[11px] font-medium text-text-muted">
+                        Naam op verzoek van de klant niet genoemd
+                      </span>
+                    )}
+                  </div>
 
                   <div className="mt-6 space-y-5">
                     <div>

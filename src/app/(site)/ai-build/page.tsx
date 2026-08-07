@@ -5,9 +5,10 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
 import WorkflowCompare from "@/components/sections/WorkflowCompare";
 import CtaSection from "@/components/sections/CtaSection";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: alternatesVoor("/ai-build"),
   title: "AI Build",
   description:
     "Automatiseringen, agents en producten op maat. Van procesoptimalisatie tot vibe-code naar product. Werkende workflows in je eigen omgeving.",

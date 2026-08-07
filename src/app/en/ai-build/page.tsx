@@ -3,13 +3,13 @@ import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "AI Build",
   description:
     "Custom automations, agents and products. From process optimization to vibe-code to product. Working workflows in your own environment.",
-  alternates: { canonical: "/en/ai-build" },
+  alternates: alternatesVoor("/en/ai-build"),
 };
 
 /** Static EN variant of the interactive before/after workflow comparison. */

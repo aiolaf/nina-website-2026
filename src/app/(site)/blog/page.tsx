@@ -4,12 +4,13 @@ import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
 import { getAllPosts } from "@/lib/blog";
+import { alternatesVoor } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Blog",
   description:
     "Wekelijkse inzichten over AI, automatisering en de praktijk van AI-implementatie bij Nederlandse bedrijven. Door Olaf Lemmens, founder van NinA AI Agency.",
-  alternates: { canonical: "/blog" },
+  alternates: alternatesVoor("/blog"),
 };
 
 export default function BlogPage() {

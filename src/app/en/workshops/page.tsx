@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Reveal from "@/components/ui/Reveal";
 import Section, { Em } from "@/components/ui/Section";
-import { site } from "@/lib/site";
+import { alternatesVoor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Workshops & Training",
   description:
     "From intro to deep-dive: hands-on AI workshops that make your team AI-proficient. View the complete workshop offering and register directly.",
-  alternates: { canonical: "/en/workshops" },
+  alternates: alternatesVoor("/en/workshops"),
 };
 
 const tracks = [

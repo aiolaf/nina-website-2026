@@ -136,7 +136,43 @@ export const langPairs: [string, string][] = [
   ["/vacatures", "/en/careers"],
   ["/contact", "/en/contact"],
   ["/privacy", "/en/privacy"],
+  // /ai-starter, /giveaways, /resources en /en/promotions/... staan hier
+  // bewust niet: dat zijn redirect-pagina's zonder eigen inhoud. Een
+  // hreflang die naar een redirect wijst rekent Google als fout aan.
 ];
+
+/**
+ * Canonical plus hreflang voor één pagina. Zonder hreflang weet Google niet
+ * dat de NL- en EN-versie taalvarianten van dezelfde pagina zijn, en laat
+ * het ze deels tegen elkaar concurreren.
+ *
+ * hreflang moet wederkerig zijn: als A naar B wijst moet B naar A terug
+ * wijzen, anders negeert Google de hele set. Dat is hier niet overal het
+ * geval. /workshops en /lezingen-workshops wijzen beide naar /en/workshops,
+ * en die kan er maar één terugwijzen. Bij zo'n paar laten we de talen weg en
+ * blijft alleen de canonical staan; een halve hreflang is slechter dan geen.
+ *
+ * Relatieve paden mogen: metadataBase in de root-layout maakt ze absoluut.
+ */
+export function alternatesVoor(pad: string) {
+  const isEn = pad === "/en" || pad.startsWith("/en/");
+  const nl = isEn ? switchLangPath(pad, "nl") : pad;
+  const en = isEn ? pad : switchLangPath(pad, "en");
+
+  const wederkerig =
+    switchLangPath(nl, "en") === en && switchLangPath(en, "nl") === nl;
+  if (!wederkerig) return { canonical: pad };
+
+  return {
+    canonical: pad,
+    languages: {
+      "nl-NL": nl,
+      en,
+      // Nederlands is de hoofdtaal, dus die vangt al het overige verkeer.
+      "x-default": nl,
+    },
+  };
+}
 
 export function switchLangPath(pathname: string, to: Lang): string {
   if (to === "en") {
