@@ -6,6 +6,7 @@ import CountUp from "@/components/ui/CountUp";
 import LogoMarquee from "@/components/ui/LogoMarquee";
 import Section, { Em } from "@/components/ui/Section";
 import FasenLoop from "@/components/sections/FasenLoop";
+import FasenProducten from "@/components/sections/FasenProducten";
 import SavingsChart from "@/components/sections/SavingsChart";
 import MaturityQuickScan from "@/components/sections/MaturityQuickScan";
 import {
@@ -17,7 +18,6 @@ import {
   IconHammer,
   IconMegaphone,
   IconSpark,
-  IconFlow,
 } from "@/components/ui/icons";
 import WorkflowShowcase from "@/components/sections/WorkflowShowcase";
 import PlanMode from "@/components/sections/PlanMode";
@@ -40,37 +40,6 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   alternates: alternatesVoor("/"),
 };
-
-const PRODUCTEN = [
-  {
-    fase: "Fase 1",
-    naam: "AI Knowledge",
-    resultaat:
-      "Een AI-spreker op je podium: van 'wat is AI' naar 'wat kan ik er morgen mee'.",
-    href: "/lezingen-workshops",
-    Icon: IconPresentation,
-    foto: "/images/foto-lezing.webp",
-    fotoAlt: "Olaf Lemmens op het podium tijdens een NinA AI keynote",
-  },
-  {
-    fase: "Fase 2",
-    naam: "AI Consult / Design",
-    resultaat: "Een geprioriteerd AI-plan, geen theorie-dump.",
-    href: "/ai-partnership",
-    Icon: IconSpark,
-    foto: "/images/foto-workshop.webp",
-    fotoAlt: "Hands-on AI workshop met deelnemers achter laptops",
-  },
-  {
-    fase: "Fase 3 en 4",
-    naam: "AI Build",
-    resultaat: "Werkende workflows in je eigen omgeving.",
-    href: "/ai-build",
-    Icon: IconFlow,
-    foto: "/images/foto-build.webp",
-    fotoAlt: "Live demo van een n8n-workflow tijdens een NinA sessie",
-  },
-];
 
 const USPS = [
   {
@@ -279,77 +248,18 @@ export default function Home() {
           <FasenLoop />
         </Section>
 
-        {/* Producten */}
+        {/* Producten per fase */}
         <Section
           variant="alt"
           title={
             <>
-              Drie manieren om te beginnen, afhankelijk van{" "}
+              Welk product je nodig hebt, hangt af van{" "}
               <Em>waar je nu staat</Em>.
             </>
           }
+          sub="Vier fasen, en per fase de producten die daarbij horen. Het partnership loopt door alle vier."
         >
-          <div className="grid gap-5 lg:grid-cols-3">
-            {PRODUCTEN.map((p, idx) => (
-              <Reveal key={p.naam} delay={idx * 0.1}>
-                <Link
-                  href={p.href}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-bg-card transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-primary/60"
-                >
-                  <span className="relative block h-40 overflow-hidden">
-                    <Image
-                      src={p.foto}
-                      alt={p.fotoAlt}
-                      fill
-                      sizes="(min-width: 1024px) 360px, 100vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-0 bg-gradient-to-t from-[#2a2130]/50 to-transparent"
-                    />
-                    <span className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/90 text-primary shadow-md backdrop-blur transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
-                      <p.Icon className="h-5 w-5" />
-                    </span>
-                  </span>
-                  <span className="block flex-1 p-7 pt-5">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                    {p.fase}
-                  </span>
-                  <h3 className="font-display mt-1.5 text-xl font-bold transition-colors group-hover:text-primary">
-                    {p.naam}
-                  </h3>
-                  <p className="mt-4 border-t border-border pt-4 text-sm text-primary">
-                    {p.resultaat}
-                  </p>
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={0.2}>
-            <Link
-              href="/ai-partnership"
-              className="group mt-5 flex flex-col gap-3 rounded-2xl border border-primary/50 bg-bg-muted p-7 transition-colors hover:border-primary sm:flex-row sm:items-center sm:justify-between"
-            >
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                  Alles-in-een
-                </span>
-                <h3 className="font-display mt-2 text-xl font-bold">
-                  Het AI Partnership
-                </h3>
-                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
-                  Wij lopen als een audit door je bedrijf, zoeken de processen
-                  waar het opstroomt en zetten die dicht. Vaste capaciteit in
-                  tokens per maand, op jaarbasis.
-                </p>
-              </div>
-              <span className="shrink-0 rounded-full border border-primary px-5 py-2.5 text-sm font-semibold text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                Vanaf EUR 2.500 per maand
-              </span>
-            </Link>
-          </Reveal>
+          <FasenProducten />
         </Section>
 
         {/* Workflow showcase */}

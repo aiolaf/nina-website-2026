@@ -9,6 +9,7 @@ import LogoMarquee from "@/components/ui/LogoMarquee";
 import GlowCard from "@/components/ui/GlowCard";
 import Section, { Em } from "@/components/ui/Section";
 import MaturityQuickScan from "@/components/sections/MaturityQuickScan";
+import FasenProducten from "@/components/sections/FasenProducten";
 import {
   IconBuilding,
   IconPresentation,
@@ -31,36 +32,6 @@ export const metadata: Metadata = {
     "NinA AI Agency helps B2B organizations automate processes with smart AI agents and workflows, without overhauling your entire IT landscape.",
   alternates: alternatesVoor("/en"),
 };
-
-const PRODUCTS = [
-  {
-    phase: "Phase 1",
-    name: "AI Knowledge",
-    result: "From 'what is AI' to 'what can I do with it tomorrow'.",
-    href: "/en/workshops",
-    Icon: IconPresentation,
-    photo: "/images/foto-lezing.webp",
-    photoAlt: "Olaf Lemmens on stage during a NinA AI keynote",
-  },
-  {
-    phase: "Phase 2",
-    name: "AI Consult / Design",
-    result: "A prioritized AI plan, not a theory dump.",
-    href: "/en/ai-partnership",
-    Icon: IconSpark,
-    photo: "/images/foto-workshop.webp",
-    photoAlt: "Hands-on AI workshop with participants behind laptops",
-  },
-  {
-    phase: "Phase 3 and 4",
-    name: "AI Build",
-    result: "Working workflows in your own environment.",
-    href: "/en/ai-build",
-    Icon: IconFlow,
-    photo: "/images/foto-build.webp",
-    photoAlt: "Live demo of an n8n workflow during a NinA session",
-  },
-];
 
 const USPS = [
   {
@@ -357,77 +328,18 @@ export default function HomeEn() {
         </ol>
       </Section>
 
-      {/* Products */}
+      {/* Products per phase */}
       <Section
         variant="alt"
         title={
           <>
-            Three ways to start, depending on{" "}
+            Which product you need depends on{" "}
             <Em>where you are now</Em>.
           </>
         }
+        sub="Four phases, and the products that belong to each. The partnership runs through all four."
       >
-        <div className="grid gap-5 lg:grid-cols-3">
-          {PRODUCTS.map((p, idx) => (
-            <Reveal key={p.name} delay={idx * 0.1}>
-              <Link
-                href={p.href}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-bg-card transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-primary/60"
-              >
-                <span className="relative block h-40 overflow-hidden">
-                  <Image
-                    src={p.photo}
-                    alt={p.photoAlt}
-                    fill
-                    sizes="(min-width: 1024px) 360px, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-[#2a2130]/50 to-transparent"
-                  />
-                  <span className="absolute bottom-3 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/90 text-primary shadow-md backdrop-blur transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
-                    <p.Icon className="h-5 w-5" />
-                  </span>
-                </span>
-                <span className="block flex-1 p-7 pt-5">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                    {p.phase}
-                  </span>
-                  <h3 className="font-display mt-1.5 text-xl font-bold transition-colors group-hover:text-primary">
-                    {p.name}
-                  </h3>
-                  <p className="mt-4 border-t border-border pt-4 text-sm text-primary">
-                    {p.result}
-                  </p>
-                </span>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal delay={0.2}>
-          <Link
-            href="/en/ai-partnership"
-            className="group mt-5 flex flex-col gap-3 rounded-2xl border border-primary/50 bg-bg-muted p-7 transition-colors hover:border-primary sm:flex-row sm:items-center sm:justify-between"
-          >
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                All-in-one
-              </span>
-              <h3 className="font-display mt-2 text-xl font-bold">
-                The AI Partnership
-              </h3>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
-                We audit your business, find the processes where the work
-                piles up and shut them down. Fixed capacity in tokens per
-                month, on a yearly basis.
-              </p>
-            </div>
-            <span className="shrink-0 rounded-full border border-primary px-5 py-2.5 text-sm font-semibold text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-              From EUR 2,500 per month
-            </span>
-          </Link>
-        </Reveal>
+        <FasenProducten lang="en" />
       </Section>
 
       {/* Workflow (static EN variant of the interactive showcase) */}
