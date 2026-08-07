@@ -25,9 +25,12 @@ const COPY = {
     sprongUitleg: "je laagste score, dus de grootste winst",
     ctaPartnership: "Bekijk het AI Partnership",
     ctaBooking: "Plan een kennismaking",
-    ctaMail: "Stuur mijn profiel naar NinA",
+    deelKop: "Stuur je profiel naar NinA",
+    kopieer: "Kopieer de tekst",
+    gekopieerd: "Gekopieerd",
+    ctaMail: "Of open je mailprogramma",
     mailHint:
-      "Opent je eigen mailprogramma met de scores erin. Je verstuurt hem zelf, wij slaan niets op.",
+      "Kopiëren is direct. Je mailprogramma openen kan een paar seconden duren, en werkt alleen als je er een hebt ingesteld. Je stuurt het zelf, wij bewaren niets.",
     mailSubject: "Mijn AI Maturity Quick Scan",
     reset: "Begin opnieuw",
     disclaimer:
@@ -74,9 +77,12 @@ const COPY = {
     sprongUitleg: "your lowest score, so the biggest gain",
     ctaPartnership: "See the AI Partnership",
     ctaBooking: "Book an intro call",
-    ctaMail: "Send my profile to NinA",
+    deelKop: "Send your profile to NinA",
+    kopieer: "Copy the text",
+    gekopieerd: "Copied",
+    ctaMail: "Or open your mail app",
     mailHint:
-      "Opens your own mail app with the scores filled in. You send it yourself, we store nothing.",
+      "Copying is instant. Opening your mail app can take a few seconds, and only works if you have one set up. You send it yourself, we store nothing.",
     mailSubject: "My AI Maturity Quick Scan",
     reset: "Start over",
     disclaimer:
@@ -121,6 +127,7 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
 
   const [scores, setScores] = useState<number[]>(START);
   const [aangeraakt, setAangeraakt] = useState(false);
+  const [gekopieerd, setGekopieerd] = useState(false);
 
   const doel = dims.map(() => DOEL_PER_DIMENSIE);
   const gem = gemiddelde(scores, lang);
@@ -165,10 +172,11 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
     lang === "en" ? "/en/ai-partnership" : "/ai-partnership";
 
   /**
-   * De scan levert nu ook iets tastbaars op zonder dat wij iets bewaren: een
-   * mailto met de scores erin. De bezoeker verstuurt hem zelf uit zijn eigen
-   * mailprogramma, dus er komt geen formulier, geen opslag en geen extra
-   * verwerker bij, en er ligt wel een lead in de inbox.
+   * De scan levert iets tastbaars op zonder dat wij iets bewaren. Kopiëren is
+   * de hoofdactie en mailto staat ernaast, niet omgekeerd: een mailto doet
+   * niets bij iedereen zonder ingesteld mailprogramma, en dat is precies het
+   * deel van de bezoekers dat webmail gebruikt. Een knop die stil faalt is
+   * erger dan geen knop.
    */
   const mailBody = [
     lang === "en"
@@ -327,22 +335,65 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
               opsturen heeft voor niemand zin. */}
           {aangeraakt && (
             <div className="mt-4 border-t border-border pt-4">
-              <a
-                href={mailHref}
-                data-cta="quickscan_mail_profiel"
-                data-cta-soort="quickscan"
-                onClick={() =>
-                  stuurEvent("quick_scan_cta", {
-                    keuze: "mail_profiel",
-                    taal: lang,
-                    ingevuld: gestart.current,
-                  })
-                }
-                className="text-sm font-semibold text-primary hover:underline"
-              >
-                {t.ctaMail} →
-              </a>
-              <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
+              <p className="text-sm font-semibold">{t.deelKop}</p>
+
+              {/* De tekst staat er zichtbaar bij, zodat hij ook met de hand te
+                  selecteren is als het klembord geweigerd wordt. */}
+              <pre className="mt-3 max-h-40 overflow-auto whitespace-pre-wrap rounded-xl bg-bg-muted px-4 py-3 font-sans text-xs leading-relaxed text-text-muted">
+                {mailBody}
+              </pre>
+
+              <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <button
+                  type="button"
+                  data-cta="quickscan_kopieer_profiel"
+                  data-cta-soort="quickscan"
+                  onClick={async () => {
+                    stuurEvent("quick_scan_cta", {
+                      keuze: "kopieer_profiel",
+                      taal: lang,
+                      ingevuld: gestart.current,
+                    });
+                    try {
+                      await navigator.clipboard.writeText(mailBody);
+                      setGekopieerd(true);
+                      setTimeout(() => setGekopieerd(false), 2500);
+                    } catch {
+                      // Klembord geweigerd: de tekst staat er hierboven al,
+                      // dus selecteren en kopiëren kan alsnog.
+                    }
+                  }}
+                  className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-ink-deep"
+                >
+                  {gekopieerd ? `${t.gekopieerd} ✓` : t.kopieer}
+                </button>
+                <a
+                  href={mailHref}
+                  data-cta="quickscan_mail_profiel"
+                  data-cta-soort="quickscan"
+                  onClick={() =>
+                    stuurEvent("quick_scan_cta", {
+                      keuze: "mail_profiel",
+                      taal: lang,
+                      ingevuld: gestart.current,
+                    })
+                  }
+                  className="text-xs font-semibold text-primary hover:underline"
+                >
+                  {t.ctaMail}
+                </a>
+                {/* Het adres als gewone tekst: zonder mailprogramma is dit de
+                    enige manier om te weten waar het heen moet. */}
+                <a
+                  href={`mailto:${site.email}`}
+                  className="text-xs text-text-muted hover:text-primary"
+                  data-geen-meting=""
+                >
+                  {site.email}
+                </a>
+              </div>
+
+              <p className="mt-3 text-xs leading-relaxed text-text-muted">
                 {t.mailHint}
               </p>
             </div>
