@@ -6,6 +6,7 @@ import CountUp from "@/components/ui/CountUp";
 import Section, { Em } from "@/components/ui/Section";
 import FilloutEmbed from "@/components/ui/FilloutEmbed";
 import LogoMarquee from "@/components/ui/LogoMarquee";
+import SessieFotos from "@/components/sections/SessieFotos";
 import MobielCTA from "@/components/layout/MobielCTA";
 import { IconWhatsApp } from "@/components/ui/icons";
 import { alternatesVoor, site } from "@/lib/site";
@@ -400,6 +401,13 @@ export default function LezingenWorkshops() {
               Onder andere deze organisaties boekten een lezing of workshop
             </p>
             <LogoMarquee />
+
+            {/* Beeld van echte sessies, direct onder de logo's. Logo's tonen
+                wie, foto's tonen wat het is: samen sterker dan alleen een
+                rij merken. */}
+            <div className="mt-10">
+              <SessieFotos />
+            </div>
           </div>
         </div>
       </section>
