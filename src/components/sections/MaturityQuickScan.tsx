@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import MaturityRadar from "@/components/ui/MaturityRadar";
-import { site, type Lang } from "@/lib/site";
+import { scanMail, site, type Lang } from "@/lib/site";
 import { stuurEvent } from "@/lib/analytics";
 import {
   DIMS_EN,
@@ -194,9 +194,11 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
       : "Ik wil graag bespreken waar we het beste beginnen.",
   ].join("\n");
 
-  const mailHref = `mailto:${site.email}?subject=${encodeURIComponent(
-    t.mailSubject
-  )}&body=${encodeURIComponent(mailBody)}`;
+  const mailHref =
+    `mailto:${scanMail.naar}` +
+    `?cc=${encodeURIComponent(scanMail.cc)}` +
+    `&subject=${encodeURIComponent(t.mailSubject)}` +
+    `&body=${encodeURIComponent(mailBody)}`;
 
   return (
     <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)]">
@@ -331,10 +333,12 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
               {t.ctaBooking}
             </MagneticButton>
           </div>
-          {/* Pas zichtbaar zodra er iets is ingevuld: een leeg profiel
-              opsturen heeft voor niemand zin. */}
-          {aangeraakt && (
-            <div className="mt-4 border-t border-border pt-4">
+          {/* Altijd zichtbaar. Stond eerst achter een klik op een score, met
+              de gedachte dat een leeg profiel opsturen weinig zin heeft. In
+              de praktijk zag niemand dat de mogelijkheid bestond: de scan
+              begint op 3 en dan is er niets te zien. De scores staan altijd
+              op iets, dus het profiel is nooit leeg. */}
+          <div className="mt-4 border-t border-border pt-4">
               <p className="text-sm font-semibold">{t.deelKop}</p>
 
               {/* De tekst staat er zichtbaar bij, zodat hij ook met de hand te
@@ -385,11 +389,11 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
                 {/* Het adres als gewone tekst: zonder mailprogramma is dit de
                     enige manier om te weten waar het heen moet. */}
                 <a
-                  href={`mailto:${site.email}`}
+                  href={`mailto:${scanMail.naar}`}
                   className="text-xs text-text-muted hover:text-primary"
                   data-geen-meting=""
                 >
-                  {site.email}
+                  {scanMail.naar}
                 </a>
               </div>
 
@@ -397,7 +401,6 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
                 {t.mailHint}
               </p>
             </div>
-          )}
           {aangeraakt && (
             <button
               type="button"

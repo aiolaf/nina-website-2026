@@ -67,9 +67,10 @@ const FASEN_NL: Fase[] = [
       { label: "AI Build", href: "/ai-build" },
       { label: "n8n Automations", href: "/n8n" },
     ],
-    foto: "/images/foto-build.webp",
-    fotoAlt: "Live demo van een n8n-workflow tijdens een NinA-sessie",
-    fotoLabel: "AI Build · n8n",
+    foto: "/images/foto-automatisering.webp",
+    fotoAlt:
+      "Olaf Lemmens laat een zelfgebouwde AI-contentmachine zien aan een volle zaal",
+    fotoLabel: "AI Build",
   },
   {
     nr: 4,
@@ -82,8 +83,9 @@ const FASEN_NL: Fase[] = [
       { label: "AI Agents", href: "/ai-agents" },
       { label: "AI Build", href: "/ai-build" },
     ],
-    foto: "/images/foto-build.webp",
-    fotoAlt: "Live demo van een n8n-workflow tijdens een NinA-sessie",
+    foto: "/images/foto-agents.webp",
+    fotoAlt:
+      "Developer van NinA werkt in de code-editor aan een agent, met een AI-assistent ernaast",
     fotoLabel: "AI Agents",
   },
 ];
@@ -131,9 +133,10 @@ const FASEN_EN: Fase[] = [
       { label: "AI Build", href: "/en/ai-build" },
       { label: "n8n Automations", href: "/en/n8n" },
     ],
-    foto: "/images/foto-build.webp",
-    fotoAlt: "Live demo of an n8n workflow during a NinA session",
-    fotoLabel: "AI Build · n8n",
+    foto: "/images/foto-automatisering.webp",
+    fotoAlt:
+      "Olaf Lemmens presenting a self-built AI content machine to a full room",
+    fotoLabel: "AI Build",
   },
   {
     nr: 4,
@@ -146,8 +149,9 @@ const FASEN_EN: Fase[] = [
       { label: "AI Agents", href: "/en/ai-agents" },
       { label: "AI Build", href: "/en/ai-build" },
     ],
-    foto: "/images/foto-build.webp",
-    fotoAlt: "Live demo of an n8n workflow during a NinA session",
+    foto: "/images/foto-agents.webp",
+    fotoAlt:
+      "NinA developer working in the code editor on an agent, with an AI assistant alongside",
     fotoLabel: "AI Agents",
   },
 ];

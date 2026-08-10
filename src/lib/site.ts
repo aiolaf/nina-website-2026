@@ -27,6 +27,16 @@ export const site = {
     encodeURIComponent("Hi Olaf, I have a question about an AI talk or workshop."),
 };
 
+/**
+ * Waar de uitkomst van de AI Maturity Quick Scan naartoe gaat. Los van
+ * site.email, want dat is het algemene adres dat overal op de site staat en
+ * deze leads komen bij Noud binnen, met Olaf in de cc.
+ */
+export const scanMail = {
+  naar: "noud@nina-ai.nl",
+  cc: "olaf@nina-ai.nl",
+};
+
 export type Lang = "nl" | "en";
 
 /**
