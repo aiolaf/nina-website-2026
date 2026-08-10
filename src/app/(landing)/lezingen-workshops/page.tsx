@@ -5,6 +5,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import CountUp from "@/components/ui/CountUp";
 import Section, { Em } from "@/components/ui/Section";
 import FilloutEmbed from "@/components/ui/FilloutEmbed";
+import LogoMarquee from "@/components/ui/LogoMarquee";
 import MobielCTA from "@/components/layout/MobielCTA";
 import { IconWhatsApp } from "@/components/ui/icons";
 import { alternatesVoor, site } from "@/lib/site";
@@ -389,6 +390,16 @@ export default function LezingenWorkshops() {
                 Vrijblijvend, binnen 24 uur een reactie.
               </p>
             </div>
+          </div>
+
+          {/* Klantlogo's direct onder het formulier: dit is de sterkste
+              social proof en die hoort naast de conversie te staan, niet
+              ergens verderop de pagina. */}
+          <div className="reveal-now mt-12 border-t border-border pt-10 [animation-delay:0.3s]">
+            <p className="mb-6 text-center text-sm text-text-muted">
+              Onder andere deze organisaties boekten een lezing of workshop
+            </p>
+            <LogoMarquee />
           </div>
         </div>
       </section>
