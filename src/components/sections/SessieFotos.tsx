@@ -6,11 +6,13 @@ type Foto = {
   alt: string;
   /** Korte labeltekst op de tegel: het soort sessie. */
   label: string;
-  /** Extra kolom- of rij-span in het raster vanaf lg. */
-  span?: string;
+  /** Staande foto: krijgt een staande cel, anders wordt hij kaalgesneden. */
+  staand?: boolean;
+  /** Grote tegel: twee kolommen breed en twee rijen hoog vanaf lg. */
+  groot?: boolean;
   /**
-   * Uitsnijpunt. Staande foto's in een liggende cel worden een horizontale
-   * band, en die valt niet altijd op de goede plek.
+   * Uitsnijpunt, alleen nodig als het onderwerp niet in het midden zit.
+   * Standaard center, want cel en foto hebben nu dezelfde vorm.
    */
   positie?: string;
 };
@@ -19,13 +21,27 @@ type Foto = {
  * Zeven foto's van echte sessies. Bewust geen klantnamen in de labels: van
  * een deel van deze foto's weet ik de opdrachtgever niet, en dan is één naam
  * noemen en de rest niet inconsistent. Het label zegt wat voor sessie het is.
+ *
+ * De volgorde is de rasterindeling, dus verplaatsen verandert de layout.
  */
 const FOTOS: Foto[] = [
   {
     src: "/images/sessie-keynote-zaal.webp",
-    alt: "Volle zaal tijdens een AI-keynote van Olaf Lemmens, met een zelfgebouwde AI-contentmachine op het scherm",
+    alt: "Olaf Lemmens op het podium met een headset, naast een slide over de verdrievoudiging van schaduw-AI",
     label: "AI Keynote",
-    span: "lg:col-span-2 lg:row-span-2",
+    groot: true,
+  },
+  {
+    src: "/images/sessie-keynote-publiek.webp",
+    alt: "Olaf Lemmens maakt een selfie met een zwaaiende zaal na een AI-lezing",
+    label: "AI Lezing",
+    staand: true,
+  },
+  {
+    src: "/images/sessie-workshop-agents.webp",
+    alt: "Olaf Lemmens legt het verschil uit tussen een zero-shot en een agentic workflow tijdens een sessie",
+    label: "Hands-on sessie",
+    staand: true,
   },
   {
     src: "/images/sessie-workshop-tafel.webp",
@@ -33,16 +49,8 @@ const FOTOS: Foto[] = [
     label: "AI Workshop",
   },
   {
-    src: "/images/sessie-keynote-publiek.webp",
-    alt: "Olaf Lemmens maakt een selfie met een zwaaiende zaal na een AI-lezing",
-    label: "AI Lezing",
-    // Hoger uitsnijden: de zwaaiende zaal is hier het bewijs, en bij een
-    // gecentreerde uitsnede werd zijn gezicht halverwege afgekapt.
-    positie: "object-[50%_26%]",
-  },
-  {
     src: "/images/sessie-keynote-podium.webp",
-    alt: "Olaf Lemmens op het podium met een headset, naast een slide over de groei van schaduw-AI",
+    alt: "AI-keynote voor een zittende zaal onder een houten kapconstructie, met een slide over schaduw-AI op corporate devices",
     label: "AI Keynote",
   },
   {
@@ -51,53 +59,67 @@ const FOTOS: Foto[] = [
     label: "AI Workshop",
   },
   {
-    src: "/images/sessie-workshop-agents.webp",
-    alt: "Olaf Lemmens legt het verschil uit tussen een zero-shot en een agentic workflow tijdens een sessie",
-    label: "Hands-on sessie",
-  },
-  {
     src: "/images/sessie-keynote-vliegtuig.webp",
     alt: "AI-lezing voor een zittend publiek in een zaal met een Boeing 747 achter het glas",
     label: "AI Keynote",
-    // Drie kolommen breed, niet twee: de grote tegel beslaat twee rijen, dus
-    // de derde rij heeft nog vier cellen over. Met een span van 2 bleef er
-    // één cel leeg en viel het raster aan de rechterkant uit elkaar.
-    span: "lg:col-span-3",
   },
 ];
 
 /**
- * Fotowand van gegeven sessies, hoog op de pagina. Op mobiel een
- * horizontaal scrollende rij: zeven tegels onder elkaar zou daar honderden
- * pixels kosten precies waar het formulier moet staan. Vanaf sm een raster
- * dat exact opvult, met twee grotere tegels voor ritme.
+ * Fotowand van gegeven sessies, hoog op de pagina.
+ *
+ * Elke cel heeft dezelfde vorm als de foto erin. Dat is de hele truc: eerst
+ * stonden staande foto's in liggende cellen, en dan snijdt object-cover er
+ * een horizontale band uit waar een hoofd per definitie verkeerd in valt.
+ * Nu krijgen staande foto's een staande cel, dus cover hoeft bijna niets weg
+ * te halen en blijft iedereen heel.
+ *
+ * Vanaf lg vullen de tegels hun rastercel; daaronder bepaalt de verhouding
+ * de hoogte. Het raster loopt exact vol: de grote tegel en de twee staande
+ * tegels vullen samen de eerste twee rijen over vier kolommen, de vier
+ * liggende tegels vormen de derde rij.
  */
 export default function SessieFotos() {
   return (
     <div
       className="
-        flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2
+        flex snap-x snap-mandatory items-start gap-3 overflow-x-auto pb-2
         [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
         sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:pb-0
-        lg:auto-rows-[minmax(0,11rem)] lg:grid-cols-4
+        lg:auto-rows-[11rem] lg:grid-cols-4
       "
     >
       {FOTOS.map((f, i) => (
         <figure
           key={f.src}
-          className={`relative w-[78vw] shrink-0 snap-start overflow-hidden rounded-2xl border border-border sm:w-auto ${
-            f.span ?? ""
-          }`}
+          className={`relative shrink-0 snap-start overflow-hidden rounded-2xl border border-border sm:self-start lg:self-stretch ${
+            f.groot ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""
+          } ${f.staand ? "lg:row-span-2" : ""}`}
         >
-          {/* Vaste verhouding op mobiel; in het raster vult de tegel zijn cel. */}
-          <div className="relative aspect-[4/3] sm:aspect-auto sm:h-full sm:min-h-44">
+          {/* Drie regimes, en in alle drie houdt de cel de vorm van de foto.
+              Mobiel: vaste hoogte, breedte volgt uit de verhouding, dus de
+              rij heeft één hooglijn zonder dat er iets gerekt wordt. Tablet:
+              volle kolombreedte, hoogte uit de verhouding, en self-start
+              zodat een lagere tegel niet meegerekt wordt met een hogere.
+              Desktop: vaste rijhoogte, de tegel vult zijn cel. Die rijhoogte
+              moet vast zijn: bij minmax(0,11rem) kropen de rijen mee met de
+              inhoud, en omdat de hoogte van de inhoud zelf uit de rij kwam
+              klapte alles dicht naar 2px. */}
+          <div
+            className={`relative h-52 sm:h-auto sm:w-full lg:h-full lg:w-auto lg:aspect-auto ${
+              f.staand ? "aspect-[3/4]" : "aspect-[4/3]"
+            }`}
+          >
             <Image
               src={f.src}
               alt={f.alt}
               fill
-              /* Grofweg: mobiel bijna schermbreed, twee kolommen op sm,
-                 kwart van de 1152px-container op lg. */
-              sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 78vw"
+              /* De grote tegel is op lg ongeveer 550px breed, de rest 270px. */
+              sizes={
+                f.groot
+                  ? "(min-width: 1024px) 560px, (min-width: 640px) 100vw, 280px"
+                  : "(min-width: 1024px) 280px, (min-width: 640px) 50vw, 280px"
+              }
               className={`object-cover ${f.positie ?? ""}`}
               priority={i === 0}
             />
