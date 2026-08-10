@@ -25,13 +25,18 @@ const COPY = {
     sprongUitleg: "je laagste score, dus de grootste winst",
     ctaPartnership: "Bekijk het AI Partnership",
     ctaBooking: "Plan een kennismaking",
-    deelKop: "Stuur je profiel naar NinA",
-    kopieer: "Kopieer de tekst",
-    gekopieerd: "Gekopieerd",
-    ctaMail: "Of open je mailprogramma",
-    mailHint:
-      "Kopiëren is direct. Je mailprogramma openen kan een paar seconden duren, en werkt alleen als je er een hebt ingesteld. Je stuurt het zelf, wij bewaren niets.",
+    aanbodKicker: "Gratis, geen verplichting",
+    aanbodKop: "Stuur je profiel op en krijg er een analyse op terug",
+    aanbodPunten: [
+      "Welke van de zeven dimensies wij als eerste zouden aanpakken, en waarom juist die",
+      "Twee voorbeelden van wat dat bij een vergelijkbare organisatie opleverde",
+      "Of een losse workshop hier logischer is dan een partnership, of andersom",
+    ],
+    ctaMail: "Mail mijn profiel",
+    mailHint: (naar: string) =>
+      `Je mailprogramma opent met je zeven scores erin, geadresseerd aan ${naar}. Je verstuurt hem zelf, dus wij bewaren niets tot je op verzenden drukt. Reactie binnen 24 uur van een mens.`,
     mailSubject: "Mijn AI Maturity Quick Scan",
+    anderePaden: "Liever eerst zelf rondkijken?",
     reset: "Begin opnieuw",
     disclaimer:
       "Indicatief en niet opgeslagen: we bewaren je antwoorden niet. De echte nulmeting doen we on-site in de Kickoff, over alle zeven dimensies.",
@@ -77,13 +82,18 @@ const COPY = {
     sprongUitleg: "your lowest score, so the biggest gain",
     ctaPartnership: "See the AI Partnership",
     ctaBooking: "Book an intro call",
-    deelKop: "Send your profile to NinA",
-    kopieer: "Copy the text",
-    gekopieerd: "Copied",
-    ctaMail: "Or open your mail app",
-    mailHint:
-      "Copying is instant. Opening your mail app can take a few seconds, and only works if you have one set up. You send it yourself, we store nothing.",
+    aanbodKicker: "Free, no strings",
+    aanbodKop: "Send us your profile and get an analysis back",
+    aanbodPunten: [
+      "Which of the seven dimensions we would tackle first, and why that one",
+      "Two examples of what that delivered at a comparable organisation",
+      "Whether a single workshop makes more sense here than a partnership, or the other way round",
+    ],
+    ctaMail: "Email my profile",
+    mailHint: (naar: string) =>
+      `Your mail app opens with your seven scores in it, addressed to ${naar}. You send it yourself, so we store nothing until you hit send. Reply within 24 hours, from a human.`,
     mailSubject: "My AI Maturity Quick Scan",
+    anderePaden: "Rather look around first?",
     reset: "Start over",
     disclaimer:
       "Indicative and not stored: we do not keep your answers. The real baseline we do on-site during the Kickoff, across all seven dimensions.",
@@ -127,7 +137,6 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
 
   const [scores, setScores] = useState<number[]>(START);
   const [aangeraakt, setAangeraakt] = useState(false);
-  const [gekopieerd, setGekopieerd] = useState(false);
 
   const doel = dims.map(() => DOEL_PER_DIMENSIE);
   const gem = gemiddelde(scores, lang);
@@ -299,108 +308,94 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border bg-bg-alt p-6 sm:p-7">
-          <div className="flex flex-col gap-3 sm:flex-row">
+        {/* Het aanbod is de hoofdactie geworden. Een knop "mail je profiel"
+            zonder te zeggen wat je terugkrijgt geeft de bezoeker geen enkele
+            reden om te klikken; de scan levert hem al een plaatje op en
+            daarmee is hij klaar. Dus staat hier eerst wat hij ervoor krijgt,
+            en pas daarna de knop. De twee andere paden blijven staan als
+            tweede keuze. */}
+        <div className="rounded-2xl border border-primary/50 bg-bg-card p-6 shadow-[0_10px_36px_rgba(97,68,121,0.1)] sm:p-7">
+          <p className="text-xs font-semibold uppercase tracking-wider text-magenta">
+            {t.aanbodKicker}
+          </p>
+          <p className="font-display mt-2 text-xl font-bold leading-snug">
+            {t.aanbodKop}
+          </p>
+          <ul className="mt-4 space-y-2.5">
+            {t.aanbodPunten.map((p) => (
+              <li key={p} className="flex items-start gap-2.5 text-sm leading-relaxed">
+                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[10px] text-primary">
+                  ✓
+                </span>
+                {p}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6">
             <MagneticButton
-              href={partnershipHref}
+              href={mailHref}
               className="w-full sm:w-auto"
-              data-cta="quickscan_partnership"
+              data-cta="quickscan_mail_profiel"
               data-cta-soort="quickscan"
               onClick={() =>
                 stuurEvent("quick_scan_cta", {
-                  keuze: "partnership",
+                  keuze: "mail_profiel",
                   taal: lang,
                   ingevuld: gestart.current,
                 })
               }
             >
-              {t.ctaPartnership}
-            </MagneticButton>
-            <MagneticButton
-              href={site.booking}
-              variant="ghost"
-              className="w-full sm:w-auto"
-              data-cta="quickscan_kennismaking"
-              data-cta-soort="quickscan"
-              onClick={() =>
-                stuurEvent("quick_scan_cta", {
-                  keuze: "kennismaking",
-                  taal: lang,
-                  ingevuld: gestart.current,
-                })
-              }
-            >
-              {t.ctaBooking}
+              {t.ctaMail}
             </MagneticButton>
           </div>
-          {/* Altijd zichtbaar. Stond eerst achter een klik op een score, met
-              de gedachte dat een leeg profiel opsturen weinig zin heeft. In
-              de praktijk zag niemand dat de mogelijkheid bestond: de scan
-              begint op 3 en dan is er niets te zien. De scores staan altijd
-              op iets, dus het profiel is nooit leeg. */}
-          <div className="mt-4 border-t border-border pt-4">
-              <p className="text-sm font-semibold">{t.deelKop}</p>
 
-              {/* De tekst staat er zichtbaar bij, zodat hij ook met de hand te
-                  selecteren is als het klembord geweigerd wordt. */}
-              <pre className="mt-3 max-h-40 overflow-auto whitespace-pre-wrap rounded-xl bg-bg-muted px-4 py-3 font-sans text-xs leading-relaxed text-text-muted">
-                {mailBody}
-              </pre>
+          {/* Het adres staat in deze regel, dus wie geen mailprogramma heeft
+              weet nog steeds waar het heen moet. Geen apart kopieerblok: dat
+              was rommelig en niemand kopieert een lap tekst. */}
+          <p className="mt-3 text-xs leading-relaxed text-text-muted">
+            {t.mailHint(scanMail.naar)}
+          </p>
 
-              <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
-                <button
-                  type="button"
-                  data-cta="quickscan_kopieer_profiel"
-                  data-cta-soort="quickscan"
-                  onClick={async () => {
-                    stuurEvent("quick_scan_cta", {
-                      keuze: "kopieer_profiel",
-                      taal: lang,
-                      ingevuld: gestart.current,
-                    });
-                    try {
-                      await navigator.clipboard.writeText(mailBody);
-                      setGekopieerd(true);
-                      setTimeout(() => setGekopieerd(false), 2500);
-                    } catch {
-                      // Klembord geweigerd: de tekst staat er hierboven al,
-                      // dus selecteren en kopiëren kan alsnog.
-                    }
-                  }}
-                  className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-ink-deep"
-                >
-                  {gekopieerd ? `${t.gekopieerd} ✓` : t.kopieer}
-                </button>
-                <a
-                  href={mailHref}
-                  data-cta="quickscan_mail_profiel"
-                  data-cta-soort="quickscan"
-                  onClick={() =>
-                    stuurEvent("quick_scan_cta", {
-                      keuze: "mail_profiel",
-                      taal: lang,
-                      ingevuld: gestart.current,
-                    })
-                  }
-                  className="text-xs font-semibold text-primary hover:underline"
-                >
-                  {t.ctaMail}
-                </a>
-                {/* Het adres als gewone tekst: zonder mailprogramma is dit de
-                    enige manier om te weten waar het heen moet. */}
-                <a
-                  href={`mailto:${scanMail.naar}`}
-                  className="text-xs text-text-muted hover:text-primary"
-                  data-geen-meting=""
-                >
-                  {scanMail.naar}
-                </a>
-              </div>
-
-              <p className="mt-3 text-xs leading-relaxed text-text-muted">
-                {t.mailHint}
-              </p>
+          <div className="mt-6 border-t border-border pt-5">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">
+              {t.anderePaden}
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <MagneticButton
+                href={partnershipHref}
+                variant="ghost"
+                className="w-full sm:w-auto"
+                data-cta="quickscan_partnership"
+                data-cta-soort="quickscan"
+                onClick={() =>
+                  stuurEvent("quick_scan_cta", {
+                    keuze: "partnership",
+                    taal: lang,
+                    ingevuld: gestart.current,
+                  })
+                }
+              >
+                {t.ctaPartnership}
+              </MagneticButton>
+              <MagneticButton
+                href={site.booking}
+                variant="ghost"
+                className="w-full sm:w-auto"
+                data-cta="quickscan_kennismaking"
+                data-cta-soort="quickscan"
+                onClick={() =>
+                  stuurEvent("quick_scan_cta", {
+                    keuze: "kennismaking",
+                    taal: lang,
+                    ingevuld: gestart.current,
+                  })
+                }
+              >
+                {t.ctaBooking}
+              </MagneticButton>
             </div>
+          </div>
           {aangeraakt && (
             <button
               type="button"
