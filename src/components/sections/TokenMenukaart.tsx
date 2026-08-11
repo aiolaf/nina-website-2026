@@ -1,12 +1,16 @@
 import Reveal from "@/components/ui/Reveal";
+import TokenStack from "@/components/ui/TokenStack";
 import type { Lang } from "@/lib/site";
 
 type MenuItem = { wat: string; uitleg: string; tokens: number };
 type Maand = {
   naam: string;
-  regels: { wat: string; tokens: number; kleur: string }[];
+  /** Wanneer zo'n maand voorkomt, bijvoorbeeld "maand 1: DG-assistent". */
+  wanneer: string;
+  regels: { wat: string; tokens: number }[];
   budget: number;
-  slot?: string;
+  /** Tokens die niet opgaan en doorschuiven naar de maand erna. */
+  doorschuif?: number;
 };
 type Regel = { kop: string; tekst: string };
 
@@ -37,37 +41,36 @@ const MENU_NL: MenuItem[] = [
   },
 ];
 
-/* Kleuren uit het thema, onderling genoeg contrast in de balk. */
-const BOUW = "bg-primary";
-const TEAM = "bg-[#c9a227]";
-const DENK = "bg-primary-light";
-
 const MAANDEN_NL: Maand[] = [
   {
     naam: "Bouwmaand",
+    wanneer: "bijv. maand 1: DG-assistent",
     regels: [
-      { wat: "4 × developer-dag", tokens: 16, kleur: BOUW },
-      { wat: "2 × dagdeel", tokens: 4, kleur: DENK },
+      { wat: "4 × developer-dag", tokens: 16 },
+      { wat: "2 × dagdeel", tokens: 4 },
     ],
     budget: 20,
   },
   {
     naam: "Adoptiemaand",
+    wanneer: "bijv. maand 3: estafette start",
     regels: [
-      { wat: "Workshop", tokens: 14, kleur: TEAM },
-      { wat: "Developer-dag", tokens: 4, kleur: BOUW },
-      { wat: "Dagdeel", tokens: 2, kleur: DENK },
+      { wat: "n8n-workshop", tokens: 14 },
+      { wat: "consultancydag", tokens: 5 },
     ],
     budget: 20,
+    doorschuif: 1,
   },
   {
     naam: "Strategiemaand",
+    wanneer: "bijv. maand 6: halfjaarreview",
     regels: [
-      { wat: "AI Design sessie", tokens: 16, kleur: DENK },
-      { wat: "Dagdeel", tokens: 2, kleur: BOUW },
+      { wat: "strategiedag met AI Expert", tokens: 9 },
+      { wat: "2 × developer-dag", tokens: 8 },
+      { wat: "dagdeel", tokens: 2 },
     ],
     budget: 20,
-    slot: "2 schuiven door",
+    doorschuif: 1,
   },
 ];
 
@@ -79,11 +82,11 @@ const REGELS_NL: Regel[] = [
   {
     kop: "Sparen mag, één maand",
     tekst:
-      "Alleen voor iets dat al gepland staat. Zo spaart Light 10 plus 10 voor een workshop van 14.",
+      "Alleen voor iets dat al gepland staat. Zo spaart Light 13 plus 13 voor een AI Design sessie van 16.",
   },
   {
     kop: "Bijkopen kan altijd",
-    tekst: "EUR 250 per token, vast tarief. Geen onderhandeling.",
+    tekst: "EUR 300 per token, vast tarief. Geen onderhandeling.",
   },
   {
     kop: "Je weet waar je staat",
@@ -125,29 +128,33 @@ const MENU_EN: MenuItem[] = [
 const MAANDEN_EN: Maand[] = [
   {
     naam: "Build month",
+    wanneer: "e.g. month 1: MD assistant",
     regels: [
-      { wat: "4 × developer day", tokens: 16, kleur: BOUW },
-      { wat: "2 × half day", tokens: 4, kleur: DENK },
+      { wat: "4 × developer day", tokens: 16 },
+      { wat: "2 × half day", tokens: 4 },
     ],
     budget: 20,
   },
   {
     naam: "Adoption month",
+    wanneer: "e.g. month 3: relay starts",
     regels: [
-      { wat: "Workshop", tokens: 14, kleur: TEAM },
-      { wat: "Developer day", tokens: 4, kleur: BOUW },
-      { wat: "Half day", tokens: 2, kleur: DENK },
+      { wat: "n8n workshop", tokens: 14 },
+      { wat: "consultancy day", tokens: 5 },
     ],
     budget: 20,
+    doorschuif: 1,
   },
   {
     naam: "Strategy month",
+    wanneer: "e.g. month 6: half-year review",
     regels: [
-      { wat: "AI Design session", tokens: 16, kleur: DENK },
-      { wat: "Half day", tokens: 2, kleur: BOUW },
+      { wat: "strategy day with an AI expert", tokens: 9 },
+      { wat: "2 × developer day", tokens: 8 },
+      { wat: "half day", tokens: 2 },
     ],
     budget: 20,
-    slot: "2 roll over",
+    doorschuif: 1,
   },
 ];
 
@@ -159,11 +166,11 @@ const REGELS_EN: Regel[] = [
   {
     kop: "You can save up, for one month",
     tekst:
-      "Only for something already scheduled. That way Light saves 10 plus 10 for a workshop that costs 14.",
+      "Only for something already scheduled. That way Light saves 13 plus 13 for an AI Design session that costs 16.",
   },
   {
     kop: "You can always buy extra",
-    tekst: "EUR 250 per token, fixed rate. No negotiating.",
+    tekst: "EUR 300 per token, fixed rate. No negotiating.",
   },
   {
     kop: "You know where you stand",
@@ -176,17 +183,19 @@ const COPY = {
     menuKop: "De menukaart",
     menuVoet:
       "Hosting, monitoring, support en de kwartaalreview kosten 0 tokens. Je stapel gaat volledig naar vooruitgang.",
-    maandKop: "Zelfde stapel, elke maand andere behoeftes",
+    maandKop: "Zo ziet 20 tokens er in de praktijk uit, elke maand anders",
     van: "van",
     tokens: "tokens",
+    schuiftDoor: "schuift door",
   },
   en: {
     menuKop: "The menu",
     menuVoet:
       "Hosting, monitoring, support and the quarterly review cost 0 tokens. Your stack goes entirely to progress.",
-    maandKop: "Same stack, different needs every month",
+    maandKop: "What 20 tokens look like in practice, different every month",
     van: "of",
     tokens: "tokens",
+    schuiftDoor: "rolls over",
   },
 };
 
@@ -205,22 +214,51 @@ function TokenChip({ n }: { n: number }) {
   );
 }
 
-/** Maandbudget als balk: één segment per token, gekleurd per onderdeel. */
-function MaandBalk({ maand }: { maand: Maand }) {
+/**
+ * Eén voorbeeldmaand als rij munten, gegroepeerd per onderdeel met het label
+ * eronder. Dat is leesbaarder dan een gekleurde balk: je ziet nu welk
+ * onderdeel welke munten opeet, en je kunt het natellen. De laatste groep is
+ * open: dat zijn de tokens die doorschuiven naar de maand erna.
+ */
+function MaandRij({ maand, t }: { maand: Maand; t: typeof COPY.nl }) {
+  const som = maand.regels.map((r) => r.tokens).join(" + ");
   const verbruikt = maand.regels.reduce((s, r) => s + r.tokens, 0);
+
   return (
-    <div
-      aria-hidden="true"
-      className="flex gap-[2px] overflow-hidden rounded-full"
-    >
-      {maand.regels.flatMap((r) =>
-        Array.from({ length: r.tokens }, (_, i) => (
-          <span key={`${r.wat}-${i}`} className={`h-2.5 flex-1 ${r.kleur}`} />
-        ))
-      )}
-      {Array.from({ length: maand.budget - verbruikt }, (_, i) => (
-        <span key={`leeg-${i}`} className="h-2.5 flex-1 bg-bg-muted" />
-      ))}
+    <div className="rounded-2xl border border-border bg-bg p-5 sm:p-6">
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,15rem)_1fr] lg:items-start">
+        <div>
+          <p className="font-display text-base font-bold">{maand.naam}</p>
+          <p className="mt-0.5 text-xs text-text-muted">{maand.wanneer}</p>
+          <p className="font-display mt-2 text-sm font-bold text-gold">
+            {som} = {verbruikt}
+            {maand.doorschuif
+              ? `, ${maand.doorschuif} ${t.schuiftDoor}`
+              : ""}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap items-start gap-x-7 gap-y-4">
+          {maand.regels.map((r) => (
+            <div key={r.wat}>
+              <TokenStack n={r.tokens} featured klein />
+              <p className="mt-1.5 text-xs text-text-muted">{r.wat}</p>
+            </div>
+          ))}
+          {maand.doorschuif ? (
+            <div>
+              <TokenStack n={maand.doorschuif} open klein />
+              <p className="mt-1.5 text-xs text-text-muted">{t.schuiftDoor}</p>
+            </div>
+          ) : null}
+        </div>
+      </div>
+      <span className="sr-only">
+        {maand.regels.map((r) => `${r.wat}: ${r.tokens} ${t.tokens}`).join(", ")}
+        {maand.doorschuif
+          ? `. ${maand.doorschuif} ${t.tokens} ${t.schuiftDoor}.`
+          : "."}
+      </span>
     </div>
   );
 }
@@ -238,70 +276,50 @@ export default function TokenMenukaart({ lang = "nl" }: { lang?: Lang }) {
 
   return (
     <div className="space-y-12">
-      <div className="grid gap-5 lg:grid-cols-[1.15fr_1fr] lg:items-start">
-        {/* Menukaart */}
-        <Reveal>
-          <div className="rounded-2xl border border-border bg-bg-card p-6 sm:p-7">
-            <h3 className="font-display text-lg font-bold">{t.menuKop}</h3>
-            <ul className="mt-5 divide-y divide-border">
-              {menu.map((m) => (
-                <li
-                  key={m.wat}
-                  className="flex items-center justify-between gap-4 py-3 first:pt-0 last:pb-0"
-                >
-                  <div>
-                    <p className="text-sm font-semibold">{m.wat}</p>
-                    <p className="text-xs text-text-muted">{m.uitleg}</p>
-                  </div>
-                  <div className="flex shrink-0 items-center">
-                    <TokenChip n={m.tokens} />
-                    <span className="sr-only">
-                      {m.tokens} {t.tokens}
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 border-t border-border pt-4 text-xs leading-relaxed text-text-muted">
-              {t.menuVoet}
-            </p>
-          </div>
-        </Reveal>
+      {/* Menukaart. Twee kolommen vanaf sm: acht regels op volle breedte
+          onder elkaar leest als een lijst, naast elkaar als een kaart. */}
+      <Reveal>
+        <div className="rounded-2xl border border-border bg-bg-card p-6 sm:p-7">
+          <h3 className="font-display text-lg font-bold">{t.menuKop}</h3>
+          <ul className="mt-5 grid gap-x-8 sm:grid-cols-2">
+            {menu.map((m) => (
+              <li
+                key={m.wat}
+                className="flex items-center justify-between gap-4 border-b border-border py-3 last:border-b-0 sm:last:border-b"
+              >
+                <div>
+                  <p className="text-sm font-semibold">{m.wat}</p>
+                  <p className="text-xs text-text-muted">{m.uitleg}</p>
+                </div>
+                <div className="flex shrink-0 items-center">
+                  <TokenChip n={m.tokens} />
+                  <span className="sr-only">
+                    {m.tokens} {t.tokens}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 border-t border-border pt-4 text-xs leading-relaxed text-text-muted">
+            {t.menuVoet}
+          </p>
+        </div>
+      </Reveal>
 
-        {/* Voorbeeldmaanden als balken */}
-        <Reveal delay={0.1}>
-          <div className="rounded-2xl border border-border bg-bg-card p-6 sm:p-7">
-            <h3 className="font-display text-lg font-bold">{t.maandKop}</h3>
-            <div className="mt-6 space-y-6">
-              {maanden.map((maand) => {
-                const verbruikt = maand.regels.reduce(
-                  (s, r) => s + r.tokens,
-                  0
-                );
-                return (
-                  <div key={maand.naam}>
-                    <div className="flex items-baseline justify-between gap-3">
-                      <p className="text-sm font-semibold">{maand.naam}</p>
-                      <p className="font-display text-xs font-bold text-text-muted">
-                        {verbruikt} {t.van} {maand.budget}
-                        {maand.slot ? `, ${maand.slot}` : ""}
-                      </p>
-                    </div>
-                    <div className="mt-2">
-                      <MaandBalk maand={maand} />
-                    </div>
-                    <p className="mt-2 text-xs text-text-muted">
-                      {maand.regels.map((r) => `${r.wat} (${r.tokens})`).join(
-                        " · "
-                      )}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+      {/* Rekenvoorbeeld: drie maanden op volle breedte, zodat de munten per
+          onderdeel op één regel passen en na te tellen zijn. */}
+      <Reveal delay={0.1}>
+        <div>
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-magenta">
+            {t.maandKop}
+          </p>
+          <div className="space-y-4">
+            {maanden.map((maand) => (
+              <MaandRij key={maand.naam} maand={maand} t={t} />
+            ))}
           </div>
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
 
       {/* Spelregels */}
       <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

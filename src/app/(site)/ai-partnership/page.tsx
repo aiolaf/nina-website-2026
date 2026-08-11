@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: alternatesVoor("/ai-partnership"),
   title: MODEL,
   description:
-    "Wij lopen als een audit door je bedrijf, zoeken de processen waar het opstroomt en zetten die dicht. Vaste capaciteit in tokens per maand, op jaarbasis. Vanaf EUR 2.500 per maand.",
+    "Wij lopen als een audit door je bedrijf, zoeken de processen waar het opstroomt en zetten die dicht. Vaste capaciteit in tokens per maand, op jaarbasis. Vanaf EUR 3.900 per maand.",
 };
 
 /** Eén regel per brandje. Een beslisser scant deze lijst, hij leest hem niet. */

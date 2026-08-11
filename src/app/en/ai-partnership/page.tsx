@@ -19,7 +19,7 @@ const MODEL = "AI Partnership";
 export const metadata: Metadata = {
   title: MODEL,
   description:
-    "We audit your business, find the processes where work piles up and shut them down. Fixed capacity in tokens per month, on a yearly basis. From EUR 2,500 per month.",
+    "We audit your business, find the processes where work piles up and shut them down. Fixed capacity in tokens per month, on a yearly basis. From EUR 3,900 per month.",
   alternates: alternatesVoor("/en/ai-partnership"),
 };
 
