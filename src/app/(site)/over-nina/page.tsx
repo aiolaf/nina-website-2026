@@ -6,6 +6,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
 import CtaSection from "@/components/sections/CtaSection";
 import { alternatesVoor, site } from "@/lib/site";
+import TeamRij from "@/components/sections/TeamRij";
 
 export const metadata: Metadata = {
   alternates: alternatesVoor("/over-nina"),
@@ -106,7 +107,7 @@ export default function OverNina() {
         variant="alt"
         title={
           <>
-            Tien specialisten die AI <Em>echt laten werken</Em>.
+            De specialisten die AI <Em>echt laten werken</Em>.
           </>
         }
         sub="In huis: strategen, prompt-engineers, AI developers en adviseurs, plus een flexibele schil van partners. Samen kennen we 100+ AI-tools, en wat in een sessie ontstaat kunnen we daarna ook echt bouwen."
@@ -117,10 +118,19 @@ export default function OverNina() {
             alt="Het NinA-team tijdens een teamuitje in een game-hal"
             width={1200}
             height={800}
-            className="mb-10 w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(42,33,48,0.12)]"
+            className="w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(42,33,48,0.12)]"
           />
         </Reveal>
-        <ul className="flex flex-wrap gap-2.5">
+
+        {/* Het hele team met naam en functie: dit is de pagina waar iemand
+            komt kijken wie er achter NinA zit, dus hier de grootste versie. */}
+        <Reveal delay={0.08}>
+          <div className="mt-12">
+            <TeamRij variant="uitgebreid" />
+          </div>
+        </Reveal>
+
+        <ul className="mt-12 flex flex-wrap gap-2.5">
           {ROLLEN.map((r) => (
             <li
               key={r}
@@ -148,10 +158,12 @@ export default function OverNina() {
                   Dagelijkse AI-inzichten van Olaf Lemmens
                 </h3>
                 <p className="mt-2 max-w-xl text-sm leading-relaxed text-text-muted">
+                  {/* Het bereikcijfer is er eerder overal uit gehaald; hier
+                      stond het nog uitgeschreven en daardoor buiten het
+                      zoekbereik van die opruimronde. */}
                   Als oprichter van NinA AI Agency deelt Olaf dagelijks
-                  praktische AI-inzichten op LinkedIn, met een bereik van 2.9
-                  miljoen. Genomineerd als AI Person of the Year. Hij staat
-                  regelmatig op podia:{" "}
+                  praktische AI-inzichten op LinkedIn. Genomineerd als AI
+                  Person of the Year. Hij staat regelmatig op podia:{" "}
                   <Link
                     href="/lezingen-workshops"
                     className="text-primary underline-offset-4 hover:underline"

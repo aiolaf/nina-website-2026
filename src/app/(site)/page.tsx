@@ -7,6 +7,7 @@ import LogoMarquee from "@/components/ui/LogoMarquee";
 import Section, { Em } from "@/components/ui/Section";
 import FasenLoop from "@/components/sections/FasenLoop";
 import FasenProducten from "@/components/sections/FasenProducten";
+import TeamRij from "@/components/sections/TeamRij";
 import SavingsChart from "@/components/sections/SavingsChart";
 import MaturityQuickScan from "@/components/sections/MaturityQuickScan";
 import {
@@ -231,6 +232,16 @@ export default function Home() {
                 </p>
                 <p className="mt-1 text-sm text-text-muted">specialisten</p>
               </div>
+            </div>
+
+            {/* Het team direct onder de cijfers: die 10+ specialisten krijgen
+                hier een gezicht. Klein en zonder namen, want de uitgebreide
+                versie staat op Over NinA AI. */}
+            <div className="mt-12 border-t border-border pt-10">
+              <p className="mb-6 text-center text-sm text-text-muted">
+                Dit is ons team
+              </p>
+              <TeamRij variant="compact" />
             </div>
           </div>
         </section>

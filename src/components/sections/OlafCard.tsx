@@ -21,7 +21,7 @@ type Props = {
 export default function OlafCard({
   kicker = "Van de oprichter",
   title = "Dagelijkse AI-inzichten van Olaf Lemmens",
-  tekst = "Dagelijks over AI, automatisering en agents op LinkedIn, met een bereik van 2.9 miljoen. Praktisch, helder en direct toepasbaar. Genomineerd als AI Person of the Year.",
+  tekst = "Dagelijks over AI, automatisering en agents op LinkedIn. Praktisch, helder en direct toepasbaar. Genomineerd als AI Person of the Year.",
 }: Props) {
   return (
     <Reveal>

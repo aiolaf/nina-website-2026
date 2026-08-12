@@ -608,9 +608,9 @@ export default function HomeEn() {
                   Daily AI insights from Olaf Lemmens
                 </h3>
                 <p className="mt-4 max-w-md text-sm leading-relaxed text-text-muted sm:text-base">
-                  Daily posts on AI, automation and agents on LinkedIn, with a
-                  reach of 2.9 million. Practical, clear and directly
-                  applicable. Nominated as AI Person of the Year.
+                  Daily posts on AI, automation and agents on LinkedIn.
+                  Practical, clear and directly applicable. Nominated as AI
+                  Person of the Year.
                 </p>
                 <ul className="mt-6 flex flex-wrap gap-2.5">
                   {[

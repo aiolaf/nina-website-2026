@@ -11,6 +11,7 @@ import PartnershipTiers from "@/components/sections/PartnershipTiers";
 import TokenMenukaart from "@/components/sections/TokenMenukaart";
 import SavingsChart from "@/components/sections/SavingsChart";
 import MaturityScan from "@/components/sections/MaturityScan";
+import TeamRij from "@/components/sections/TeamRij";
 import MobielCTA from "@/components/layout/MobielCTA";
 import { alternatesVoor, site } from "@/lib/site";
 
@@ -474,9 +475,25 @@ export default function AiPartnership() {
         </div>
       </Section>
 
-      {/* Kickoff en jaarbasis in één sectie: hoe het loopt */}
+      {/* Het team met naam en functie. Staat hier omdat de sectie hierboven
+          "een vast gezicht" belooft; dan hoort er te staan wie dat zijn. */}
       <Section
         variant="alt"
+        kicker="Wie het doet"
+        title={
+          <>
+            Het team dat <Em>aan je bedrijf werkt</Em>.
+          </>
+        }
+        sub="Geen wisselende inhuur per opdracht. Dit zijn de mensen die jullie processen leren kennen en het bouwwerk onderhouden."
+      >
+        <Reveal>
+          <TeamRij variant="namen" />
+        </Reveal>
+      </Section>
+
+      {/* Kickoff en jaarbasis in één sectie: hoe het loopt */}
+      <Section
         title={
           <>
             Het begint met de <Em>Kickoff</Em>, daarna een jaar.

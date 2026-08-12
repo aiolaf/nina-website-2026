@@ -139,8 +139,8 @@ export default function AboutNinaEn() {
                 </h3>
                 <p className="mt-2 max-w-xl text-sm leading-relaxed text-text-muted">
                   As founder of NinA AI Agency, Olaf shares practical AI
-                  insights on LinkedIn every day, with a reach of 2.9
-                  million. Nominated as AI Person of the Year.
+                  insights on LinkedIn every day. Nominated as AI Person of
+                  the Year.
                 </p>
               </div>
             </div>
