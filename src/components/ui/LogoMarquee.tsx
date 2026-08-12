@@ -11,6 +11,17 @@ const LOGOS: { src: string; alt: string; w: number; h: number }[] = [
   { src: "/images/logos/easytoys.webp", alt: "EasyToys", w: 75, h: 32 },
   { src: "/images/logos/kernbouw.webp", alt: "KernBouw", w: 123, h: 32 },
   { src: "/images/logos/koffiejongens.webp", alt: "De Koffiejongens", w: 40, h: 40 },
+  // Wit weggesleuteld naar transparantie, net als de rest: het grijsfilter van
+  // de marquee zou van een wit vlak anders een kaartje maken tussen de
+  // wordmarks. "de nieuwe arts" is een gestapeld woordmerk van drie regels en
+  // heeft dus de volle hoogte nodig om leesbaar te blijven.
+  { src: "/images/logos/de-nieuwe-arts.webp", alt: "de nieuwe arts", w: 59, h: 40 },
+  {
+    src: "/images/logos/last-mile-solutions.webp",
+    alt: "Last Mile Solutions",
+    w: 74,
+    h: 32,
+  },
 ];
 
 /**
