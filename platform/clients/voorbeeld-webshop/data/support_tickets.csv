@@ -1,0 +1,25 @@
+ticket_id,klant_email,telefoon,datum,onderwerp,bericht,status,order_bedrag
+T-1001,anne.jansen@gmail.com,+31 6 12345678,2026-06-02,Bestelling niet ontvangen,Mijn pakket zou gisteren komen maar is er nog niet. Kunnen jullie kijken waar het blijft?,open,89.95
+T-1002,peter.devries@outlook.com,06-23456789,2026-06-02,Verkeerde maat ontvangen,Ik had maat L besteld maar kreeg maat M. Graag omruilen.,open,49.99
+T-1003,fatima.el.idrissi@hotmail.com,,2026-06-03,Factuur nodig,Kan ik een factuur op bedrijfsnaam ontvangen voor mijn laatste bestelling?,open,120.00
+T-1004,jan@webshopklant.nl,+31612349988,2026-06-03,Retour aanmelden,Ik wil een artikel retourneren binnen de bedenktijd. Hoe werkt dat?,open,34.50
+T-1005,sanne.bakker@gmail.com,06 87654321,2026-06-04,Product kapot aangekomen,De mok was gebroken bij aankomst. Erg jammer. Graag een nieuwe.,open,15.00
+T-1006,mohammed.aziz@gmail.com,,2026-06-04,Vraag over levertijd,Wanneer wordt mijn bestelling verzonden? Ik heb hem eergisteren geplaatst.,open,72.30
+T-1007,lisa.smit@ziggo.nl,+31 6 55512345,2026-06-05,Klacht over service,Ik wacht al een week op antwoord op mijn vorige mail. Dit is niet netjes.,open,210.00
+T-1008,thomas.meyer@gmail.com,,2026-06-05,Betaling mislukt,Mijn iDEAL-betaling ging mis maar het bedrag is wel afgeschreven.,open,64.99
+T-1009,,06-11223344,2026-06-06,Adreswijziging,Ik ben verhuisd en wil mijn bezorgadres aanpassen voor de openstaande order.,open,45.00
+T-1010,nadia.hassan@gmail.com,+31687001122,2026-06-06,Cadeaubon inwisselen,Hoe kan ik mijn cadeaubon gebruiken bij het afrekenen?,open,0.00
+T-1011,ruben.visser@gmail.com,,2026-06-07,Dubbel afgeschreven,Het lijkt erop dat ik twee keer betaald heb voor dezelfde order.,open,158.00
+T-1012,emma.dijkstra@outlook.com,06 99887766,2026-06-07,Product niet op voorraad,Het artikel dat ik wil is uitverkocht. Komt het nog terug?,open,29.95
+T-1013,kevin.mulder@gmail.com,,2026-06-08,Garantie claim,Mijn koptelefoon doet het na twee maanden niet meer. Valt dit onder garantie?,open,99.00
+T-1014,julia.bos@gmail.com,+31 6 44556677,2026-06-08,Verkeerd artikel geleverd,Ik kreeg een compleet ander product dan besteld.,open,55.50
+T-1015,daan.hendriks@gmail.com,,2026-06-09,Bezorging spoed,Kan mijn bestelling met spoed geleverd worden? Ik heb het morgen nodig.,open,88.00
+T-1016,sofia.romano@gmail.com,06-33445566,2026-06-09,Annuleren bestelling,Ik wil mijn bestelling annuleren voordat hij verzonden wordt.,open,42.00
+T-1017,bram.koster@gmail.com,,2026-06-10,Vraag over materiaal,Is deze trui van wol of van katoen? Staat niet duidelijk op de site.,open,39.95
+T-1018,yasmine.benali@gmail.com,+31 6 77889900,2026-06-10,Terugbetaling status,Ik heb vorige week geretourneerd maar nog geen geld teruggekregen.,open,67.25
+T-1019,lars.willems@gmail.com,,2026-06-11,Kortingscode werkt niet,De code WELKOM10 wordt niet geaccepteerd bij het afrekenen.,open,0.00
+T-1020,noor.jacobs@gmail.com,06 12312312,2026-06-11,Verkeerde kleur,Ik bestelde blauw maar kreeg groen geleverd.,open,52.00
+T-1021,tim.dekker@gmail.com,,2026-06-12,Track and trace ontbreekt,Ik heb geen track en trace code ontvangen na mijn bestelling.,open,73.40
+T-1022,amira.khan@gmail.com,+31698765432,2026-06-12,Grote order zakelijk,Wij willen 50 stuks bestellen voor ons kantoor. Is er een staffelkorting?,open,1450.00
+T-1023,sven.groen@gmail.com,,2026-06-13,Product advies,Welke laptoptas past bij een 15 inch laptop? Twijfel tussen twee modellen.,open,0.00
+T-1024,iris.vermeer@gmail.com,06-45645645,2026-06-13,Beschadigde verpakking,De doos was flink beschadigd maar het product lijkt heel. Toch melden.,open,31.99
