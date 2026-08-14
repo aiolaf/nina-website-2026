@@ -8,6 +8,7 @@ import Section, { Em } from "@/components/ui/Section";
 import FasenLoop from "@/components/sections/FasenLoop";
 import FasenProducten from "@/components/sections/FasenProducten";
 import TeamRij from "@/components/sections/TeamRij";
+import ApoTeaser from "@/components/sections/ApoTeaser";
 import SavingsChart from "@/components/sections/SavingsChart";
 import MaturityQuickScan from "@/components/sections/MaturityQuickScan";
 import {
@@ -181,6 +182,20 @@ export default function Home() {
           sub="Zeven vragen, één per dimensie van AI-volwassenheid. Geef een score van 1 tot 5 en het web beweegt mee. De gestreepte lijn is waar we in een AI Partnership binnen twaalf maanden naartoe werken."
         >
           <MaturityQuickScan />
+        </Section>
+
+        {/* APO methode: teaser. De quick scan hierboven is stap 1 van deze
+            methode; de verdieping staat op de partnershippagina. */}
+        <Section
+          kicker="Onze methode"
+          title={
+            <>
+              De scan hierboven is stap 1 van de <Em>APO methode</Em>.
+            </>
+          }
+          sub="AI Process Optimisation: in één sessie in kaart welke processen AI kan overnemen, wat dat per jaar oplevert in uren en euro's, en wat het kost om het te bouwen."
+        >
+          <ApoTeaser />
         </Section>
 
         {/* Motto */}

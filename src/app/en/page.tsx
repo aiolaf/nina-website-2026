@@ -10,6 +10,7 @@ import GlowCard from "@/components/ui/GlowCard";
 import Section, { Em } from "@/components/ui/Section";
 import MaturityQuickScan from "@/components/sections/MaturityQuickScan";
 import FasenProducten from "@/components/sections/FasenProducten";
+import ApoTeaser from "@/components/sections/ApoTeaser";
 import {
   IconBuilding,
   IconPresentation,
@@ -289,6 +290,19 @@ export default function HomeEn() {
         sub="Seven questions, one per dimension of AI maturity. Score from 1 to 5 and the web moves with you. The dashed line is where an AI Partnership gets you within twelve months."
       >
         <MaturityQuickScan lang="en" />
+      </Section>
+
+      {/* APO method teaser. The quick scan above is step 1 of this method. */}
+      <Section
+        kicker="Our method"
+        title={
+          <>
+            The scan above is step 1 of the <Em>APO method</Em>.
+          </>
+        }
+        sub="AI Process Optimisation: one session that maps which processes AI can take over, what that delivers per year in hours and euros, and what it costs to build."
+      >
+        <ApoTeaser lang="en" />
       </Section>
 
       {/* Four phases (static EN variant of the interactive loop) */}

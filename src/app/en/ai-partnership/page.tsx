@@ -11,6 +11,7 @@ import PartnershipTiers from "@/components/sections/PartnershipTiers";
 import TokenMenukaart from "@/components/sections/TokenMenukaart";
 import SavingsChart from "@/components/sections/SavingsChart";
 import MaturityScan from "@/components/sections/MaturityScan";
+import ApoMethode from "@/components/sections/ApoMethode";
 import MobielCTA from "@/components/layout/MobielCTA";
 import { alternatesVoor, site } from "@/lib/site";
 
@@ -296,6 +297,20 @@ export default function AiPartnershipEn() {
             prioritized list we start the year with.
           </p>
         </Reveal>
+      </Section>
+
+      {/* The APO method in full. The baseline above is step 1. */}
+      <Section
+        id="apo-methode"
+        kicker="Our method"
+        title={
+          <>
+            The APO method: from <Em>opportunities to a business case</Em>.
+          </>
+        }
+        sub="AI Process Optimisation: in one working session we map the work into measurable steps, decide per step what AI takes over, and calculate what that delivers. Not a talk about what AI could do, but the maths on what it delivers in your organisation."
+      >
+        <ApoMethode lang="en" />
       </Section>
 
       {/* Three processes */}
