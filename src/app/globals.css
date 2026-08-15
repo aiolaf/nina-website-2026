@@ -25,6 +25,53 @@ html {
   background: var(--color-bg);
 }
 
+/* ---------------------------------------------------------------------
+   Donker thema, gebruikt door de routegroep (donker) rond /ai-modellen.
+
+   Alleen de merk-tokens worden hier opnieuw gezet. Elke Tailwind-utility
+   verwijst naar deze variabelen, dus bg-bg-card, text-text-muted en
+   border-border volgen vanzelf, inclusief de gedeelde header en footer.
+   De pagina zelf bevat daardoor geen enkele vaste kleurcode en zou het in
+   het ivory-thema net zo goed doen.
+   --------------------------------------------------------------------- */
+.thema-donker {
+  --color-bg: #0c0e18;
+  --color-bg-card: #151828;
+  --color-bg-alt: #101322;
+  --color-bg-muted: #1c2033;
+  --color-primary: #9952e0;
+  --color-primary-light: #bf80ff;
+  --color-magenta: #bf80ff;
+  /* Hoverkleur van de gevulde knop. Bewust donkerder dan #bf80ff: daarop
+     zou de witte knoptekst te weinig contrast houden. */
+  --color-ink-deep: #7a3cc0;
+  --color-text: #f2f2f2;
+  --color-text-muted: #a6a6a6;
+  --color-border: #33374d;
+  /* Goud, uitsluitend voor de NinA aanrader-highlight. */
+  --color-gold: #fde68b;
+  color-scheme: dark;
+}
+
+/* html en body staan buiten de wrapper en zouden anders in ivory
+   doorschemeren bij overscroll of op een korte pagina. */
+html:has(.thema-donker),
+html:has(.thema-donker) body {
+  background: #0c0e18;
+}
+
+/* De gradient van .text-shimmer is op de ivory-achtergrond afgestemd en
+   valt op donker weg. Hier dezelfde beweging, maar dan lichter. */
+.thema-donker .text-shimmer {
+  background: linear-gradient(122deg, #bf80ff 0%, #9952e0 55%, #c270b5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.thema-donker .footer-watermark::after {
+  color: rgba(242, 242, 242, 0.035);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

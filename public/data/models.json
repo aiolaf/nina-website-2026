@@ -1,0 +1,442 @@
+{
+  "laatstBijgewerkt": "2026-08-15T21:27:12.311Z",
+  "bron": {
+    "naam": "Artificial Analysis",
+    "url": "https://artificialanalysis.ai"
+  },
+  "wisselkoers": {
+    "van": "USD",
+    "naar": "EUR",
+    "koers": 0.9124,
+    "datum": "2026-08-14",
+    "bron": "frankfurter.app"
+  },
+  "aantal": 23,
+  "modellen": [
+    {
+      "slug": "claude-opus-5",
+      "naam": "Claude Opus 5",
+      "provider": "Anthropic",
+      "intelligentie": 73.4,
+      "coding": 71.2,
+      "prijsInput": 13.69,
+      "prijsOutput": 68.43,
+      "snelheid": 62,
+      "contextvenster": 500000,
+      "verdict": {
+        "categorie": [
+          "redeneren",
+          "agents",
+          "coding"
+        ],
+        "ninaVerdict": "Het zwaarste model dat we inzetten. Alleen als denkwerk zwaarder weegt dan de rekening.",
+        "waarGoedVoor": "Architectuurkeuzes, moeilijke analyses, agents die lang zelfstandig doorwerken.",
+        "sterren": 5,
+        "aanrader": true
+      }
+    },
+    {
+      "slug": "claude-fable-5",
+      "naam": "Claude Fable 5",
+      "provider": "Anthropic",
+      "intelligentie": 71.8,
+      "coding": 69.5,
+      "prijsInput": 5.47,
+      "prijsOutput": 27.37,
+      "snelheid": 95,
+      "contextvenster": 500000,
+      "verdict": {
+        "categorie": [
+          "agents",
+          "coding",
+          "nederlands"
+        ],
+        "ninaVerdict": "Onze standaardkeuze voor AI-agents en Nederlandse teksten.",
+        "waarGoedVoor": "Complexe agents, lange documenten, betrouwbare output in het Nederlands.",
+        "sterren": 5,
+        "aanrader": true
+      }
+    },
+    {
+      "slug": "gpt-5-high",
+      "naam": "GPT-5 (high)",
+      "provider": "OpenAI",
+      "intelligentie": 70.9,
+      "coding": 66.4,
+      "prijsInput": 1.14,
+      "prijsOutput": 9.12,
+      "snelheid": 148,
+      "contextvenster": 400000,
+      "verdict": {
+        "categorie": [
+          "content",
+          "redeneren",
+          "multimodaal"
+        ],
+        "ninaVerdict": "Sterk allround en het meest herkenbaar voor je team. Let op de toon in het Nederlands.",
+        "waarGoedVoor": "Contentproductie, brainstorms, beeld en tekst door elkaar.",
+        "sterren": 4,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "gemini-3-pro",
+      "naam": "Gemini 3 Pro",
+      "provider": "Google",
+      "intelligentie": 70.1,
+      "coding": 65.8,
+      "prijsInput": 1.82,
+      "prijsOutput": 10.95,
+      "snelheid": 133,
+      "contextvenster": 1048576,
+      "verdict": {
+        "categorie": [
+          "multimodaal",
+          "redeneren",
+          "content"
+        ],
+        "ninaVerdict": "Onze keuze zodra er beeld, video of een gigantisch document bij komt kijken.",
+        "waarGoedVoor": "Documenten van honderden pagina's, screenshots lezen, video analyseren.",
+        "sterren": 4,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "claude-sonnet-5",
+      "naam": "Claude Sonnet 5",
+      "provider": "Anthropic",
+      "intelligentie": 68.7,
+      "coding": 70.1,
+      "prijsInput": 2.74,
+      "prijsOutput": 13.69,
+      "snelheid": 118,
+      "contextvenster": 300000,
+      "verdict": {
+        "categorie": [
+          "coding",
+          "agents",
+          "snelheid"
+        ],
+        "ninaVerdict": "De beste verhouding tussen kwaliteit en prijs voor dagelijks bouwwerk.",
+        "waarGoedVoor": "Code schrijven en reviewen, workflows in n8n, agents die de hele dag draaien.",
+        "sterren": 5,
+        "aanrader": true
+      }
+    },
+    {
+      "slug": "grok-4",
+      "naam": "Grok 4",
+      "provider": "xAI",
+      "intelligentie": 67.2,
+      "coding": 62.9,
+      "prijsInput": 2.74,
+      "prijsOutput": 13.69,
+      "snelheid": 77,
+      "contextvenster": 256000,
+      "verdict": {
+        "categorie": [
+          "redeneren",
+          "snelheid"
+        ],
+        "ninaVerdict": "Scoort hoog op benchmarks, maar wij zetten het zelden in bij klanten.",
+        "waarGoedVoor": "Experimenten en vergelijkingen, actuele onderwerpen.",
+        "sterren": 3,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "deepseek-r1",
+      "naam": "DeepSeek R1",
+      "provider": "DeepSeek",
+      "intelligentie": 65.4,
+      "coding": 61,
+      "prijsInput": 0.5,
+      "prijsOutput": 2,
+      "snelheid": 28,
+      "contextvenster": 128000,
+      "verdict": {
+        "categorie": [
+          "redeneren",
+          "budget",
+          "open-source"
+        ],
+        "ninaVerdict": "Redeneert hardop en goedkoop. Traag, dus niet voor iets waar iemand op zit te wachten.",
+        "waarGoedVoor": "Wiskundige en logische vraagstukken, achtergrondtaken zonder tijdsdruk.",
+        "sterren": 4,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "qwen3-max",
+      "naam": "Qwen3 Max",
+      "provider": "Alibaba",
+      "intelligentie": 64.1,
+      "coding": 63.3,
+      "prijsInput": 1.09,
+      "prijsOutput": 5.47,
+      "snelheid": 89,
+      "contextvenster": 262144,
+      "verdict": {
+        "categorie": [
+          "open-source",
+          "coding",
+          "budget"
+        ],
+        "ninaVerdict": "Verrassend sterk in code voor deze prijs. Nederlands blijft het zwakke punt.",
+        "waarGoedVoor": "Codegeneratie en refactoring in Engelstalige projecten.",
+        "sterren": 4,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "gpt-5-mini",
+      "naam": "GPT-5 mini",
+      "provider": "OpenAI",
+      "intelligentie": 62.8,
+      "coding": 58.7,
+      "prijsInput": 0.23,
+      "prijsOutput": 1.82,
+      "snelheid": 210,
+      "contextvenster": 400000,
+      "verdict": {
+        "categorie": [
+          "budget",
+          "snelheid",
+          "content"
+        ],
+        "ninaVerdict": "Prima instapmodel als het volume hoog is en de tekst kort.",
+        "waarGoedVoor": "Chatwidgets, korte samenvattingen, eenvoudige extractie uit formulieren.",
+        "sterren": 3,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "gemini-3-flash",
+      "naam": "Gemini 3 Flash",
+      "provider": "Google",
+      "intelligentie": 61.5,
+      "coding": 57.2,
+      "prijsInput": 0.27,
+      "prijsOutput": 2.28,
+      "snelheid": 265,
+      "contextvenster": 1048576,
+      "verdict": {
+        "categorie": [
+          "snelheid",
+          "budget",
+          "multimodaal"
+        ],
+        "ninaVerdict": "Snel en spotgoedkoop, en het leest ook nog plaatjes. Sterke default voor bulkwerk.",
+        "waarGoedVoor": "Facturen en bonnen uitlezen, grote batches verwerken, realtime antwoorden.",
+        "sterren": 4,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "deepseek-v3",
+      "naam": "DeepSeek V3",
+      "provider": "DeepSeek",
+      "intelligentie": 60.2,
+      "coding": 59.8,
+      "prijsInput": 0.25,
+      "prijsOutput": 1,
+      "snelheid": 63,
+      "contextvenster": 128000,
+      "verdict": {
+        "categorie": [
+          "budget",
+          "open-source",
+          "coding"
+        ],
+        "ninaVerdict": "Veel kwaliteit voor bijna geen geld. Weeg wel af waar je data terechtkomt.",
+        "waarGoedVoor": "Codetaken en analyses waar de prijs telt en de data niet gevoelig is.",
+        "sterren": 4,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "claude-haiku-4-5",
+      "naam": "Claude Haiku 4.5",
+      "provider": "Anthropic",
+      "intelligentie": 58.9,
+      "coding": 56.4,
+      "prijsInput": 0.91,
+      "prijsOutput": 4.56,
+      "snelheid": 190,
+      "contextvenster": 200000,
+      "verdict": {
+        "categorie": [
+          "snelheid",
+          "budget",
+          "agents"
+        ],
+        "ninaVerdict": "Onze werkezel voor volume: snel, goedkoop en verrassend precies.",
+        "waarGoedVoor": "Classificatie, samenvatten, e-mails routeren, alles wat duizenden keren per dag draait.",
+        "sterren": 4,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "llama-4-maverick",
+      "naam": "Llama 4 Maverick",
+      "provider": "Meta",
+      "intelligentie": 54.7,
+      "coding": 49.9,
+      "prijsInput": 0.17,
+      "prijsOutput": 0.45,
+      "snelheid": 156,
+      "contextvenster": 1048576,
+      "verdict": {
+        "categorie": [
+          "open-source",
+          "budget",
+          "multimodaal"
+        ],
+        "ninaVerdict": "De serieuze optie als je zelf wilt hosten. Reken op eigen beheer en eigen kosten.",
+        "waarGoedVoor": "Draaien op eigen infrastructuur, gevoelige data die het pand niet uit mag.",
+        "sterren": 3,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "mistral-large-3",
+      "naam": "Mistral Large 3",
+      "provider": "Mistral",
+      "intelligentie": 53.1,
+      "coding": 48.2,
+      "prijsInput": 1.82,
+      "prijsOutput": 5.47,
+      "snelheid": 84,
+      "contextvenster": 128000,
+      "verdict": {
+        "categorie": [
+          "nederlands",
+          "content",
+          "open-source"
+        ],
+        "ninaVerdict": "Europese aanbieder met nette Nederlandse output. Handig als datalocatie een eis is.",
+        "waarGoedVoor": "Organisaties die binnen de EU willen blijven, zakelijke correspondentie.",
+        "sterren": 3,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "command-a",
+      "naam": "Command A",
+      "provider": "Cohere",
+      "intelligentie": 51.4,
+      "coding": 46.1,
+      "prijsInput": 2.28,
+      "prijsOutput": 9.12,
+      "snelheid": 93,
+      "contextvenster": 256000,
+      "verdict": null
+    },
+    {
+      "slug": "mistral-medium-3-1",
+      "naam": "Mistral Medium 3.1",
+      "provider": "Mistral",
+      "intelligentie": 49.6,
+      "coding": 45.7,
+      "prijsInput": 0.36,
+      "prijsOutput": 1.82,
+      "snelheid": 126,
+      "contextvenster": 128000,
+      "verdict": {
+        "categorie": [
+          "budget",
+          "snelheid",
+          "nederlands"
+        ],
+        "ninaVerdict": "De goedkope Europese variant. Doet het werk, maar mist scherpte bij nuance.",
+        "waarGoedVoor": "Standaardteksten, interne tooling, eenvoudige classificatie binnen de EU.",
+        "sterren": 3,
+        "aanrader": false
+      }
+    },
+    {
+      "slug": "nova-pro",
+      "naam": "Nova Pro",
+      "provider": "Amazon",
+      "intelligentie": 47.8,
+      "coding": 40.3,
+      "prijsInput": 0.73,
+      "prijsOutput": 2.92,
+      "snelheid": 109,
+      "contextvenster": 300000,
+      "verdict": null
+    },
+    {
+      "slug": "glm-4-6",
+      "naam": "GLM-4.6",
+      "provider": "Zhipu AI",
+      "intelligentie": 46.3,
+      "coding": 44.9,
+      "prijsInput": 0.55,
+      "prijsOutput": 2.01,
+      "snelheid": 74,
+      "contextvenster": 200000,
+      "verdict": null
+    },
+    {
+      "slug": "kimi-k2",
+      "naam": "Kimi K2",
+      "provider": "Moonshot AI",
+      "intelligentie": 44.5,
+      "coding": 43.1,
+      "prijsInput": 0.55,
+      "prijsOutput": 2.28,
+      "snelheid": 58,
+      "contextvenster": 262144,
+      "verdict": null
+    },
+    {
+      "slug": "llama-4-scout",
+      "naam": "Llama 4 Scout",
+      "provider": "Meta",
+      "intelligentie": 42.6,
+      "coding": 38.4,
+      "prijsInput": 0.1,
+      "prijsOutput": 0.31,
+      "snelheid": 281,
+      "contextvenster": 10485760,
+      "verdict": null
+    },
+    {
+      "slug": "phi-5",
+      "naam": "Phi-5",
+      "provider": "Microsoft",
+      "intelligentie": 40.1,
+      "coding": 41.8,
+      "prijsInput": 0.01,
+      "prijsOutput": 0.36,
+      "snelheid": 241,
+      "contextvenster": 128000,
+      "verdict": null
+    },
+    {
+      "slug": "jamba-2-large",
+      "naam": "Jamba 2 Large",
+      "provider": "AI21 Labs",
+      "intelligentie": 36.9,
+      "coding": 31.2,
+      "prijsInput": 1.82,
+      "prijsOutput": 7.3,
+      "snelheid": 96,
+      "contextvenster": 256000,
+      "verdict": null
+    },
+    {
+      "slug": "sonar-large",
+      "naam": "Sonar Large",
+      "provider": "Perplexity",
+      "intelligentie": 34.2,
+      "coding": 29.8,
+      "prijsInput": 0.91,
+      "prijsOutput": 0.91,
+      "snelheid": 130,
+      "contextvenster": 127000,
+      "verdict": null
+    }
+  ]
+}

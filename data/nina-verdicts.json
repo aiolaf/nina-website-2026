@@ -1,0 +1,140 @@
+{
+  "$schema": "./nina-verdicts.schema.json",
+  "verdicts": [
+    {
+      "slug": "claude-fable-5",
+      "match": ["fable 5", "fable-5"],
+      "categorie": ["agents", "coding", "nederlands"],
+      "ninaVerdict": "Onze standaardkeuze voor AI-agents en Nederlandse teksten.",
+      "waarGoedVoor": "Complexe agents, lange documenten, betrouwbare output in het Nederlands.",
+      "sterren": 5,
+      "aanrader": true
+    },
+    {
+      "slug": "claude-opus-5",
+      "match": ["opus 5", "opus-5"],
+      "categorie": ["redeneren", "agents", "coding"],
+      "ninaVerdict": "Het zwaarste model dat we inzetten. Alleen als denkwerk zwaarder weegt dan de rekening.",
+      "waarGoedVoor": "Architectuurkeuzes, moeilijke analyses, agents die lang zelfstandig doorwerken.",
+      "sterren": 5,
+      "aanrader": true
+    },
+    {
+      "slug": "claude-sonnet-5",
+      "match": ["sonnet 5", "sonnet-5"],
+      "categorie": ["coding", "agents", "snelheid"],
+      "ninaVerdict": "De beste verhouding tussen kwaliteit en prijs voor dagelijks bouwwerk.",
+      "waarGoedVoor": "Code schrijven en reviewen, workflows in n8n, agents die de hele dag draaien.",
+      "sterren": 5,
+      "aanrader": true
+    },
+    {
+      "slug": "claude-haiku-4-5",
+      "match": ["haiku 4.5", "haiku-4.5", "haiku 4-5"],
+      "categorie": ["snelheid", "budget", "agents"],
+      "ninaVerdict": "Onze werkezel voor volume: snel, goedkoop en verrassend precies.",
+      "waarGoedVoor": "Classificatie, samenvatten, e-mails routeren, alles wat duizenden keren per dag draait.",
+      "sterren": 4,
+      "aanrader": false
+    },
+    {
+      "slug": "gpt-5",
+      "match": ["gpt-5"],
+      "categorie": ["content", "redeneren", "multimodaal"],
+      "ninaVerdict": "Sterk allround en het meest herkenbaar voor je team. Let op de toon in het Nederlands.",
+      "waarGoedVoor": "Contentproductie, brainstorms, beeld en tekst door elkaar.",
+      "sterren": 4,
+      "aanrader": false
+    },
+    {
+      "slug": "gpt-5-mini",
+      "match": ["gpt-5 mini", "gpt-5-mini"],
+      "categorie": ["budget", "snelheid", "content"],
+      "ninaVerdict": "Prima instapmodel als het volume hoog is en de tekst kort.",
+      "waarGoedVoor": "Chatwidgets, korte samenvattingen, eenvoudige extractie uit formulieren.",
+      "sterren": 3,
+      "aanrader": false
+    },
+    {
+      "slug": "gemini-3-pro",
+      "match": ["gemini 3 pro", "gemini-3-pro"],
+      "categorie": ["multimodaal", "redeneren", "content"],
+      "ninaVerdict": "Onze keuze zodra er beeld, video of een gigantisch document bij komt kijken.",
+      "waarGoedVoor": "Documenten van honderden pagina's, screenshots lezen, video analyseren.",
+      "sterren": 4,
+      "aanrader": false
+    },
+    {
+      "slug": "gemini-3-flash",
+      "match": ["gemini 3 flash", "gemini-3-flash"],
+      "categorie": ["snelheid", "budget", "multimodaal"],
+      "ninaVerdict": "Snel en spotgoedkoop, en het leest ook nog plaatjes. Sterke default voor bulkwerk.",
+      "waarGoedVoor": "Facturen en bonnen uitlezen, grote batches verwerken, realtime antwoorden.",
+      "sterren": 4,
+      "aanrader": false
+    },
+    {
+      "slug": "deepseek-v3",
+      "match": ["deepseek-v3", "deepseek v3"],
+      "categorie": ["budget", "open-source", "coding"],
+      "ninaVerdict": "Veel kwaliteit voor bijna geen geld. Weeg wel af waar je data terechtkomt.",
+      "waarGoedVoor": "Codetaken en analyses waar de prijs telt en de data niet gevoelig is.",
+      "sterren": 4,
+      "aanrader": false
+    },
+    {
+      "slug": "deepseek-r1",
+      "match": ["deepseek-r1", "deepseek r1"],
+      "categorie": ["redeneren", "budget", "open-source"],
+      "ninaVerdict": "Redeneert hardop en goedkoop. Traag, dus niet voor iets waar iemand op zit te wachten.",
+      "waarGoedVoor": "Wiskundige en logische vraagstukken, achtergrondtaken zonder tijdsdruk.",
+      "sterren": 4,
+      "aanrader": false
+    },
+    {
+      "slug": "mistral-large",
+      "match": ["mistral large", "mistral-large"],
+      "categorie": ["nederlands", "content", "open-source"],
+      "ninaVerdict": "Europese aanbieder met nette Nederlandse output. Handig als datalocatie een eis is.",
+      "waarGoedVoor": "Organisaties die binnen de EU willen blijven, zakelijke correspondentie.",
+      "sterren": 3,
+      "aanrader": false
+    },
+    {
+      "slug": "mistral-medium",
+      "match": ["mistral medium", "mistral-medium"],
+      "categorie": ["budget", "snelheid", "nederlands"],
+      "ninaVerdict": "De goedkope Europese variant. Doet het werk, maar mist scherpte bij nuance.",
+      "waarGoedVoor": "Standaardteksten, interne tooling, eenvoudige classificatie binnen de EU.",
+      "sterren": 3,
+      "aanrader": false
+    },
+    {
+      "slug": "llama-4-maverick",
+      "match": ["llama 4 maverick", "llama-4-maverick"],
+      "categorie": ["open-source", "budget", "multimodaal"],
+      "ninaVerdict": "De serieuze optie als je zelf wilt hosten. Reken op eigen beheer en eigen kosten.",
+      "waarGoedVoor": "Draaien op eigen infrastructuur, gevoelige data die het pand niet uit mag.",
+      "sterren": 3,
+      "aanrader": false
+    },
+    {
+      "slug": "qwen3-max",
+      "match": ["qwen3-max", "qwen3 max", "qwen 3 max"],
+      "categorie": ["open-source", "coding", "budget"],
+      "ninaVerdict": "Verrassend sterk in code voor deze prijs. Nederlands blijft het zwakke punt.",
+      "waarGoedVoor": "Codegeneratie en refactoring in Engelstalige projecten.",
+      "sterren": 4,
+      "aanrader": false
+    },
+    {
+      "slug": "grok-4",
+      "match": ["grok 4", "grok-4"],
+      "categorie": ["redeneren", "snelheid"],
+      "ninaVerdict": "Scoort hoog op benchmarks, maar wij zetten het zelden in bij klanten.",
+      "waarGoedVoor": "Experimenten en vergelijkingen, actuele onderwerpen.",
+      "sterren": 3,
+      "aanrader": false
+    }
+  ]
+}

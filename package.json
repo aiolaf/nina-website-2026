@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "update-models": "node scripts/update-models.mjs",
+    "test:update-models": "node scripts/test-update-models.mjs"
   },
   "dependencies": {
     "@next/third-parties": "^16.3.0",

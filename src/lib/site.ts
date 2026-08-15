@@ -95,6 +95,7 @@ export const footerNav = {
       { label: "Freebies", href: "/freebies" },
       { label: "Cases", href: "/cases" },
       { label: "AI Kennis", href: "/ai-kennis" },
+      { label: "AI-modellen", href: "/ai-modellen" },
     ],
     bedrijf: [
       { label: "Over NinA AI", href: "/over-nina" },

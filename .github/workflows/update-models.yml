@@ -1,0 +1,58 @@
+name: AI-modellen bijwerken
+
+# Haalt dagelijks de rankings en prijzen op bij Artificial Analysis, rekent
+# ze om naar euro en zet het resultaat in public/data/models.json. De pagina
+# /ai-modellen leest dat bestand bij de build, dus de commit hieronder is
+# tegelijk het startsein voor een nieuwe deploy.
+
+on:
+  schedule:
+    # 06:00 UTC, elke dag. GitHub voert cron-jobs met vertraging uit bij
+    # drukte; een kwartier later is normaal en geen probleem.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+# Alleen schrijfrechten op de repo-inhoud, meer heeft deze job niet nodig.
+permissions:
+  contents: write
+
+# Twee runs tegelijk zouden elkaars push omverduwen.
+concurrency:
+  group: update-models
+  cancel-in-progress: false
+
+jobs:
+  bijwerken:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Faalt dit, dan stopt de workflow zichtbaar en blijft models.json
+      # staan zoals het was. Er wordt dan niets gecommit.
+      - name: Modellen ophalen en omrekenen
+        env:
+          AA_API_KEY: ${{ secrets.AA_API_KEY }}
+        run: node scripts/update-models.mjs
+
+      - name: Committen en pushen als er iets veranderd is
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- public/data/models.json; then
+            echo "Geen wijzigingen in models.json, niets te committen."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/models.json
+          # Bewust zonder [skip ci]: de site moet juist opnieuw deployen,
+          # anders blijft de oude data in de build zitten. Draait er ooit een
+          # zware CI-pipeline op elke push, zet dan "[skip ci]" achter dit
+          # bericht en regel de deploy apart.
+          git commit -m "data: update AI-modellen"
+          # Rebase voor het geval er ondertussen op main gepusht is.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

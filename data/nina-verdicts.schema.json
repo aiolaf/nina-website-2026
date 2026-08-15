@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "NinA-verdicts",
+  "description": "De expertise-laag onder /ai-modellen. De cijfers komen van Artificial Analysis, dit bestand voegt het oordeel van NinA toe. Handmatig bijhouden, het update-script raakt dit bestand nooit aan.",
+  "type": "object",
+  "required": ["verdicts"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "verdicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "slug",
+          "match",
+          "categorie",
+          "ninaVerdict",
+          "waarGoedVoor",
+          "sterren",
+          "aanrader"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "type": "string",
+            "description": "Unieke sleutel, alleen voor jezelf. Wordt niet gebruikt om te koppelen.",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "match": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" },
+            "description": "Lowercase substrings. Het update-script koppelt dit verdict aan elk model waarvan de naam (of de slug uit de API) een van deze substrings bevat. Bij meerdere treffers wint de langste substring, zodat 'gpt-5 mini' voorgaat op 'gpt-5'."
+          },
+          "categorie": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "enum": [
+                "coding",
+                "agents",
+                "content",
+                "nederlands",
+                "budget",
+                "snelheid",
+                "redeneren",
+                "multimodaal",
+                "open-source"
+              ]
+            }
+          },
+          "ninaVerdict": {
+            "type": "string",
+            "description": "Een korte, stellige zin in de stem van NinA. Nederlands, actief, geen wollige taal."
+          },
+          "waarGoedVoor": {
+            "type": "string",
+            "description": "Concrete toepassingen, in gewone taal."
+          },
+          "sterren": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "aanrader": {
+            "type": "boolean",
+            "description": "true geeft het model de gouden NinA aanrader-rand op de pagina. Spaarzaam gebruiken."
+          }
+        }
+      }
+    }
+  }
+}
