@@ -7,6 +7,8 @@ import {
   categorieLabel,
   contextKort,
   euro,
+  menselijkeMaat,
+  PAGINAS_PER_PDF,
   prijsIndex,
   score,
   type Categorie,
@@ -222,6 +224,10 @@ function ModelKaart({ model }: { model: Model }) {
         )}
       </div>
 
+      {model.contextvenster !== null && (
+        <ContextInTekst tokens={model.contextvenster} />
+      )}
+
       <div className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border">
         <Prijs label="Input" waarde={model.prijsInput} />
         <Prijs label="Output" waarde={model.prijsOutput} />
@@ -257,6 +263,32 @@ function ModelKaart({ model }: { model: Model }) {
         </ul>
       )}
     </li>
+  );
+}
+
+/**
+ * Het contextvenster in tekst die je kunt vasthouden. "200K tokens" zegt
+ * alleen iets tegen wie al weet wat een token is; "300 A4-pagina's in een
+ * gesprek" begrijpt iedereen meteen.
+ */
+function ContextInTekst({ tokens }: { tokens: number }) {
+  const maat = menselijkeMaat(tokens);
+  // De lopende tekst staat in strings en niet los in de JSX: apostrofs in
+  // een JSX-tekstknoop worden door react/no-unescaped-entities afgekeurd.
+  return (
+    <p className="mt-2.5 text-xs leading-relaxed text-text-muted">
+      {"Leest in een gesprek ongeveer "}
+      <span className="font-mono text-text">{maat.woorden}</span>
+      {" woorden, zo'n "}
+      <span className="font-mono text-text">{maat.paginas}</span>
+      {maat.pdfsZinnig ? " A4-pagina's, of " : " A4-pagina's."}
+      {maat.pdfsZinnig && (
+        <>
+          <span className="font-mono text-text">{maat.pdfs}</span>
+          {` pdf's van ${PAGINAS_PER_PDF} pagina's.`}
+        </>
+      )}
+    </p>
   );
 }
 

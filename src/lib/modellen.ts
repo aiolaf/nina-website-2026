@@ -107,6 +107,61 @@ export function score(waarde: number): string {
   return String(waarde).replace(".", ",");
 }
 
+/* ---------------------------------------------------------------------
+   Tokens naar eenheden die iemand zonder AI-achtergrond herkent.
+
+   Het zijn schattingen en geen exacte omrekening: hoeveel tokens een tekst
+   kost verschilt per model, per taal en per onderwerp. Nederlands is
+   duurder dan Engels, omdat samenstellingen in meer stukken worden geknipt.
+   Wil je de aannames bijstellen, dan is dit de enige plek waar dat hoeft.
+   --------------------------------------------------------------------- */
+
+/**
+ * Gemiddeld aantal tokens per Nederlands woord. Voor Engels is dit ~1,3.
+ * Precies 1,67 gekozen, want daarmee komt een miljoen tokens op ronde
+ * getallen uit: 600.000 woorden, 1.500 pagina's, 75 pdf's. Binnen de
+ * onzekerheid van zo'n schatting is dat net zo goed als 1,65.
+ */
+export const TOKENS_PER_WOORD = 1.67;
+/** Woorden op een goedgevulde A4 met normale marges. */
+export const WOORDEN_PER_PAGINA = 400;
+/** Omvang van een "pdf" als eenheid: een rapport van twintig pagina's. */
+export const PAGINAS_PER_PDF = 20;
+
+/**
+ * Ronden op ongeveer twee significante cijfers. Een schatting die als
+ * "76.842 woorden" op het scherm staat doet alsof hij precies is.
+ */
+function rondAf(n: number): number {
+  if (n <= 0) return 0;
+  const orde = Math.pow(10, Math.floor(Math.log10(n)) - 1);
+  return Math.round(n / orde) * orde;
+}
+
+/** 600000 wordt "600.000". Met de hand, niet via Intl (zie de kop). */
+export function duizendtal(n: number): string {
+  return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+/** Wat een aantal tokens ruwweg is in tekst die je kunt vasthouden. */
+export function menselijkeMaat(tokens: number): {
+  woorden: string;
+  paginas: string;
+  pdfs: string;
+  /** Onder de honderd pagina's is "pdf's" geen zinnige eenheid meer. */
+  pdfsZinnig: boolean;
+} {
+  const woorden = tokens / TOKENS_PER_WOORD;
+  const paginas = woorden / WOORDEN_PER_PAGINA;
+  const pdfs = paginas / PAGINAS_PER_PDF;
+  return {
+    woorden: duizendtal(rondAf(woorden)),
+    paginas: duizendtal(rondAf(paginas)),
+    pdfs: duizendtal(rondAf(pdfs)),
+    pdfsZinnig: pdfs >= 2,
+  };
+}
+
 /** 1048576 wordt "1 mln", 200000 wordt "200K". */
 export function contextKort(tokens: number): string {
   if (tokens >= 1_000_000) {

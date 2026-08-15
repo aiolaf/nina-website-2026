@@ -5,7 +5,15 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import ModellenOverzicht from "@/components/sections/ModellenOverzicht";
 import Reveal from "@/components/ui/Reveal";
 import { Em } from "@/components/ui/Section";
-import { datumNL, koers, type ModellenData } from "@/lib/modellen";
+import {
+  datumNL,
+  koers,
+  menselijkeMaat,
+  PAGINAS_PER_PDF,
+  TOKENS_PER_WOORD,
+  WOORDEN_PER_PAGINA,
+  type ModellenData,
+} from "@/lib/modellen";
 import { alternatesVoor } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -35,6 +43,74 @@ async function leesModellen(): Promise<ModellenData | null> {
     // een pagina die even geen tabel toont.
     return null;
   }
+}
+
+/**
+ * Alle prijzen op deze pagina staan per miljoen tokens, en dat is voor
+ * niemand een gevoelsmaat. Dit blok vertaalt het een keer naar tekst die je
+ * kunt vasthouden, zodat de kaarten daarna met tokens toe kunnen.
+ */
+function TokenUitleg() {
+  const maat = menselijkeMaat(1_000_000);
+  // Apostrofs staan hier in gewone strings en niet los in de JSX, want daar
+  // struikelt react/no-unescaped-entities over.
+  const eenheden = [
+    {
+      waarde: maat.woorden,
+      eenheid: "woorden",
+      toelichting: "Nederlandse tekst",
+    },
+    {
+      waarde: maat.paginas,
+      eenheid: "A4-pagina's",
+      toelichting: `van ${WOORDEN_PER_PAGINA} woorden`,
+    },
+    {
+      waarde: maat.pdfs,
+      eenheid: "pdf's",
+      toelichting: `van ${PAGINAS_PER_PDF} pagina's`,
+    },
+  ];
+
+  return (
+    <section className="relative">
+      <div className="mx-auto max-w-6xl px-5 pb-10">
+        <div className="rounded-2xl border border-border bg-bg-card/60 p-6 backdrop-blur-md sm:p-7">
+          <h2 className="font-display text-lg font-bold">
+            Wat is een miljoen tokens?
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">
+            De prijzen hieronder gelden per miljoen tokens. Een token is een
+            stukje van een woord, dus dat getal zegt weinig. Dit krijg je er
+            ongeveer voor:
+          </p>
+          <dl className="mt-5 grid gap-3 sm:grid-cols-3">
+            {eenheden.map((e) => (
+              <div
+                key={e.eenheid}
+                className="rounded-xl border border-border bg-bg-muted/40 px-4 py-3"
+              >
+                <dd className="font-mono text-2xl font-semibold text-text">
+                  {e.waarde}
+                </dd>
+                <dt className="mt-0.5 text-sm text-text">
+                  {e.eenheid}{" "}
+                  <span className="text-text-muted">{e.toelichting}</span>
+                </dt>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-4 text-xs leading-relaxed text-text-muted">
+            Ruwe schatting, gerekend met ongeveer{" "}
+            {TOKENS_PER_WOORD.toFixed(1).replace(".", ",")} token per
+            Nederlands woord. Engelse tekst is zuiniger, dus daar komt er
+            ongeveer een kwart meer in. Elk model telt bovendien net iets
+            anders.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default async function AiModellenPage() {
@@ -92,6 +168,8 @@ export default async function AiModellenPage() {
           </div>
         </div>
       </section>
+
+      <TokenUitleg />
 
       <section className="relative">
         <div className="mx-auto max-w-6xl px-5 pb-20 sm:pb-24">
