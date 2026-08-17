@@ -395,7 +395,7 @@ function StapKaart({
   const stap = c.stappen[nr - 1];
   return (
     <Reveal>
-      <div className="rounded-3xl border border-border bg-bg-card p-6 shadow-[0_18px_60px_rgba(42,33,48,0.07)] sm:p-9">
+      <div className="rounded-3xl border border-border bg-bg-card p-6 shadow-[0_18px_60px_rgba(12,14,24,0.07)] sm:p-9">
         <span className="inline-flex rounded-full border border-border bg-bg px-3.5 py-1.5 font-mono text-xs text-text-muted">
           {c.badge} · {nr}/4
         </span>
@@ -500,7 +500,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
                       <li
                         key={item.tekst.nl}
                         className="rounded-xl p-2.5 text-[11px] leading-snug"
-                        style={{ backgroundColor: KLEUR[kolom.kleur].vlak, color: "#2a2130" }}
+                        style={{ backgroundColor: KLEUR[kolom.kleur].vlak, color: "#0c0e18" }}
                       >
                         {t(item.tekst, lang)}
                         <span
@@ -733,7 +733,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
                         <li
                           key={item.nl}
                           className="rounded-lg px-2.5 py-1.5 text-[11px] leading-snug"
-                          style={{ backgroundColor: KLEUR[fase.kleur].vlak, color: "#2a2130" }}
+                          style={{ backgroundColor: KLEUR[fase.kleur].vlak, color: "#0c0e18" }}
                         >
                           {t(item, lang)}
                         </li>

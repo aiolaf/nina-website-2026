@@ -129,7 +129,7 @@ export default function HomeEn() {
       <section className="relative flex min-h-[100svh] items-center overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(12,14,24,0.08),transparent_60%)]"
         />
         <div
           aria-hidden="true"
@@ -183,7 +183,7 @@ export default function HomeEn() {
             </div>
             <div className="reveal-now [animation-delay:0.25s]">
               {/* Static agent log (the NL page shows an interactive playground) */}
-              <div className="rounded-2xl border border-border bg-bg-card/80 p-5 shadow-[0_20px_60px_rgba(42,33,48,0.12)] backdrop-blur">
+              <div className="rounded-2xl border border-border bg-bg-card/80 p-5 shadow-[0_20px_60px_rgba(12,14,24,0.12)] backdrop-blur">
                 <div className="flex items-center justify-between border-b border-border pb-3">
                   <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                     Agents at work
@@ -233,7 +233,7 @@ export default function HomeEn() {
           <LogoMarquee />
           <div className="mt-12 grid grid-cols-2 gap-6 text-center lg:grid-cols-4">
             <div className="flex flex-col items-center">
-              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] text-white shadow-[0_6px_18px_rgba(97,68,121,0.3)]">
+              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
                 <IconBuilding className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
@@ -244,7 +244,7 @@ export default function HomeEn() {
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] text-white shadow-[0_6px_18px_rgba(97,68,121,0.3)]">
+              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
                 <IconPresentation className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
@@ -255,7 +255,7 @@ export default function HomeEn() {
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] text-white shadow-[0_6px_18px_rgba(97,68,121,0.3)]">
+              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
                 <IconSpark className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
@@ -264,7 +264,7 @@ export default function HomeEn() {
               <p className="mt-1 text-sm text-text-muted">average rating</p>
             </div>
             <div className="flex flex-col items-center">
-              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] text-white shadow-[0_6px_18px_rgba(97,68,121,0.3)]">
+              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
                 <IconUsers className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
@@ -559,7 +559,7 @@ export default function HomeEn() {
       <section className="mx-auto max-w-6xl px-5 py-20 sm:py-28">
         <Reveal>
           <figure className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
-            <div className="relative overflow-hidden rounded-3xl border border-border shadow-[0_20px_60px_rgba(42,33,48,0.12)]">
+            <div className="relative overflow-hidden rounded-3xl border border-border shadow-[0_20px_60px_rgba(12,14,24,0.12)]">
               <Image
                 src="/images/foto-da-drogist.webp"
                 alt="The DA Drogist team after the NinA AI workshop"
@@ -611,7 +611,7 @@ export default function HomeEn() {
           <div className="relative overflow-hidden rounded-3xl border border-border bg-bg-card">
             <div
               aria-hidden="true"
-              className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(165,98,161,0.18),transparent_65%)]"
+              className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(176,101,58,0.18),transparent_65%)]"
             />
             <div className="relative grid gap-8 p-8 sm:p-10 lg:grid-cols-[1.3fr_1fr] lg:gap-4">
               <div>
@@ -672,7 +672,7 @@ export default function HomeEn() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(97,68,121,0.09),transparent_65%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(12,14,24,0.09),transparent_65%)]"
         />
         <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
           <Reveal>

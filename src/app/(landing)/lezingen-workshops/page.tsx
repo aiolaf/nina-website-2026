@@ -334,7 +334,7 @@ export default function LezingenWorkshops() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(12,14,24,0.08),transparent_60%)]"
         />
         {/* Deze pagina heeft geen header, dus die 96px bovenmarge kost op
             mobiel alleen fold-ruimte voor het formulier. */}
@@ -484,7 +484,7 @@ export default function LezingenWorkshops() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <article className="relative flex h-full flex-col rounded-2xl border border-primary bg-bg-muted p-7 shadow-[0_12px_44px_rgba(97,68,121,0.12)]">
+            <article className="relative flex h-full flex-col rounded-2xl border border-primary bg-bg-muted p-7 shadow-[0_12px_44px_rgba(12,14,24,0.12)]">
               <span className="absolute -top-3 right-6 rounded-full bg-gold/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-gold">
                 Meest gekozen
               </span>
@@ -571,7 +571,7 @@ export default function LezingenWorkshops() {
                 alt="Olaf Lemmens als AI-spreker op het podium voor een volle zaal"
                 width={900}
                 height={499}
-                className="w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(42,33,48,0.12)]"
+                className="w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
               />
               <figcaption className="mt-3 text-xs text-text-muted">
                 Keynote voor een volle zaal. Sessies beoordeeld met een 9,3.
@@ -762,7 +762,7 @@ export default function LezingenWorkshops() {
             </div>
           </Reveal>
           <Reveal delay={0.08} className="hidden lg:block">
-            <div className="relative h-full min-h-72 overflow-hidden rounded-2xl bg-[radial-gradient(circle_at_50%_20%,rgba(165,98,161,0.2),rgba(97,68,121,0.06))]">
+            <div className="relative h-full min-h-72 overflow-hidden rounded-2xl bg-[radial-gradient(circle_at_50%_20%,rgba(176,101,58,0.2),rgba(12,14,24,0.06))]">
               <Image
                 src="/images/olaf-cutout.webp"
                 alt="Olaf Lemmens, spreker en oprichter van NinA AI Agency"

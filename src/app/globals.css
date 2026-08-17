@@ -1,23 +1,56 @@
 @import "tailwindcss";
 
 @theme {
-  /* NinA AI Ivory-thema, tokens uit het merkdeck/carousel-systeem */
-  --color-bg: #f4f0e8;
-  --color-bg-card: #ffffff;
-  --color-bg-alt: #ede6da;
-  --color-bg-muted: #e7e1d6;
-  --color-primary: #614479;
-  --color-primary-light: #a562a1;
-  --color-magenta: #c270b5;
-  --color-ink-deep: #4c2a4f;
-  --color-text: #2a2130;
-  --color-text-muted: #635a6d;
-  --color-border: #ddd5c9;
-  --color-gold: #8f6c1d;
+  /* ------------------------------------------------------------------
+     Huisstijl "Licht": Legora-esthetiek met NinA-accenten.
+     Bron: componenten/nina-huisstijl-claude-design.md
+
+     De legacy-namen (primary, magenta, gold, ink-deep) blijven bestaan
+     maar wijzen nu naar het nieuwe palet. Zo verft één tokenwissel alle
+     bestaande componenten mee in plaats van 400 losse classnames:
+     - primary was plum en is nu inkt, want zwart is in deze stijl de
+       primaire actiekleur (zwarte pill-CTA).
+     - magenta wordt amber, gold wordt cognac: dat zijn de werkkleuren
+       voor data en warme accenten.
+     Violet is uitdrukkelijk GEEN legacy-alias: dat is het merkmoment en
+     mag maximaal één keer per scherm voorkomen. Gebruik het bewust via
+     text-violet / bg-violet.
+     ------------------------------------------------------------------ */
+  --color-bg: #f4f2ee;
+  --color-bg-card: #fbfaf8;
+  --color-bg-alt: #efece5;
+  --color-bg-muted: #f0ede6;
+  --color-text: #0c0e18;
+  --color-text-muted: #6b6b70;
+  --color-border: #e2dfd7;
+
+  /* Legacy-aliassen, zie toelichting hierboven */
+  --color-primary: #0c0e18;
+  --color-primary-light: #3f3f46;
+  --color-magenta: #e8963e;
+  --color-ink-deep: #23252f;
+  --color-gold: #b0653a;
+
+  /* Nieuwe, benoemde tokens */
+  --color-ink: #0c0e18;
+  --color-ink-muted: #6b6b70;
+  --color-violet: #9952e0;
+  --color-violet-light: #bf80ff;
+  --color-marker: #fde68b;
+  --color-sand: #e9dfc8;
+  --color-amber: #e8963e;
+  --color-cognac: #b0653a;
+  --color-blue: #3f7de0;
+  --color-green-soft: #d9ead3;
+  --color-red-soft: #f6d7d7;
+  --color-chip: #f0ede6;
 
   --font-sans: var(--font-inter), system-ui, sans-serif;
+  /* display = UI-koppen (kaarttitels), serif = editorial display-koppen */
   --font-display: var(--font-bricolage), var(--font-inter), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-serif: var(--font-instrument), "Playfair Display", Georgia, serif;
+  --font-mono: var(--font-fragment), ui-monospace, monospace;
+  --font-hand: var(--font-kalam), cursive;
 }
 
 html {
@@ -92,6 +125,68 @@ body {
   color: #ffffff;
 }
 
+/* ====================================================================
+   Huisstijl "Licht": signatuur-elementen
+   ==================================================================== */
+
+/* Display-kop: Instrument Serif, dun en groot. Een woord of zinsdeel mag
+   cursief voor nadruk; dat is het accent in plaats van een kleur. */
+.display-serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.display-serif em {
+  font-style: italic;
+}
+
+/* Marker-effect met goud achter één woord. Zeldzaam gebruiken: hooguit
+   één keer per pagina, en nooit samen met een violet-moment in beeld. */
+.marker {
+  background-image: linear-gradient(
+    transparent 56%,
+    var(--color-marker) 56%,
+    var(--color-marker) 92%,
+    transparent 92%
+  );
+}
+
+/* Handgeschreven annotatie in violet: het menselijke NinA-moment. Maximaal
+   één per sectie, altijd bij beeld of een diagram. */
+.annotatie {
+  font-family: var(--font-hand);
+  font-weight: 300;
+  color: var(--color-violet);
+  display: inline-block;
+  transform: rotate(-2deg);
+}
+
+/* Mono-label boven een sectie of in een kaart. */
+.label-mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Glassmorphism-kaart, de standaardcontainer van de stijl. Bewust zonder
+   border-radius: die zet je met een Tailwind-class per gebruik. */
+.glas {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 24px 64px rgba(12, 14, 24, 0.08),
+    0 2px 8px rgba(12, 14, 24, 0.04);
+}
+/* Zonder backdrop-filter (oudere browsers) zou de kaart doorschijnend en
+   dus onleesbaar worden. */
+@supports not (backdrop-filter: blur(4px)) {
+  .glas {
+    background: #fbfaf8;
+  }
+}
+
 /* Papierkorrel voor de warme ivory-uitstraling */
 .grain::after {
   content: "";
@@ -103,14 +198,16 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
 }
 
-/* Brand-gradient op accentwoorden in koppen, uit het carousel-systeem */
+/* Accentwoorden in koppen. In de lichte huisstijl is het accent primair
+   cursief (zie .display-serif em); deze warme gradient blijft voor de
+   sans-koppen die nog niet omgezet zijn. */
 .text-shimmer {
   background: linear-gradient(
     122deg,
-    #4c2a4f 0%,
-    #614479 36%,
-    #a562a1 70%,
-    #c270b5 100%
+    #0c0e18 0%,
+    #6b4227 45%,
+    #b0653a 78%,
+    #e8963e 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -154,11 +251,11 @@ body {
   background: conic-gradient(
     from var(--angle, 0deg),
     transparent 0%,
-    #614479 18%,
-    #a562a1 30%,
+    #0c0e18 18%,
+    #b0653a 30%,
     transparent 45%,
     transparent 55%,
-    #c270b5 68%,
+    #e8963e 68%,
     transparent 80%
   );
   -webkit-mask:
@@ -195,7 +292,7 @@ body {
   border-radius: inherit;
   background: radial-gradient(
     340px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(97, 68, 121, 0.08),
+    rgba(12, 14, 24, 0.06),
     transparent 65%
   );
   opacity: var(--glow, 0);
@@ -284,12 +381,12 @@ body {
 /* Footer-watermerk als pseudo-element, puur decoratief */
 .footer-watermark::after {
   content: "NinA AI";
-  font-family: var(--font-display);
-  font-weight: 700;
+  font-family: var(--font-serif);
+  font-weight: 400;
   font-size: 9rem;
   line-height: 1;
   white-space: nowrap;
-  color: rgba(42, 33, 48, 0.035);
+  color: rgba(12, 14, 24, 0.045);
   position: absolute;
   bottom: -2.5rem;
   left: 50%;
@@ -318,7 +415,7 @@ body {
   height: 2px;
   background-image: repeating-linear-gradient(
     90deg,
-    #a562a1 0 8px,
+    #e8963e 0 8px,
     transparent 8px 16px
   );
   background-size: 24px 2px;
@@ -330,7 +427,7 @@ body {
   width: 2px;
   background-image: repeating-linear-gradient(
     180deg,
-    #a562a1 0 8px,
+    #e8963e 0 8px,
     transparent 8px 16px
   );
   background-size: 2px 24px;
@@ -360,10 +457,10 @@ body {
 .motto-outline {
   color: var(--color-text);
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1.5px rgba(42, 33, 48, 0.58);
+  -webkit-text-stroke: 1.5px rgba(12, 14, 24, 0.45);
 }
 .motto-fill {
-  background: linear-gradient(122deg, #614479, #a562a1 60%, #c270b5);
+  background: linear-gradient(122deg, #0c0e18, #b0653a 55%, #e8963e);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -495,7 +592,7 @@ body {
   margin: 1.5em 0;
   padding: 1em 1.25em;
   border-radius: 0.75rem;
-  background: #2a2130;
+  background: #0c0e18;
   color: #f2f2f2;
   font-family: var(--font-mono);
   font-size: 0.875rem;

@@ -39,7 +39,7 @@ export default function AboutNinaEn() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(12,14,24,0.08),transparent_60%)]"
         />
         <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-24 sm:pb-24">
           <div className="reveal-now">
@@ -107,7 +107,7 @@ export default function AboutNinaEn() {
             alt="The NinA team during a team outing in an arcade"
             width={1200}
             height={800}
-            className="mb-10 w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(42,33,48,0.12)]"
+            className="mb-10 w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
           />
         </Reveal>
         <ul className="flex flex-wrap gap-2.5">
@@ -160,7 +160,7 @@ export default function AboutNinaEn() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(97,68,121,0.09),transparent_65%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(12,14,24,0.09),transparent_65%)]"
         />
         <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
           <Reveal>

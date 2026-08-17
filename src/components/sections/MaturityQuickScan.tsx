@@ -314,7 +314,7 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
             daarmee is hij klaar. Dus staat hier eerst wat hij ervoor krijgt,
             en pas daarna de knop. De twee andere paden blijven staan als
             tweede keuze. */}
-        <div className="rounded-2xl border border-primary/50 bg-bg-card p-6 shadow-[0_10px_36px_rgba(97,68,121,0.1)] sm:p-7">
+        <div className="rounded-2xl border border-primary/50 bg-bg-card p-6 shadow-[0_10px_36px_rgba(12,14,24,0.1)] sm:p-7">
           <p className="text-xs font-semibold uppercase tracking-wider text-magenta">
             {t.aanbodKicker}
           </p>

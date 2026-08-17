@@ -15,7 +15,7 @@ export default function CtaSection({
     <section className="relative overflow-hidden">
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(97,68,121,0.09),transparent_65%)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(12,14,24,0.09),transparent_65%)]"
       />
       <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
         <Reveal>

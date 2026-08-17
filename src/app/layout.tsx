@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { GoogleTagManager } from "@next/third-parties/google";
 import Script from "next/script";
-import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Fragment_Mono,
+  Instrument_Serif,
+  Inter,
+  Kalam,
+} from "next/font/google";
 import CookieBanner from "@/components/layout/CookieBanner";
 import KlikMeting from "@/components/layout/KlikMeting";
 import ScrollDiepte from "@/components/layout/ScrollDiepte";
@@ -22,8 +28,30 @@ const bricolage = Bricolage_Grotesque({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
+/**
+ * Huisstijl "Licht": Instrument Serif is de display-letter (dun, editorial,
+ * met cursief als accent), Fragment Mono neemt de plek van JetBrains Mono
+ * over voor labels en cijfers, en Kalam is uitsluitend voor de violette
+ * handschrift-annotaties. Bricolage blijft voor kaarttitels, Inter voor body.
+ */
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const fragmentMono = Fragment_Mono({
+  variable: "--font-fragment",
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const kalam = Kalam({
+  variable: "--font-kalam",
+  weight: "300",
   subsets: ["latin"],
   display: "swap",
 });
@@ -61,7 +89,7 @@ export default function RootLayout({
     <html
       lang="nl"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${bricolage.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${bricolage.variable} ${instrumentSerif.variable} ${fragmentMono.variable} ${kalam.variable} h-full antialiased`}
     >
       {/* Consent Mode v2. Moet met beforeInteractive draaien, dus vóór het
           GTM-script: staat de default te laat, dan mogen tags in dat gaatje

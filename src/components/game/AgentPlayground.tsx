@@ -21,12 +21,12 @@ type TaskDef = {
 };
 
 const TASKS: TaskDef[] = [
-  { label: "E-mail", output: "gelezen en beantwoord", tool: "Mail", min: 9, kleur: "#614479" },
-  { label: "Factuur", output: "gematcht en geboekt", tool: "ERP", min: 12, kleur: "#a562a1" },
-  { label: "PDF-aanvraag", output: "uitgelezen en gelabeld", tool: "CRM", min: 14, kleur: "#c270b5" },
-  { label: "Klantvraag", output: "beantwoord in 3 talen", tool: "Helpdesk", min: 8, kleur: "#4c2a4f" },
-  { label: "Order", output: "gevalideerd en ingevoerd", tool: "ERP", min: 11, kleur: "#614479" },
-  { label: "Rapport", output: "concept opgesteld", tool: "Docs", min: 18, kleur: "#a562a1" },
+  { label: "E-mail", output: "gelezen en beantwoord", tool: "Mail", min: 9, kleur: "#6b4227" },
+  { label: "Factuur", output: "gematcht en geboekt", tool: "ERP", min: 12, kleur: "#b0653a" },
+  { label: "PDF-aanvraag", output: "uitgelezen en gelabeld", tool: "CRM", min: 14, kleur: "#e8963e" },
+  { label: "Klantvraag", output: "beantwoord in 3 talen", tool: "Helpdesk", min: 8, kleur: "#0c0e18" },
+  { label: "Order", output: "gevalideerd en ingevoerd", tool: "ERP", min: 11, kleur: "#6b4227" },
+  { label: "Rapport", output: "concept opgesteld", tool: "Docs", min: 18, kleur: "#b0653a" },
 ];
 
 const LEVEL_AT = 6;
@@ -58,7 +58,7 @@ export default function AgentPlayground() {
     if (reduced.current) return;
     const host = rootRef.current;
     if (!host) return;
-    const colors = ["#614479", "#a562a1", "#c270b5", "#8f6c1d", "#2a2130"];
+    const colors = ["#6b4227", "#b0653a", "#e8963e", "#b0653a", "#0c0e18"];
     for (let i = 0; i < 26; i++) {
       const p = document.createElement("span");
       const size = 5 + Math.random() * 6;
@@ -160,7 +160,7 @@ export default function AgentPlayground() {
   return (
     <div
       ref={rootRef}
-      className="relative overflow-hidden rounded-3xl border border-border bg-bg-card p-6 shadow-[0_20px_60px_rgba(42,33,48,0.08)] sm:p-7"
+      className="relative overflow-hidden rounded-3xl border border-border bg-bg-card p-6 shadow-[0_20px_60px_rgba(12,14,24,0.08)] sm:p-7"
     >
       <div className="flex items-center justify-between gap-3">
         <p className="font-display text-lg font-bold">
@@ -209,7 +209,7 @@ export default function AgentPlayground() {
       <div className="mt-6 flex items-center gap-4">
         <div
           aria-hidden="true"
-          className={`relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] shadow-[0_8px_24px_rgba(97,68,121,0.35)] transition-transform ${
+          className={`relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] shadow-[0_8px_24px_rgba(12,14,24,0.35)] transition-transform ${
             busy ? "scale-110" : ""
           }`}
         >
@@ -257,9 +257,9 @@ export default function AgentPlayground() {
           leveled ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="flex flex-col items-start justify-between gap-3 rounded-2xl bg-[#2a2130] p-4 sm:flex-row sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-3 rounded-2xl bg-[#0c0e18] p-4 sm:flex-row sm:items-center">
           <p className="text-sm text-[#e8e2ee]">
-            <span className="font-display font-bold text-[#c270b5]">
+            <span className="font-display font-bold text-[#e8963e]">
               Level up.
             </span>{" "}
             Zo voelt spelen met AI. Wij bouwen dit dagelijks, in het echt.
@@ -268,7 +268,7 @@ export default function AgentPlayground() {
             href={site.booking}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-semibold text-[#2a2130] transition-colors hover:bg-[#c270b5] hover:text-white"
+            className="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-semibold text-[#0c0e18] transition-colors hover:bg-[#e8963e] hover:text-white"
           >
             Plan een kennismaking
           </a>

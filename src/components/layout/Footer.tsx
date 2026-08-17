@@ -42,8 +42,8 @@ export default function Footer({ lang = "nl" }: { lang?: Lang }) {
       <div aria-hidden="true" className="footer-watermark" />
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-5">
         <div className="sm:col-span-2 lg:col-span-1">
-          <p className="font-display text-lg font-bold">
-            NinA<span className="text-primary"> AI</span> Agency
+          <p className="display-serif text-[22px]">
+            NinA<em className="italic"> AI</em> Agency
           </p>
           <p className="mt-3 text-sm text-text-muted">{t.tagline1}</p>
           <p className="mt-3 text-sm text-text-muted">{t.tagline2}</p>

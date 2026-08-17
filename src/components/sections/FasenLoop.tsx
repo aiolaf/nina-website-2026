@@ -120,7 +120,7 @@ export default function FasenLoop() {
           opRing ? "absolute -translate-x-1/2 -translate-y-1/2" : ""
         } ${
           isActive
-            ? "scale-110 border-primary bg-primary text-white shadow-[0_8px_24px_rgba(97,68,121,0.35)]"
+            ? "scale-110 border-primary bg-primary text-white shadow-[0_8px_24px_rgba(12,14,24,0.35)]"
             : "border-border bg-bg-card text-text hover:border-primary hover:text-primary"
         }`}
       >
@@ -158,9 +158,9 @@ export default function FasenLoop() {
         <svg viewBox="0 0 400 400" className="h-full w-full" aria-hidden="true">
           <defs>
             <linearGradient id="loopgrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#4c2a4f" />
-              <stop offset="55%" stopColor="#614479" />
-              <stop offset="100%" stopColor="#c270b5" />
+              <stop offset="0%" stopColor="#0c0e18" />
+              <stop offset="55%" stopColor="#6b4227" />
+              <stop offset="100%" stopColor="#e8963e" />
             </linearGradient>
           </defs>
           {/* stille basisring */}
@@ -190,7 +190,7 @@ export default function FasenLoop() {
             <g key={deg} transform={`rotate(${deg} 200 200)`}>
               <path
                 d="M 200 26 l -7 8 M 200 26 l 7 8"
-                stroke="#a562a1"
+                stroke="#b0653a"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 fill="none"
@@ -199,14 +199,14 @@ export default function FasenLoop() {
           ))}
           {/* reizende pulse */}
           <g className="motion-reduce:hidden">
-            <circle r="6" fill="#c270b5" opacity="0.9">
+            <circle r="6" fill="#e8963e" opacity="0.9">
               <animateMotion
                 dur="9s"
                 repeatCount="indefinite"
                 path="M 200,30 A 170,170 0 1,1 199.9,30"
               />
             </circle>
-            <circle r="12" fill="#c270b5" opacity="0.25">
+            <circle r="12" fill="#e8963e" opacity="0.25">
               <animateMotion
                 dur="9s"
                 repeatCount="indefinite"
@@ -217,7 +217,7 @@ export default function FasenLoop() {
         </svg>
 
         {/* kern */}
-        <div className="absolute left-1/2 top-1/2 flex h-[38%] w-[38%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-[linear-gradient(135deg,#4c2a4f,#614479_55%,#a562a1)] text-center shadow-[0_16px_48px_rgba(97,68,121,0.3)]">
+        <div className="absolute left-1/2 top-1/2 flex h-[38%] w-[38%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-center shadow-[0_16px_48px_rgba(12,14,24,0.3)]">
           <fase.Icon className="h-7 w-7 text-white/90 sm:h-8 sm:w-8" />
           <p className="font-display mt-1.5 px-3 text-xs font-bold leading-tight text-white sm:text-sm">
             {fase.kort}

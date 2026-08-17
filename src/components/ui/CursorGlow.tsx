@@ -42,8 +42,8 @@ export default function CursorGlow() {
       const s = hot ? 2.1 : 1;
       ring.style.transform = `translate(${x - 16}px, ${y - 16}px) scale(${s})`;
       ring.style.borderColor = hot
-        ? "rgba(194, 112, 181, 0.6)"
-        : "rgba(165, 98, 161, 0.55)";
+        ? "rgba(232, 150, 62, 0.6)"
+        : "rgba(176, 101, 58, 0.55)";
       glow.style.transform = `translate(${tx - 190}px, ${ty - 190}px)`;
       raf = requestAnimationFrame(loop);
     };
@@ -65,7 +65,7 @@ export default function CursorGlow() {
         style={{
           display: "none",
           background:
-            "radial-gradient(circle, rgba(97,68,121,0.09) 0%, transparent 60%)",
+            "radial-gradient(circle, rgba(12,14,24,0.09) 0%, transparent 60%)",
         }}
       />
       <div

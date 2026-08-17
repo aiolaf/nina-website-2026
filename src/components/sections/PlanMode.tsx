@@ -156,7 +156,7 @@ export default function PlanMode() {
   const kaart = (actief: boolean) =>
     `flex h-full flex-col rounded-2xl border p-5 transition-all duration-300 ${
       actief
-        ? "border-primary/60 bg-bg-card shadow-[0_12px_40px_rgba(97,68,121,0.14)]"
+        ? "border-primary/60 bg-bg-card shadow-[0_12px_40px_rgba(12,14,24,0.14)]"
         : "border-border bg-bg-card opacity-90"
     }`;
 
@@ -248,7 +248,7 @@ export default function PlanMode() {
             onClick={keurGoed}
             disabled={stap !== 2}
             className={`mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-ink-deep disabled:opacity-40 ${
-              stap === 2 ? "shadow-[0_8px_24px_rgba(97,68,121,0.35)]" : ""
+              stap === 2 ? "shadow-[0_8px_24px_rgba(12,14,24,0.35)]" : ""
             }`}
           >
             <CheckCircle className="h-4 w-4" /> Goedkeuren
@@ -325,8 +325,8 @@ export default function PlanMode() {
               />
               <defs>
                 <linearGradient id="pm-grad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#614479" />
-                  <stop offset="100%" stopColor="#c270b5" />
+                  <stop offset="0%" stopColor="#6b4227" />
+                  <stop offset="100%" stopColor="#e8963e" />
                 </linearGradient>
               </defs>
             </svg>

@@ -182,7 +182,7 @@ export default function AiPartnership() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(12,14,24,0.08),transparent_60%)]"
         />
         <div className="relative mx-auto max-w-6xl px-5 pb-10 pt-36">
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
@@ -227,7 +227,7 @@ export default function AiPartnership() {
                 alt="Kickoff-workshop met het kernteam van een klant"
                 width={900}
                 height={682}
-                className="rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(42,33,48,0.12)]"
+                className="rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
               />
             </div>
           </div>
@@ -667,7 +667,7 @@ export default function AiPartnership() {
       <section id="afsluiter" className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(97,68,121,0.09),transparent_65%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(12,14,24,0.09),transparent_65%)]"
         />
         <div className="relative mx-auto max-w-4xl px-5 py-24 sm:py-28">
           <Reveal>

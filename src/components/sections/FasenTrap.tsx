@@ -77,7 +77,7 @@ export default function FasenTrap() {
               onClick={() => setActive(idx)}
               className={`group relative flex-1 rounded-t-xl border border-b-0 px-4 pb-6 pt-5 text-left transition-[border-color,box-shadow] ${
                 isActive
-                  ? "border-primary bg-bg-muted shadow-[0_-8px_28px_rgba(97,68,121,0.12)]"
+                  ? "border-primary bg-bg-muted shadow-[0_-8px_28px_rgba(12,14,24,0.12)]"
                   : "border-border bg-bg-card hover:border-primary/50"
               }`}
               style={{

@@ -37,7 +37,7 @@ export default function AiBuildEn() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(12,14,24,0.08),transparent_60%)]"
         />
         <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-24 sm:pb-24">
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
@@ -66,7 +66,7 @@ export default function AiBuildEn() {
                 alt="Live demo of an n8n workflow during a NinA session"
                 width={900}
                 height={675}
-                className="rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(42,33,48,0.12)]"
+                className="rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
               />
             </div>
           </div>
@@ -219,7 +219,7 @@ export default function AiBuildEn() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(97,68,121,0.09),transparent_65%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(12,14,24,0.09),transparent_65%)]"
         />
         <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
           <Reveal>

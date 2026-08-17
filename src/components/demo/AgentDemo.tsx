@@ -140,7 +140,7 @@ export default function AgentDemo() {
             className="absolute inset-x-0 top-0 h-0.5"
             style={{
               background:
-                "linear-gradient(90deg, transparent, #a562a1, transparent)",
+                "linear-gradient(90deg, transparent, #b0653a, transparent)",
               backgroundSize: "200% 100%",
               animation: "shimmer 1.2s linear infinite",
             }}

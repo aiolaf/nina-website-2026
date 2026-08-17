@@ -157,7 +157,7 @@ export default function PartnershipTiers({ lang = "nl" }: { lang?: Lang }) {
           <div
             className={`flex flex-col rounded-2xl border p-6 transition-shadow sm:p-7 ${
               tier.featured
-                ? "border-glow border-primary/60 bg-bg-muted shadow-[0_12px_44px_rgba(97,68,121,0.14)] lg:pb-10 lg:pt-9"
+                ? "border-glow border-primary/60 bg-bg-muted shadow-[0_12px_44px_rgba(12,14,24,0.14)] lg:pb-10 lg:pt-9"
                 : "border-border bg-bg-card hover:border-primary/40"
             }`}
           >

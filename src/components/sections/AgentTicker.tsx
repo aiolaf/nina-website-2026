@@ -25,9 +25,9 @@ export default function AgentTicker() {
           <span
             className={`rounded px-1.5 py-0.5 text-[10px] uppercase tracking-wider ${
               l.tag === "kpi"
-                ? "bg-[#c270b5]/25 text-[#e8b7df]"
+                ? "bg-[#e8963e]/25 text-[#e8b7df]"
                 : l.tag === "mens"
-                  ? "bg-[#a562a1]/25 text-[#d9a8d4]"
+                  ? "bg-[#b0653a]/25 text-[#d9a8d4]"
                   : "bg-white/10 text-[#b5adc0]"
             }`}
           >
@@ -43,14 +43,14 @@ export default function AgentTicker() {
     <div
       role="img"
       aria-label="Voorbeeld van een doorlopende agent-log met verwerkte taken"
-      className="relative h-44 overflow-hidden rounded-2xl bg-[#2a2130] p-5 shadow-[0_16px_48px_rgba(42,33,48,0.25)] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_78%,transparent)]"
+      className="relative h-44 overflow-hidden rounded-2xl bg-[#0c0e18] p-5 shadow-[0_16px_48px_rgba(12,14,24,0.25)] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_78%,transparent)]"
     >
       <div className="ticker-up space-y-2.5 motion-reduce:animate-none">
         {rows(false)}
         {rows(true)}
       </div>
       <span className="absolute right-4 top-3 inline-flex items-center gap-2 text-[11px] text-[#b5adc0]">
-        <span className="relative flex h-2 w-2 rounded-full bg-[#c270b5] text-[#c270b5] ping-soft" />
+        <span className="relative flex h-2 w-2 rounded-full bg-[#e8963e] text-[#e8963e] ping-soft" />
         agents actief
       </span>
     </div>

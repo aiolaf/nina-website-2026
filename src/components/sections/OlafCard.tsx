@@ -28,7 +28,7 @@ export default function OlafCard({
       <div className="relative overflow-hidden rounded-3xl border border-border bg-bg-card">
         <div
           aria-hidden="true"
-          className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(165,98,161,0.18),transparent_65%)]"
+          className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(176,101,58,0.18),transparent_65%)]"
         />
         <div className="relative grid gap-8 p-8 sm:p-10 lg:grid-cols-[1.3fr_1fr] lg:gap-4">
           <div>

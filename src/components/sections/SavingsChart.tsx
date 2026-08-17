@@ -84,7 +84,7 @@ export default function SavingsChart() {
               </div>
               <div className="h-3 overflow-hidden rounded-full bg-bg-alt">
                 <div
-                  className="h-full origin-left rounded-full bg-[linear-gradient(90deg,#614479,#a562a1)] transition-transform duration-1000 ease-out"
+                  className="h-full origin-left rounded-full bg-[linear-gradient(90deg,#6b4227,#b0653a)] transition-transform duration-1000 ease-out"
                   style={{
                     width: `${Math.max((r.na / MAX) * 100, 3)}%`,
                     transform: on ? "scaleX(1)" : "scaleX(0)",

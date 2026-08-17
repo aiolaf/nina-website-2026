@@ -185,7 +185,7 @@ export default function NeuralField({ className }: { className?: string }) {
             const md = Math.sqrt(mx * mx + my * my);
             if (md < CURSOR_DIST) alpha += (1 - md / CURSOR_DIST) * 0.3;
           }
-          ctx.strokeStyle = `rgba(97, 68, 121, ${alpha.toFixed(3)})`;
+          ctx.strokeStyle = `rgba(12, 14, 24, ${alpha.toFixed(3)})`;
           ctx.lineWidth = 0.5 + depth;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -203,7 +203,7 @@ export default function NeuralField({ className }: { className?: string }) {
           if (d2 > CURSOR_DIST * CURSOR_DIST) continue;
           const d = Math.sqrt(d2);
           const alpha = (1 - d / CURSOR_DIST) * 0.5;
-          ctx.strokeStyle = `rgba(165, 98, 161, ${alpha.toFixed(3)})`;
+          ctx.strokeStyle = `rgba(176, 101, 58, ${alpha.toFixed(3)})`;
           ctx.lineWidth = 0.8;
           ctx.beginPath();
           ctx.moveTo(pointer.x, pointer.y);
@@ -218,8 +218,8 @@ export default function NeuralField({ className }: { className?: string }) {
           pointer.y,
           70
         );
-        g.addColorStop(0, "rgba(165, 98, 161, 0.28)");
-        g.addColorStop(1, "rgba(165, 98, 161, 0)");
+        g.addColorStop(0, "rgba(176, 101, 58, 0.28)");
+        g.addColorStop(1, "rgba(176, 101, 58, 0)");
         ctx.fillStyle = g;
         ctx.beginPath();
         ctx.arc(pointer.x, pointer.y, 70, 0, Math.PI * 2);
@@ -229,7 +229,7 @@ export default function NeuralField({ className }: { className?: string }) {
       // Klik-rimpels
       for (const r of ripples) {
         const alpha = (1 - r.r / 220) * 0.35;
-        ctx.strokeStyle = `rgba(165, 98, 161, ${alpha.toFixed(3)})`;
+        ctx.strokeStyle = `rgba(176, 101, 58, ${alpha.toFixed(3)})`;
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.arc(r.x, r.y, r.r, 0, Math.PI * 2);
@@ -244,7 +244,7 @@ export default function NeuralField({ className }: { className?: string }) {
         const x = a.x + (b.x - a.x) * p.t;
         const y = a.y + (b.y - a.y) * p.t;
         const fade = Math.sin(p.t * Math.PI);
-        const color = p.gold ? "194, 112, 181" : "191, 128, 255";
+        const color = p.gold ? "232, 150, 62" : "191, 128, 255";
         const g = ctx.createRadialGradient(x, y, 0, x, y, 14);
         g.addColorStop(0, `rgba(${color}, ${(0.9 * fade).toFixed(3)})`);
         g.addColorStop(1, `rgba(${color}, 0)`);
@@ -252,7 +252,7 @@ export default function NeuralField({ className }: { className?: string }) {
         ctx.beginPath();
         ctx.arc(x, y, 14, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = `rgba(42, 33, 48, ${(0.9 * fade).toFixed(3)})`;
+        ctx.fillStyle = `rgba(12, 14, 24, ${(0.9 * fade).toFixed(3)})`;
         ctx.beginPath();
         ctx.arc(x, y, 1.6, 0, Math.PI * 2);
         ctx.fill();
@@ -261,7 +261,7 @@ export default function NeuralField({ className }: { className?: string }) {
       // Nodes met dieptegloed
       for (const n of nodes) {
         const r = 0.8 + n.z * 2.2;
-        ctx.fillStyle = `rgba(165, 98, 161, ${(0.35 + n.z * 0.5).toFixed(3)})`;
+        ctx.fillStyle = `rgba(176, 101, 58, ${(0.35 + n.z * 0.5).toFixed(3)})`;
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
         ctx.fill();

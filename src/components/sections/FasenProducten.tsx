@@ -218,7 +218,7 @@ export default function FasenProducten({ lang = "nl" }: { lang?: Lang }) {
   }
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-border bg-bg-card shadow-[0_18px_60px_rgba(42,33,48,0.08)]">
+    <div className="overflow-hidden rounded-3xl border border-border bg-bg-card shadow-[0_18px_60px_rgba(12,14,24,0.08)]">
       {/* Tabrij. Op mobiel twee kolommen, vanaf md vier naast elkaar. */}
       <div
         role="tablist"
@@ -340,7 +340,7 @@ export default function FasenProducten({ lang = "nl" }: { lang?: Lang }) {
           />
           <span
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-[#2a2130]/45 to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-[#0c0e18]/45 to-transparent"
           />
           <span className="absolute bottom-4 left-4 rounded-full bg-ink-deep/85 px-4 py-1.5 font-mono text-xs text-white backdrop-blur">
             {fase.fotoLabel}

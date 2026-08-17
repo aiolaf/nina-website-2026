@@ -1,16 +1,15 @@
 /**
- * Het motto van Olaf als vaste display-regel: outline-tekst met een
- * gevulde brand-gradient op "spelen". Bewust statisch: de logowall
- * verderop is de enige marquee op de pagina.
+ * Het motto van Olaf als vaste display-regel. In de huisstijl "Licht" is dit
+ * de enige plek op de homepage waar het goud verschijnt: als marker-streep
+ * achter "spelen". Bewust statisch, de logowall in de hero is de enige
+ * marquee op de pagina.
  */
 export default function MottoMarquee() {
   return (
-    <div className="border-y border-border bg-bg-alt py-10 sm:py-14">
-      <p className="font-display mx-auto max-w-6xl px-5 text-center text-4xl font-bold leading-tight tracking-tight sm:text-6xl">
-        <span className="motto-outline">Ga </span>
-        <span className="motto-fill">spelen</span>
-        <span className="motto-outline"> met AI.</span>
-        <span className="mt-2 block text-lg font-medium tracking-normal text-text-muted sm:text-xl">
+    <div className="border-y border-border bg-bg py-16 sm:py-20">
+      <p className="display-serif mx-auto max-w-6xl px-5 text-center text-[2.6rem] sm:text-[4rem]">
+        Ga <span className="marker italic">spelen</span> met AI.
+        <span className="mt-4 block font-sans text-base font-normal tracking-normal text-text-muted sm:text-lg">
           Alleen zo groei je.
         </span>
       </p>

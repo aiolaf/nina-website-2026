@@ -51,7 +51,7 @@ export default function OverNina() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(12,14,24,0.08),transparent_60%)]"
         />
         <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-36 sm:pb-24">
           <div className="reveal-now">
@@ -118,7 +118,7 @@ export default function OverNina() {
             alt="Het NinA-team tijdens een teamuitje in een game-hal"
             width={1200}
             height={800}
-            className="w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(42,33,48,0.12)]"
+            className="w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
           />
         </Reveal>
 

@@ -126,7 +126,7 @@ export default function SessieFotos() {
           </div>
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2a2130]/55 via-transparent to-transparent"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0c0e18]/55 via-transparent to-transparent"
           />
           <figcaption className="absolute bottom-3 left-3 rounded-full bg-ink-deep/80 px-3 py-1 font-mono text-[11px] text-white backdrop-blur">
             {f.label}

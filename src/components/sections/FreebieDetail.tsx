@@ -44,7 +44,7 @@ export default function FreebieDetail({
     <article className="relative">
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-96 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
+        className="absolute inset-x-0 top-0 h-96 bg-[radial-gradient(ellipse_at_top,rgba(12,14,24,0.08),transparent_60%)]"
       />
       <div className="relative mx-auto max-w-3xl px-5 pt-24 pb-16 sm:pb-20">
         <header className="reveal-now">

@@ -21,7 +21,7 @@ export default function VacaturesPage() {
       <section className="relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(97,68,121,0.08),transparent_60%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(12,14,24,0.08),transparent_60%)]"
         />
         <div className="relative mx-auto max-w-6xl px-5 pt-24 pb-12 sm:pb-16">
           <div className="reveal-now grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">

@@ -1,0 +1,96 @@
+import type { ReactNode } from "react";
+import Reveal from "./Reveal";
+
+type Props = {
+  /** Mono-label boven de kop, bijvoorbeeld "APO METHODE · 2/4". */
+  label?: string;
+  title: ReactNode;
+  sub?: ReactNode;
+  children?: ReactNode;
+  className?: string;
+  variant?: "default" | "alt";
+  /** Smallere kop-kolom voor secties met veel tekst. */
+  id?: string;
+};
+
+/**
+ * Sectie-stramien van de huisstijl "Licht": een mono-label met streep,
+ * daarna een dunne serif-kop waarin het accent cursief is, dan een muted
+ * subregel en de inhoud.
+ *
+ * Dit is de opvolger van Section (het merkdeck-stramien met paarse kicker
+ * en vette sans-kop). Beide bestaan nu naast elkaar zolang de rest van de
+ * site nog niet om is.
+ */
+export default function SectieLicht({
+  label,
+  title,
+  sub,
+  children,
+  className = "",
+  variant = "default",
+  id,
+}: Props) {
+  const bg = variant === "alt" ? "bg-bg-alt" : "";
+
+  return (
+    <section
+      id={id}
+      className={`relative border-t border-border ${bg} ${className}`}
+    >
+      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:py-28">
+        <Reveal>
+          {label && (
+            <p className="label-mono mb-6 border-b border-border pb-3 text-[11.5px] text-text-muted sm:text-xs">
+              {label}
+            </p>
+          )}
+          <h2 className="display-serif title-blur max-w-3xl text-[2.1rem] sm:text-[2.8rem] lg:text-[3.4rem]">
+            {title}
+          </h2>
+          {sub && (
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-text-muted sm:text-[17px]">
+              {sub}
+            </p>
+          )}
+        </Reveal>
+        {children && <div className="mt-12">{children}</div>}
+      </div>
+    </section>
+  );
+}
+
+/** Cursief accent in een serif-kop. Vervangt de gekleurde <Em>. */
+export function Cursief({ children }: { children: ReactNode }) {
+  return <em className="italic">{children}</em>;
+}
+
+/**
+ * Groot cijfer in serif met de eenheid klein erachter en een mono-label
+ * eronder. Het statistiek-patroon uit de stijlgids.
+ */
+export function StatSerif({
+  cijfer,
+  eenheid,
+  label,
+  className = "",
+}: {
+  cijfer: ReactNode;
+  eenheid?: string;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <p className="display-serif text-[2.6rem] leading-none sm:text-[3.4rem]">
+        {cijfer}
+        {eenheid && (
+          <span className="ml-2 font-sans text-[0.34em] font-normal text-text-muted">
+            {eenheid}
+          </span>
+        )}
+      </p>
+      <p className="label-mono mt-3 text-[11px] text-text-muted">{label}</p>
+    </div>
+  );
+}

@@ -68,11 +68,14 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+        {/* Wordmerk in de display-serif van de huisstijl "Licht": de "AI"
+            cursief in plaats van in een accentkleur. Violet blijft daarmee
+            vrij voor het ene merk-moment per scherm. */}
         <Link
           href={home}
-          className="font-display flex h-7 items-center text-lg font-bold leading-none tracking-tight"
+          className="display-serif flex h-7 items-center text-[22px] leading-none"
         >
-          NinA<span className="text-primary">&nbsp;AI</span>
+          NinA<em className="italic">&nbsp;AI</em>
         </Link>
 
         <nav

@@ -50,7 +50,7 @@ export default function MagneticButton({
     "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-[background-color,color,border-color,box-shadow] duration-200 active:scale-[0.97] select-none";
   const variants = {
     primary:
-      "bg-primary text-white hover:bg-ink-deep hover:text-white shadow-[0_8px_30px_rgba(97,68,121,0.22)] hover:shadow-[0_10px_36px_rgba(97,68,121,0.3)]",
+      "bg-primary text-white hover:bg-ink-deep hover:text-white shadow-[0_8px_30px_rgba(12,14,24,0.22)] hover:shadow-[0_10px_36px_rgba(12,14,24,0.3)]",
     ghost:
       "border border-border text-text hover:border-primary hover:text-primary",
   };

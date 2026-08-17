@@ -22,7 +22,7 @@ export default function TokenStack({
   const vulling = open
     ? "border border-gold/60 bg-transparent"
     : featured
-      ? "bg-[linear-gradient(140deg,#c9a227,#8f6c1d)]"
+      ? "bg-[linear-gradient(140deg,#c9a227,#b0653a)]"
       : "bg-gold/35";
 
   return (
