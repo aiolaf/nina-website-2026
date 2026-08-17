@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { getAllPosts, getPost, withLazyImages } from "@/lib/blog";
+import NieuwsbriefSticky from "@/components/sections/NieuwsbriefSticky";
 import { alternatesVoor, site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -64,6 +65,12 @@ export default async function BlogPostPage({ params }: Props) {
             className="article-prose mt-10"
             dangerouslySetInnerHTML={{ __html: withLazyImages(post.contentHtml) }}
           />
+
+          {/* Nieuwsbrief: volledige kaart onder het artikel plus de
+              meescrollende variant. Staat vóór de conversie-afsluiter, want
+              wie net een artikel uit heeft is eerder in de nieuwsbrief
+              geïnteresseerd dan in een kennismaking. */}
+          <NieuwsbriefSticky />
 
           {/* Conversie-afsluiter, consistent met de rest van de site */}
           <aside className="mt-16 rounded-3xl border border-border bg-bg-card p-8 shadow-sm sm:p-10">
