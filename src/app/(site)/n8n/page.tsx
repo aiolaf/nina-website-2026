@@ -68,9 +68,12 @@ export default function N8n() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               n8n AI Automations
             </p>
-            <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+            <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
               Wij zijn de <Em>n8n experts</Em> van Nederland.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              koppelen wat je al gebruikt
+            </p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
               n8n is een open-source low-code platform voor het bouwen van
               automatiseringen: de veiligste en meest complete manier om je

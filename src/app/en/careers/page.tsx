@@ -29,9 +29,12 @@ export default function CareersPage() {
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                 We&rsquo;re hiring!
               </p>
-              <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
                 We&rsquo;re looking for <Em>talent</Em>
               </h1>
+              <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+                we read every application ourselves
+              </p>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
                 We are an ambitious and innovative organization where there is
                 room for your talent development.
@@ -74,7 +77,7 @@ export default function CareersPage() {
                       </span>
                     )}
                   </div>
-                  <h2 className="font-display mt-3 text-xl font-bold leading-snug">
+                  <h2 className="display-serif mt-3 text-xl leading-snug">
                     {v.titelEn}
                     {v.niveauEn ? (
                       <span className="text-text-muted"> · {v.niveauEn}</span>
@@ -101,7 +104,7 @@ export default function CareersPage() {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   {openSollicitatie.categorieEn}
                 </p>
-                <h2 className="font-display mt-3 text-xl font-bold leading-snug">
+                <h2 className="display-serif mt-3 text-xl leading-snug">
                   {openSollicitatie.titelEn}
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">

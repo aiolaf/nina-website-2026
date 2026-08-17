@@ -107,7 +107,7 @@ function SectionBlock({
 }) {
   return (
     <>
-      {section.heading && <h2>{section.heading[lang]}</h2>}
+      {section.heading && <h2 className="display-serif">{section.heading[lang]}</h2>}
       {section.blocks.map((block, i) => (
         <Block key={i} block={block} lang={lang} />
       ))}

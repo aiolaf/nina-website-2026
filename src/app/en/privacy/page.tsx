@@ -26,7 +26,7 @@ export default function PrivacyPageEn() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Privacy Policy
             </p>
-            <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               How we handle <Em>your data</Em>.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
@@ -61,7 +61,7 @@ export default function PrivacyPageEn() {
               download, is the authoritative version.
             </p>
 
-            <h2>1. Who are we?</h2>
+            <h2 className="display-serif">1. Who are we?</h2>
             <p>
               NinA AI Agency is an Amsterdam-based company specialized in
               artificial intelligence. We offer three core services: AI
@@ -77,7 +77,7 @@ export default function PrivacyPageEn() {
               <li>Chamber of Commerce (KvK): {site.kvk}</li>
             </ul>
 
-            <h2>2. What personal data do we process?</h2>
+            <h2 className="display-serif">2. What personal data do we process?</h2>
             <p>
               Depending on how you get in touch with us, we may process the
               following personal data:
@@ -119,7 +119,7 @@ export default function PrivacyPageEn() {
               </li>
             </ul>
 
-            <h2>3. Why do we process personal data?</h2>
+            <h2 className="display-serif">3. Why do we process personal data?</h2>
             <p>
               We process personal data exclusively for the following purposes,
               each based on the legal ground stated:
@@ -161,7 +161,7 @@ export default function PrivacyPageEn() {
               </li>
             </ul>
 
-            <h2>4. Cookies</h2>
+            <h2 className="display-serif">4. Cookies</h2>
             <p>
               Our website uses cookies: small text files placed on your device
               when you visit. Functional cookies are required for the website
@@ -174,7 +174,7 @@ export default function PrivacyPageEn() {
               preferences at any time via the cookie banner.
             </p>
 
-            <h2>5. Sharing with third parties</h2>
+            <h2 className="display-serif">5. Sharing with third parties</h2>
             <p>
               We only share your personal data with third parties when this is
               necessary for our services, or when we are legally required to.
@@ -195,7 +195,7 @@ export default function PrivacyPageEn() {
               or an adequacy decision.
             </p>
 
-            <h2>6. Retention periods</h2>
+            <h2 className="display-serif">6. Retention periods</h2>
             <p>
               We do not keep personal data longer than necessary for the
               purpose it was collected for:
@@ -215,7 +215,7 @@ export default function PrivacyPageEn() {
               </li>
             </ul>
 
-            <h2>7. Security</h2>
+            <h2 className="display-serif">7. Security</h2>
             <p>
               We take appropriate technical and organizational measures to
               protect your personal data against unauthorized access, loss or
@@ -225,7 +225,7 @@ export default function PrivacyPageEn() {
               staff awareness and training on information security.
             </p>
 
-            <h2>8. Your rights</h2>
+            <h2 className="display-serif">8. Your rights</h2>
             <p>
               Under the GDPR you have the following rights regarding your
               personal data:
@@ -269,7 +269,7 @@ export default function PrivacyPageEn() {
               identify yourself before handling your request.
             </p>
 
-            <h2>9. Right to complain</h2>
+            <h2 className="display-serif">9. Right to complain</h2>
             <p>
               If you are unhappy with how we handle your personal data, we
               would like to hear from you so we can help. You also always have
@@ -278,7 +278,7 @@ export default function PrivacyPageEn() {
               www.autoriteitpersoonsgegevens.nl, phone 088 - 1805 250.
             </p>
 
-            <h2>10. Use of AI tools</h2>
+            <h2 className="display-serif">10. Use of AI tools</h2>
             <p>
               As an AI agency we may use AI tools and models from external
               providers when delivering our services. We handle your data with
@@ -291,7 +291,7 @@ export default function PrivacyPageEn() {
               for you without human involvement.
             </p>
 
-            <h2>11. Social media and online presence</h2>
+            <h2 className="display-serif">11. Social media and online presence</h2>
             <p>
               NinA AI Agency is active on social media platforms, including
               LinkedIn and TikTok. When you interact with our content on these
@@ -301,7 +301,7 @@ export default function PrivacyPageEn() {
               as your name and message) to answer your question.
             </p>
 
-            <h2>12. Changes to this privacy policy</h2>
+            <h2 className="display-serif">12. Changes to this privacy policy</h2>
             <p>
               We may update this privacy policy from time to time, for example
               when our services, legislation or technology change. The most
@@ -310,7 +310,7 @@ export default function PrivacyPageEn() {
               changes.
             </p>
 
-            <h2>13. Contact</h2>
+            <h2 className="display-serif">13. Contact</h2>
             <p>
               Questions about this privacy policy or how we process your
               personal data? Get in touch:

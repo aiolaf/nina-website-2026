@@ -45,10 +45,13 @@ export default function AiBuildEn() {
               <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                 AI Build
               </p>
-              <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+              <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
                 We deliver working workflows,{" "}
                 <Em>not reports in a drawer</Em>.
               </h1>
+              <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+                from prototype to production
+              </p>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
                 Custom automations, agents and products. Our developers build
                 in your own environment, without lock-in. Projects from EUR
@@ -84,7 +87,7 @@ export default function AiBuildEn() {
         <div className="grid gap-5 lg:grid-cols-2">
           <Reveal>
             <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7">
-              <h2 className="font-display text-xl font-bold">
+              <h2 className="display-serif text-xl ">
                 Process optimization
               </h2>
               <div className="mt-5 space-y-3">
@@ -112,7 +115,7 @@ export default function AiBuildEn() {
           </Reveal>
           <Reveal delay={0.1}>
             <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7">
-              <h2 className="font-display text-xl font-bold">
+              <h2 className="display-serif text-xl ">
                 Vibe-code to product
               </h2>
               <div className="mt-5 space-y-3">
@@ -223,7 +226,7 @@ export default function AiBuildEn() {
         />
         <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
           <Reveal>
-            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            <h2 className="display-serif text-3xl sm:text-5xl">
               Which process shall we rebuild first?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-text-muted sm:text-lg">

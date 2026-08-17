@@ -146,7 +146,7 @@ export default function HomeEn() {
               <p className="mb-6 inline-flex items-center rounded-full border border-border bg-bg-card/70 px-4 py-1.5 font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary backdrop-blur">
                 On our way to the #1 AI agency in the Netherlands
               </p>
-              <h1 className="font-display max-w-3xl text-[2.6rem] font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+              <h1 className="display-serif max-w-3xl text-[2.6rem] leading-[1.05] sm:text-6xl lg:text-7xl">
                 <span className="reveal-now inline-block">From AI knowledge</span>{" "}
                 <span className="reveal-now inline-block [animation-delay:0.12s]">
                   to a
@@ -170,16 +170,18 @@ export default function HomeEn() {
                   See the AI Partnership
                 </MagneticButton>
               </div>
-              <p className="mt-4 text-xs text-text-muted">
-                No strings attached, 15 minutes, reply within 24 hours. Or{" "}
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <p className="text-xs text-text-muted">
+                  No strings attached, 15 minutes, reply within 24 hours.
+                </p>
+                {/* Handwritten violet: the human NinA moment, one per section. */}
                 <Link
                   href="/en/workshops"
-                  className="font-semibold text-primary hover:underline"
+                  className="annotatie text-[19px] decoration-violet/40 underline-offset-4 hover:underline"
                 >
-                  request a keynote
+                  or request an AI talk or workshop
                 </Link>
-                .
-              </p>
+              </div>
             </div>
             <div className="reveal-now [animation-delay:0.25s]">
               {/* Static agent log (the NL page shows an interactive playground) */}
@@ -674,7 +676,7 @@ export default function HomeEn() {
         />
         <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
           <Reveal>
-            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            <h2 className="display-serif text-3xl sm:text-5xl">
               Let&apos;s take the first step together.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-text-muted sm:text-lg">

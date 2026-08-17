@@ -182,10 +182,13 @@ export default function AiPartnershipEn() {
               <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                 The {MODEL}
               </p>
-              <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+              <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
                 Every euro you put into AI has to bring{" "}
                 <Em>more than one back out</Em>.
               </h1>
+              <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+                twelve months, not a one-off project
+              </p>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
                 Everyone has AI on the agenda, almost nobody knows where to
                 start. We audit your business, find the processes where the work
@@ -604,7 +607,7 @@ export default function AiPartnershipEn() {
         />
         <div className="relative mx-auto max-w-4xl px-5 py-24 sm:py-28">
           <Reveal>
-            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            <h2 className="display-serif text-3xl sm:text-5xl">
               Two questions to start with.
             </h2>
             <div className="mt-8 space-y-4">

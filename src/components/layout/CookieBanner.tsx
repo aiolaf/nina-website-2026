@@ -67,7 +67,7 @@ export default function CookieBanner() {
       className="fixed inset-x-0 bottom-0 z-[80] p-4 sm:p-5"
     >
       <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-bg-card p-5 shadow-[0_20px_60px_rgba(12,14,24,0.22)] sm:p-6">
-        <h2 className="font-display text-lg font-bold">Cookies op deze site</h2>
+        <h2 className="display-serif text-lg ">Cookies op deze site</h2>
         <p className="mt-2 text-sm leading-relaxed text-text-muted">
           We gebruiken cookies die nodig zijn om de site te laten werken. Met
           jouw toestemming meten we ook hoe de site gebruikt wordt en hoe onze

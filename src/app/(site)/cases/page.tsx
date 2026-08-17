@@ -131,9 +131,12 @@ export default function CasesPage() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Cases
             </p>
-            <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               Bewezen <Em>AI-resultaten</Em>.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              namen alleen met toestemming
+            </p>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
               Van MKB tot mid-market: concrete AI-oplossingen die direct impact
               maken op efficiëntie, kosten en kwaliteit.
@@ -160,7 +163,7 @@ export default function CasesPage() {
                   <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                     {c.tag}
                   </p>
-                  <h2 className="font-display mt-2 text-2xl font-bold leading-snug">
+                  <h2 className="display-serif mt-2 text-2xl leading-snug">
                     {c.company}
                   </h2>
                   <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -221,7 +224,7 @@ export default function CasesPage() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-20 text-center sm:py-24">
           <Reveal>
-            <h2 className="font-display mx-auto max-w-2xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            <h2 className="display-serif mx-auto max-w-2xl text-3xl leading-tight sm:text-4xl">
               Klaar voor <Em>vergelijkbare resultaten</Em>?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-text-muted">

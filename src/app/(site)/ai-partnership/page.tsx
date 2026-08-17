@@ -190,10 +190,13 @@ export default function AiPartnership() {
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                 Het {MODEL}
               </p>
-              <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+              <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
                 Elke euro die je in AI stopt, moet er{" "}
                 <Em>meer dan één uit halen</Em>.
               </h1>
+              <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+                twaalf maanden, geen los project
+              </p>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
                 Iedereen heeft AI op de agenda, bijna niemand weet waar te
                 beginnen. Wij lopen als een audit door je bedrijf, zoeken de
@@ -671,7 +674,7 @@ export default function AiPartnership() {
         />
         <div className="relative mx-auto max-w-4xl px-5 py-24 sm:py-28">
           <Reveal>
-            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            <h2 className="display-serif text-3xl sm:text-5xl">
               Twee vragen om mee te beginnen.
             </h2>
             <div className="mt-8 space-y-4">

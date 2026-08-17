@@ -26,7 +26,7 @@ export default function PrivacyPage() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Privacyverklaring
             </p>
-            <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               Zo gaan wij om met <Em>jouw gegevens</Em>.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
@@ -66,7 +66,7 @@ export default function PrivacyPage() {
               toepasselijke Nederlandse privacywetgeving.
             </p>
 
-            <h2>1. Wie zijn wij?</h2>
+            <h2 className="display-serif">1. Wie zijn wij?</h2>
             <p>
               NinA AI Agency is een in Amsterdam gevestigd bedrijf
               gespecialiseerd in kunstmatige intelligentie. Wij bieden drie
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
               <li>KvK-nummer: {site.kvk}</li>
             </ul>
 
-            <h2>2. Welke persoonsgegevens verwerken wij?</h2>
+            <h2 className="display-serif">2. Welke persoonsgegevens verwerken wij?</h2>
             <p>
               Afhankelijk van hoe je met ons in contact komt, kunnen wij de
               volgende persoonsgegevens verwerken:
@@ -127,7 +127,7 @@ export default function PrivacyPage() {
               </li>
             </ul>
 
-            <h2>3. Waarom verwerken wij persoonsgegevens?</h2>
+            <h2 className="display-serif">3. Waarom verwerken wij persoonsgegevens?</h2>
             <p>
               Wij verwerken persoonsgegevens uitsluitend voor de volgende
               doeleinden en op basis van de daarbij genoemde wettelijke
@@ -175,7 +175,7 @@ export default function PrivacyPage() {
               </li>
             </ul>
 
-            <h2>4. Cookies</h2>
+            <h2 className="display-serif">4. Cookies</h2>
             <p>
               Onze website maakt gebruik van cookies. Cookies zijn kleine
               tekstbestanden die op jouw apparaat worden geplaatst wanneer je
@@ -202,7 +202,7 @@ export default function PrivacyPage() {
               aanpassen via de cookiebanner op onze website.
             </p>
 
-            <h2>5. Delen met derden</h2>
+            <h2 className="display-serif">5. Delen met derden</h2>
             <p>
               Wij delen jouw persoonsgegevens alleen met derden wanneer dit
               noodzakelijk is voor onze dienstverlening, of wanneer wij daartoe
@@ -239,7 +239,7 @@ export default function PrivacyPage() {
               adequaatheidsbesluit.
             </p>
 
-            <h2>6. Bewaartermijnen</h2>
+            <h2 className="display-serif">6. Bewaartermijnen</h2>
             <p>
               Wij bewaren persoonsgegevens niet langer dan noodzakelijk is voor
               het doel waarvoor ze zijn verzameld. De volgende bewaartermijnen
@@ -263,7 +263,7 @@ export default function PrivacyPage() {
               </li>
             </ul>
 
-            <h2>7. Beveiliging</h2>
+            <h2 className="display-serif">7. Beveiliging</h2>
             <p>
               Wij nemen passende technische en organisatorische maatregelen om
               jouw persoonsgegevens te beschermen tegen ongeautoriseerde
@@ -290,7 +290,7 @@ export default function PrivacyPage() {
               </li>
             </ul>
 
-            <h2>8. Jouw rechten</h2>
+            <h2 className="display-serif">8. Jouw rechten</h2>
             <p>
               Op grond van de AVG heb je de volgende rechten met betrekking tot
               jouw persoonsgegevens:
@@ -338,7 +338,7 @@ export default function PrivacyPage() {
               identificeren voordat wij jouw verzoek in behandeling nemen.
             </p>
 
-            <h2>9. Klachtrecht</h2>
+            <h2 className="display-serif">9. Klachtrecht</h2>
             <p>
               Mocht je ontevreden zijn over hoe wij met jouw persoonsgegevens
               omgaan, dan horen wij dat graag zodat wij je kunnen helpen. Je
@@ -352,7 +352,7 @@ export default function PrivacyPage() {
               <li>Telefoon: 088 - 1805 250</li>
             </ul>
 
-            <h2>10. Gebruik van AI-tools</h2>
+            <h2 className="display-serif">10. Gebruik van AI-tools</h2>
             <p>
               Als AI-bureau kunnen wij bij de uitvoering van onze diensten
               gebruikmaken van AI-tools en -modellen van externe leveranciers.
@@ -384,7 +384,7 @@ export default function PrivacyPage() {
               jouw project, lichten wij dit graag nader toe.
             </p>
 
-            <h2>11. Social media en online aanwezigheid</h2>
+            <h2 className="display-serif">11. Social media en online aanwezigheid</h2>
             <p>
               NinA AI Agency is actief op social media platforms, waaronder
               LinkedIn en TikTok. Wanneer je interactie hebt met onze content
@@ -398,7 +398,7 @@ export default function PrivacyPage() {
               om jouw vraag te beantwoorden.
             </p>
 
-            <h2>12. Wijzigingen in deze privacyverklaring</h2>
+            <h2 className="display-serif">12. Wijzigingen in deze privacyverklaring</h2>
             <p>
               Wij kunnen deze privacyverklaring van tijd tot tijd aanpassen,
               bijvoorbeeld bij wijzigingen in onze dienstverlening, nieuwe
@@ -408,7 +408,7 @@ export default function PrivacyPage() {
               wijzigingen informeren wij je hier actief over.
             </p>
 
-            <h2>13. Contact</h2>
+            <h2 className="display-serif">13. Contact</h2>
             <p>
               Heb je vragen over deze privacyverklaring of over de manier
               waarop wij jouw persoonsgegevens verwerken? Neem dan gerust

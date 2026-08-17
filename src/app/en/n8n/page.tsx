@@ -63,9 +63,12 @@ export default function N8nEn() {
             <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               n8n AI Automations
             </p>
-            <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+            <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
               We are the <Em>n8n experts</Em> of the Netherlands.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              connect what you already use
+            </p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
               n8n is an open-source low-code platform for building
               automations: the safest and most complete way to automate your
@@ -145,7 +148,7 @@ export default function N8nEn() {
         />
         <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
           <Reveal>
-            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            <h2 className="display-serif text-3xl sm:text-5xl">
               Ready to connect your workflows?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-text-muted sm:text-lg">

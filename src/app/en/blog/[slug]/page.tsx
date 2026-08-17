@@ -49,7 +49,7 @@ export default async function BlogPostPageEn({ params }: Props) {
             </Link>
             {post.categoryEn ? ` · ${post.categoryEn}` : ""}
           </p>
-          <h1 className="font-display mt-4 text-3xl font-bold leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+          <h1 className="display-serif mt-4 text-3xl leading-[1.12] sm:text-4xl lg:text-[2.75rem]">
             {post.titleEn ?? post.title}
           </h1>
           <p className="mt-5 text-sm text-text-muted">
@@ -71,7 +71,7 @@ export default async function BlogPostPageEn({ params }: Props) {
         />
 
         <aside className="mt-16 rounded-3xl border border-border bg-bg-card p-8 shadow-sm sm:p-10">
-          <h2 className="font-display text-2xl font-bold tracking-tight">
+          <h2 className="display-serif text-2xl ">
             Ready to put AI to work?
           </h2>
           <p className="mt-3 leading-relaxed text-text-muted">

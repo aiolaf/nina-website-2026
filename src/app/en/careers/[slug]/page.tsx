@@ -51,7 +51,7 @@ export default async function CareerPage({ params }: Props) {
                 {v.badgeEn}
               </span>
             )}
-            <h1 className="font-display mt-4 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-4 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               {v.titelEn}
             </h1>
             {v.niveauEn && (

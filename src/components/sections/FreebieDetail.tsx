@@ -54,7 +54,7 @@ export default function FreebieDetail({
             </Link>
             {` · ${freebie.category[lang]}`}
           </p>
-          <h1 className="font-display mt-4 text-3xl font-bold leading-[1.12] tracking-tight sm:text-4xl">
+          <h1 className="display-serif mt-4 text-3xl leading-[1.12] sm:text-4xl">
             {freebie.title[lang]}
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-text-muted">
@@ -97,7 +97,7 @@ export default function FreebieDetail({
         </div>
 
         <aside className="mt-16 rounded-3xl border border-border bg-bg-card p-8 shadow-sm sm:p-10">
-          <h2 className="font-display text-2xl font-bold tracking-tight">
+          <h2 className="display-serif text-2xl ">
             {t.ctaTitle}
           </h2>
           <p className="mt-3 leading-relaxed text-text-muted">{t.ctaSub}</p>

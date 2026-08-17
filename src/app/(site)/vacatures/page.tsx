@@ -29,9 +29,12 @@ export default function VacaturesPage() {
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                 We&rsquo;re hiring!
               </p>
-              <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
                 Kom bij ons <Em>AI bouwen</Em>.
               </h1>
+              <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+                we lezen elke sollicitatie zelf
+              </p>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
                 We zijn een jong bedrijf in Amsterdam dat hard groeit. Je krijgt
                 veel ruimte en verantwoordelijkheid, en je werk staat meestal
@@ -77,7 +80,7 @@ export default function VacaturesPage() {
                       </span>
                     )}
                   </div>
-                  <h2 className="font-display mt-3 text-xl font-bold leading-snug">
+                  <h2 className="display-serif mt-3 text-xl leading-snug">
                     {v.titel}
                     {v.niveau ? (
                       <span className="text-text-muted"> · {v.niveau}</span>
@@ -104,7 +107,7 @@ export default function VacaturesPage() {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   {openSollicitatie.categorie}
                 </p>
-                <h2 className="font-display mt-3 text-xl font-bold leading-snug">
+                <h2 className="display-serif mt-3 text-xl leading-snug">
                   {openSollicitatie.titel}
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">

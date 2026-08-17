@@ -29,9 +29,12 @@ export default function BlogPageEn() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Blog
             </p>
-            <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               An <Em>honest story</Em> from AI practice, every week.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              a new one every week
+            </p>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
               No hype, just what works: {posts.length} articles on AI agents,
               automation and organizations that make AI actually pay off.
@@ -66,7 +69,7 @@ export default function BlogPageEn() {
                   Latest article
                   {latest.categoryEn ? ` · ${latest.categoryEn}` : ""}
                 </p>
-                <h2 className="font-display mt-3 text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
+                <h2 className="display-serif mt-3 text-2xl leading-tight sm:text-3xl">
                   {latest.titleEn ?? latest.title}
                 </h2>
                 {(latest.excerptEn ?? latest.excerpt) && (

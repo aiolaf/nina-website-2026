@@ -80,9 +80,12 @@ export default function AiAgentsEn() {
             <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               AI Agents
             </p>
-            <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+            <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
               Digital colleagues that <Em>work 24/7</Em>.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              the human approves, the agent works
+            </p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
               Fewer manual tasks and errors, faster turnaround times. We build
               AI agents that run in your own environment, with the human in
@@ -221,7 +224,7 @@ export default function AiAgentsEn() {
         />
         <div className="relative mx-auto max-w-3xl px-5 py-24 text-center sm:py-32">
           <Reveal>
-            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            <h2 className="display-serif text-3xl sm:text-5xl">
               Which colleague will you hire first?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-text-muted sm:text-lg">

@@ -43,9 +43,12 @@ export default function Contact() {
         />
         <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-36 sm:pb-28">
           <div className="reveal-now">
-            <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+            <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
               Laten we <Em>kennismaken</Em>.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              reactie binnen 24 uur
+            </p>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
               Plan een vrijblijvend kennismakingsgesprek van 15 minuten. We
               denken graag mee, ook als het nog geen project is.
@@ -56,7 +59,7 @@ export default function Contact() {
             {OPTIES.map((o, idx) => (
               <Reveal key={o.titel} delay={idx * 0.1}>
                 <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 transition-colors hover:border-primary/50">
-                  <h2 className="font-display text-lg font-bold">{o.titel}</h2>
+                  <h2 className="display-serif text-lg ">{o.titel}</h2>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-text-muted">
                     {o.tekst}
                   </p>

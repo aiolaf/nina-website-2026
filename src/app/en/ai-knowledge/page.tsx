@@ -25,9 +25,12 @@ export default function AiKnowledgePageEn() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               AI Knowledge
             </p>
-            <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               Practical <Em>AI insights</Em>, 3 to 5 times a week.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              start with the basics
+            </p>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
               Receive insights on AI implementations, new developments and
               practical AI tips? Subscribe to Olaf Lemmens&apos; Substack, or
@@ -55,7 +58,7 @@ export default function AiKnowledgePageEn() {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   Newsletter · Substack
                 </p>
-                <h2 className="font-display mt-2 text-2xl font-bold">
+                <h2 className="display-serif mt-2 text-2xl ">
                   This week in AI
                 </h2>
                 <p className="mt-3 leading-relaxed text-text-muted">
@@ -76,7 +79,7 @@ export default function AiKnowledgePageEn() {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   Blog
                 </p>
-                <h2 className="font-display mt-2 text-2xl font-bold">
+                <h2 className="display-serif mt-2 text-2xl ">
                   Honest stories from AI practice
                 </h2>
                 <p className="mt-3 leading-relaxed text-text-muted">
@@ -100,7 +103,7 @@ export default function AiKnowledgePageEn() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-20 text-center sm:py-24">
           <Reveal>
-            <h2 className="font-display mx-auto max-w-2xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            <h2 className="display-serif mx-auto max-w-2xl text-3xl leading-tight sm:text-4xl">
               Prefer AI knowledge <Em>for your whole team</Em>?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-text-muted">

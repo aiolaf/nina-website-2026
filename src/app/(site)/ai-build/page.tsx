@@ -28,10 +28,13 @@ export default function AiBuild() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               AI Build
             </p>
-            <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+            <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
               Wij leveren werkende workflows,{" "}
               <Em>geen rapporten in een la</Em>.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              van prototype naar productie
+            </p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
               Automatiseringen, agents en producten op maat. Onze developers
               bouwen in jouw eigen omgeving, zonder lock-in. Projecten vanaf
@@ -65,7 +68,7 @@ export default function AiBuild() {
         <div className="grid gap-5 lg:grid-cols-2">
           <Reveal>
             <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7">
-              <h2 className="font-display text-xl font-bold">
+              <h2 className="display-serif text-xl ">
                 Procesoptimalisatie
               </h2>
               <div className="mt-5 space-y-3">
@@ -93,7 +96,7 @@ export default function AiBuild() {
           </Reveal>
           <Reveal delay={0.1}>
             <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7">
-              <h2 className="font-display text-xl font-bold">
+              <h2 className="display-serif text-xl ">
                 Vibe-code naar product
               </h2>
               <div className="mt-5 space-y-3">

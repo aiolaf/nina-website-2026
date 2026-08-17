@@ -122,9 +122,12 @@ export default function CasesPageEn() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Cases
             </p>
-            <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               Proven <Em>AI results</Em>.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              names only with permission
+            </p>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
               From SME to mid-market: concrete AI solutions that directly
               impact efficiency, costs and quality.
@@ -143,7 +146,7 @@ export default function CasesPageEn() {
                   <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                     {c.tag}
                   </p>
-                  <h2 className="font-display mt-2 text-2xl font-bold leading-snug">
+                  <h2 className="display-serif mt-2 text-2xl leading-snug">
                     {c.company}
                   </h2>
                   <p className="mt-1 text-sm text-text-muted">{c.industry}</p>
@@ -197,7 +200,7 @@ export default function CasesPageEn() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-20 text-center sm:py-24">
           <Reveal>
-            <h2 className="font-display mx-auto max-w-2xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            <h2 className="display-serif mx-auto max-w-2xl text-3xl leading-tight sm:text-4xl">
               Ready for <Em>similar results</Em>?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-text-muted">

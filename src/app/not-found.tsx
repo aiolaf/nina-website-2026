@@ -22,7 +22,7 @@ export default function NotFound() {
           />
           <div className="relative mx-auto max-w-6xl px-5 py-24">
             <p className="font-mono text-sm font-semibold text-primary">404</p>
-            <h1 className="font-display mt-3 max-w-2xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+            <h1 className="display-serif mt-3 max-w-2xl text-4xl leading-[1.08] sm:text-6xl">
               Deze pagina bestaat niet <Em>(meer)</Em>.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">

@@ -47,10 +47,13 @@ export default function WorkshopsPageEn() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Workshops &amp; Training
             </p>
-            <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               From intro to deep-dive: hands-on workshops that make your team{" "}
               <Em>AI-proficient</Em>.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              hands-on, not just slides
+            </p>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
               No theory lectures, but doing it yourself: practical sessions
               with AI tools, prompt engineering and concrete exercises.
@@ -128,7 +131,7 @@ export default function WorkshopsPageEn() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Workshop Platform
             </p>
-            <h2 className="font-display mx-auto mt-3 max-w-2xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            <h2 className="display-serif mx-auto mt-3 max-w-2xl text-3xl leading-tight sm:text-4xl">
               View the complete offering and <Em>register directly</Em>.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-text-muted">

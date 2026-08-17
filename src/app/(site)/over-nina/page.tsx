@@ -58,9 +58,12 @@ export default function OverNina() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Over NinA AI Agency
             </p>
-            <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+            <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
               Wij zorgen dat AI bij jullie <Em>echt gebruikt wordt</Em>.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              tien specialisten, één team
+            </p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
               Te veel Nederlandse bedrijven blijven achter in de
               AI-revolutie. Niet omdat ze niet willen, maar omdat AI complex,

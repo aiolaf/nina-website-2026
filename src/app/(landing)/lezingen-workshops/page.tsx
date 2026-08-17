@@ -351,10 +351,13 @@ export default function LezingenWorkshops() {
                 Sessies beoordeeld met een{" "}
                 <span className="font-semibold text-gold">9,3</span>
               </p>
-              <h1 className="font-display max-w-xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              <h1 className="display-serif max-w-xl text-4xl leading-[1.08] sm:text-5xl">
                 <Em>AI spreker</Em> inhuren die je team ook echt in beweging
                 krijgt.
               </h1>
+              <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+                altijd op maat voor jullie zaal
+              </p>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-text-muted sm:mt-6 sm:text-lg">
                 Olaf Lemmens geeft keynotes, lezingen en hands-on workshops over
                 AI, op maat voor jullie organisatie. Van directietafel tot
@@ -453,7 +456,7 @@ export default function LezingenWorkshops() {
               <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
                 Kennis & enthousiasme
               </span>
-              <h2 className="font-display mt-3 text-2xl font-bold">
+              <h2 className="display-serif mt-3 text-2xl ">
                 AI Lezing
               </h2>
               <p className="mt-2 text-sm text-primary">
@@ -491,7 +494,7 @@ export default function LezingenWorkshops() {
               <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
                 Handen aan het stuur
               </span>
-              <h2 className="font-display mt-3 text-2xl font-bold">
+              <h2 className="display-serif mt-3 text-2xl ">
                 AI Workshop
               </h2>
               <p className="mt-2 text-sm text-primary">

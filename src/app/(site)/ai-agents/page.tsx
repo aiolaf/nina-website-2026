@@ -65,9 +65,12 @@ export default function AiAgents() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               AI Agents
             </p>
-            <h1 className="font-display max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl">
+            <h1 className="display-serif max-w-3xl text-4xl leading-[1.08] sm:text-6xl">
               Digitale collega&apos;s die <Em>24/7 werken</Em>.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              de mens keurt, de agent werkt
+            </p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
               Minder handmatige taken en fouten, snellere doorlooptijden. Wij
               bouwen AI-agents die in jullie eigen omgeving draaien, met de

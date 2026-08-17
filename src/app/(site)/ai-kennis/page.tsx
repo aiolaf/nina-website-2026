@@ -25,9 +25,12 @@ export default function AiKennisPage() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               AI Kennis
             </p>
-            <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               Drie tot vijf keer per week <Em>praktische AI-inzichten</Em>.
             </h1>
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              begin bij de basis
+            </p>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
               Inzichten over AI-implementaties, nieuwe ontwikkelingen en
               praktische AI-tips ontvangen? Abonneer op de Substack van Olaf
@@ -54,7 +57,7 @@ export default function AiKennisPage() {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   Nieuwsbrief · Substack
                 </p>
-                <h2 className="font-display mt-2 text-2xl font-bold">
+                <h2 className="display-serif mt-2 text-2xl ">
                   Dit was de week in AI
                 </h2>
                 <p className="mt-3 leading-relaxed text-text-muted">
@@ -76,7 +79,7 @@ export default function AiKennisPage() {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   Blog
                 </p>
-                <h2 className="font-display mt-2 text-2xl font-bold">
+                <h2 className="display-serif mt-2 text-2xl ">
                   Eerlijke verhalen uit de AI-praktijk
                 </h2>
                 <p className="mt-3 leading-relaxed text-text-muted">
@@ -100,7 +103,7 @@ export default function AiKennisPage() {
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-20 text-center sm:py-24">
           <Reveal>
-            <h2 className="font-display mx-auto max-w-2xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            <h2 className="display-serif mx-auto max-w-2xl text-3xl leading-tight sm:text-4xl">
               Liever AI-kennis <Em>voor je hele team</Em>?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-text-muted">

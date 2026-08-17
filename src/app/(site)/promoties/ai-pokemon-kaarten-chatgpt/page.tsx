@@ -45,7 +45,7 @@ export default function PokemonKaartenPage() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Gratis Promotie
             </p>
-            <h1 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <h1 className="display-serif mt-3 max-w-3xl text-4xl leading-[1.08] sm:text-5xl">
               Custom Pokemon kaart <Em>afbeelding generatie</Em> in ChatGPT.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
@@ -60,7 +60,7 @@ export default function PokemonKaartenPage() {
       <section className="border-t border-border bg-bg-alt">
         <div className="mx-auto max-w-3xl px-5 py-16 sm:py-20">
           <article className="article-prose">
-            <h2>1. Ga naar ChatGPT</h2>
+            <h2 className="display-serif">1. Ga naar ChatGPT</h2>
             <p>
               Open{" "}
               <a
@@ -73,9 +73,9 @@ export default function PokemonKaartenPage() {
               .
             </p>
 
-            <h2>2. Kies &ldquo;/maak een afbeelding&rdquo;</h2>
+            <h2 className="display-serif">2. Kies &ldquo;/maak een afbeelding&rdquo;</h2>
 
-            <h2>3. Voeg een foto toe</h2>
+            <h2 className="display-serif">3. Voeg een foto toe</h2>
             <p>
               Voeg een foto toe die je in de Pokemon kaart wilt verwerken van
               de persoon of het karakter.
@@ -85,7 +85,7 @@ export default function PokemonKaartenPage() {
               foto&rsquo;s als referentie afbeelding. Voeg beide toe.
             </p>
 
-            <h2>4. Gebruik deze prompt</h2>
+            <h2 className="display-serif">4. Gebruik deze prompt</h2>
             <p>
               Pas aan waar nodig om je eigen custom Pokemon kaart te
               genereren.
@@ -104,7 +104,7 @@ export default function PokemonKaartenPage() {
               />
             </figure>
 
-            <h2>✨ Alternatieve prompt</h2>
+            <h2 className="display-serif">✨ Alternatieve prompt</h2>
             <p>Je kunt ook deze prompt gebruiken:</p>
             <PromptBlock text={prompt2} />
 
