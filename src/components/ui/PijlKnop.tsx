@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type Variant = "ink" | "ghost" | "licht" | "violet";
+type Variant = "ink" | "ghost" | "ghost-licht" | "licht" | "violet";
 
 type Props = {
   href: string;
@@ -38,6 +38,9 @@ export default function PijlKnop({
   const varianten: Record<Variant, string> = {
     ink: "bg-ink text-white shadow-[0_10px_30px_rgba(12,14,24,0.14)]",
     ghost: "border border-ink/15 text-ink hover:border-ink/35",
+    // Ghost op donker beeld: witte rand, witte tekst.
+    "ghost-licht":
+      "border border-white/30 text-[#f2f2f2] hover:border-white/60 backdrop-blur-sm",
     licht: "bg-[#f2f2f2] text-ink",
     violet: "bg-violet text-white shadow-[0_10px_30px_rgba(153,82,224,0.28)]",
   };
@@ -45,6 +48,7 @@ export default function PijlKnop({
   const cirkel: Record<Variant, string> = {
     ink: "bg-white/16 text-white",
     ghost: "bg-ink/8 text-ink",
+    "ghost-licht": "bg-white/15 text-[#f2f2f2]",
     licht: "bg-ink/10 text-ink",
     violet: "bg-white/20 text-white",
   };

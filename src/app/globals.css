@@ -187,6 +187,75 @@ body {
   }
 }
 
+/* ====================================================================
+   Beeldrecept uit de huisstijl "Licht" (componenten/beeld.html)
+
+   Het bronmateriaal komt uit sessies en lezingen en loopt sterk uiteen in
+   camera, licht en kwaliteit. Deze ene behandeling trekt alles naar
+   hetzelfde warme palet. Elke foto op de site hoort in een .foto-wrapper.
+   ==================================================================== */
+.foto {
+  position: relative;
+  overflow: hidden;
+  background: #ddd8cf;
+}
+.foto > img {
+  filter: saturate(0.82) contrast(1.06) brightness(1.03) sepia(0.08);
+}
+/* Warme wash over de hele foto */
+.foto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    160deg,
+    rgba(233, 223, 200, 0.3),
+    rgba(244, 242, 238, 0.1) 55%,
+    rgba(176, 101, 58, 0.14)
+  );
+  mix-blend-mode: soft-light;
+}
+/* Leesbaarheidslaag: alleen als er tekst op de foto ligt. Donker vanuit
+   onder en links, zodat witte tekst overal leest. */
+.foto-met-tekst::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to top,
+      rgba(12, 14, 24, 0.92) 0%,
+      rgba(12, 14, 24, 0.74) 32%,
+      rgba(12, 14, 24, 0.4) 58%,
+      rgba(12, 14, 24, 0.1) 88%
+    ),
+    linear-gradient(
+      to right,
+      rgba(12, 14, 24, 0.66) 0%,
+      rgba(12, 14, 24, 0.22) 48%,
+      rgba(12, 14, 24, 0) 74%
+    );
+}
+/* Lichte variant: er zweeft een glaskaart boven de foto, dus alleen een
+   warme sluier zodat het glas leesbaar blijft. */
+.foto-licht::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: rgba(244, 242, 238, 0.46);
+}
+/* Alles wat bovenop de overlays moet staan. */
+.op-foto {
+  position: relative;
+  z-index: 3;
+}
+
 /* Papierkorrel voor de warme ivory-uitstraling */
 .grain::after {
   content: "";

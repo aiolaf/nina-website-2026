@@ -1,39 +1,43 @@
 /* eslint-disable @next/next/no-img-element */
 
-const LOGOS: { src: string; alt: string; w: number; h: number }[] = [
-  { src: "/images/logos/asml.svg", alt: "ASML", w: 78, h: 40 },
-  { src: "/images/logos/schiphol.svg", alt: "Schiphol Group", w: 78, h: 40 },
-  { src: "/images/logos/action.webp", alt: "Action", w: 169, h: 32 },
-  { src: "/images/logos/boskalis.webp", alt: "Boskalis", w: 100, h: 32 },
-  { src: "/images/logos/da-drogist.webp", alt: "DA Drogist", w: 40, h: 40 },
-  { src: "/images/logos/de-baak.webp", alt: "De Baak", w: 70, h: 32 },
-  { src: "/images/logos/lelystad.webp", alt: "Gemeente Lelystad", w: 82, h: 32 },
-  { src: "/images/logos/easytoys.webp", alt: "EasyToys", w: 75, h: 32 },
-  { src: "/images/logos/kernbouw.webp", alt: "KernBouw", w: 123, h: 32 },
-  { src: "/images/logos/koffiejongens.webp", alt: "De Koffiejongens", w: 40, h: 40 },
-  // Wit weggesleuteld naar transparantie, net als de rest: het grijsfilter van
-  // de marquee zou van een wit vlak anders een kaartje maken tussen de
-  // wordmarks. "de nieuwe arts" is een gestapeld woordmerk van drie regels en
-  // heeft dus de volle hoogte nodig om leesbaar te blijven.
-  { src: "/images/logos/de-nieuwe-arts.webp", alt: "de nieuwe arts", w: 59, h: 40 },
-  {
-    src: "/images/logos/last-mile-solutions.webp",
-    alt: "Last Mile Solutions",
-    w: 74,
-    h: 32,
-  },
+/**
+ * De klantlogo-banner. Bron: componenten/assets/logo (index.json), de
+ * logobibliotheek van Olaf. Elk logo staat volgens het beeldrecept op een
+ * witte tegel: grijswaarden op 66 procent, volle kleur bij hover. Zo blijft
+ * de rij rustig terwijl merken met een wit vlak in het bestand niet meer als
+ * los kaartje tussen de wordmarks vallen.
+ */
+const LOGOS: { src: string; alt: string }[] = [
+  { src: "/images/logos/asml.svg", alt: "ASML" },
+  { src: "/images/logos/schiphol-group.svg", alt: "Schiphol Group" },
+  { src: "/images/logos/politie.webp", alt: "Politie" },
+  { src: "/images/logos/action.webp", alt: "Action" },
+  { src: "/images/logos/boskalis.webp", alt: "Boskalis" },
+  { src: "/images/logos/da-drogist.webp", alt: "DA Drogist" },
+  { src: "/images/logos/de-baak.webp", alt: "De Baak" },
+  { src: "/images/logos/gemeente-lelystad.webp", alt: "Gemeente Lelystad" },
+  { src: "/images/logos/kplusv.svg", alt: "KplusV" },
+  { src: "/images/logos/easytoys.webp", alt: "EasyToys" },
+  { src: "/images/logos/kernbouw.webp", alt: "KernBouw" },
+  { src: "/images/logos/de-koffie-jongens.svg", alt: "De Koffie Jongens" },
+  { src: "/images/logos/de-nieuwe-arts.webp", alt: "de nieuwe arts" },
+  { src: "/images/logos/last-mile-solutions.webp", alt: "Last Mile Solutions" },
+  { src: "/images/logos/wens-chalets.webp", alt: "Wens Chalets" },
+  { src: "/images/logos/cascando.webp", alt: "Cascando" },
+  { src: "/images/logos/qcore.svg", alt: "Qcore" },
+  { src: "/images/logos/avictus.svg", alt: "Avictus" },
+  { src: "/images/logos/movebuddy.webp", alt: "MoveBuddy" },
+  { src: "/images/logos/nomilk2day.webp", alt: "Nomilk2day" },
+  { src: "/images/logos/red-panda-works.webp", alt: "Red Panda Works" },
+  { src: "/images/logos/cakeprint.svg", alt: "Cakeprint" },
+  { src: "/images/logos/tza.webp", alt: "TZA" },
 ];
 
-/**
- * Doorlopende logowall met echte klantlogo's. Rustig in grijswaarden,
- * kleur op hover. CSS-animatie pauzeert op hover en staat stil onder
- * prefers-reduced-motion.
- */
 export default function LogoMarquee() {
   const row = (ariaHidden: boolean) => (
     <ul
       aria-hidden={ariaHidden || undefined}
-      className="flex shrink-0 items-center gap-14 pr-14"
+      className="flex shrink-0 items-center gap-3 pr-3 sm:gap-4 sm:pr-4"
     >
       {LOGOS.map((logo) => (
         <li key={logo.alt} className="shrink-0">
@@ -41,17 +45,16 @@ export default function LogoMarquee() {
               ver buiten het scherm en werd daardoor nooit geladen; zodra de
               animatie die rij in beeld schoof bleven de logo's leeg, het
               duidelijkst op mobiel waar bijna alles buiten beeld begint.
-              fetchPriority laag houdt ze uit de weg van de LCP; alle tien
-              logo's samen zijn ruim 60 kB. */}
-          <img
-            src={logo.src}
-            alt={ariaHidden ? "" : logo.alt}
-            width={logo.w}
-            height={logo.h}
-            decoding="async"
-            fetchPriority="low"
-            className="max-h-10 w-auto [filter:grayscale(1)_opacity(0.6)] transition-[filter] duration-300 hover:[filter:grayscale(0)_opacity(1)]"
-          />
+              fetchPriority laag houdt ze uit de weg van de LCP. */}
+          <span className="flex h-14 w-28 items-center justify-center rounded-2xl border border-border bg-white px-4 py-3 transition-shadow duration-300 hover:shadow-[0_8px_20px_rgba(12,14,24,0.08)] sm:h-16 sm:w-32">
+            <img
+              src={logo.src}
+              alt={ariaHidden ? "" : logo.alt}
+              decoding="async"
+              fetchPriority="low"
+              className="max-h-full max-w-full object-contain [filter:grayscale(1)_contrast(0.9)] opacity-[0.66] transition-[filter,opacity] duration-300 hover:[filter:none] hover:opacity-100"
+            />
+          </span>
         </li>
       ))}
     </ul>
@@ -59,11 +62,11 @@ export default function LogoMarquee() {
 
   return (
     <div
-      className="group relative overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+      className="group relative overflow-hidden py-1 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
       role="region"
       aria-label="Organisaties die met NinA AI werkten"
     >
-      <div className="flex w-max animate-[marquee_45s_linear_infinite] py-2 group-hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:w-full motion-reduce:flex-wrap motion-reduce:justify-center">
+      <div className="flex w-max animate-[marquee_70s_linear_infinite] py-2 group-hover:[animation-play-state:paused] motion-reduce:w-full motion-reduce:animate-none motion-reduce:flex-wrap motion-reduce:justify-center">
         {row(false)}
         {row(true)}
       </div>

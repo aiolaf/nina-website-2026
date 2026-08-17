@@ -329,7 +329,10 @@ export default function FasenProducten({ lang = "nl" }: { lang?: Lang }) {
           </p>
         </div>
 
-        <div className="relative min-h-64 lg:min-h-0">
+        {/* .foto zet het beeldrecept erop: alle fasefoto's komen uit
+            verschillende sessies en camera's, deze behandeling trekt ze naar
+            hetzelfde warme palet. */}
+        <div className="foto relative min-h-64 lg:min-h-0">
           <Image
             key={fase.foto + fase.nr}
             src={fase.foto}

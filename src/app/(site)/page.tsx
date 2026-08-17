@@ -101,46 +101,52 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: jsonLd(homepageSchema("nl")) }}
       />
 
-      {/* ------------------------------------------------------------- Hero */}
-      <section className="relative flex min-h-[100svh] items-center overflow-hidden">
-        {/* Zand-blob in plaats van de plum-orbs: warm, traag driftend. Eén
-            langzaam element per pagina, zoals de stijl voorschrijft. */}
-        <div
-          aria-hidden="true"
-          className="orb -right-32 -top-24 h-[34rem] w-[34rem] bg-sand/60"
-        />
-        <div
-          aria-hidden="true"
-          className="orb -left-40 bottom-0 h-80 w-80 bg-cognac/10 [animation-delay:-11s]"
-        />
-        <NeuralField className="absolute inset-0 h-full w-full opacity-50" />
-        <div className="relative mx-auto w-full max-w-6xl px-5 pb-20 pt-32">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
-            <div className="reveal-now">
+      {/* ------------------------------------------------------------- Hero
+          De banner is een echte foto uit een eigen sessie, behandeld met het
+          beeldrecept (.foto) en een donkere scrim vanuit onder en links
+          (.foto-met-tekst) zodat de witte tekst overal leest. Bewust
+          sessie-rood: die is donker en rustig aan de tekstkant, wat de
+          stijlgids voorschrijft voor een tekst-hero. */}
+      <section className="relative px-4 pt-20 sm:px-5 sm:pt-24">
+        <div className="mx-auto w-full max-w-6xl">
+          <div className="foto foto-met-tekst reveal-now relative min-h-[clamp(34rem,82svh,46rem)] rounded-[24px] sm:rounded-[28px]">
+            <Image
+              src="/images/beeld/sessie-rood.webp"
+              alt="Olaf Lemmens tijdens een AI-sessie voor een volle zaal"
+              fill
+              priority
+              sizes="(min-width: 1152px) 1120px, 100vw"
+              /* Op mobiel schuift het kader naar rechts: de spreker staat aan
+                 die kant en zou anders volledig achter de tekst verdwijnen. */
+              className="object-cover object-[64%_center] sm:object-center"
+            />
+            {/* Het neurale veld blijft, maar nu als subtiel raster over de
+                foto in plaats van over een leeg vlak. */}
+            <NeuralField className="absolute inset-0 z-[2] h-full w-full opacity-25" />
+            <div className="op-foto flex min-h-[clamp(34rem,82svh,46rem)] flex-col justify-end p-7 sm:p-12 lg:p-16">
               {/* Ambitie, niet een claim. "De nummer 1" konden we niet
                   onderbouwen, en een niet-onderbouwde superioriteitsclaim
                   is onder de Nederlandse Reclame Code aanvechtbaar. Zo
                   blijft de lat staan zonder dat er iets te weerleggen is. */}
-              <p className="label-mono text-[11px] text-text-muted sm:text-[11.5px]">
+              <p className="label-mono text-[10.5px] text-white/70 sm:text-[11.5px]">
                 Op weg naar de nummer 1 AI agency van Nederland
               </p>
-              <h1 className="display-serif mt-7 max-w-[38rem] text-[2.9rem] sm:text-[4.2rem] lg:text-[4.8rem]">
-                <span className="reveal-now inline-block">Van AI-kennis</span>{" "}
-                <span className="reveal-now inline-block [animation-delay:0.12s]">
-                  naar een
-                </span>{" "}
-                <span className="reveal-now inline-block [animation-delay:0.24s]">
-                  <em className="italic">werkende AI-organisatie</em>.
-                </span>
+              <h1 className="display-serif mt-6 max-w-[34rem] text-[2.5rem] text-[#f2f2f2] sm:text-[3.6rem] lg:max-w-[42rem] lg:text-[4.4rem]">
+                Van AI-kennis naar een{" "}
+                <em className="italic text-violet-light">
+                  werkende AI-organisatie
+                </em>
+                .
               </h1>
-              <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-text-muted">
+              <p className="mt-6 max-w-[46ch] text-[16px] leading-relaxed text-white/75 sm:text-[17px]">
                 NinA helpt B2B organisaties processen te automatiseren met
                 slimme AI-agents en workflows, zonder je hele IT-landschap om
                 te gooien. Jullie vaste AI-partner.
               </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <PijlKnop
                   href={site.booking}
+                  variant="licht"
                   data-cta="home_hero_kennismaking"
                   data-cta-soort="hero"
                 >
@@ -150,7 +156,7 @@ export default function Home() {
                     knop. De lezing blijft bereikbaar als tekstlink. */}
                 <PijlKnop
                   href="/ai-partnership"
-                  variant="ghost"
+                  variant="ghost-licht"
                   zonderPijl
                   data-cta="home_hero_partnership"
                   data-cta-soort="hero"
@@ -158,17 +164,17 @@ export default function Home() {
                   Bekijk het AI Partnership
                 </PijlKnop>
               </div>
-              <p className="mt-5 text-[13px] text-text-muted">
+              <p className="mt-5 text-[13px] text-white/60">
                 Vrijblijvend, 15 minuten, binnen 24 uur reactie. Of{" "}
                 <Link
                   href="/lezingen-workshops"
-                  className="text-text underline decoration-border decoration-1 underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
+                  className="text-white/90 underline decoration-white/40 decoration-1 underline-offset-4 transition-colors hover:decoration-white"
                 >
                   vraag een lezing aan
                 </Link>
                 .
               </p>
-              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5 font-mono text-[12px] text-text-muted">
+              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5 border-t border-white/15 pt-6 font-mono text-[11.5px] text-white/70 sm:text-[12px]">
                 {BEWIJS.map((b) => (
                   <li key={b} className="inline-flex items-center gap-2.5">
                     <span
@@ -180,22 +186,37 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            <div className="reveal-now [animation-delay:0.25s]">
-              <AgentPlayground />
-            </div>
           </div>
 
-          {/* Klantlogo's in de hero: dit is de sterkste social proof, dus
-              zichtbaar zonder te scrollen in plaats van in een sectie
-              verderop. */}
-          <div className="reveal-now mt-16 [animation-delay:0.35s]">
-            <p className="label-mono mb-6 text-center text-[11px] text-text-muted">
+          {/* Klantlogo's direct onder de banner: dit is de sterkste social
+              proof, dus zichtbaar zonder te scrollen. Witte tegels volgens
+              het beeldrecept. */}
+          <div className="reveal-now mt-8 [animation-delay:0.35s] sm:mt-10">
+            <p className="label-mono mb-5 text-center text-[11px] text-text-muted">
               Vertrouwd door
             </p>
             <LogoMarquee />
           </div>
         </div>
       </section>
+
+      {/* Het motto van Olaf is speelbaar: de agent-minigame stond eerder in
+          de hero, maar met de foto als banner krijgt hij hier zijn eigen plek
+          met een kop erboven. */}
+      <SectieLicht
+        label="Ga spelen met AI"
+        title={
+          <>
+            Tik een taak aan en kijk wat een agent{" "}
+            <em className="italic">van je overneemt</em>.
+          </>
+        }
+        sub="Echte werkprocessen, geen demo-data: mail, facturen, aanvragen. Je ziet direct hoeveel minuten er per taak vrijkomen."
+      >
+        <div className="mx-auto max-w-2xl">
+          <AgentPlayground />
+        </div>
+      </SectieLicht>
 
       {/* AI Maturity Quick Scan: het startpunt van het partnership, hier
           interactief zodat een bezoeker zijn eigen profiel ziet en van
@@ -387,12 +408,13 @@ export default function Home() {
             </p>
             <figure className="grid items-center gap-14 lg:grid-cols-[1fr_1.05fr]">
               <div className="relative">
-                <div className="relative overflow-hidden rounded-[24px] border border-border">
+                <div className="foto relative overflow-hidden rounded-[24px] border border-border">
                   <Image
-                    src="/images/foto-da-drogist.webp"
+                    src="/images/beeld/klantteam-da.webp"
                     alt="Het team van DA Drogist na de AI-workshop van NinA"
-                    width={1200}
-                    height={900}
+                    width={1400}
+                    height={1050}
+                    sizes="(min-width: 1024px) 540px, 100vw"
                     className="h-full w-full object-cover"
                   />
                   <span className="label-mono absolute bottom-3 left-3 rounded-[10px] bg-white/85 px-3 py-1.5 text-[10.5px] text-text backdrop-blur">
@@ -461,7 +483,7 @@ export default function Home() {
                   className="group flex h-full flex-col"
                 >
                   {post.image && (
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-[18px] border border-border">
+                    <div className="foto relative aspect-[16/10] overflow-hidden rounded-[18px] border border-border">
                       <Image
                         src={post.image}
                         alt={post.title}
