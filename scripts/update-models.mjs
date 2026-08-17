@@ -344,6 +344,9 @@ async function main() {
       bron: "frankfurter.app",
     },
     aantal: top.length,
+    // De bovengrens meeschrijven, zodat de onderbouwingspagina hem kan
+    // noemen zonder dat het getal op twee plekken onderhouden wordt.
+    maximum: TOP,
     modellen: top,
   };
 

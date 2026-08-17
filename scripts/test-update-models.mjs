@@ -130,6 +130,7 @@ test("draait door op de mock en schrijft een compleet bestand", () =>
     assert.equal(data.wisselkoers.koers, KOERS);
     assert.equal(data.wisselkoers.datum, "2026-08-14");
     assert.equal(data.aantal, data.modellen.length);
+    assert.equal(data.maximum, 40);
   }));
 
 test("laat modellen zonder Intelligence Index vallen", () =>

@@ -1,5 +1,5 @@
 {
-  "laatstBijgewerkt": "2026-08-15T21:27:12.311Z",
+  "laatstBijgewerkt": "2026-08-17T07:45:52.836Z",
   "bron": {
     "naam": "Artificial Analysis",
     "url": "https://artificialanalysis.ai"
@@ -12,6 +12,7 @@
     "bron": "frankfurter.app"
   },
   "aantal": 23,
+  "maximum": 40,
   "modellen": [
     {
       "slug": "claude-opus-5",

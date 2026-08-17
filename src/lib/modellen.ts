@@ -55,7 +55,10 @@ export type ModellenData = {
     datum: string | null;
     bron: string;
   };
+  /** Hoeveel modellen er nu in de lijst staan. */
   aantal: number;
+  /** De bovengrens die het update-script aanhoudt (de "top N"). */
+  maximum: number;
   modellen: Model[];
 };
 

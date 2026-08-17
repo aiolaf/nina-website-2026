@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
+import Link from "next/link";
 import MagneticButton from "@/components/ui/MagneticButton";
 import ModellenOverzicht from "@/components/sections/ModellenOverzicht";
 import Reveal from "@/components/ui/Reveal";
@@ -12,8 +11,8 @@ import {
   PAGINAS_PER_PDF,
   TOKENS_PER_WOORD,
   WOORDEN_PER_PAGINA,
-  type ModellenData,
 } from "@/lib/modellen";
+import { leesModellen } from "@/lib/modellen-server";
 import { alternatesVoor } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -22,28 +21,6 @@ export const metadata: Metadata = {
     "Live rankings van de beste AI-modellen, met prijzen per miljoen tokens in euro, snelheid en het verdict van NinA AI Agency. Dagelijks bijgewerkt.",
   alternates: alternatesVoor("/ai-modellen"),
 };
-
-/**
- * De data wordt bij de build van schijf gelezen, niet in de browser
- * opgehaald. De GitHub Action commit een nieuwe models.json en dat zet een
- * deploy in gang, dus de pagina is na elke run weer actueel, en de cijfers
- * staan meteen in de HTML in plaats van na een fetch.
- */
-async function leesModellen(): Promise<ModellenData | null> {
-  try {
-    const ruw = await readFile(
-      path.join(process.cwd(), "public", "data", "models.json"),
-      "utf8"
-    );
-    const data = JSON.parse(ruw) as ModellenData;
-    return Array.isArray(data?.modellen) ? data : null;
-  } catch {
-    // Ontbreekt het bestand of is het stuk, dan valt de pagina terug op een
-    // nette melding. Een kapotte build door een databestand is erger dan
-    // een pagina die even geen tabel toont.
-    return null;
-  }
-}
 
 /**
  * Alle prijzen op deze pagina staan per miljoen tokens, en dat is voor
@@ -105,7 +82,14 @@ function TokenUitleg() {
             {TOKENS_PER_WOORD.toFixed(1).replace(".", ",")} token per
             Nederlands woord. Engelse tekst is zuiniger, dus daar komt er
             ongeveer een kwart meer in. Elk model telt bovendien net iets
-            anders.
+            anders.{" "}
+            <Link
+              href="/ai-modellen/onderbouwing#tokens"
+              className="text-primary underline underline-offset-4 transition-colors hover:text-primary-light"
+            >
+              Zo komen we aan deze aannames
+            </Link>
+            .
           </p>
         </div>
       </div>
@@ -164,6 +148,15 @@ export default async function AiModellenPage() {
                   {koersDatum ? ` (${koersDatum})` : null}
                 </>
               ) : null}
+              {" · "}
+              {/* Bewust klein gehouden: wie de bronregel leest is precies
+                  degene die wil weten hoe deze lijst is opgebouwd. */}
+              <Link
+                href="/ai-modellen/onderbouwing"
+                className="underline underline-offset-4 transition-colors hover:text-primary-light"
+              >
+                Onderbouwing
+              </Link>
             </p>
           </div>
         </div>

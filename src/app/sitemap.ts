@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/workshops",
     "/ai-kennis",
     "/ai-modellen",
+    "/ai-modellen/onderbouwing",
     "/privacy",
     "/promoties/ai-pokemon-kaarten-chatgpt",
     "/en",
