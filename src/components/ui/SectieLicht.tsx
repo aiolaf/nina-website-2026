@@ -6,6 +6,11 @@ type Props = {
   label?: string;
   title: ReactNode;
   sub?: ReactNode;
+  /**
+   * Korte handgeschreven annotatie in violet naast de subregel. Maximaal één
+   * per sectie: dat is het menselijke NinA-moment, geen tweede subkop.
+   */
+  annotatie?: string;
   children?: ReactNode;
   className?: string;
   variant?: "default" | "alt";
@@ -26,6 +31,7 @@ export default function SectieLicht({
   label,
   title,
   sub,
+  annotatie,
   children,
   className = "",
   variant = "default",
@@ -51,6 +57,11 @@ export default function SectieLicht({
           {sub && (
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-text-muted sm:text-[17px]">
               {sub}
+            </p>
+          )}
+          {annotatie && (
+            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
+              {annotatie}
             </p>
           )}
         </Reveal>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Section, { Em } from "@/components/ui/Section";
-import LogoMarquee from "@/components/ui/LogoMarquee";
+import KlantLogoRij from "@/components/ui/KlantLogoRij";
 import CountUp from "@/components/ui/CountUp";
 import IjkpuntLijn from "@/components/ui/IjkpuntLijn";
 import PartnershipTiers from "@/components/sections/PartnershipTiers";
@@ -245,7 +245,7 @@ export default function AiPartnershipEn() {
           </Reveal>
         </div>
         <div className="relative mx-auto max-w-6xl px-5 pb-14">
-          <LogoMarquee />
+          <KlantLogoRij label="Trusted by" />
         </div>
       </section>
 

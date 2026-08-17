@@ -5,7 +5,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import CountUp from "@/components/ui/CountUp";
 import Section, { Em } from "@/components/ui/Section";
 import FilloutEmbed from "@/components/ui/FilloutEmbed";
-import LogoMarquee from "@/components/ui/LogoMarquee";
+import KlantLogoRij from "@/components/ui/KlantLogoRij";
 import SessieFotos from "@/components/sections/SessieFotos";
 import MobielCTA from "@/components/layout/MobielCTA";
 import { IconWhatsApp } from "@/components/ui/icons";
@@ -397,10 +397,10 @@ export default function LezingenWorkshops() {
               social proof en die hoort naast de conversie te staan, niet
               ergens verderop de pagina. */}
           <div className="reveal-now mt-12 border-t border-border pt-10 [animation-delay:0.3s]">
-            <p className="mb-6 text-center text-sm text-text-muted">
-              Onder andere deze organisaties boekten een lezing of workshop
-            </p>
-            <LogoMarquee />
+            {/* Statische rij in plaats van de band: op een landingspagina
+                hoort een handvol gekozen merken naast de conversie, niet de
+                hele set in beweging. Spec: docs/klant-logo-rij.md. */}
+            <KlantLogoRij />
 
             {/* Beeld van echte sessies, direct onder de logo's. Logo's tonen
                 wie, foto's tonen wat het is: samen sterker dan alleen een

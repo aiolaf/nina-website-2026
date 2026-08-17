@@ -141,13 +141,13 @@ body {
   font-style: italic;
 }
 
-/* Marker-effect met goud achter één woord. Zeldzaam gebruiken: hooguit
-   één keer per pagina, en nooit samen met een violet-moment in beeld. */
+/* Marker-effect achter één woord, in violet. Bewust een transparante tint en
+   niet de volle merkkleur: de inkt-tekst moet er leesbaar op blijven. */
 .marker {
   background-image: linear-gradient(
     transparent 56%,
-    var(--color-marker) 56%,
-    var(--color-marker) 92%,
+    rgba(153, 82, 224, 0.32) 56%,
+    rgba(153, 82, 224, 0.32) 92%,
     transparent 92%
   );
 }
@@ -160,6 +160,11 @@ body {
   color: var(--color-violet);
   display: inline-block;
   transform: rotate(-2deg);
+}
+/* Op donkere dragers (foto met scrim, merk-sectie) is het violet te donker;
+   daar de lichte tint. */
+.annotatie-licht {
+  color: var(--color-violet-light);
 }
 
 /* Mono-label boven een sectie of in een kaart. */

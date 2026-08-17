@@ -25,9 +25,9 @@ import type { Metadata } from "next";
 /**
  * Homepage in de huisstijl "Licht": Legora-esthetiek als basis (dunne serif
  * display-koppen met een cursief accent, mono-labels boven elke sectie,
- * pijl-CTA's, grote serif-statistieken, veel wit) met NinA in schaarse
- * momenten: de inkt als tekstkleur, goud eenmalig als marker op het motto
- * en violet uitsluitend in de afsluitende donkere sectie.
+ * pijl-CTA's, grote serif-statistieken, veel wit) met NinA in de inkt en het
+ * violet: de marker onder het motto, de handgeschreven annotaties (hoogstens
+ * één per sectie) en de gloed in de afsluitende donkere sectie.
  *
  * Titel en beschrijving komen uit de root-layout; deze pagina voegt alleen
  * de canonical en de hreflang toe.
@@ -103,21 +103,19 @@ export default function Home() {
       {/* ------------------------------------------------------------- Hero
           De banner is een echte foto uit een eigen sessie, behandeld met het
           beeldrecept (.foto) en een donkere scrim vanuit onder en links
-          (.foto-met-tekst) zodat de witte tekst overal leest. Bewust
-          sessie-rood: die is donker en rustig aan de tekstkant, wat de
-          stijlgids voorschrijft voor een tekst-hero. */}
+          (.foto-met-tekst) zodat de witte tekst overal leest. */}
       <section className="relative px-4 pb-14 pt-20 sm:px-5 sm:pb-16 sm:pt-24">
         <div className="mx-auto w-full max-w-6xl">
           <div className="foto foto-met-tekst reveal-now relative min-h-[clamp(34rem,82svh,46rem)] rounded-[24px] sm:rounded-[28px]">
             <Image
-              src="/images/beeld/sessie-rood.webp"
-              alt="Olaf Lemmens tijdens een AI-sessie voor een volle zaal"
+              src="/images/beeld/zaal-verkenners.webp"
+              alt="Volle zaal tijdens een AI-lezing van NinA AI"
               fill
               priority
               sizes="(min-width: 1152px) 1120px, 100vw"
-              /* Op mobiel schuift het kader naar rechts: de spreker staat aan
-                 die kant en zou anders volledig achter de tekst verdwijnen. */
-              className="object-cover object-[64%_center] sm:object-center"
+              /* Op mobiel schuift het kader naar rechts: daar zit de zaal, en
+                 links komt de tekst met de scrim erover. */
+              className="object-cover object-[62%_center] sm:object-center"
             />
             {/* Het neurale veld blijft, maar nu als subtiel raster over de
                 foto in plaats van over een leeg vlak. */}
@@ -138,7 +136,7 @@ export default function Home() {
                 .
               </h1>
               <p className="mt-6 max-w-[46ch] text-[16px] leading-relaxed text-white/75 sm:text-[17px]">
-                NinA helpt B2B organisaties processen te automatiseren met
+                NinA helpt organisaties processen te automatiseren met
                 slimme AI-agents en workflows, zonder je hele IT-landschap om
                 te gooien. Jullie vaste AI-partner.
               </p>
@@ -163,16 +161,19 @@ export default function Home() {
                   Bekijk het AI Partnership
                 </PijlKnop>
               </div>
-              <p className="mt-5 text-[13px] text-white/60">
-                Vrijblijvend, 15 minuten, binnen 24 uur reactie. Of{" "}
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <p className="text-[13px] text-white/60">
+                  Vrijblijvend, 15 minuten, binnen 24 uur reactie.
+                </p>
+                {/* Handgeschreven violet: het menselijke NinA-moment. Op de
+                    foto de lichte tint, anders leest het violet niet. */}
                 <Link
                   href="/lezingen-workshops"
-                  className="text-white/90 underline decoration-white/40 decoration-1 underline-offset-4 transition-colors hover:decoration-white"
+                  className="annotatie annotatie-licht text-[19px] decoration-violet-light/50 underline-offset-4 hover:underline"
                 >
-                  vraag een lezing aan
+                  of vraag een AI lezing of workshop aan
                 </Link>
-                .
-              </p>
+              </div>
               <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5 border-t border-white/15 pt-6 font-mono text-[11.5px] text-white/70 sm:text-[12px]">
                 {BEWIJS.map((b) => (
                   <li key={b} className="inline-flex items-center gap-2.5">
@@ -191,9 +192,6 @@ export default function Home() {
               proof, dus zichtbaar zonder te scrollen. Witte tegels volgens
               het beeldrecept. */}
           <div className="reveal-now mt-8 [animation-delay:0.35s] sm:mt-10">
-            <p className="label-mono mb-5 text-center text-[11px] text-text-muted">
-              Vertrouwd door
-            </p>
             <LogoMarquee />
           </div>
         </div>
@@ -241,6 +239,7 @@ export default function Home() {
           </>
         }
         sub="Zeven vragen, één per dimensie van AI-volwassenheid. Geef een score van 1 tot 5 en het web beweegt mee. De gestreepte lijn is waar we in een AI Partnership binnen twaalf maanden naartoe werken."
+        annotatie="twee minuten, dat is alles"
       >
         <MaturityQuickScan />
       </SectieLicht>
@@ -286,6 +285,7 @@ export default function Home() {
           </>
         }
         sub="Vier fasen, en per fase de producten die daarbij horen. Het partnership loopt door alle vier."
+        annotatie="je hoeft niet bij fase 1 te beginnen"
       >
         <FasenProducten />
       </SectieLicht>
@@ -327,6 +327,7 @@ export default function Home() {
             <em className="italic">meer dan 13x rendement</em>.
           </>
         }
+        annotatie="expected scenario, niet de best case"
       >
         <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
           <Reveal className="h-full">
@@ -454,6 +455,7 @@ export default function Home() {
           </>
         }
         sub="Geen hype, wel wat werkt. Lees mee met de nieuwste inzichten."
+        annotatie="elke week een nieuwe"
       >
         <div className="grid gap-8 sm:grid-cols-3">
           {getAllPosts()

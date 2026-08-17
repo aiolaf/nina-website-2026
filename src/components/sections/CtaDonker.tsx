@@ -1,5 +1,6 @@
 import Reveal from "@/components/ui/Reveal";
 import PijlKnop from "@/components/ui/PijlKnop";
+import { KlantLogoRijDonker } from "@/components/ui/KlantLogoRij";
 import { site } from "@/lib/site";
 
 type Props = {
@@ -62,6 +63,13 @@ export default function CtaDonker({
               <li>Sessies met een 9,3</li>
               <li>Amsterdam</li>
             </ul>
+          </div>
+
+          {/* Logo's op donker: de witvarianten, zonder tegels. Een kleurlogo
+              mag hier nooit, dus merken zonder witvariant staan er niet in.
+              Spec: docs/klant-logo-rij.md. */}
+          <div className="relative mt-14 border-t border-white/10 pt-10">
+            <KlantLogoRijDonker />
           </div>
         </div>
       </Reveal>

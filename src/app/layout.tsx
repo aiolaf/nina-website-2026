@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     template: "%s | NinA AI Agency",
   },
   description:
-    "NinA AI Agency helpt B2B organisaties om processen te automatiseren met slimme AI-agents en workflows, zonder je hele IT-landschap om te gooien.",
+    "NinA AI Agency helpt organisaties om processen te automatiseren met slimme AI-agents en workflows, zonder je hele IT-landschap om te gooien.",
   openGraph: {
     type: "website",
     locale: "nl_NL",

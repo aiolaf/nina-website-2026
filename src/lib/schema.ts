@@ -73,8 +73,8 @@ export function homepageSchema(lang: Lang = "nl") {
         ],
         founder: { "@id": OLAF_ID },
         description: isEn
-          ? "NinA AI Agency helps B2B organizations automate processes with AI agents and workflows, from keynotes and workshops to a long-term AI partnership."
-          : "NinA AI Agency helpt B2B-organisaties processen automatiseren met AI-agents en workflows, van lezingen en workshops tot een doorlopend AI Partnership.",
+          ? "NinA AI Agency helps organizations automate processes with AI agents and workflows, from keynotes and workshops to a long-term AI partnership."
+          : "NinA AI Agency helpt organisaties processen automatiseren met AI-agents en workflows, van lezingen en workshops tot een doorlopend AI Partnership.",
         knowsAbout: [
           "Kunstmatige intelligentie",
           "AI-agents",

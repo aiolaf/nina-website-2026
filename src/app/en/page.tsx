@@ -30,7 +30,7 @@ import { homepageSchema, jsonLd } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "NinA AI Agency | From idea to working AI agent",
   description:
-    "NinA AI Agency helps B2B organizations automate processes with smart AI agents and workflows, without overhauling your entire IT landscape.",
+    "NinA AI Agency helps organizations automate processes with smart AI agents and workflows, without overhauling your entire IT landscape.",
   alternates: alternatesVoor("/en"),
 };
 
@@ -156,7 +156,7 @@ export default function HomeEn() {
                 </span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-muted">
-                NinA helps B2B organizations automate processes with smart AI
+                NinA helps organizations automate processes with smart AI
                 agents and workflows, without overhauling your entire IT
                 landscape. Your dedicated AI partner.
               </p>
@@ -227,10 +227,8 @@ export default function HomeEn() {
       {/* Logos + stats */}
       <section className="border-b border-border bg-bg-alt py-12">
         <div className="mx-auto max-w-6xl px-5">
-          <p className="mb-6 text-center text-sm text-text-muted">
-            These organizations went before you
-          </p>
-          <LogoMarquee />
+          {/* Label zit in het component; spec: docs/klant-logo-rij.md. */}
+          <LogoMarquee label="Trusted by" />
           <div className="mt-12 grid grid-cols-2 gap-6 text-center lg:grid-cols-4">
             <div className="flex flex-col items-center">
               <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">

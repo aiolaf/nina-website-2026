@@ -143,9 +143,8 @@ export default function CasesPage() {
           {/* De logowall stond alleen op de homepage, terwijl dit de pagina is
               waar iemand naartoe komt om te zien wíe er al mee werkt. */}
           <div className="reveal-now mt-12 [animation-delay:0.15s]">
-            <p className="mb-5 text-sm text-text-muted">
-              Onder andere deze organisaties werken met NinA
-            </p>
+            {/* Label zit in het component: de rij opent altijd met het
+                mono-label "Vertrouwd door", zonder kop erboven. */}
             <LogoMarquee />
           </div>
         </div>
