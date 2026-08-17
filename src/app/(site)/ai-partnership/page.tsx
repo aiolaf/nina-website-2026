@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   alternates: alternatesVoor("/ai-partnership"),
   title: MODEL,
   description:
-    "Wij lopen als een audit door je bedrijf, zoeken de processen waar het opstroomt en zetten die dicht. Vaste capaciteit in tokens per maand, op jaarbasis. Vanaf EUR 3.900 per maand.",
+    "Wij lopen met je door het bedrijf, kijken waar werk blijft liggen en pakken dat aan. Vaste capaciteit in tokens per maand, op jaarbasis. Vanaf EUR 3.900 per maand.",
 };
 
 /** Eén regel per brandje. Een beslisser scant deze lijst, hij leest hem niet. */
@@ -199,8 +199,8 @@ export default function AiPartnership() {
               </p>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
                 Iedereen heeft AI op de agenda, bijna niemand weet waar te
-                beginnen. Wij lopen als een audit door je bedrijf, zoeken de
-                processen waar het opstroomt, en zetten die dicht.
+                beginnen. Wij lopen met je door het bedrijf, kijken waar werk
+                blijft liggen, en pakken dat aan.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton
@@ -278,7 +278,7 @@ export default function AiPartnership() {
             Elk bedrijf heeft <Em>brandjes</Em>.
           </>
         }
-        sub="Plekken waar het opstroomt. Niet spectaculair, wel elke week weer."
+        sub="Die dingen die niemand oplost omdat ze nét niet erg genoeg zijn. Ze kosten wel elke week tijd."
       >
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {BRANDJES.map((b, idx) => (
@@ -518,7 +518,7 @@ export default function AiPartnership() {
             Het begint met de <Em>Kickoff</Em>, daarna een jaar.
           </>
         }
-        sub="Een audit door je organisatie: waar stroomt het op, wat is oplossen waard, in welke volgorde. Daarna bouwen we."
+        sub="We gaan je organisatie door: waar loopt werk vast, wat is het waard om dat op te lossen, en in welke volgorde. Daarna bouwen we."
       >
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {TREDEN.map((t, idx) => (

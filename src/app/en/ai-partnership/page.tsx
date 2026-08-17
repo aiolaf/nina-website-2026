@@ -20,7 +20,7 @@ const MODEL = "AI Partnership";
 export const metadata: Metadata = {
   title: MODEL,
   description:
-    "We audit your business, find the processes where work piles up and shut them down. Fixed capacity in tokens per month, on a yearly basis. From EUR 3,900 per month.",
+    "We walk through your business with you, look at where work gets stuck and deal with it. Fixed capacity in tokens per month, on a yearly basis. From EUR 3,900 per month.",
   alternates: alternatesVoor("/en/ai-partnership"),
 };
 
@@ -191,8 +191,8 @@ export default function AiPartnershipEn() {
               </p>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
                 Everyone has AI on the agenda, almost nobody knows where to
-                start. We audit your business, find the processes where the work
-                piles up, and shut them down.
+                start. We walk through your business with you, look at where
+                work gets stuck, and deal with it.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton href={site.bookingPartnership}>
@@ -260,7 +260,7 @@ export default function AiPartnershipEn() {
             Every business has <Em>small fires</Em>.
           </>
         }
-        sub="Places where the work piles up. Not spectacular, but back again every week."
+        sub="The things nobody fixes because they are not quite bad enough. They still cost you time every week."
       >
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {FIRES.map((f, idx) => (
@@ -446,7 +446,7 @@ export default function AiPartnershipEn() {
             It starts with the <Em>Kickoff</Em>, then a year.
           </>
         }
-        sub="An audit of your organization: where does the work pile up, what is solving it worth, in what order. Then we build."
+        sub="We go through your organization: where does work get stuck, what is it worth to solve, and in what order. Then we build."
       >
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((t, idx) => (
