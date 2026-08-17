@@ -135,7 +135,7 @@ export const PAGINAS_PER_PDF = 20;
  * Ronden op ongeveer twee significante cijfers. Een schatting die als
  * "76.842 woorden" op het scherm staat doet alsof hij precies is.
  */
-function rondAf(n: number): number {
+export function rondAf(n: number): number {
   if (n <= 0) return 0;
   const orde = Math.pow(10, Math.floor(Math.log10(n)) - 1);
   return Math.round(n / orde) * orde;

@@ -1,6 +1,12 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
+import { useId, useMemo, useState, type ReactNode } from "react";
+import {
+  IconBliksem,
+  IconCode,
+  IconLagen,
+  IconVonk,
+} from "@/components/ui/DataIcons";
 import {
   CATEGORIEEN,
   SORTERINGEN,
@@ -17,9 +23,17 @@ import {
 } from "@/lib/modellen";
 
 /**
- * Filterbalk plus modelkaarten. Alles gebeurt in de browser op een lijst
- * die al in de HTML staat: de pagina is statisch geprerenderd, dus zonder
- * JavaScript zie je nog steeds alle modellen op volgorde van intelligentie.
+ * Filterbalk plus modelkaarten in de huisstijl "Licht".
+ *
+ * Kleurverdeling volgens het huisstijldocument: ink voor actieve states en
+ * knoppen, amber en sand als werkkleuren voor data, goud alleen als
+ * markeerstift bij een aanrader, en violet uitsluitend als klein
+ * merk-label op het verdict. Het grote violet-moment van deze pagina is de
+ * donkere afsluiter, niet deze lijst.
+ *
+ * Alles gebeurt in de browser op een lijst die al in de HTML staat: de
+ * pagina is statisch geprerenderd, dus zonder JavaScript zie je nog steeds
+ * alle modellen op volgorde van intelligentie.
  */
 export default function ModellenOverzicht({ modellen }: { modellen: Model[] }) {
   const [gekozen, setGekozen] = useState<Categorie[]>([]);
@@ -75,9 +89,9 @@ export default function ModellenOverzicht({ modellen }: { modellen: Model[] }) {
 
   return (
     <div>
-      {/* Filters. Op mobiel schuift de chiprij horizontaal, met een negatieve
-          marge zodat de eerste en laatste chip tegen de schermrand lopen. */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
+        {/* Op mobiel schuift de chiprij horizontaal, met een negatieve marge
+            zodat de eerste en laatste chip tegen de schermrand lopen. */}
         <div
           role="group"
           aria-label="Filter op categorie"
@@ -91,10 +105,10 @@ export default function ModellenOverzicht({ modellen }: { modellen: Model[] }) {
                 type="button"
                 aria-pressed={aan}
                 onClick={() => wissel(c.sleutel)}
-                className={`shrink-0 rounded-full border px-4 py-1.5 text-sm transition-colors ${
+                className={`shrink-0 rounded-[10px] px-3 py-1.5 font-mono text-xs uppercase tracking-[0.06em] transition-colors ${
                   aan
-                    ? "border-primary bg-primary/15 text-primary-light"
-                    : "border-border bg-bg-card/60 text-text-muted hover:border-primary/60 hover:text-primary-light"
+                    ? "bg-text text-bg"
+                    : "bg-bg-muted text-text-muted hover:text-text"
                 }`}
               >
                 {c.label}
@@ -104,21 +118,21 @@ export default function ModellenOverzicht({ modellen }: { modellen: Model[] }) {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-2">
-            <span className="hidden text-sm text-text-muted sm:inline">
+          <div className="flex items-center gap-3">
+            <span className="label-mono hidden text-text-muted sm:inline">
               Sorteer op
             </span>
-            <div className="flex rounded-full border border-border bg-bg-card/60 p-1">
+            <div className="flex gap-1 rounded-full bg-bg-muted p-1">
               {SORTERINGEN.map((s) => (
                 <button
                   key={s.sleutel}
                   type="button"
                   aria-pressed={sortering === s.sleutel}
                   onClick={() => setSortering(s.sleutel)}
-                  className={`rounded-full px-3.5 py-1.5 text-sm transition-colors ${
+                  className={`rounded-full px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.06em] transition-colors ${
                     sortering === s.sleutel
-                      ? "bg-primary text-white"
-                      : "text-text-muted hover:text-primary-light"
+                      ? "bg-text text-bg"
+                      : "text-text-muted hover:text-text"
                   }`}
                 >
                   {s.label}
@@ -137,18 +151,18 @@ export default function ModellenOverzicht({ modellen }: { modellen: Model[] }) {
               value={zoek}
               onChange={(e) => setZoek(e.target.value)}
               placeholder="Zoek een model"
-              className="w-full rounded-full border border-border bg-bg-card/60 px-4 py-2 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none"
+              className="w-full rounded-full border border-border bg-bg-alt px-4 py-2.5 text-sm text-text transition-colors placeholder:text-text-muted focus:border-[rgba(12,14,24,0.3)] focus:outline-none"
             />
           </div>
         </div>
       </div>
 
-      <p aria-live="polite" className="mt-6 font-mono text-xs text-text-muted">
+      <p aria-live="polite" className="label-mono mt-7 text-text-muted">
         {gefilterdActief
-          ? `${zichtbaar.length} van de ${modellen.length} modellen`
+          ? `${zichtbaar.length} van ${modellen.length} modellen`
           : `${modellen.length} modellen`}
         {sortering === "prijs" && (
-          <span className="font-sans">
+          <span className="font-sans text-xs normal-case tracking-normal">
             {" "}
             · prijs berekend op drie delen input, een deel output
           </span>
@@ -156,7 +170,7 @@ export default function ModellenOverzicht({ modellen }: { modellen: Model[] }) {
       </p>
 
       {zichtbaar.length === 0 ? (
-        <div className="mt-8 rounded-2xl border border-border bg-bg-card/60 p-10 text-center">
+        <div className="kaart-glas mt-8 p-12 text-center">
           <p className="text-text-muted">
             Geen modellen gevonden met deze combinatie van filters.
           </p>
@@ -166,15 +180,15 @@ export default function ModellenOverzicht({ modellen }: { modellen: Model[] }) {
               setGekozen([]);
               setZoek("");
             }}
-            className="mt-4 text-sm font-semibold text-primary transition-colors hover:text-primary-light"
+            className="link-onder mt-4 font-mono text-xs uppercase tracking-[0.06em]"
           >
             Filters wissen
           </button>
         </div>
       ) : (
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {zichtbaar.map((model) => (
-            <ModelKaart key={model.slug} model={model} />
+        <ul className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {zichtbaar.map((model, i) => (
+            <ModelKaart key={model.slug} model={model} index={i} />
           ))}
         </ul>
       )}
@@ -182,45 +196,63 @@ export default function ModellenOverzicht({ modellen }: { modellen: Model[] }) {
   );
 }
 
-function ModelKaart({ model }: { model: Model }) {
+function ModelKaart({ model, index }: { model: Model; index: number }) {
   const aanrader = model.verdict?.aanrader === true;
 
   return (
     <li
-      className={`flex flex-col rounded-2xl border bg-bg-card/70 p-5 backdrop-blur-md transition-colors ${
-        aanrader
-          ? "border-gold/45 shadow-[0_0_0_1px_rgba(253,230,139,0.1)]"
-          : "border-border hover:border-primary/50"
+      className={`kaart-in kaart-glas flex flex-col p-6 ${
+        aanrader ? "kaart-uitgelicht" : ""
       }`}
+      /* Gestaffeld per 80ms zoals het huisstijldocument voorschrijft, maar
+         afgetopt: bij 23 kaarten zou de laatste anders bijna twee seconden
+         op zichzelf staan wachten. */
+      style={{ animationDelay: `${Math.min(index, 5) * 80}ms` }}
     >
       {aanrader && (
-        <p className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-gold/35 bg-gold/10 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-gold">
-          NinA aanrader
+        <p className="label-mono mb-4 text-text">
+          <span className="marker-goud">NinA aanrader</span>
         </p>
       )}
 
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="font-display text-lg font-bold leading-snug">
+          <h3 className="font-display text-lg font-semibold leading-snug tracking-[-0.02em]">
             {model.naam}
           </h3>
-          <p className="mt-0.5 text-sm text-text-muted">{model.provider}</p>
+          <p className="mt-1 text-sm text-text-muted">{model.provider}</p>
         </div>
         {model.verdict?.sterren ? (
           <Sterren aantal={model.verdict.sterren} />
         ) : null}
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2">
-        <Badge label="Intelligentie" waarde={score(model.intelligentie)} />
+      <div className="mt-5 flex flex-wrap gap-2">
+        <Chip
+          icoon={<IconVonk className="h-3.5 w-3.5 text-amber" />}
+          label="Intelligentie"
+          waarde={score(model.intelligentie)}
+        />
         {model.coding !== null && (
-          <Badge label="Coding" waarde={score(model.coding)} />
+          <Chip
+            icoon={<IconCode className="h-3.5 w-3.5 text-amber" />}
+            label="Coding"
+            waarde={score(model.coding)}
+          />
         )}
         {model.snelheid !== null && (
-          <Badge label="Snelheid" waarde={`${model.snelheid} t/s`} />
+          <Chip
+            icoon={<IconBliksem className="h-3.5 w-3.5 text-amber" />}
+            label="Snelheid"
+            waarde={`${model.snelheid} t/s`}
+          />
         )}
         {model.contextvenster !== null && (
-          <Badge label="Context" waarde={contextKort(model.contextvenster)} />
+          <Chip
+            icoon={<IconLagen className="h-3.5 w-3.5 text-amber" />}
+            label="Context"
+            waarde={contextKort(model.contextvenster)}
+          />
         )}
       </div>
 
@@ -228,22 +260,20 @@ function ModelKaart({ model }: { model: Model }) {
         <ContextInTekst tokens={model.contextvenster} />
       )}
 
-      <div className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border">
+      <div className="kaart-binnen mt-5 grid grid-cols-2 divide-x divide-border">
         <Prijs label="Input" waarde={model.prijsInput} />
         <Prijs label="Output" waarde={model.prijsOutput} />
       </div>
 
       {model.verdict && (
-        <div className="mt-4 rounded-r-xl border-l-2 border-primary bg-primary/10 px-4 py-3">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-light">
-            Verdict van NinA
-          </p>
-          <p className="mt-1.5 text-sm font-medium leading-relaxed text-text">
+        <div className="mt-5 border-l-2 border-primary/60 pl-4">
+          <p className="label-mono text-primary">Verdict van NinA</p>
+          <p className="mt-2 leading-relaxed text-text">
             {model.verdict.ninaVerdict}
           </p>
           {model.verdict.waarGoedVoor && (
-            <p className="mt-2 text-xs leading-relaxed text-text-muted">
-              <span className="font-semibold text-text">Goed voor: </span>
+            <p className="mt-2 text-sm leading-relaxed text-text-muted">
+              <span className="text-text">Goed voor: </span>
               {model.verdict.waarGoedVoor}
             </p>
           )}
@@ -251,11 +281,11 @@ function ModelKaart({ model }: { model: Model }) {
       )}
 
       {model.verdict && model.verdict.categorie.length > 0 && (
-        <ul className="mt-auto flex flex-wrap gap-1.5 pt-4">
+        <ul className="mt-auto flex flex-wrap gap-1.5 pt-5">
           {model.verdict.categorie.map((c) => (
             <li
               key={c}
-              className="rounded-md border border-border px-2 py-0.5 text-[11px] text-text-muted"
+              className="rounded-md bg-sand/60 px-2 py-0.5 font-mono text-[11px] text-text-muted"
             >
               {categorieLabel(c)}
             </li>
@@ -263,6 +293,31 @@ function ModelKaart({ model }: { model: Model }) {
         </ul>
       )}
     </li>
+  );
+}
+
+/**
+ * Chip volgens het recept: mono, icoon plus waarde, zachte achtergrond,
+ * radius 10. Het label staat er in tekst bij, want op een
+ * vergelijkingspagina moet je kunnen zien welk cijfer je leest.
+ */
+function Chip({
+  icoon,
+  label,
+  waarde,
+}: {
+  icoon: ReactNode;
+  label: string;
+  waarde: string;
+}) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-[10px] bg-bg-muted px-2.5 py-1.5">
+      {icoon}
+      <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-text-muted">
+        {label}
+      </span>
+      <span className="font-mono text-xs text-text">{waarde}</span>
+    </span>
   );
 }
 
@@ -276,7 +331,7 @@ function ContextInTekst({ tokens }: { tokens: number }) {
   // De lopende tekst staat in strings en niet los in de JSX: apostrofs in
   // een JSX-tekstknoop worden door react/no-unescaped-entities afgekeurd.
   return (
-    <p className="mt-2.5 text-xs leading-relaxed text-text-muted">
+    <p className="mt-3 text-sm leading-relaxed text-text-muted">
       {"Leest in een gesprek ongeveer "}
       <span className="font-mono text-text">{maat.woorden}</span>
       {" woorden, zo'n "}
@@ -292,30 +347,24 @@ function ContextInTekst({ tokens }: { tokens: number }) {
   );
 }
 
-function Badge({ label, waarde }: { label: string; waarde: string }) {
-  return (
-    <span className="inline-flex items-baseline gap-1.5 rounded-lg border border-border bg-bg-muted/50 px-2.5 py-1">
-      <span className="text-[11px] text-text-muted">{label}</span>
-      <span className="font-mono text-sm font-semibold text-text">{waarde}</span>
-    </span>
-  );
-}
-
 function Prijs({ label, waarde }: { label: string; waarde: number | null }) {
   return (
-    <div className="bg-bg-card/80 px-4 py-3">
-      <p className="text-[11px] uppercase tracking-[0.12em] text-text-muted">
-        {label}
-      </p>
-      <p className="font-mono text-lg font-semibold text-text">
+    <div className="px-4 py-3.5">
+      <p className="label-mono text-text-muted">{label}</p>
+      <p className="mt-1 font-mono text-lg text-text">
         {waarde === null ? "n.b." : `€ ${euro(waarde)}`}
       </p>
-      <p className="text-[11px] text-text-muted">per 1M tokens</p>
+      <p className="mt-0.5 font-mono text-[11px] text-text-muted">
+        per 1M tokens
+      </p>
     </div>
   );
 }
 
-/** Sterren van NinA. Paars, want goud is voorbehouden aan de aanrader. */
+/**
+ * Sterren van NinA in amber. Amber is de werkkleur voor datapunten en
+ * actieve iconen; violet blijft het merk en goud de zeldzame highlight.
+ */
 function Sterren({ aantal }: { aantal: number }) {
   const heel = Math.max(0, Math.min(5, Math.round(aantal)));
   return (
@@ -329,7 +378,9 @@ function Sterren({ aantal }: { aantal: number }) {
           key={i}
           viewBox="0 0 20 20"
           aria-hidden="true"
-          className={`h-3.5 w-3.5 ${i < heel ? "text-primary" : "text-border"}`}
+          className={`h-3.5 w-3.5 ${
+            i < heel ? "text-amber" : "text-[rgba(12,14,24,0.14)]"
+          }`}
           fill="currentColor"
         >
           <path d="M10 1.5l2.47 5.36 5.86.67-4.36 3.97 1.19 5.77L10 14.4l-5.16 2.87 1.19-5.77L1.67 7.53l5.86-.67L10 1.5z" />

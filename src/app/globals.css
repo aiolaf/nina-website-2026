@@ -18,6 +18,39 @@
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-display: var(--font-bricolage), var(--font-inter), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  /* ----------------------------------------------------------------
+     Huisstijl "Licht" (Legora-esthetiek met NinA-accenten).
+     Zie docs/huisstijl/nina-huisstijl-claude-design.md.
+
+     Het functionele palet en de extra fontlagen staan hier zodat
+     Tailwind de utilities aanmaakt (bg-sand, text-amber, font-serif).
+     De basiskleuren worden per routegroep omgezet, zie .thema-licht.
+     ---------------------------------------------------------------- */
+
+  /* Werkkleuren voor data en interface. Nooit verwarren met violet:
+     violet is het merk, deze twee zijn gereedschap. */
+  --color-sand: #e9dfc8;
+  --color-amber: #e8963e;
+  --color-cognac: #b0653a;
+  --color-blue: #3f7de0;
+  --color-green-soft: #d9ead3;
+  --color-red-soft: #f6d7d7;
+  /* Merk-donker, voor de ene donkere sectie per pagina. */
+  --color-dark: #0c0e18;
+
+  /* Display-koppen: groot, dun, editorial. Ook cursief voor nadruk.
+     UI-koppen (kaarttitels) blijven Bricolage via --font-display.
+     Handschrift voor de ene annotatie in violet.
+
+     Hier staan alleen de fallbacks. De echte fonts worden geladen in de
+     layout van de routegroep en dus toegewezen in .thema-licht: een
+     variabele die naar een andere variabele verwijst wordt opgelost op het
+     element waar hij is gedeclareerd, en dat is hier :root. De
+     font-variabelen van next/font staan op de wrapper daarbinnen, dus een
+     verwijzing vanaf :root zou leeg blijven. */
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-hand: cursive;
 }
 
 html {
@@ -25,51 +58,183 @@ html {
   background: var(--color-bg);
 }
 
-/* ---------------------------------------------------------------------
-   Donker thema, gebruikt door de routegroep (donker) rond /ai-modellen.
+/* =====================================================================
+   Huisstijl "Licht", gebruikt door de routegroep (licht) rond
+   /ai-modellen. Bron: docs/huisstijl/nina-huisstijl-claude-design.md.
 
    Alleen de merk-tokens worden hier opnieuw gezet. Elke Tailwind-utility
    verwijst naar deze variabelen, dus bg-bg-card, text-text-muted en
    border-border volgen vanzelf, inclusief de gedeelde header en footer.
-   De pagina zelf bevat daardoor geen enkele vaste kleurcode en zou het in
-   het ivory-thema net zo goed doen.
-   --------------------------------------------------------------------- */
-.thema-donker {
-  --color-bg: #0c0e18;
-  --color-bg-card: #151828;
-  --color-bg-alt: #121421;
-  --color-bg-muted: #262a40;
+   De paginas zelf bevatten daardoor geen vaste kleurcodes.
+
+   Wil je de hele site omzetten, dan verhuizen deze waarden naar @theme
+   en kan de wrapper eruit.
+   ===================================================================== */
+.thema-licht {
+  --color-bg: #f4f2ee;
+  /* De kaartkleur heeft zelf al alpha; gebruik hem zonder /opacity. */
+  --color-bg-card: rgba(255, 255, 255, 0.72);
+  --color-bg-alt: #fbfaf8;
+  --color-bg-muted: #f0ede6;
   --color-primary: #9952e0;
   --color-primary-light: #bf80ff;
-  --color-magenta: #bf80ff;
-  /* Hoverkleur van de gevulde knop. Bewust donkerder dan #bf80ff: daarop
-     zou de witte knoptekst te weinig contrast houden. */
-  --color-ink-deep: #7a3cc0;
-  --color-text: #f2f2f2;
-  --color-text-muted: #a6a6a6;
-  --color-border: #33374d;
-  /* Goud, uitsluitend voor de NinA aanrader-highlight. */
+  --color-magenta: #b0653a;
+  --color-ink-deep: #0c0e18;
+  --color-text: #0c0e18;
+  --color-text-muted: #6b6b70;
+  --color-border: rgba(12, 14, 24, 0.08);
   --color-gold: #fde68b;
-  color-scheme: dark;
+  /* De drie fontlagen die deze groep extra laadt. Ze worden hier
+     toegewezen en niet in @theme, omdat de font-variabelen van next/font op
+     dit element staan: een var() die naar een andere var() wijst wordt
+     opgelost op het element van de declaratie, niet op het element waar de
+     utility wordt gebruikt. */
+  --font-serif: var(--font-instrument), "Playfair Display", Georgia, serif;
+  --font-hand: var(--font-kalam), cursive;
+  /* Fragment Mono voor labels, chips en cijfers, JetBrains als fallback. */
+  --font-mono: var(--font-fragment), var(--font-jetbrains), ui-monospace,
+    monospace;
 }
 
-/* html en body staan buiten de wrapper en zouden anders in ivory
-   doorschemeren bij overscroll of op een korte pagina. */
-html:has(.thema-donker),
-html:has(.thema-donker) body {
-  background: #0c0e18;
+/* html en body staan buiten de wrapper en zouden anders het oude ivory
+   laten doorschemeren bij overscroll of op een korte pagina. */
+html:has(.thema-licht),
+html:has(.thema-licht) body {
+  background: #f4f2ee;
 }
 
-/* De gradient van .text-shimmer is op de ivory-achtergrond afgestemd en
-   valt op donker weg. Hier dezelfde beweging, maar dan lichter. */
-.thema-donker .text-shimmer {
-  background: linear-gradient(122deg, #bf80ff 0%, #9952e0 55%, #c270b5 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
+/* ------------------------------ Koppen ------------------------------ */
+
+/* Display-kop: groot en dun. Eén woord mag cursief voor nadruk. */
+.kop-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 
-.thema-donker .footer-watermark::after {
-  color: rgba(242, 242, 242, 0.035);
+/* Sectie-opener: zelfde serif, kleinere trap. */
+.kop-sectie {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Klein mono-label boven een sectie of blok. */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* --------------------------- Containers ---------------------------- */
+
+/* Standaard container: glassmorphism op de warme paginabasis. */
+.kaart-glas {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  box-shadow:
+    0 24px 64px rgba(12, 14, 24, 0.08),
+    0 2px 8px rgba(12, 14, 24, 0.04);
+}
+
+/* Binnenkaart: kleinere radius, subtielere schaduw. */
+.kaart-binnen {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(12, 14, 24, 0.03);
+}
+
+/* Eén uitgelichte kaart per lijst: gouden hairline in plaats van een rand
+   die om aandacht schreeuwt. */
+.kaart-uitgelicht {
+  box-shadow:
+    0 0 0 1px rgba(253, 230, 139, 0.9) inset,
+    0 24px 64px rgba(12, 14, 24, 0.08),
+    0 2px 8px rgba(12, 14, 24, 0.04);
+}
+
+/* ----------------------------- Details ----------------------------- */
+
+/* Goud als markeerstift achter een woord. Zeldzaam gebruiken. */
+.marker-goud {
+  background-image: linear-gradient(
+    transparent 56%,
+    var(--color-gold) 56%,
+    var(--color-gold) 94%,
+    transparent 94%
+  );
+  padding: 0 0.18em;
+}
+
+/* Handgeschreven annotatie in violet: het menselijke NinA-moment.
+   Maximaal één per sectie. Gewicht 300 hoort erbij, anders synthetiseert de
+   browser een zwaardere variant van Kalam. */
+.annotatie {
+  font-family: var(--font-hand);
+  font-weight: 300;
+  color: var(--color-primary);
+}
+
+/* Tekstlink met dunne onderstreping die bij hover violet kleurt. */
+.link-onder {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(12, 14, 24, 0.28);
+  transition:
+    color 0.2s,
+    text-decoration-color 0.2s;
+}
+.link-onder:hover {
+  color: var(--color-primary);
+  text-decoration-color: var(--color-primary);
+}
+
+/* --------------------------- Beweging ------------------------------ */
+
+/* Kaart-entree: 16px omhoog, gestaffeld via animation-delay per index. */
+@keyframes kaart-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.kaart-in {
+  animation: kaart-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (scripting: none) {
+  .kaart-in {
+    animation: none;
+  }
+}
+
+/* Het ene langzame element dat mag doorlopen: een driftende gradient van
+   26 seconden. Maximaal één per pagina. */
+@keyframes drift-traag {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4%, -3%) scale(1.06);
+  }
+}
+.drift-traag {
+  animation: drift-traag 26s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

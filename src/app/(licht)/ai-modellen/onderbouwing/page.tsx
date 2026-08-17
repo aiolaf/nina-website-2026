@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import MagneticButton from "@/components/ui/MagneticButton";
+import PillButton from "@/components/ui/PillButton";
+import Reveal from "@/components/ui/Reveal";
 import {
   datumNL,
   menselijkeMaat,
@@ -44,10 +45,15 @@ function Getal({ children }: { children: ReactNode }) {
 
 function Lijst({ items }: { items: ReactNode[] }) {
   return (
-    <ul className="mt-4 space-y-2.5">
+    <ul className="mt-5 space-y-3">
       {items.map((item, i) => (
-        <li key={i} className="flex gap-3 leading-relaxed text-text-muted">
-          <span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
+        <li key={i} className="flex gap-3.5 leading-relaxed text-text-muted">
+          {/* Amber is de werkkleur voor datapunten en opsommingen; violet
+              blijft gereserveerd voor het merk-moment. */}
+          <span
+            aria-hidden="true"
+            className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber"
+          />
           <span>{item}</span>
         </li>
       ))}
@@ -55,16 +61,16 @@ function Lijst({ items }: { items: ReactNode[] }) {
   );
 }
 
-/** Tweekolommen-tabel voor aannames en schalen. */
+/** Tweekolommen-tabel voor aannames en schalen. Termen in mono. */
 function Tabel({ rijen }: { rijen: [ReactNode, ReactNode][] }) {
   return (
-    <dl className="mt-5 overflow-hidden rounded-xl border border-border">
+    <dl className="kaart-binnen mt-6 overflow-hidden">
       {rijen.map((rij, i) => (
         <div
           key={i}
-          className={`grid gap-1 px-4 py-3 sm:grid-cols-[11rem_1fr] sm:gap-4 ${
+          className={`grid gap-1.5 px-5 py-4 sm:grid-cols-[11rem_1fr] sm:gap-5 ${
             i > 0 ? "border-t border-border" : ""
-          } ${i % 2 === 1 ? "bg-bg-muted/25" : ""}`}
+          }`}
         >
           <dt className="font-mono text-sm text-text">{rij[0]}</dt>
           <dd className="text-sm leading-relaxed text-text-muted">{rij[1]}</dd>
@@ -100,7 +106,7 @@ function secties(data: {
               href="https://artificialanalysis.ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary underline underline-offset-4 transition-colors hover:text-primary-light"
+              className="link-onder text-text"
             >
               Artificial Analysis
             </a>
@@ -139,7 +145,7 @@ function secties(data: {
               href="https://frankfurter.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary underline underline-offset-4 transition-colors hover:text-primary-light"
+              className="link-onder text-text"
             >
               Frankfurter
             </a>
@@ -349,6 +355,11 @@ function secties(data: {
               ["Geen verdict", "We hebben er te weinig mee gebouwd om iets zinnigs te vinden. Dat is geen afkeuring, dat is stilte."],
             ]}
           />
+          {/* Het menselijke NinA-moment van deze pagina: één handgeschreven
+              annotatie in violet, zoals het huisstijldocument voorschrijft. */}
+          <p className="annotatie mt-6 text-xl leading-snug">
+            geen gemiddelde van benchmarks, maar wat wij ervan vinden
+          </p>
           <Alinea>
             De gouden markering <Nadruk>NinA aanrader</Nadruk> zit op modellen
             die we op dit moment zelf in klantomgevingen laten draaien. Die
@@ -456,7 +467,7 @@ function secties(data: {
               href={`mailto:${site.email}?subject=${encodeURIComponent(
                 "Correctie AI-modellenoverzicht"
               )}`}
-              className="text-primary underline underline-offset-4 transition-colors hover:text-primary-light"
+              className="link-onder text-text"
             >
               {site.email}
             </a>
@@ -491,22 +502,25 @@ export default async function OnderbouwingPage() {
   return (
     <>
       <section className="relative overflow-hidden">
+        {/* Het ene langzame element van deze pagina. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(153,82,224,0.13),transparent_60%)]"
-        />
-        <div className="relative mx-auto max-w-3xl px-5 pt-28 pb-8 sm:pt-32">
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+        >
+          <div className="drift-traag absolute -top-48 left-1/3 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(153,82,224,0.1),transparent_65%)] blur-2xl" />
+        </div>
+        <div className="relative mx-auto max-w-3xl px-5 pt-32 pb-10 sm:pt-40">
           <div className="reveal-now">
-            <Link
-              href="/ai-modellen"
-              className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-primary transition-colors hover:text-primary-light"
-            >
+            <Link href="/ai-modellen" className="label-mono link-onder text-text-muted">
+              <span aria-hidden="true" className="mr-1.5">
+                &larr;
+              </span>
               Terug naar het overzicht
             </Link>
-            <h1 className="font-display mt-4 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">
-              Onderbouwing
+            <h1 className="kop-display mt-6">
+              De keuzes <em className="italic">achter deze lijst</em>
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-text-muted">
+            <p className="mt-7 text-lg leading-relaxed text-text-muted">
               Elke vergelijking zit vol keuzes. Welke bron, welke koers, hoe je
               afrondt, wat je meeneemt en wat je weglaat. Hieronder staan die
               keuzes voor het modellenoverzicht, inclusief de plekken waar de
@@ -520,49 +534,45 @@ export default async function OnderbouwingPage() {
           nummering en de ankers nooit uit elkaar lopen. */}
       <section className="relative">
         <div className="mx-auto max-w-3xl px-5">
-          <nav
-            aria-label="Inhoud van deze pagina"
-            className="rounded-2xl border border-border bg-bg-card/60 p-5 backdrop-blur-md sm:p-6"
-          >
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-text-muted">
-              Op deze pagina
-            </p>
-            <ol className="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
-              {lijst.map((sectie, i) => (
-                <li key={sectie.id} className="flex gap-3 text-sm">
-                  <span className="font-mono text-text-muted">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <a
-                    href={`#${sectie.id}`}
-                    className="text-text-muted transition-colors hover:text-primary-light"
-                  >
-                    {sectie.titel}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
+          <Reveal y={16}>
+            <nav
+              aria-label="Inhoud van deze pagina"
+              className="kaart-glas p-6 sm:p-7"
+            >
+              <p className="label-mono text-text-muted">Op deze pagina</p>
+              <ol className="mt-5 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+                {lijst.map((sectie, i) => (
+                  <li key={sectie.id} className="flex gap-3 text-sm">
+                    <span className="font-mono text-text-muted">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <a href={`#${sectie.id}`} className="link-onder text-text">
+                      {sectie.titel}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </Reveal>
         </div>
       </section>
 
       <section className="relative">
-        <div className="mx-auto max-w-3xl px-5 py-16 sm:py-20">
-          <div className="space-y-14">
+        <div className="mx-auto max-w-3xl px-5 py-20 sm:py-24">
+          <div className="space-y-16">
             {lijst.map((sectie, i) => (
               <article
                 key={sectie.id}
                 id={sectie.id}
                 /* scroll-mt houdt de kop vrij van de vaste header bij een
                    sprong vanuit de inhoudsopgave. */
-                className="scroll-mt-24 border-t border-border pt-8 first:border-t-0 first:pt-0"
+                className="scroll-mt-28 border-t border-border pt-10 first:border-t-0 first:pt-0"
               >
-                <p className="font-mono text-xs font-semibold text-primary">
-                  {String(i + 1).padStart(2, "0")}
+                <p className="label-mono text-text-muted">
+                  Onderbouwing · {String(i + 1).padStart(2, "0")}/
+                  {String(lijst.length).padStart(2, "0")}
                 </p>
-                <h2 className="font-display mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-[1.75rem]">
-                  {sectie.titel}
-                </h2>
+                <h2 className="kop-sectie mt-3">{sectie.titel}</h2>
                 {sectie.inhoud}
               </article>
             ))}
@@ -570,27 +580,34 @@ export default async function OnderbouwingPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-border">
-        <div className="relative mx-auto max-w-3xl px-5 py-16 text-center sm:py-20">
-          <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
-            Liever meteen het antwoord voor jouw situatie?
+      {/* De ene donkere merk-sectie van deze pagina. */}
+      <section className="relative overflow-hidden bg-dark">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 flex justify-center"
+        >
+          <div className="h-64 w-[32rem] -translate-y-14 rounded-full bg-[rgba(153,82,224,0.25)] blur-[90px]" />
+        </div>
+        <div className="relative mx-auto max-w-3xl px-5 py-20 text-center sm:py-28">
+          <p className="label-mono text-[#a6a6a6]">AI Consult</p>
+          <h2 className="kop-sectie mt-4 text-[#f2f2f2]">
+            Liever meteen het antwoord voor{" "}
+            <em className="italic">jouw situatie</em>?
           </h2>
-          <p className="mx-auto mt-4 max-w-xl leading-relaxed text-text-muted">
+          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-[#a6a6a6]">
             Deze pagina vertelt hoe wij naar modellen kijken. In een AI Consult
             kijken we naar jouw proces, je data en je volumes, en komen we tot
             een keuze die je kunt onderbouwen bij je eigen organisatie.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <MagneticButton
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <PillButton
               href="/contact"
+              variant="merk"
               data-cta="onderbouwing_consult"
               data-cta-soort="slot"
             >
               Plan een AI Consult
-            </MagneticButton>
-            <MagneticButton href="/ai-modellen" variant="ghost">
-              Terug naar het overzicht
-            </MagneticButton>
+            </PillButton>
           </div>
         </div>
       </section>
