@@ -14,7 +14,6 @@ import MaturityQuickScan from "@/components/sections/MaturityQuickScan";
 import WorkflowShowcase from "@/components/sections/WorkflowShowcase";
 import PlanMode from "@/components/sections/PlanMode";
 import Image from "next/image";
-import AgentPlayground from "@/components/game/AgentPlayground";
 import MottoMarquee from "@/components/sections/MottoMarquee";
 import OlafCard from "@/components/sections/OlafCard";
 import CtaDonker from "@/components/sections/CtaDonker";
@@ -107,7 +106,7 @@ export default function Home() {
           (.foto-met-tekst) zodat de witte tekst overal leest. Bewust
           sessie-rood: die is donker en rustig aan de tekstkant, wat de
           stijlgids voorschrijft voor een tekst-hero. */}
-      <section className="relative px-4 pt-20 sm:px-5 sm:pt-24">
+      <section className="relative px-4 pb-14 pt-20 sm:px-5 sm:pb-16 sm:pt-24">
         <div className="mx-auto w-full max-w-6xl">
           <div className="foto foto-met-tekst reveal-now relative min-h-[clamp(34rem,82svh,46rem)] rounded-[24px] sm:rounded-[28px]">
             <Image
@@ -200,60 +199,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Het motto van Olaf is speelbaar: de agent-minigame stond eerder in
-          de hero, maar met de foto als banner krijgt hij hier zijn eigen plek
-          met een kop erboven. */}
-      <SectieLicht
-        label="Ga spelen met AI"
-        title={
-          <>
-            Tik een taak aan en kijk wat een agent{" "}
-            <em className="italic">van je overneemt</em>.
-          </>
-        }
-        sub="Echte werkprocessen, geen demo-data: mail, facturen, aanvragen. Je ziet direct hoeveel minuten er per taak vrijkomen."
-      >
-        <div className="mx-auto max-w-2xl">
-          <AgentPlayground />
-        </div>
-      </SectieLicht>
-
-      {/* AI Maturity Quick Scan: het startpunt van het partnership, hier
-          interactief zodat een bezoeker zijn eigen profiel ziet en van
-          daaruit doorklikt. */}
-      <SectieLicht
-        id="quick-scan"
-        variant="alt"
-        label="Quick scan · gratis, twee minuten"
-        title={
-          <>
-            Waar staat jouw organisatie <em className="italic">nu</em>?
-          </>
-        }
-        sub="Zeven vragen, één per dimensie van AI-volwassenheid. Geef een score van 1 tot 5 en het web beweegt mee. De gestreepte lijn is waar we in een AI Partnership binnen twaalf maanden naartoe werken."
-      >
-        <MaturityQuickScan />
-      </SectieLicht>
-
-      {/* APO methode: teaser. De quick scan hierboven is stap 1 van deze
-          methode; de verdieping staat op de partnershippagina. */}
-      <SectieLicht
-        label="APO methode · onze werkwijze"
-        title={
-          <>
-            De scan hierboven is stap 1 van de{" "}
-            <em className="italic">APO methode</em>.
-          </>
-        }
-        sub="AI Process Optimisation: in één sessie in kaart welke processen AI kan overnemen, wat dat per jaar oplevert in uren en euro's, en wat het kost om het te bouwen."
-      >
-        <ApoTeaser />
-      </SectieLicht>
-
-      {/* Motto */}
+      {/* Direct onder de banner: het motto, de cijfers en de gezichten van
+          het team. Dat is het bewijs, en dat hoort hoog op de pagina te staan
+          in plaats van halverwege. */}
       <MottoMarquee />
 
-      {/* Cijfers plus het team: het bewijsblok */}
       <section className="border-t border-border bg-bg-alt">
         <div className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
           <Reveal>
@@ -278,6 +228,38 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* AI Maturity Quick Scan: het startpunt van het partnership, hier
+          interactief zodat een bezoeker zijn eigen profiel ziet en van
+          daaruit doorklikt. */}
+      <SectieLicht
+        id="quick-scan"
+        label="Quick scan · gratis, twee minuten"
+        title={
+          <>
+            Waar staat jouw organisatie <em className="italic">nu</em>?
+          </>
+        }
+        sub="Zeven vragen, één per dimensie van AI-volwassenheid. Geef een score van 1 tot 5 en het web beweegt mee. De gestreepte lijn is waar we in een AI Partnership binnen twaalf maanden naartoe werken."
+      >
+        <MaturityQuickScan />
+      </SectieLicht>
+
+      {/* APO methode: teaser. De quick scan hierboven is stap 1 van deze
+          methode; de verdieping staat op de partnershippagina. */}
+      <SectieLicht
+        variant="alt"
+        label="APO methode · onze werkwijze"
+        title={
+          <>
+            De scan hierboven is stap 1 van de{" "}
+            <em className="italic">APO methode</em>.
+          </>
+        }
+        sub="AI Process Optimisation: in één sessie in kaart welke processen AI kan overnemen, wat dat per jaar oplevert in uren en euro's, en wat het kost om het te bouwen."
+      >
+        <ApoTeaser />
+      </SectieLicht>
 
       {/* Vier fasen */}
       <SectieLicht
