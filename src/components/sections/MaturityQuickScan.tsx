@@ -379,7 +379,7 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
                 {t.ctaPartnership}
               </MagneticButton>
               <MagneticButton
-                href={site.booking}
+                href={site.bookingPartnership}
                 variant="ghost"
                 className="w-full sm:w-auto"
                 data-cta="quickscan_kennismaking"

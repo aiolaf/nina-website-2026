@@ -11,6 +11,7 @@ import {
   ctaKort,
   ctaKortEn,
   switchLangPath,
+  site,
   type Lang,
 } from "@/lib/site";
 
@@ -24,6 +25,14 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
   // Desktopbalk gebruikt het korte label, het mobiele menu heeft de ruimte
   // voor het volledige.
   const actionKort = lang === "en" ? ctaKortEn : ctaKort;
+
+  /**
+   * Staat de bezoeker op de partnershippagina, dan boekt de headerknop op het
+   * partnership-boekingstype. Zelfde gesprek, maar in de agenda is dan te zien
+   * waar de aanvraag vandaan komt, net als bij de knoppen in de pagina zelf.
+   */
+  const opPartnership = pathname.endsWith("/ai-partnership");
+  const boekHref = opPartnership ? site.bookingPartnership : action.href;
   const home = lang === "en" ? "/en" : "/";
   const otherLang: Lang = lang === "en" ? "nl" : "en";
   const switchHref = switchLangPath(pathname, otherLang);
@@ -104,7 +113,7 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
           {/* Externe boekingspagina, dus een gewone anchor met target en rel
               in plaats van next/link. */}
           <a
-            href={action.href}
+            href={boekHref}
             target="_blank"
             rel="noopener noreferrer"
             className="whitespace-nowrap rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-ink-deep hover:text-white xl:px-5"
@@ -197,7 +206,7 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
             </Link>
           ))}
           <a
-            href={action.href}
+            href={boekHref}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 rounded-full bg-primary px-5 py-3 text-center text-base font-semibold text-white"

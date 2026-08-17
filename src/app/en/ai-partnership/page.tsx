@@ -192,7 +192,7 @@ export default function AiPartnershipEn() {
                 piles up, and shut them down.
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                <MagneticButton href={site.booking}>
+                <MagneticButton href={site.bookingPartnership}>
                   Book an intro call
                 </MagneticButton>
                 <MagneticButton href="#packages" variant="ghost">
@@ -644,7 +644,7 @@ export default function AiPartnershipEn() {
 
           <Reveal delay={0.2}>
             <div className="mt-12 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href={site.booking}>
+              <MagneticButton href={site.bookingPartnership}>
                 Book an intro call
               </MagneticButton>
               <MagneticButton href={`mailto:${site.email}`} variant="ghost">
@@ -689,7 +689,7 @@ export default function AiPartnershipEn() {
 
       <MobielCTA
         label="Book intro call"
-        href={site.booking}
+        href={site.bookingPartnership}
         sub="15 minutes, no strings"
         meting="partnership_balk_en"
         verbergBij="#afsluiter"

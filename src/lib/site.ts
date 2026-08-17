@@ -11,6 +11,14 @@ export const site = {
   /** TidyCal-pagina achter elke "Plan een kennismaking"-knop. */
   booking: "https://tidycal.com/olaf/kennismaking-15-minuten-website",
   /**
+   * Aparte TidyCal-pagina voor het AI Partnership. Zelfde gesprek, ander
+   * boekingstype, zodat in de agenda direct zichtbaar is dat de aanvraag uit
+   * het partnership-spoor komt. Gebruik deze op de partnershippagina's en op
+   * de quick scan; overal elders het algemene adres hierboven.
+   */
+  bookingPartnership:
+    "https://tidycal.com/olaf/kennismaking-15-minuten-website-ai-partnership",
+  /**
    * WhatsApp in plaats van een zichtbaar telefoonnummer. Op pagina's die
    * betaald verkeer trekken staat het nummer niet meer als tekst in de HTML,
    * zodat scrapers het niet oppikken; bezoekers klikken op een label en

@@ -201,7 +201,7 @@ export default function AiPartnership() {
               </p>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton
-                  href={site.booking}
+                  href={site.bookingPartnership}
                   data-cta="partnership_hero_kennismaking"
                   data-cta-soort="hero"
                 >
@@ -709,7 +709,7 @@ export default function AiPartnership() {
 
           <Reveal delay={0.2}>
             <div className="mt-12 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton href={site.booking}>
+              <MagneticButton href={site.bookingPartnership}>
                 Plan een kennismaking
               </MagneticButton>
               <MagneticButton href={`mailto:${site.email}`} variant="ghost">
@@ -757,7 +757,7 @@ export default function AiPartnership() {
           kennismaking zo binnen bereik. */}
       <MobielCTA
         label="Plan kennismaking"
-        href={site.booking}
+        href={site.bookingPartnership}
         sub="15 minuten, vrijblijvend"
         meting="partnership_balk"
         verbergBij="#afsluiter"

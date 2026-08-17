@@ -753,7 +753,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
           <p className="max-w-xl text-sm leading-relaxed text-text-muted">{c.slot}</p>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <MagneticButton
-              href={site.booking}
+              href={site.bookingPartnership}
               className="w-full sm:w-auto"
               data-cta="apo_kennismaking"
               data-cta-soort="apo"
