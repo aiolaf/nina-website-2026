@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
+import NieuwsbriefBanner from "@/components/sections/NieuwsbriefBanner";
 import { Em } from "@/components/ui/Section";
 import { getAllPosts } from "@/lib/blog";
 import { alternatesVoor } from "@/lib/site";
@@ -43,6 +44,10 @@ export default function BlogPage() {
           </div>
         </div>
       </section>
+
+      {/* Inschrijven op de nieuwsbrief staat boven de artikelen: de blog is
+          de etalage, de nieuwsbrief is waar iemand blijft. */}
+      <NieuwsbriefBanner />
 
       {/* Uitgelicht: nieuwste artikel groot */}
       {nieuwste && (
