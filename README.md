@@ -35,7 +35,8 @@ euro en het verdict van NinA.
 
 Eenmalig instellen:
 
-1. Vraag een API-key aan op [artificialanalysis.ai](https://artificialanalysis.ai/insights/api).
+1. Vraag een API-key aan op [artificialanalysis.ai](https://artificialanalysis.ai)
+   (via hun API- of Insights-sectie).
 2. Zet die key in GitHub onder **Settings > Secrets and variables > Actions >
    New repository secret**, met de naam `AA_API_KEY`.
 3. Start de workflow een keer handmatig via **Actions > AI-modellen bijwerken
