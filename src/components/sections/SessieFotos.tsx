@@ -1,3 +1,11 @@
+/**
+ * Uitzondering op het beeldrecept: deze zeven sessiefoto's blijven in volle
+ * kleur. De rest van de site gaat door de duotone (zie .foto in globals.css),
+ * maar dit is de Google Ads-landingspagina en het argument is juist de energie
+ * in een volle zaal: paars licht op het podium, rode wanden, mensen die
+ * lachen. In cognac-duotone verdwijnt precies dat. Zet de klasse "foto" hier
+ * dus niet terug bij een volgende veegslag.
+ */
 import Image from "next/image";
 
 type Foto = {
@@ -92,7 +100,7 @@ export default function SessieFotos() {
       {FOTOS.map((f, i) => (
         <figure
           key={f.src}
-          className={`foto relative shrink-0 snap-start overflow-hidden rounded-[3px] border border-border sm:self-start lg:self-stretch ${
+          className={`relative shrink-0 snap-start overflow-hidden rounded-[3px] border border-border sm:self-start lg:self-stretch ${
             f.groot ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""
           } ${f.staand ? "lg:row-span-2" : ""}`}
         >
