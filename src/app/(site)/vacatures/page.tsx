@@ -46,7 +46,7 @@ export default function VacaturesPage() {
                 </MagneticButton>
               </div>
             </div>
-            <div className="relative hidden aspect-[4/3] overflow-hidden rounded-3xl border border-border shadow-sm lg:block">
+            <div className="relative hidden aspect-[4/3] overflow-hidden rounded-[3px] border border-border shadow-sm lg:block">
               <Image
                 src="/assets/team-office-DyvV-0z4.jpg"
                 alt="Het team van NinA AI Agency op kantoor"
@@ -68,7 +68,7 @@ export default function VacaturesPage() {
               <Reveal key={v.slug} delay={Math.min(i % 3, 2) * 0.08}>
                 <Link
                   href={`/vacatures/${v.slug}`}
-                  className="group flex h-full flex-col rounded-2xl border border-border bg-bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
+                  className="group flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
                 >
                   <div className="flex items-center gap-2">
                     <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
@@ -103,7 +103,7 @@ export default function VacaturesPage() {
 
             {/* Open sollicitatie */}
             <Reveal delay={0.16}>
-              <div className="flex h-full flex-col rounded-2xl border border-dashed border-primary/40 bg-bg-card p-6 shadow-sm">
+              <div className="flex h-full flex-col rounded-[3px] border border-dashed border-primary/40 bg-bg-card p-6 shadow-sm">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   {openSollicitatie.categorie}
                 </p>

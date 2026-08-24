@@ -98,7 +98,7 @@ export default function MaturityScan({ lang = "nl" }: { lang?: Lang }) {
   return (
     <div className="grid gap-5 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
       <Reveal>
-        <div className="h-full rounded-2xl border border-border bg-bg-card p-6 sm:p-7">
+        <div className="h-full rounded-[3px] border border-border bg-bg-card p-6 sm:p-7">
           <p className="text-xs font-semibold uppercase tracking-wider text-primary">
             {t.kaartLabel}
           </p>
@@ -114,7 +114,7 @@ export default function MaturityScan({ lang = "nl" }: { lang?: Lang }) {
 
           <div className="mt-2 flex items-center justify-center gap-5 text-[11px] text-text-muted">
             <span className="inline-flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-sm bg-ink-deep" />
+              <span className="h-2.5 w-2.5 rounded-[3px] bg-ink-deep" />
               {t.legendaNu}
             </span>
             <span className="inline-flex items-center gap-1.5">
@@ -139,7 +139,7 @@ export default function MaturityScan({ lang = "nl" }: { lang?: Lang }) {
             </div>
           </div>
 
-          <p className="mt-5 rounded-xl bg-bg-muted px-4 py-3">
+          <p className="mt-5 rounded-[3px] bg-bg-muted px-4 py-3">
             <span className="block text-xs font-semibold uppercase tracking-wider text-primary">
               {t.sprongLabel}
             </span>
@@ -151,7 +151,7 @@ export default function MaturityScan({ lang = "nl" }: { lang?: Lang }) {
       </Reveal>
 
       <Reveal delay={0.1}>
-        <div className="h-full rounded-2xl border border-border bg-bg-card p-6 sm:p-7">
+        <div className="h-full rounded-[3px] border border-border bg-bg-card p-6 sm:p-7">
           <p className="text-xs font-semibold uppercase tracking-wider text-primary">
             {t.schaalLabel}
           </p>

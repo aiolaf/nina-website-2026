@@ -43,7 +43,7 @@ export default function AgentTicker() {
     <div
       role="img"
       aria-label="Voorbeeld van een doorlopende agent-log met verwerkte taken"
-      className="relative h-44 overflow-hidden rounded-2xl bg-[#0c0e18] p-5 shadow-[0_16px_48px_rgba(12,14,24,0.25)] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_78%,transparent)]"
+      className="relative h-44 overflow-hidden rounded-[3px] bg-[#0c0e18] p-5 shadow-[0_16px_48px_rgba(12,14,24,0.25)] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_78%,transparent)]"
     >
       <div className="ticker-up space-y-2.5 motion-reduce:animate-none">
         {rows(false)}

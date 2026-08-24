@@ -110,7 +110,7 @@ export default function AboutNinaEn() {
             alt="The NinA team during a team outing in an arcade"
             width={1200}
             height={800}
-            className="mb-10 w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
+            className="mb-10 w-full rounded-[3px] border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
           />
         </Reveal>
         <ul className="flex flex-wrap gap-2.5">
@@ -127,7 +127,7 @@ export default function AboutNinaEn() {
           </li>
         </ul>
         <Reveal delay={0.1}>
-          <div className="mt-10 rounded-2xl border border-border bg-bg-card p-7 sm:flex sm:items-center sm:justify-between">
+          <div className="mt-10 rounded-[3px] border border-border bg-bg-card p-7 sm:flex sm:items-center sm:justify-between">
             <div className="flex items-start gap-5">
               <Image
                 src="/images/olaf-profile.webp"

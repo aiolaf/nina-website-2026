@@ -63,7 +63,7 @@ export default function FreebiesIndex({ lang }: { lang: Lang }) {
               <Reveal key={f.slug} delay={Math.min(i % 3, 2) * 0.08}>
                 <Link
                   href={`${t.base}/${f.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-bg-card shadow-sm transition-shadow hover:shadow-md"
+                  className="group flex h-full flex-col overflow-hidden rounded-[3px] border border-border bg-bg-card shadow-sm transition-shadow hover:shadow-md"
                 >
                   {f.image && (
                     <div className="relative aspect-[16/9]">

@@ -97,7 +97,7 @@ export default async function VacaturePage({ params }: Props) {
         <div className="grid gap-6 sm:grid-cols-3">
           {v.aanbod.map((a, i) => (
             <Reveal key={a.label} delay={i * 0.08}>
-              <div className="h-full rounded-2xl border border-border bg-bg-card p-6 shadow-sm">
+              <div className="h-full rounded-[3px] border border-border bg-bg-card p-6 shadow-sm">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   {a.label}
                 </p>
@@ -120,7 +120,7 @@ export default async function VacaturePage({ params }: Props) {
           {v.match.map((m, i) => (
             <li key={i}>
               <Reveal delay={Math.min(i, 4) * 0.06}>
-                <div className="flex items-start gap-3 rounded-2xl border border-border bg-bg-card p-5 shadow-sm">
+                <div className="flex items-start gap-3 rounded-[3px] border border-border bg-bg-card p-5 shadow-sm">
                   <span
                     aria-hidden="true"
                     className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 font-mono text-sm font-bold text-primary"
@@ -174,7 +174,7 @@ export default async function VacaturePage({ params }: Props) {
           {v.proces.map((stap, i) => (
             <li key={i}>
               <Reveal delay={i * 0.08}>
-                <div className="flex items-start gap-5 rounded-2xl border border-border bg-bg-card p-6 shadow-sm">
+                <div className="flex items-start gap-5 rounded-[3px] border border-border bg-bg-card p-6 shadow-sm">
                   <span className="font-display flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">
                     {i + 1}
                   </span>

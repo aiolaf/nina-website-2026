@@ -57,7 +57,7 @@ export default function ContactEn() {
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {OPTIONS.map((o, idx) => (
               <Reveal key={o.title} delay={idx * 0.1}>
-                <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 transition-colors hover:border-primary/50">
+                <div className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7 transition-colors hover:border-primary/50">
                   <h2 className="display-serif text-lg ">{o.title}</h2>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-text-muted">
                     {o.text}
@@ -75,7 +75,7 @@ export default function ContactEn() {
           </div>
 
           <Reveal delay={0.2}>
-            <div className="mt-14 rounded-2xl border border-border bg-bg-alt p-7 text-sm text-text-muted">
+            <div className="mt-14 rounded-[3px] border border-border bg-bg-alt p-7 text-sm text-text-muted">
               <p className="font-semibold text-text">NinA AI Agency</p>
               <p className="mt-2">{site.address}</p>
               <p>Chamber of Commerce (KVK) {site.kvk}</p>

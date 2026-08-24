@@ -145,7 +145,7 @@ export default function FilloutEmbed({
   return (
     <div
       ref={ref}
-      className={`overflow-hidden rounded-2xl border border-border ${className}`}
+      className={`overflow-hidden rounded-[3px] border border-border ${className}`}
       // Voor de eerste hoogtemelding houdt de plaatshouder height vast, zodat
       // de pagina niet verschuift; daarna mag hij ook kleiner worden dan dat.
       style={{ minHeight: gemeldeHoogte ? undefined : height }}

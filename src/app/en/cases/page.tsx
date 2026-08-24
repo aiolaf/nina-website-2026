@@ -142,7 +142,7 @@ export default function CasesPageEn() {
           <div className="grid gap-6 md:grid-cols-2">
             {cases.map((c, i) => (
               <Reveal key={c.company} delay={Math.min(i % 2, 1) * 0.08}>
-                <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+                <article className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7 shadow-sm transition-shadow hover:shadow-md sm:p-8">
                   <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                     {c.tag}
                   </p>
@@ -170,7 +170,7 @@ export default function CasesPageEn() {
                     </div>
                   </div>
 
-                  <div className="mt-6 rounded-xl border border-primary/15 bg-primary/5 p-5">
+                  <div className="mt-6 rounded-[3px] border border-primary/15 bg-primary/5 p-5">
                     <h3 className="font-mono text-xs font-semibold uppercase tracking-[0.15em] text-primary">
                       Result
                     </h3>

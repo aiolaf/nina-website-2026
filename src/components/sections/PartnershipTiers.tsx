@@ -155,7 +155,7 @@ export default function PartnershipTiers({ lang = "nl" }: { lang?: Lang }) {
       {tiers.map((tier, idx) => (
         <Reveal key={tier.naam} delay={idx * 0.1}>
           <div
-            className={`flex flex-col rounded-2xl border p-6 transition-shadow sm:p-7 ${
+            className={`flex flex-col rounded-[3px] border p-6 transition-shadow sm:p-7 ${
               tier.featured
                 ? "border-glow border-primary/60 bg-bg-muted shadow-[0_12px_44px_rgba(12,14,24,0.14)] lg:pb-10 lg:pt-9"
                 : "border-border bg-bg-card hover:border-primary/40"

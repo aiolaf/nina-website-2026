@@ -119,7 +119,7 @@ export default function FasenTrap() {
             role="tab"
             aria-selected={idx === active}
             onClick={() => setActive(idx)}
-            className={`rounded-xl border px-4 py-3 text-left transition-colors ${
+            className={`rounded-[3px] border px-4 py-3 text-left transition-colors ${
               idx === active
                 ? "border-primary bg-bg-muted"
                 : "border-border bg-bg-card"
@@ -144,7 +144,7 @@ export default function FasenTrap() {
       <div
         key={fase.nr}
         role="tabpanel"
-        className="reveal-now mt-6 flex flex-col gap-4 rounded-2xl border border-border bg-bg-card p-6 [animation-duration:0.3s] sm:flex-row sm:items-center sm:justify-between"
+        className="reveal-now mt-6 flex flex-col gap-4 rounded-[3px] border border-border bg-bg-card p-6 [animation-duration:0.3s] sm:flex-row sm:items-center sm:justify-between"
       >
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-primary">

@@ -452,7 +452,7 @@ export default function LezingenWorkshops() {
       >
         <div className="grid gap-5 lg:grid-cols-2">
           <Reveal>
-            <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7">
+            <article className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7">
               <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
                 Kennis & enthousiasme
               </span>
@@ -487,7 +487,7 @@ export default function LezingenWorkshops() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <article className="relative flex h-full flex-col rounded-2xl border border-primary bg-bg-muted p-7 shadow-[0_12px_44px_rgba(12,14,24,0.12)]">
+            <article className="relative flex h-full flex-col rounded-[3px] border border-primary bg-bg-muted p-7 shadow-[0_12px_44px_rgba(12,14,24,0.12)]">
               <span className="absolute -top-3 right-6 rounded-full bg-gold/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-gold">
                 Meest gekozen
               </span>
@@ -516,14 +516,14 @@ export default function LezingenWorkshops() {
                 ))}
               </ul>
               <div className="mt-6 grid gap-3 border-t border-border pt-4 sm:grid-cols-2">
-                <div className="rounded-xl bg-bg-card p-4">
+                <div className="rounded-[3px] bg-bg-card p-4">
                   <p className="text-sm font-semibold">Praktische oefeningen</p>
                   <p className="mt-1 text-xs text-text-muted">
                     Zelf beter leren werken met AI via praktijkopdrachten,
                     met dummy data of eigen oefeningen.
                   </p>
                 </div>
-                <div className="rounded-xl bg-bg-card p-4">
+                <div className="rounded-[3px] bg-bg-card p-4">
                   <p className="text-sm font-semibold">Design Thinking</p>
                   <p className="mt-1 text-xs text-text-muted">
                     Kansen-overzicht voor jullie processen als resultaat.
@@ -574,7 +574,7 @@ export default function LezingenWorkshops() {
                 alt="Olaf Lemmens als AI-spreker op het podium voor een volle zaal"
                 width={900}
                 height={499}
-                className="w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
+                className="w-full rounded-[3px] border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
               />
               <figcaption className="mt-3 text-xs text-text-muted">
                 Keynote voor een volle zaal. Sessies beoordeeld met een 9,3.
@@ -638,7 +638,7 @@ export default function LezingenWorkshops() {
         <div className="grid gap-6 md:grid-cols-2">
           {NIVEAUS.map((n, i) => (
             <Reveal key={n.naam} delay={i * 0.08}>
-              <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 shadow-sm">
+              <article className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7 shadow-sm">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   {n.naam}
                 </p>
@@ -666,7 +666,7 @@ export default function LezingenWorkshops() {
         </div>
 
         <Reveal delay={0.16}>
-          <div className="mt-8 grid items-center gap-8 rounded-2xl border border-border bg-bg-card p-7 lg:grid-cols-[1.1fr_1fr]">
+          <div className="mt-8 grid items-center gap-8 rounded-[3px] border border-border bg-bg-card p-7 lg:grid-cols-[1.1fr_1fr]">
             <div>
             <h3 className="font-display text-lg font-bold">
               We werken met het model dat jullie al gebruiken
@@ -695,7 +695,7 @@ export default function LezingenWorkshops() {
                 alt="Deelnemers werken in een hands-on AI-workshop met hun eigen laptop"
                 width={900}
                 height={682}
-                className="w-full rounded-2xl border border-border object-cover"
+                className="w-full rounded-[3px] border border-border object-cover"
               />
               <figcaption className="mt-2 text-xs text-text-muted">
                 Hands-on: iedereen werkt in de tool die het bedrijf al gebruikt.
@@ -765,7 +765,7 @@ export default function LezingenWorkshops() {
             </div>
           </Reveal>
           <Reveal delay={0.08} className="hidden lg:block">
-            <div className="relative h-full min-h-72 overflow-hidden rounded-2xl bg-[radial-gradient(circle_at_50%_20%,rgba(176,101,58,0.2),rgba(12,14,24,0.06))]">
+            <div className="relative h-full min-h-72 overflow-hidden rounded-[3px] bg-[radial-gradient(circle_at_50%_20%,rgba(176,101,58,0.2),rgba(12,14,24,0.06))]">
               <Image
                 src="/images/olaf-cutout.webp"
                 alt="Olaf Lemmens, spreker en oprichter van NinA AI Agency"
@@ -776,7 +776,7 @@ export default function LezingenWorkshops() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-border bg-bg-card p-7">
               <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
                 Een heel team achter je
               </p>
@@ -823,7 +823,7 @@ export default function LezingenWorkshops() {
           {PRIJZEN.map((p, idx) => (
             <Reveal key={p.naam} delay={idx * 0.1}>
               <div
-                className={`flex h-full flex-col rounded-2xl border p-7 ${
+                className={`flex h-full flex-col rounded-[3px] border p-7 ${
                   p.featured
                     ? "border-primary bg-bg-muted"
                     : "border-border bg-bg-card"
@@ -916,7 +916,7 @@ export default function LezingenWorkshops() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-8 rounded-2xl border border-border bg-bg-card p-5">
+              <div className="mt-8 rounded-[3px] border border-border bg-bg-card p-5">
                 <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
                   Liever even kort schakelen?
                 </p>

@@ -35,7 +35,7 @@ export default function LazyYouTube({
   return (
     <div
       ref={ref}
-      className="aspect-video overflow-hidden rounded-2xl border border-border bg-bg-muted"
+      className="aspect-video overflow-hidden rounded-[3px] border border-border bg-bg-muted"
     >
       {visible && (
         <iframe

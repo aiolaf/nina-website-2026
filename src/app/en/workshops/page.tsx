@@ -87,7 +87,7 @@ export default function WorkshopsPageEn() {
         <div className="grid gap-6 md:grid-cols-3">
           {tracks.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.08}>
-              <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 shadow-sm transition-shadow hover:shadow-md">
+              <div className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7 shadow-sm transition-shadow hover:shadow-md">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   {String(i + 1).padStart(2, "0")}
                 </p>
@@ -102,7 +102,7 @@ export default function WorkshopsPageEn() {
           ))}
         </div>
         <Reveal>
-          <div className="mt-10 rounded-2xl border border-border bg-bg-card p-7 sm:p-8">
+          <div className="mt-10 rounded-[3px] border border-border bg-bg-card p-7 sm:p-8">
             <h3 className="font-display text-xl font-bold">
               What to expect from every workshop
             </h3>

@@ -98,7 +98,7 @@ export default function AiAgents() {
         <div className="grid gap-5 lg:grid-cols-3">
           {USE_CASES.map((u, idx) => (
             <Reveal key={u.naam} delay={idx * 0.1}>
-              <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 transition-colors hover:border-primary/50">
+              <div className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7 transition-colors hover:border-primary/50">
                 <h3 className="font-display text-lg font-bold">{u.naam}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-text-muted">
                   {u.tekst}
@@ -136,7 +136,7 @@ export default function AiAgents() {
         <div className="grid gap-5 sm:grid-cols-3">
           {AGENTS.map((a, idx) => (
             <Reveal key={a.naam} delay={idx * 0.08}>
-              <div className="h-full rounded-2xl border border-border bg-bg-card p-6">
+              <div className="h-full rounded-[3px] border border-border bg-bg-card p-6">
                 <h3 className="font-display text-base font-bold">{a.naam}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
                   {a.tekst}
@@ -157,7 +157,7 @@ export default function AiAgents() {
       >
         <div className="grid gap-5 sm:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-border bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">
                 Veilig gehost in Amsterdam
               </h3>
@@ -168,7 +168,7 @@ export default function AiAgents() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-border bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">
                 Geen lock-in, eigen IP
               </h3>

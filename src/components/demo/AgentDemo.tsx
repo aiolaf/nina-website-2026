@@ -115,7 +115,7 @@ export default function AgentDemo() {
       aria-label="Gesimuleerd voorbeeld van een AI-agent die een e-mailaanvraag verwerkt"
     >
       {/* Inkomende e-mail */}
-      <div className="rounded-2xl border border-border bg-bg-card p-5">
+      <div className="rounded-[3px] border border-border bg-bg-card p-5">
         <div className="mb-4 flex items-center gap-2">
           <span className="h-3 w-3 rounded-full bg-bg-muted" />
           <span className="h-3 w-3 rounded-full bg-bg-muted" />
@@ -133,7 +133,7 @@ export default function AgentDemo() {
       </div>
 
       {/* Agent-verwerking */}
-      <div className="relative flex flex-col overflow-hidden rounded-2xl border border-border bg-bg-card p-5">
+      <div className="relative flex flex-col overflow-hidden rounded-[3px] border border-border bg-bg-card p-5">
         {phase === "processing" && (
           <div
             aria-hidden="true"
@@ -206,7 +206,7 @@ export default function AgentDemo() {
         </ol>
 
         {phase === "done" && (
-          <div className="mt-4 rounded-xl border border-primary/40 bg-bg-alt p-4">
+          <div className="mt-4 rounded-[3px] border border-primary/40 bg-bg-alt p-4">
             <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">
               Resultaat
             </p>

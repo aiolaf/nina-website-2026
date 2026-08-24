@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: Props) {
           <NieuwsbriefSticky />
 
           {/* Conversie-afsluiter, consistent met de rest van de site */}
-          <aside className="mt-16 rounded-3xl border border-border bg-bg-card p-8 shadow-sm sm:p-10">
+          <aside className="mt-16 rounded-[3px] border border-border bg-bg-card p-8 shadow-sm sm:p-10">
             <h2 className="display-serif text-2xl ">
               Zelf aan de slag met AI?
             </h2>

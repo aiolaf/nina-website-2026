@@ -213,7 +213,7 @@ export default function AiPartnershipEn() {
                 alt="Kickoff workshop with a client's core team"
                 width={900}
                 height={682}
-                className="rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
+                className="[filter:grayscale(1)_sepia(0.42)_saturate(1.75)_contrast(1.05)_brightness(1.02)] rounded-[3px] border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
               />
             </div>
           </div>
@@ -267,7 +267,7 @@ export default function AiPartnershipEn() {
             <li key={f} className="h-full">
               <Reveal
                 delay={idx * 0.05}
-                className="h-full rounded-xl border border-border bg-bg-card p-4 text-sm leading-snug transition-colors hover:border-primary/50"
+                className="h-full rounded-[3px] border border-border bg-bg-card p-4 text-sm leading-snug transition-colors hover:border-primary/50"
               >
                 {f}
               </Reveal>
@@ -328,7 +328,7 @@ export default function AiPartnershipEn() {
         <div className="grid gap-5 lg:grid-cols-3">
           {PROCESSES.map((p, idx) => (
             <Reveal key={p.name} delay={idx * 0.08}>
-              <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-6">
+              <article className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-6">
                 <h3 className="font-display text-lg font-bold">{p.name}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   {p.pain}
@@ -357,7 +357,7 @@ export default function AiPartnershipEn() {
               alt="Live demo of an n8n workflow during a NinA session"
               width={900}
               height={600}
-              className="h-full w-full rounded-2xl border border-border object-cover"
+              className="[filter:grayscale(1)_sepia(0.42)_saturate(1.75)_contrast(1.05)_brightness(1.02)] h-full w-full rounded-[3px] border border-border object-cover"
             />
           </Reveal>
         </div>
@@ -376,7 +376,7 @@ export default function AiPartnershipEn() {
         <div className="grid gap-5 lg:grid-cols-3">
           {GUARANTEES.map((g, idx) => (
             <Reveal key={g.title} delay={idx * 0.08}>
-              <div className="h-full rounded-2xl border border-border bg-bg-card p-6">
+              <div className="h-full rounded-[3px] border border-border bg-bg-card p-6">
                 <h3 className="font-display text-lg font-bold">{g.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   {g.text}
@@ -398,7 +398,7 @@ export default function AiPartnershipEn() {
       >
         <div className="grid gap-5 lg:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-2xl border border-primary/50 bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-primary/50 bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">What it is</h3>
               <ul className="mt-5 space-y-3">
                 {IS.map((w) => (
@@ -414,7 +414,7 @@ export default function AiPartnershipEn() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-alt p-7">
+            <div className="flex h-full flex-col rounded-[3px] border border-border bg-bg-alt p-7">
               <h3 className="font-display text-lg font-bold">What it is not</h3>
               <ul className="mt-5 flex-1 space-y-3">
                 {IS_NOT.map((n) => (
@@ -453,7 +453,7 @@ export default function AiPartnershipEn() {
             <li key={t.name} className="h-full">
               <Reveal
                 delay={idx * 0.08}
-                className="relative h-full rounded-2xl border border-border bg-bg-card p-6 pt-8 transition-colors hover:border-primary/50"
+                className="relative h-full rounded-[3px] border border-border bg-bg-card p-6 pt-8 transition-colors hover:border-primary/50"
               >
                 <span className="font-display absolute -top-4 left-6 rounded-full border border-primary/50 bg-bg px-3 py-1 text-sm font-bold text-primary">
                   {t.step}
@@ -468,7 +468,7 @@ export default function AiPartnershipEn() {
         </ol>
 
         <Reveal delay={0.1}>
-          <div className="mt-5 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+          <div className="mt-5 grid gap-px overflow-hidden rounded-[3px] border border-border bg-border sm:grid-cols-2">
             <div className="bg-bg-card p-6">
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="font-display text-lg font-bold">
@@ -555,7 +555,7 @@ export default function AiPartnershipEn() {
       >
         <div className="grid gap-5 lg:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-2xl border border-primary/50 bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-primary/50 bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">
                 This is about you if
               </h3>
@@ -573,7 +573,7 @@ export default function AiPartnershipEn() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-border bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">
                 Not for you if
               </h3>
@@ -629,7 +629,7 @@ export default function AiPartnershipEn() {
               <li key={s.step} className="h-full">
                 <Reveal
                   delay={idx * 0.08}
-                  className="relative h-full rounded-2xl border border-border bg-bg-card p-6 pt-8"
+                  className="relative h-full rounded-[3px] border border-border bg-bg-card p-6 pt-8"
                 >
                   <span className="font-display absolute -top-4 left-6 rounded-full border border-primary/50 bg-bg px-3 py-1 text-sm font-bold text-primary">
                     {s.step}

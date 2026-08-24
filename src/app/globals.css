@@ -60,10 +60,9 @@ html {
   background: var(--color-bg);
 }
 
-/* Tijdelijke vergelijking van de twee kandidaat-letters, zie LetterVoorkeur. */
-html[data-letter="sentient"] {
-  --font-serif: var(--font-sentient), var(--font-instrument), Georgia, serif;
-}
+/* Wisselen naar de tweede kandidaat (Sentient, bestanden staan in
+   public/fonts): declareer hem met localFont in layout.tsx zoals Zodiak en zet
+   --font-serif hierboven op var(--font-sentient). Verder is er niets nodig. */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -165,8 +164,11 @@ body {
   font-family: var(--font-hand);
   font-weight: 300;
   color: var(--color-violet);
-  display: inline-block;
   transform: rotate(-2deg);
+  /* Bewust géén display: die regel staat later in het bestand dan de
+     Tailwind-utilities en overrulede daarmee hidden en 2xl:hidden, waardoor de
+     noot vanaf 1536px twee keer in beeld stond. Wie de noot inline nodig heeft
+     zet zelf inline-block erbij. */
 }
 /* Op donkere dragers (foto met scrim, merk-sectie) is het violet te donker;
    daar de lichte tint. */
@@ -300,7 +302,10 @@ body {
 }
 /* Duotone in plaats van "iets ontzadigd": zo is elk beeld op de site direct
    van NinA. De foto wordt naar inkt en cognac getrokken, niet naar grijs. */
-.foto > img {
+/* Nadrukkelijk een afstammelingsselector en geen direct-kind: in SessieFotos
+   en de blogkaarten zit de afbeelding een niveau dieper, en daar bleef het
+   beeld in volle kleur staan terwijl de wrapper de klasse wel had. */
+.foto img {
   /* Warme duotone: eerst naar grijs, dan met sepia plus saturate terug naar
      cognac. Een blend-laag met mix-blend-mode: color maakte het beeld koel en
      documentair, en dat is precies de warmte die de huisstijl niet mag

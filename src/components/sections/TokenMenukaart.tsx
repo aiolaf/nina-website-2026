@@ -225,7 +225,7 @@ function MaandRij({ maand, t }: { maand: Maand; t: typeof COPY.nl }) {
   const verbruikt = maand.regels.reduce((s, r) => s + r.tokens, 0);
 
   return (
-    <div className="rounded-2xl border border-border bg-bg p-5 sm:p-6">
+    <div className="rounded-[3px] border border-border bg-bg p-5 sm:p-6">
       <div className="grid gap-5 lg:grid-cols-[minmax(0,15rem)_1fr] lg:items-start">
         <div>
           <p className="font-display text-base font-bold">{maand.naam}</p>
@@ -279,7 +279,7 @@ export default function TokenMenukaart({ lang = "nl" }: { lang?: Lang }) {
       {/* Menukaart. Twee kolommen vanaf sm: acht regels op volle breedte
           onder elkaar leest als een lijst, naast elkaar als een kaart. */}
       <Reveal>
-        <div className="rounded-2xl border border-border bg-bg-card p-6 sm:p-7">
+        <div className="rounded-[3px] border border-border bg-bg-card p-6 sm:p-7">
           <h3 className="font-display text-lg font-bold">{t.menuKop}</h3>
           <ul className="mt-5 grid gap-x-8 sm:grid-cols-2">
             {menu.map((m) => (
@@ -327,7 +327,7 @@ export default function TokenMenukaart({ lang = "nl" }: { lang?: Lang }) {
           <li key={r.kop} className="h-full">
             <Reveal
               delay={idx * 0.06}
-              className="relative h-full rounded-2xl border border-border bg-bg-card p-5 pt-7"
+              className="relative h-full rounded-[3px] border border-border bg-bg-card p-5 pt-7"
             >
               <span className="font-display absolute -top-3.5 left-5 rounded-full border border-primary/50 bg-bg px-2.5 py-0.5 text-xs font-bold text-primary">
                 {String(idx + 1).padStart(2, "0")}

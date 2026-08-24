@@ -97,7 +97,7 @@ export default function WorkflowCompare() {
       className="relative"
     >
       <div ref={contentRef} className={reduced ? "" : "sticky top-20"}>
-        <div className="mb-6 flex items-center justify-between rounded-2xl border border-border bg-bg-card px-5 py-4">
+        <div className="mb-6 flex items-center justify-between rounded-[3px] border border-border bg-bg-card px-5 py-4">
           <span className="text-sm font-semibold">
             {doneCount >= STAPPEN.length
               ? "Workflow volledig AI-ondersteund"
@@ -131,7 +131,7 @@ export default function WorkflowCompare() {
             return (
               <li
                 key={s.taak}
-                className={`grid gap-2 rounded-2xl border p-4 transition-[border-color,background-color,opacity,transform] duration-300 sm:grid-cols-[1fr_1.2fr] sm:items-center sm:gap-6 sm:p-5 ${
+                className={`grid gap-2 rounded-[3px] border p-4 transition-[border-color,background-color,opacity,transform] duration-300 sm:grid-cols-[1fr_1.2fr] sm:items-center sm:gap-6 sm:p-5 ${
                   done
                     ? "border-primary/50 bg-bg-muted"
                     : "scale-[0.99] border-border bg-bg-card"

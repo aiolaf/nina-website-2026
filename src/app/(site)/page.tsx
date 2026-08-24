@@ -169,7 +169,7 @@ export default function Home() {
                     foto de lichte tint, anders leest het violet niet. */}
                 <Link
                   href="/lezingen-workshops"
-                  className="annotatie annotatie-licht text-[19px] decoration-violet-light/50 underline-offset-4 hover:underline"
+                  className="annotatie annotatie-licht inline-block text-[19px] decoration-violet-light/50 underline-offset-4 hover:underline"
                 >
                   of vraag een AI lezing of workshop aan
                 </Link>
@@ -380,7 +380,7 @@ export default function Home() {
                   {u.tekst}
                 </p>
                 {"pin" in u && (
-                  <span className="mt-5 inline-flex items-center rounded-[10px] bg-chip px-3 py-1.5 font-mono text-[12px] text-text">
+                  <span className="mt-5 inline-flex items-center rounded-[3px] bg-chip px-3 py-1.5 font-mono text-[12px] text-text">
                     {u.pin}
                   </span>
                 )}
@@ -408,7 +408,7 @@ export default function Home() {
                     sizes="(min-width: 1024px) 540px, 100vw"
                     className="h-full w-full object-cover"
                   />
-                  <span className="label-mono absolute bottom-3 left-3 rounded-[10px] bg-white/85 px-3 py-1.5 text-[10.5px] text-text backdrop-blur">
+                  <span className="label-mono absolute bottom-3 left-3 rounded-[3px] bg-white/85 px-3 py-1.5 text-[10.5px] text-text backdrop-blur">
                     Workshop bij DA Drogist
                   </span>
                 </div>

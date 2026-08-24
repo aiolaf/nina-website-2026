@@ -197,7 +197,7 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-lg px-3 py-3 text-lg font-medium ${
+              className={`rounded-[3px] px-3 py-3 text-lg font-medium ${
                 item.uitgelicht
                   ? "border border-primary/40 font-semibold text-primary"
                   : pathname === item.href
@@ -218,7 +218,7 @@ export default function Header({ lang = "nl" }: { lang?: Lang }) {
           </a>
           <Link
             href={switchHref}
-            className="mt-2 rounded-lg px-3 py-3 text-sm font-medium text-text-muted"
+            className="mt-2 rounded-[3px] px-3 py-3 text-sm font-medium text-text-muted"
           >
             {lang === "en" ? "🇳🇱 Nederlands" : "🇬🇧 English"}
           </Link>

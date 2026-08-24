@@ -115,7 +115,7 @@ export default function AiAgentsEn() {
         <div className="grid gap-5 lg:grid-cols-3">
           {USE_CASES.map((u, idx) => (
             <Reveal key={u.name} delay={idx * 0.1}>
-              <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7 transition-colors hover:border-primary/50">
+              <div className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7 transition-colors hover:border-primary/50">
                 <h3 className="font-display text-lg font-bold">{u.name}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-text-muted">
                   {u.text}
@@ -145,7 +145,7 @@ export default function AiAgentsEn() {
             <li key={s.step} className="h-full">
               <Reveal
                 delay={idx * 0.1}
-                className="relative h-full rounded-2xl border border-border bg-bg-card p-6 pt-8"
+                className="relative h-full rounded-[3px] border border-border bg-bg-card p-6 pt-8"
               >
                 <span className="font-display absolute -top-4 left-6 rounded-full border border-primary/50 bg-bg px-3 py-1 text-sm font-bold text-primary">
                   {String(idx + 1).padStart(2, "0")}
@@ -171,7 +171,7 @@ export default function AiAgentsEn() {
         <div className="grid gap-5 sm:grid-cols-3">
           {AGENTS.map((a, idx) => (
             <Reveal key={a.name} delay={idx * 0.08}>
-              <div className="h-full rounded-2xl border border-border bg-bg-card p-6">
+              <div className="h-full rounded-[3px] border border-border bg-bg-card p-6">
                 <h3 className="font-display text-base font-bold">{a.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
                   {a.text}
@@ -192,7 +192,7 @@ export default function AiAgentsEn() {
       >
         <div className="grid gap-5 sm:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-border bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">
                 Securely hosted in Amsterdam
               </h3>
@@ -203,7 +203,7 @@ export default function AiAgentsEn() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-border bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">
                 No lock-in, you own the IP
               </h3>

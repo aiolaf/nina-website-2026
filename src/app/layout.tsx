@@ -9,7 +9,6 @@ import {
   Kalam,
 } from "next/font/google";
 import localFont from "next/font/local";
-import LetterVoorkeur from "@/components/layout/LetterVoorkeur";
 import CookieBanner from "@/components/layout/CookieBanner";
 import KlikMeting from "@/components/layout/KlikMeting";
 import ScrollDiepte from "@/components/layout/ScrollDiepte";
@@ -64,9 +63,9 @@ const kalam = Kalam({
  * public/fonts/FONTSHARE-FFL-LICENSE.txt).
  *
  * Instrument Serif was de sterkste reden dat de site op elke andere
- * AI-website leek. Deze twee staan tijdelijk naast elkaar zodat Olaf kan
- * kiezen; daarna gaat de verliezer eruit. Wisselen kan met ?letter=zodiak of
- * ?letter=sentient, zie LetterVoorkeur.
+ * AI-website leek. Zodiak is de gekozen vervanger. De tweede kandidaat
+ * (Sentient) ligt nog in public/fonts; wisselen is één localFont-declaratie
+ * plus het token --font-serif in globals.css.
  */
 const zodiak = localFont({
   src: [
@@ -74,15 +73,6 @@ const zodiak = localFont({
     { path: "../../public/fonts/Zodiak-LightItalic.woff2", weight: "300", style: "italic" },
   ],
   variable: "--font-zodiak",
-  display: "swap",
-});
-
-const sentient = localFont({
-  src: [
-    { path: "../../public/fonts/Sentient-Light.woff2", weight: "300", style: "normal" },
-    { path: "../../public/fonts/Sentient-LightItalic.woff2", weight: "300", style: "italic" },
-  ],
-  variable: "--font-sentient",
   display: "swap",
 });
 
@@ -119,8 +109,7 @@ export default function RootLayout({
     <html
       lang="nl"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${bricolage.variable} ${instrumentSerif.variable} ${fragmentMono.variable} ${kalam.variable} ${zodiak.variable} ${sentient.variable} h-full antialiased`}
-      data-letter="zodiak"
+      className={`${inter.variable} ${bricolage.variable} ${instrumentSerif.variable} ${fragmentMono.variable} ${kalam.variable} ${zodiak.variable} h-full antialiased`}
     >
       {/* Consent Mode v2. Moet met beforeInteractive draaien, dus vóór het
           GTM-script: staat de default te laat, dan mogen tags in dat gaatje
@@ -153,8 +142,6 @@ export default function RootLayout({
           aria-hidden="true"
           className="pointer-events-none absolute top-0 h-8 w-px"
         />
-        {/* Tijdelijk: leest ?letter= en zet data-letter op <html>. */}
-        <LetterVoorkeur />
         <ScrollProgress />
         <CursorGlow />
         {children}

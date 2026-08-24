@@ -50,7 +50,7 @@ export default function AiBuild() {
               alt="Live demo van een n8n-workflow tijdens een NinA sessie"
               width={900}
               height={675}
-              className="rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
+              className="rounded-[3px] border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
             />
           </div>
           </div>
@@ -67,18 +67,18 @@ export default function AiBuild() {
       >
         <div className="grid gap-5 lg:grid-cols-2">
           <Reveal>
-            <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7">
+            <article className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7">
               <h2 className="display-serif text-xl ">
                 Procesoptimalisatie
               </h2>
               <div className="mt-5 space-y-3">
-                <div className="rounded-xl border border-border bg-bg-alt p-4">
+                <div className="rounded-[3px] border border-border bg-bg-alt p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
                     Oud
                   </p>
                   <p className="mt-1 text-sm">Handmatig, foutgevoelig</p>
                 </div>
-                <div className="rounded-xl border border-primary/50 bg-bg-muted p-4">
+                <div className="rounded-[3px] border border-primary/50 bg-bg-muted p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-primary">
                     Nieuw
                   </p>
@@ -95,18 +95,18 @@ export default function AiBuild() {
             </article>
           </Reveal>
           <Reveal delay={0.1}>
-            <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7">
+            <article className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7">
               <h2 className="display-serif text-xl ">
                 Vibe-code naar product
               </h2>
               <div className="mt-5 space-y-3">
-                <div className="rounded-xl border border-border bg-bg-alt p-4">
+                <div className="rounded-[3px] border border-border bg-bg-alt p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
                     Jouw start
                   </p>
                   <p className="mt-1 text-sm">Zelfgebouwd prototype</p>
                 </div>
-                <div className="rounded-xl border border-primary/50 bg-bg-muted p-4">
+                <div className="rounded-[3px] border border-primary/50 bg-bg-muted p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-primary">
                     NinA bouwt
                   </p>
@@ -125,24 +125,24 @@ export default function AiBuild() {
         </div>
 
         <Reveal delay={0.15}>
-          <div className="mt-5 rounded-2xl border border-border bg-bg-card p-7">
+          <div className="mt-5 rounded-[3px] border border-border bg-bg-card p-7">
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">
               Waar de agent zit
             </p>
             <div className="mt-5 flex flex-col items-stretch gap-3 text-center sm:flex-row sm:items-center">
-              <div className="flex-1 rounded-xl border border-border bg-bg-alt p-4 text-sm">
+              <div className="flex-1 rounded-[3px] border border-border bg-bg-alt p-4 text-sm">
                 Jouw systemen en data
               </div>
               <span aria-hidden="true" className="text-primary">
                 →
               </span>
-              <div className="flex-1 rounded-xl border border-primary/60 bg-bg-muted p-4 text-sm font-semibold text-primary">
+              <div className="flex-1 rounded-[3px] border border-primary/60 bg-bg-muted p-4 text-sm font-semibold text-primary">
                 NinA agent
               </div>
               <span aria-hidden="true" className="text-primary">
                 →
               </span>
-              <div className="flex-1 rounded-xl border border-border bg-bg-alt p-4 text-sm">
+              <div className="flex-1 rounded-[3px] border border-border bg-bg-alt p-4 text-sm">
                 Jouw team
               </div>
             </div>

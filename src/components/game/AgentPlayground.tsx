@@ -160,7 +160,7 @@ export default function AgentPlayground() {
   return (
     <div
       ref={rootRef}
-      className="relative overflow-hidden rounded-3xl border border-border bg-bg-card p-6 shadow-[0_20px_60px_rgba(12,14,24,0.08)] sm:p-7"
+      className="relative overflow-hidden rounded-[3px] border border-border bg-bg-card p-6 shadow-[0_20px_60px_rgba(12,14,24,0.08)] sm:p-7"
     >
       <div className="flex items-center justify-between gap-3">
         <p className="font-display text-lg font-bold">
@@ -257,7 +257,7 @@ export default function AgentPlayground() {
           leveled ? "max-h-32 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="flex flex-col items-start justify-between gap-3 rounded-2xl bg-[#0c0e18] p-4 sm:flex-row sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-3 rounded-[3px] bg-[#0c0e18] p-4 sm:flex-row sm:items-center">
           <p className="text-sm text-[#e8e2ee]">
             <span className="font-display font-bold text-[#e8963e]">
               Level up.

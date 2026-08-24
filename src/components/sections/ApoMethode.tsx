@@ -371,7 +371,7 @@ function Fit({ n }: { n: number }) {
       {[1, 2, 3, 4].map((i) => (
         <span
           key={i}
-          className="w-1 rounded-sm"
+          className="w-1 rounded-[3px]"
           style={{
             height: 4 + i * 3,
             backgroundColor: i <= n ? (n >= 3 ? KLEUR.groen.dot : KLEUR.oranje.dot) : "#ddd5c9",
@@ -395,7 +395,7 @@ function StapKaart({
   const stap = c.stappen[nr - 1];
   return (
     <Reveal>
-      <div className="rounded-3xl border border-border bg-bg-card p-6 shadow-[0_18px_60px_rgba(12,14,24,0.07)] sm:p-9">
+      <div className="rounded-[3px] border border-border bg-bg-card p-6 shadow-[0_18px_60px_rgba(12,14,24,0.07)] sm:p-9">
         <span className="inline-flex rounded-full border border-border bg-bg px-3.5 py-1.5 font-mono text-xs text-text-muted">
           {c.badge} · {nr}/4
         </span>
@@ -419,7 +419,7 @@ function Paneel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-bg p-5">
+    <div className="rounded-[3px] border border-border bg-bg p-5">
       <p className="flex items-center gap-2 text-sm font-semibold">
         {dot && (
           <span
@@ -499,7 +499,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
                     {kolom.items.map((item) => (
                       <li
                         key={item.tekst.nl}
-                        className="rounded-xl p-2.5 text-[11px] leading-snug"
+                        className="rounded-[3px] p-2.5 text-[11px] leading-snug"
                         style={{ backgroundColor: KLEUR[kolom.kleur].vlak, color: "#0c0e18" }}
                       >
                         {t(item.tekst, lang)}
@@ -523,7 +523,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
               {PROCESMAP.map((s, i) => (
                 <div
                   key={s.naam.nl}
-                  className="w-36 shrink-0 snap-start rounded-xl border border-border bg-bg-card p-3 lg:w-auto"
+                  className="w-36 shrink-0 snap-start rounded-[3px] border border-border bg-bg-card p-3 lg:w-auto"
                 >
                   <p className="font-mono text-[10px] text-text-muted">{i + 1}</p>
                   <p className="mt-1 min-h-8 text-xs font-semibold leading-snug">
@@ -562,7 +562,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
               {CLASSIFICATIE.map((r) => (
                 <li
                   key={r.stap.nl}
-                  className="grid grid-cols-2 items-center gap-x-4 gap-y-2 rounded-xl border border-border bg-bg-card p-4 sm:grid-cols-[1.2fr_auto_auto_1fr_auto] sm:gap-x-5"
+                  className="grid grid-cols-2 items-center gap-x-4 gap-y-2 rounded-[3px] border border-border bg-bg-card p-4 sm:grid-cols-[1.2fr_auto_auto_1fr_auto] sm:gap-x-5"
                 >
                   <p className="text-sm font-semibold">{t(r.stap, lang)}</p>
                   <div className="justify-self-end sm:justify-self-auto">
@@ -608,9 +608,9 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
               {BOUWLAGEN.map((laag, i) => (
                 <li
                   key={laag.naam.nl}
-                  className="flex items-start gap-3 rounded-xl border border-border bg-bg-card p-3.5"
+                  className="flex items-start gap-3 rounded-[3px] border border-border bg-bg-card p-3.5"
                 >
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-primary/10 text-primary">
                     <laag.Icon className="h-4 w-4" />
                   </span>
                   <span>
@@ -692,7 +692,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
                 {c.tegels.map((tegel) => (
                   <div
                     key={tegel.label}
-                    className="rounded-xl border border-border bg-bg-card p-4"
+                    className="rounded-[3px] border border-border bg-bg-card p-4"
                   >
                     <span
                       aria-hidden="true"
@@ -715,7 +715,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
             <Paneel kop={c.futurePlan} dot="paars">
               <div className="grid gap-2.5 sm:grid-cols-3">
                 {FUTUREPLAN.map((fase) => (
-                  <div key={fase.fase.nl} className="rounded-xl border border-border bg-bg-card p-3.5">
+                  <div key={fase.fase.nl} className="rounded-[3px] border border-border bg-bg-card p-3.5">
                     <p
                       className="flex items-center gap-1.5 text-xs font-semibold"
                       style={{ color: KLEUR[fase.kleur].tekst }}
@@ -732,7 +732,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
                       {fase.items.map((item) => (
                         <li
                           key={item.nl}
-                          className="rounded-lg px-2.5 py-1.5 text-[11px] leading-snug"
+                          className="rounded-[3px] px-2.5 py-1.5 text-[11px] leading-snug"
                           style={{ backgroundColor: KLEUR[fase.kleur].vlak, color: "#0c0e18" }}
                         >
                           {t(item, lang)}
@@ -749,7 +749,7 @@ export default function ApoMethode({ lang = "nl" }: { lang?: Lang }) {
 
       {/* Slot: waar deze methode in de producten zit */}
       <Reveal delay={0.05}>
-        <div className="flex flex-col gap-4 rounded-3xl border border-border bg-bg-card p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+        <div className="flex flex-col gap-4 rounded-[3px] border border-border bg-bg-card p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
           <p className="max-w-xl text-sm leading-relaxed text-text-muted">{c.slot}</p>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <MagneticButton

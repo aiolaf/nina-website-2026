@@ -50,10 +50,10 @@ export default function BlogPageEn() {
           <div className="reveal-now [animation-delay:0.1s]">
             <Link
               href={`/en/blog/${latest.slug}`}
-              className="group grid items-stretch overflow-hidden rounded-3xl border border-border bg-bg-card shadow-sm transition-shadow hover:shadow-lg lg:grid-cols-2"
+              className="group grid items-stretch overflow-hidden rounded-[3px] border border-border bg-bg-card shadow-sm transition-shadow hover:shadow-lg lg:grid-cols-2"
             >
               {latest.image && (
-                <div className="relative aspect-[16/9] lg:aspect-auto lg:min-h-[320px]">
+                <div className="foto relative aspect-[16/9] lg:aspect-auto lg:min-h-[320px]">
                   <Image
                     src={latest.image}
                     alt={latest.titleEn ?? latest.title}
@@ -94,10 +94,10 @@ export default function BlogPageEn() {
               <Reveal key={post.slug} delay={Math.min(i % 3, 2) * 0.08}>
                 <Link
                   href={`/en/blog/${post.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-bg-card shadow-sm transition-shadow hover:shadow-md"
+                  className="group flex h-full flex-col overflow-hidden rounded-[3px] border border-border bg-bg-card shadow-sm transition-shadow hover:shadow-md"
                 >
                   {post.image && (
-                    <div className="relative aspect-[16/9]">
+                    <div className="foto relative aspect-[16/9]">
                       <Image
                         src={post.image}
                         alt={post.titleEn ?? post.title}

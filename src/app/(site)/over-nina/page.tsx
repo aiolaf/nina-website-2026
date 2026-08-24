@@ -121,7 +121,7 @@ export default function OverNina() {
             alt="Het NinA-team tijdens een teamuitje in een game-hal"
             width={1200}
             height={800}
-            className="w-full rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
+            className="w-full rounded-[3px] border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
           />
         </Reveal>
 
@@ -147,7 +147,7 @@ export default function OverNina() {
           </li>
         </ul>
         <Reveal delay={0.1}>
-          <div className="mt-10 rounded-2xl border border-border bg-bg-card p-7 sm:flex sm:items-center sm:justify-between">
+          <div className="mt-10 rounded-[3px] border border-border bg-bg-card p-7 sm:flex sm:items-center sm:justify-between">
             <div className="flex items-start gap-5">
               <Image
                 src="/images/olaf-profile.webp"

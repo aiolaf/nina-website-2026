@@ -177,7 +177,7 @@ export default function HomeEn() {
                 {/* Handwritten violet: the human NinA moment, one per section. */}
                 <Link
                   href="/en/workshops"
-                  className="annotatie text-[19px] decoration-violet/40 underline-offset-4 hover:underline"
+                  className="annotatie inline-block text-[19px] decoration-violet/40 underline-offset-4 hover:underline"
                 >
                   or request an AI talk or workshop
                 </Link>
@@ -185,7 +185,7 @@ export default function HomeEn() {
             </div>
             <div className="reveal-now [animation-delay:0.25s]">
               {/* Static agent log (the NL page shows an interactive playground) */}
-              <div className="rounded-2xl border border-border bg-bg-card/80 p-5 shadow-[0_20px_60px_rgba(12,14,24,0.12)] backdrop-blur">
+              <div className="rounded-[3px] border border-border bg-bg-card/80 p-5 shadow-[0_20px_60px_rgba(12,14,24,0.12)] backdrop-blur">
                 <div className="flex items-center justify-between border-b border-border pb-3">
                   <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                     Agents at work
@@ -233,7 +233,7 @@ export default function HomeEn() {
           <LogoMarquee label="Trusted by" />
           <div className="mt-12 grid grid-cols-2 gap-6 text-center lg:grid-cols-4">
             <div className="flex flex-col items-center">
-              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
+              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-[3px] bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
                 <IconBuilding className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
@@ -244,7 +244,7 @@ export default function HomeEn() {
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
+              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-[3px] bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
                 <IconPresentation className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
@@ -255,7 +255,7 @@ export default function HomeEn() {
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
+              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-[3px] bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
                 <IconSpark className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
@@ -264,7 +264,7 @@ export default function HomeEn() {
               <p className="mt-1 text-sm text-text-muted">average rating</p>
             </div>
             <div className="flex flex-col items-center">
-              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
+              <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-[3px] bg-[linear-gradient(135deg,#0c0e18,#6b4227_55%,#b0653a)] text-white shadow-[0_6px_18px_rgba(12,14,24,0.3)]">
                 <IconUsers className="h-5.5 w-5.5" />
               </span>
               <p className="font-display text-3xl font-bold text-primary sm:text-4xl">
@@ -320,10 +320,10 @@ export default function HomeEn() {
             <li key={f.nr} className="h-full">
               <Reveal
                 delay={idx * 0.1}
-                className="h-full rounded-2xl border border-border bg-bg-card p-6 transition-colors hover:border-primary/50"
+                className="h-full rounded-[3px] border border-border bg-bg-card p-6 transition-colors hover:border-primary/50"
               >
                 <div className="flex items-center justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-[3px] bg-primary/10 text-primary">
                     <f.Icon className="h-5 w-5" />
                   </span>
                   <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">
@@ -372,7 +372,7 @@ export default function HomeEn() {
             <li key={s.step} className="h-full">
               <Reveal
                 delay={idx * 0.1}
-                className="relative h-full rounded-2xl border border-border bg-bg-card p-6 pt-8"
+                className="relative h-full rounded-[3px] border border-border bg-bg-card p-6 pt-8"
               >
                 <span className="font-display absolute -top-4 left-6 rounded-full border border-primary/50 bg-bg px-3 py-1 text-sm font-bold text-primary">
                   {String(idx + 1).padStart(2, "0")}
@@ -397,7 +397,7 @@ export default function HomeEn() {
         sub="Every agent we build works like this: the agent proposes a plan, you approve, adjust or take over. The human stays in the loop."
       >
         <Reveal>
-          <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-bg-card p-7">
+          <div className="mx-auto max-w-3xl rounded-[3px] border border-border bg-bg-card p-7">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               Plan for approval
             </p>
@@ -443,7 +443,7 @@ export default function HomeEn() {
         <div className="grid gap-5 lg:grid-cols-[1.2fr_1fr]">
           {/* Static EN variant of the savings chart */}
           <Reveal className="h-full">
-            <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-7">
+            <div className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-7">
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                 Hours, before and after
               </p>
@@ -503,7 +503,7 @@ export default function HomeEn() {
               },
             ].map((c, idx) => (
               <Reveal key={idx} delay={idx * 0.08} className="h-full">
-                <GlowCard className="flex h-full flex-col justify-center rounded-2xl border border-border bg-bg-card p-5 sm:p-6">
+                <GlowCard className="flex h-full flex-col justify-center rounded-[3px] border border-border bg-bg-card p-5 sm:p-6">
                   <p className="font-display text-2xl font-bold text-gold sm:text-3xl">
                     {c.figure}
                   </p>
@@ -530,9 +530,9 @@ export default function HomeEn() {
         <div className="grid gap-5 sm:grid-cols-2">
           {USPS.map((u, idx) => (
             <Reveal key={u.title} delay={idx * 0.08} className="h-full">
-              <GlowCard className="h-full rounded-2xl border border-border bg-bg-card p-7 hover:border-primary/40">
+              <GlowCard className="h-full rounded-[3px] border border-border bg-bg-card p-7 hover:border-primary/40">
                 <div className="flex items-start gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[3px] bg-primary/10 text-primary">
                     <u.Icon className="h-5.5 w-5.5" />
                   </span>
                   <div>
@@ -559,7 +559,7 @@ export default function HomeEn() {
       <section className="mx-auto max-w-6xl px-5 py-20 sm:py-28">
         <Reveal>
           <figure className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
-            <div className="relative overflow-hidden rounded-3xl border border-border shadow-[0_20px_60px_rgba(12,14,24,0.12)]">
+            <div className="relative overflow-hidden rounded-[3px] border border-border shadow-[0_20px_60px_rgba(12,14,24,0.12)]">
               <Image
                 src="/images/foto-da-drogist.webp"
                 alt="The DA Drogist team after the NinA AI workshop"
@@ -608,7 +608,7 @@ export default function HomeEn() {
       {/* Olaf, personal brand (static EN variant of OlafCard) */}
       <section className="mx-auto max-w-6xl px-5 pb-20 sm:pb-28">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-bg-card">
+          <div className="relative overflow-hidden rounded-[3px] border border-border bg-bg-card">
             <div
               aria-hidden="true"
               className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(176,101,58,0.18),transparent_65%)]"

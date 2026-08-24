@@ -80,7 +80,7 @@ export default function FreebieDetail({
         </header>
 
         {freebie.image && (
-          <div className="relative mt-10 overflow-hidden rounded-2xl border border-border">
+          <div className="relative mt-10 overflow-hidden rounded-[3px] border border-border">
             <Image
               src={freebie.image}
               alt={freebie.title[lang]}
@@ -96,7 +96,7 @@ export default function FreebieDetail({
           <FreebieBlocks freebie={freebie} lang={lang} />
         </div>
 
-        <aside className="mt-16 rounded-3xl border border-border bg-bg-card p-8 shadow-sm sm:p-10">
+        <aside className="mt-16 rounded-[3px] border border-border bg-bg-card p-8 shadow-sm sm:p-10">
           <h2 className="display-serif text-2xl ">
             {t.ctaTitle}
           </h2>

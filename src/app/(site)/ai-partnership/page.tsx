@@ -230,7 +230,7 @@ export default function AiPartnership() {
                 alt="Kickoff-workshop met het kernteam van een klant"
                 width={900}
                 height={682}
-                className="rounded-3xl border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
+                className="[filter:grayscale(1)_sepia(0.42)_saturate(1.75)_contrast(1.05)_brightness(1.02)] rounded-[3px] border border-border object-cover shadow-[0_20px_60px_rgba(12,14,24,0.12)]"
               />
             </div>
           </div>
@@ -285,7 +285,7 @@ export default function AiPartnership() {
             <li key={b} className="h-full">
               <Reveal
                 delay={idx * 0.05}
-                className="h-full rounded-xl border border-border bg-bg-card p-4 text-sm leading-snug transition-colors hover:border-primary/50"
+                className="h-full rounded-[3px] border border-border bg-bg-card p-4 text-sm leading-snug transition-colors hover:border-primary/50"
               >
                 {b}
               </Reveal>
@@ -347,7 +347,7 @@ export default function AiPartnership() {
         <div className="grid gap-5 lg:grid-cols-3">
           {PROCESSEN.map((p, idx) => (
             <Reveal key={p.naam} delay={idx * 0.08}>
-              <article className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-6">
+              <article className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-6">
                 <h3 className="font-display text-lg font-bold">{p.naam}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   {p.pijn}
@@ -378,7 +378,7 @@ export default function AiPartnership() {
               alt="Live demo van een n8n-workflow tijdens een NinA-sessie"
               width={900}
               height={600}
-              className="h-full w-full rounded-2xl border border-border object-cover"
+              className="[filter:grayscale(1)_sepia(0.42)_saturate(1.75)_contrast(1.05)_brightness(1.02)] h-full w-full rounded-[3px] border border-border object-cover"
             />
           </Reveal>
         </div>
@@ -388,14 +388,14 @@ export default function AiPartnership() {
             een workshop komt en niet uit een partnership: dat is de enige
             met naam vrijgegeven quote die er nu is. */}
         <Reveal delay={0.2}>
-          <figure className="mt-5 rounded-2xl border border-border bg-bg-card p-6 sm:p-8">
+          <figure className="mt-5 rounded-[3px] border border-border bg-bg-card p-6 sm:p-8">
             <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center">
               <Image
                 src="/images/foto-da-drogist.webp"
                 alt="Het team van DA Drogist na de AI-workshop van NinA"
                 width={320}
                 height={240}
-                className="h-32 w-full rounded-xl object-cover sm:w-44"
+                className="h-32 w-full rounded-[3px] object-cover sm:w-44"
               />
               <div>
                 <blockquote className="font-display text-lg leading-snug sm:text-xl">
@@ -432,7 +432,7 @@ export default function AiPartnership() {
         <div className="grid gap-5 lg:grid-cols-3">
           {GARANTIES.map((g, idx) => (
             <Reveal key={g.kop} delay={idx * 0.08}>
-              <div className="h-full rounded-2xl border border-border bg-bg-card p-6">
+              <div className="h-full rounded-[3px] border border-border bg-bg-card p-6">
                 <h3 className="font-display text-lg font-bold">{g.kop}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   {g.tekst}
@@ -454,7 +454,7 @@ export default function AiPartnership() {
       >
         <div className="grid gap-5 lg:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-2xl border border-primary/50 bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-primary/50 bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">Dit is het wel</h3>
               <ul className="mt-5 space-y-3">
                 {IS_WEL.map((w) => (
@@ -470,7 +470,7 @@ export default function AiPartnership() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-alt p-7">
+            <div className="flex h-full flex-col rounded-[3px] border border-border bg-bg-alt p-7">
               <h3 className="font-display text-lg font-bold">Dit is het niet</h3>
               <ul className="mt-5 flex-1 space-y-3">
                 {IS_NIET.map((n) => (
@@ -525,7 +525,7 @@ export default function AiPartnership() {
             <li key={t.naam} className="h-full">
               <Reveal
                 delay={idx * 0.08}
-                className="relative h-full rounded-2xl border border-border bg-bg-card p-6 pt-8 transition-colors hover:border-primary/50"
+                className="relative h-full rounded-[3px] border border-border bg-bg-card p-6 pt-8 transition-colors hover:border-primary/50"
               >
                 <span className="font-display absolute -top-4 left-6 rounded-full border border-primary/50 bg-bg px-3 py-1 text-sm font-bold text-primary">
                   {t.stap}
@@ -541,7 +541,7 @@ export default function AiPartnership() {
 
         {/* Kickoff-prijzen als strip in plaats van twee bulletlijsten */}
         <Reveal delay={0.1}>
-          <div className="mt-5 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+          <div className="mt-5 grid gap-px overflow-hidden rounded-[3px] border border-border bg-border sm:grid-cols-2">
             <div className="bg-bg-card p-6">
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="font-display text-lg font-bold">Kickoff Fase</h3>
@@ -622,7 +622,7 @@ export default function AiPartnership() {
       >
         <div className="grid gap-5 lg:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-2xl border border-primary/50 bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-primary/50 bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">
                 Dit gaat over jou als
               </h3>
@@ -640,7 +640,7 @@ export default function AiPartnership() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="h-full rounded-2xl border border-border bg-bg-card p-7">
+            <div className="h-full rounded-[3px] border border-border bg-bg-card p-7">
               <h3 className="font-display text-lg font-bold">
                 Niet voor jou als
               </h3>
@@ -696,7 +696,7 @@ export default function AiPartnership() {
               <li key={s.stap} className="h-full">
                 <Reveal
                   delay={idx * 0.08}
-                  className="relative h-full rounded-2xl border border-border bg-bg-card p-6 pt-8"
+                  className="relative h-full rounded-[3px] border border-border bg-bg-card p-6 pt-8"
                 >
                   <span className="font-display absolute -top-4 left-6 rounded-full border border-primary/50 bg-bg px-3 py-1 text-sm font-bold text-primary">
                     {s.stap}

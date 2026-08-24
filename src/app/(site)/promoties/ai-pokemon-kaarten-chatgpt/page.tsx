@@ -20,7 +20,7 @@ const prompt2 = `Photorealistic close-up of a rare holographic Pokémon-style tr
  */
 function PromptBlock({ text }: { text: string }) {
   return (
-    <div className="my-6 rounded-2xl border border-border bg-bg-card p-5 sm:p-6">
+    <div className="my-6 rounded-[3px] border border-border bg-bg-card p-5 sm:p-6">
       <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
         Prompt
       </div>

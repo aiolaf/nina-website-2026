@@ -92,7 +92,7 @@ export default function SessieFotos() {
       {FOTOS.map((f, i) => (
         <figure
           key={f.src}
-          className={`relative shrink-0 snap-start overflow-hidden rounded-2xl border border-border sm:self-start lg:self-stretch ${
+          className={`foto relative shrink-0 snap-start overflow-hidden rounded-[3px] border border-border sm:self-start lg:self-stretch ${
             f.groot ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""
           } ${f.staand ? "lg:row-span-2" : ""}`}
         >

@@ -48,6 +48,9 @@ export default function Section({
     >
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:py-28">
         <Reveal>
+          {/* Blokje op het spoor in de linkermarge (zie AgentSpoor): gaat aan
+              zodra deze sectie in beeld komt. Onder 1536px staat het uit. */}
+          <span aria-hidden="true" className="spoor-knoop mt-2" />
           {kicker && (
             <p className="label-mono mb-6 border-b border-border pb-3 text-[11.5px] text-text-muted">
               {kicker}

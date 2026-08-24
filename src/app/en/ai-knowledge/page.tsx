@@ -54,7 +54,7 @@ export default function AiKnowledgePageEn() {
         <div className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
           <div className="grid gap-6 md:grid-cols-2">
             <Reveal>
-              <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-8 shadow-sm transition-shadow hover:shadow-md">
+              <div className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-8 shadow-sm transition-shadow hover:shadow-md">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   Newsletter · Substack
                 </p>
@@ -75,7 +75,7 @@ export default function AiKnowledgePageEn() {
               </div>
             </Reveal>
             <Reveal delay={0.08}>
-              <div className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-8 shadow-sm transition-shadow hover:shadow-md">
+              <div className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-8 shadow-sm transition-shadow hover:shadow-md">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary">
                   Blog
                 </p>

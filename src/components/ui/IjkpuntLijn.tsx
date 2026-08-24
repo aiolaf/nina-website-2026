@@ -16,7 +16,7 @@ export default function IjkpuntLijn({
 }) {
   return (
     <Reveal>
-      <div className="rounded-2xl border border-border bg-bg-card p-6 sm:p-8">
+      <div className="rounded-[3px] border border-border bg-bg-card p-6 sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
           {label}
         </p>
