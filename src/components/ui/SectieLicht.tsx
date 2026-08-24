@@ -14,7 +14,8 @@ type Props = {
   children?: ReactNode;
   className?: string;
   variant?: "default" | "alt";
-  /** Smallere kop-kolom voor secties met veel tekst. */
+  /** Nummer voor het mono-label, bijvoorbeeld "03". Zet ook de knoop op het spoor. */
+  nr?: string;
   id?: string;
 };
 
@@ -35,6 +36,7 @@ export default function SectieLicht({
   children,
   className = "",
   variant = "default",
+  nr,
   id,
 }: Props) {
   const bg = variant === "alt" ? "bg-bg-alt" : "";
@@ -46,8 +48,12 @@ export default function SectieLicht({
     >
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:py-28">
         <Reveal>
+          {/* Blokje op het spoor in de linkermarge: gaat aan zodra de sectie
+              in beeld komt. */}
+          {nr && <span aria-hidden="true" className="spoor-knoop mt-2" />}
           {label && (
             <p className="label-mono mb-6 border-b border-border pb-3 text-[11.5px] text-text-muted sm:text-xs">
+              {nr && <span className="mr-3 text-text">{nr}</span>}
               {label}
             </p>
           )}
@@ -59,10 +65,21 @@ export default function SectieLicht({
               {sub}
             </p>
           )}
+          {/* De noot staat in de buitenmarge zodra daar ruimte is, en anders
+              gewoon onder de subregel. Twee keer dezelfde tekst in de DOM zou
+              een schermlezer verdubbelen, dus de marge-versie is decoratief. */}
           {annotatie && (
-            <p className="annotatie mt-4 text-[19px] sm:text-[21px]">
-              {annotatie}
-            </p>
+            <>
+              <p className="annotatie mt-4 text-[19px] 2xl:hidden sm:text-[21px]">
+                {annotatie}
+              </p>
+              <p
+                aria-hidden="true"
+                className="annotatie marge-noot mt-1 text-[17px]"
+              >
+                {annotatie}
+              </p>
+            </>
           )}
         </Reveal>
         {children && <div className="mt-12">{children}</div>}

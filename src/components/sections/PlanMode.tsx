@@ -137,7 +137,7 @@ export default function PlanMode() {
         {nr}
       </span>
       <span
-        className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest transition-colors ${
+        className={`inline-flex items-center gap-1 rounded-[3px] px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest transition-colors ${
           wie === "AI"
             ? actief
               ? "bg-primary/15 text-primary"
@@ -154,7 +154,7 @@ export default function PlanMode() {
   );
 
   const kaart = (actief: boolean) =>
-    `flex h-full flex-col rounded-2xl border p-5 transition-all duration-300 ${
+    `flex h-full flex-col rounded-[3px] border p-5 transition-all duration-300 ${
       actief
         ? "border-primary/60 bg-bg-card shadow-[0_12px_40px_rgba(12,14,24,0.14)]"
         : "border-border bg-bg-card opacity-90"
@@ -205,7 +205,7 @@ export default function PlanMode() {
               );
             })}
           </ul>
-          <p className="mt-auto rounded-xl border border-primary/30 bg-primary/5 p-3 pt-3 text-xs leading-relaxed text-text-muted">
+          <p className="mt-auto rounded-[3px] border border-primary/30 bg-primary/5 p-3 pt-3 text-xs leading-relaxed text-text-muted">
             Dit is mijn plan. Uitgelegd in gewone taal.
           </p>
         </div>
@@ -223,14 +223,14 @@ export default function PlanMode() {
             <button
               type="button"
               disabled={stap !== 2}
-              className="flex w-full items-center gap-2 rounded-lg border border-border px-3 py-2 text-left text-sm transition-colors hover:border-primary hover:text-primary disabled:opacity-50"
+              className="flex w-full items-center gap-2 rounded-[3px] border border-border px-3 py-2 text-left text-sm transition-colors hover:border-primary hover:text-primary disabled:opacity-50"
             >
               <PencilSimple className="h-4 w-4" /> Aanpassen
             </button>
             <button
               type="button"
               disabled={stap !== 2}
-              className="flex w-full items-center gap-2 rounded-lg border border-border px-3 py-2 text-left text-sm transition-colors hover:border-primary hover:text-primary disabled:opacity-50"
+              className="flex w-full items-center gap-2 rounded-[3px] border border-border px-3 py-2 text-left text-sm transition-colors hover:border-primary hover:text-primary disabled:opacity-50"
             >
               <FunnelSimple className="h-4 w-4" /> Inperken
             </button>
@@ -238,7 +238,7 @@ export default function PlanMode() {
               type="button"
               onClick={keurAf}
               disabled={stap !== 2}
-              className="flex w-full items-center gap-2 rounded-lg border border-border px-3 py-2 text-left text-sm transition-colors hover:border-primary hover:text-primary disabled:opacity-50"
+              className="flex w-full items-center gap-2 rounded-[3px] border border-border px-3 py-2 text-left text-sm transition-colors hover:border-primary hover:text-primary disabled:opacity-50"
             >
               <XCircle className="h-4 w-4" /> Afkeuren
             </button>

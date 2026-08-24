@@ -48,7 +48,9 @@
   --font-sans: var(--font-inter), system-ui, sans-serif;
   /* display = UI-koppen (kaarttitels), serif = editorial display-koppen */
   --font-display: var(--font-bricolage), var(--font-inter), system-ui, sans-serif;
-  --font-serif: var(--font-instrument), "Playfair Display", Georgia, serif;
+  /* Display-letter. Zelf gehost uit Fontshare; Instrument Serif blijft alleen
+     als noodfallback staan. */
+  --font-serif: var(--font-zodiak), var(--font-instrument), Georgia, serif;
   --font-mono: var(--font-fragment), ui-monospace, monospace;
   --font-hand: var(--font-kalam), cursive;
 }
@@ -56,6 +58,11 @@
 html {
   scroll-behavior: smooth;
   background: var(--color-bg);
+}
+
+/* Tijdelijke vergelijking van de twee kandidaat-letters, zie LetterVoorkeur. */
+html[data-letter="sentient"] {
+  --font-serif: var(--font-sentient), var(--font-instrument), Georgia, serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -193,6 +200,93 @@ body {
 }
 
 /* ====================================================================
+   Print: scherpe hoeken, haarlijnen, marge
+
+   Alles was afgerond (148x rounded-full, 121x rounded-2xl). Kaarten en
+   beelden gaan naar 3px, wat op een scherm leest als een gedrukt vlak.
+   Alleen knoppen blijven pillen: dat is het enige ronde element en dus
+   herkenbaar als "hier kun je klikken".
+   ==================================================================== */
+.kaart {
+  border-radius: 3px;
+}
+
+/* Handgeschreven noot in de buitenmarge, zoals een aantekening naast een
+   gedrukte kolom. Pas vanaf 1536px: daaronder is er geen marge en staat de
+   noot gewoon onder de tekst. */
+.marge-noot {
+  position: absolute;
+  left: calc(50% - 50vw + 40px);
+  width: 168px;
+  text-align: right;
+  line-height: 1.35;
+  transform: rotate(-3deg);
+}
+
+/* Het spoor: een gestippelde lijn langs de linkerrand die zich vult tijdens
+   het scrollen, met een blokje per sectie. Verwijzing naar wat we bouwen:
+   een taak die door een workflow loopt. */
+.spoor {
+  position: fixed;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  z-index: 30;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(12, 14, 24, 0.22) 0 3px,
+    transparent 3px 9px
+  );
+}
+.spoor-vulling {
+  position: absolute;
+  inset: 0;
+  transform-origin: top;
+  transform: scaleY(0);
+  background: linear-gradient(
+    to bottom,
+    var(--color-cognac),
+    var(--color-ink) 60%
+  );
+}
+@supports (animation-timeline: scroll()) {
+  .spoor-vulling {
+    animation: spoor-groei linear both;
+    animation-timeline: scroll(root);
+  }
+  @keyframes spoor-groei {
+    to {
+      transform: scaleY(1);
+    }
+  }
+}
+/* Knoop per sectie, uitgelijnd op het spoor. */
+.spoor-knoop {
+  position: absolute;
+  left: calc(50% - 50vw + 20px);
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(12, 14, 24, 0.28);
+  background: var(--color-bg);
+  transition:
+    background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible .spoor-knoop {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+}
+@media (max-width: 1535px) {
+  .spoor,
+  .spoor-knoop,
+  .marge-noot {
+    display: none;
+  }
+}
+
+/* ====================================================================
    Beeldrecept uit de huisstijl "Licht" (componenten/beeld.html)
 
    Het bronmateriaal komt uit sessies en lezingen en loopt sterk uiteen in
@@ -204,8 +298,15 @@ body {
   overflow: hidden;
   background: #ddd8cf;
 }
+/* Duotone in plaats van "iets ontzadigd": zo is elk beeld op de site direct
+   van NinA. De foto wordt naar inkt en cognac getrokken, niet naar grijs. */
 .foto > img {
-  filter: saturate(0.82) contrast(1.06) brightness(1.03) sepia(0.08);
+  /* Warme duotone: eerst naar grijs, dan met sepia plus saturate terug naar
+     cognac. Een blend-laag met mix-blend-mode: color maakte het beeld koel en
+     documentair, en dat is precies de warmte die de huisstijl niet mag
+     verliezen. */
+  filter: grayscale(1) sepia(0.42) saturate(1.75) contrast(1.05) brightness(1.02)
+    hue-rotate(-6deg);
 }
 /* Warme wash over de hele foto */
 .foto::before {
@@ -216,9 +317,9 @@ body {
   pointer-events: none;
   background: linear-gradient(
     160deg,
-    rgba(233, 223, 200, 0.3),
-    rgba(244, 242, 238, 0.1) 55%,
-    rgba(176, 101, 58, 0.14)
+    rgba(233, 223, 200, 0.28),
+    rgba(244, 242, 238, 0.08) 55%,
+    rgba(176, 101, 58, 0.2)
   );
   mix-blend-mode: soft-light;
 }
@@ -262,14 +363,35 @@ body {
 }
 
 /* Papierkorrel voor de warme ivory-uitstraling */
+/* Papier, geen filter-effect. De korrel stond op 3,5 procent en was daarmee
+   onzichtbaar; grover en met multiply leest de pagina als bedrukt papier in
+   plaats van als een scherm. Twee lagen: fijne korrel plus een trage,
+   grovere vlek die de vlakken ongelijk maakt. */
 .grain::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  opacity: 0.09;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 59;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Cfilter id='v'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.008' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='700' height='700' filter='url(%23v)' opacity='0.09'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+@media (prefers-contrast: more) {
+  .grain::after,
+  .grain::before {
+    display: none;
+  }
 }
 
 /* Accentwoorden in koppen. In de lichte huisstijl is het accent primair

@@ -99,7 +99,7 @@ export default function NieuwsbriefSticky() {
     <>
       {/* De volledige kaart, in de tekstkolom onder het artikel. Die staat er
           altijd, ook als de meescrollende versie is weggeklikt. */}
-      <div ref={kaartRef} className="glas mt-16 rounded-[24px] p-7 sm:p-8">
+      <div ref={kaartRef} className="glas mt-16 rounded-[3px] p-7 sm:p-8">
         <p className="label-mono text-[11px] text-text-muted">
           Nieuwsbrief · gratis
         </p>
@@ -115,7 +115,7 @@ export default function NieuwsbriefSticky() {
             title="Inschrijven voor de nieuwsbrief van Olaf Lemmens"
             loading="lazy"
             scrolling="no"
-            className="h-[235px] w-full rounded-2xl border border-border bg-white sm:h-[190px]"
+            className="h-[235px] w-full rounded-[3px] border border-border bg-white sm:h-[190px]"
           />
         </div>
       </div>
@@ -131,7 +131,7 @@ export default function NieuwsbriefSticky() {
             : "pointer-events-none translate-y-4 opacity-0"
         } inset-x-3 bottom-3 sm:inset-x-auto sm:bottom-4 sm:right-4 sm:w-[360px] 2xl:bottom-6 2xl:right-6 2xl:w-[344px]`}
       >
-        <div className="glas relative overflow-hidden rounded-2xl">
+        <div className="glas relative overflow-hidden rounded-[3px]">
           {/* Kruisje: klein en doorzichtig, wordt duidelijker bij hover. */}
           <button
             type="button"
@@ -177,7 +177,7 @@ export default function NieuwsbriefSticky() {
                   title="Inschrijven voor de nieuwsbrief van Olaf Lemmens"
                   loading="lazy"
                   scrolling="no"
-                  className="mt-3 h-[235px] w-full rounded-xl border border-border bg-white"
+                  className="mt-3 h-[235px] w-full rounded-[3px] border border-border bg-white"
                 />
               )}
             </div>
@@ -190,7 +190,7 @@ export default function NieuwsbriefSticky() {
                   loading="lazy"
                   scrolling="no"
                   /* 215px: bij 190 sneed de kop van de Substack-embed af. */
-                  className="mt-3 h-[215px] w-full rounded-xl border border-border bg-white"
+                  className="mt-3 h-[215px] w-full rounded-[3px] border border-border bg-white"
                 />
               )}
             </div>

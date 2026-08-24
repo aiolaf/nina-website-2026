@@ -59,7 +59,7 @@ export default function ApoTeaser({ lang = "nl" }: { lang?: Lang }) {
   const c = lang === "en" ? COPY.en : COPY.nl;
 
   return (
-    <div className="rounded-3xl border border-border bg-bg-card p-6 shadow-[0_18px_60px_rgba(12,14,24,0.07)] sm:p-9">
+    <div className="rounded-[3px] border border-border bg-bg-card p-6 shadow-[0_18px_60px_rgba(12,14,24,0.07)] sm:p-9">
       <div className="grid gap-8 lg:grid-cols-[1.25fr_1fr] lg:gap-12">
         <div>
           <span className="inline-flex rounded-full border border-border bg-bg px-3.5 py-1.5 font-mono text-xs text-text-muted">
@@ -91,13 +91,13 @@ export default function ApoTeaser({ lang = "nl" }: { lang?: Lang }) {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border bg-bg p-5 sm:p-6">
+        <div className="rounded-[3px] border border-border bg-bg p-5 sm:p-6">
           <p className="text-sm font-semibold">{c.uitkomst}</p>
           <div className="mt-4 space-y-3">
             {c.tegels.map((tegel) => (
               <div
                 key={tegel.label}
-                className="flex items-center gap-4 rounded-xl border border-border bg-bg-card p-4"
+                className="flex items-center gap-4 rounded-[3px] border border-border bg-bg-card p-4"
               >
                 <span
                   aria-hidden="true"

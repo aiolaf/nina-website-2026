@@ -25,7 +25,7 @@ export default function OlafCard({
 }: Props) {
   return (
     <Reveal>
-      <div className="relative overflow-hidden rounded-3xl border border-border bg-bg-card">
+      <div className="relative overflow-hidden rounded-[3px] border border-border bg-bg-card">
         <div
           aria-hidden="true"
           className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(176,101,58,0.18),transparent_65%)]"

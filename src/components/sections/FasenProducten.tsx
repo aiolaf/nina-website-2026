@@ -218,7 +218,7 @@ export default function FasenProducten({ lang = "nl" }: { lang?: Lang }) {
   }
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-border bg-bg-card shadow-[0_18px_60px_rgba(12,14,24,0.08)]">
+    <div className="overflow-hidden rounded-[3px] border border-border bg-bg-card shadow-[0_18px_60px_rgba(12,14,24,0.08)]">
       {/* Tabrij. Op mobiel twee kolommen, vanaf md vier naast elkaar. */}
       <div
         role="tablist"

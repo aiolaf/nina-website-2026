@@ -29,7 +29,7 @@ export default function CtaDonker({
   return (
     <section className="px-5 pb-16 pt-4 sm:pb-24">
       <Reveal>
-        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[28px] bg-ink px-6 py-20 text-center sm:px-12 sm:py-28">
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[4px] bg-ink px-6 py-20 text-center sm:px-12 sm:py-28">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -top-36 left-1/2 h-[340px] w-[520px] -translate-x-1/2 rounded-full bg-violet/25 blur-[90px]"

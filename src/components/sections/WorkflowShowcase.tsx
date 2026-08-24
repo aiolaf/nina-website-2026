@@ -206,7 +206,7 @@ export default function WorkflowShowcase() {
       {/* Node-canvas */}
       <div className="grid items-stretch gap-3 lg:grid-cols-[1.1fr_2.5rem_1fr_2.5rem_1.1fr]">
         {/* Bron-node */}
-        <div className="rounded-2xl border border-border bg-bg-card p-5">
+        <div className="rounded-[3px] border border-border bg-bg-card p-5">
           <p className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-text-muted">
             Binnenkomend
           </p>
@@ -217,7 +217,7 @@ export default function WorkflowShowcase() {
             ))}
           </div>
           {s.bron.bijlage && (
-            <p className="mt-4 inline-flex items-center gap-2 rounded-lg border border-border bg-bg px-3 py-2 text-xs font-medium">
+            <p className="mt-4 inline-flex items-center gap-2 rounded-[3px] border border-border bg-bg px-3 py-2 text-xs font-medium">
               <span
                 aria-hidden="true"
                 className="flex h-6 w-6 items-center justify-center rounded bg-primary/10 font-mono text-[9px] font-bold text-primary"
@@ -237,7 +237,7 @@ export default function WorkflowShowcase() {
 
         {/* Agent-node */}
         <div
-          className={`rounded-2xl border p-5 transition-colors ${
+          className={`rounded-[3px] border p-5 transition-colors ${
             busy ? "border-primary/60 bg-bg-muted" : "border-border bg-bg-card"
           }`}
         >
@@ -290,7 +290,7 @@ export default function WorkflowShowcase() {
               {s.labels.map((l, i) => (
                 <span
                   key={l.k}
-                  className={`rounded-md px-2 py-1 font-mono text-[11px] transition-all duration-300 ${
+                  className={`rounded-[3px] px-2 py-1 font-mono text-[11px] transition-all duration-300 ${
                     i < labelN
                       ? l.goud
                         ? "bg-gold/15 text-gold"
@@ -320,7 +320,7 @@ export default function WorkflowShowcase() {
         </div>
 
         {/* Tools-node */}
-        <div className="rounded-2xl border border-border bg-bg-card p-5">
+        <div className="rounded-[3px] border border-border bg-bg-card p-5">
           <p className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-wider text-text-muted">
             Jouw tools
           </p>
@@ -330,7 +330,7 @@ export default function WorkflowShowcase() {
               return (
                 <li
                   key={tool}
-                  className={`flex items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-medium transition-all duration-300 ${
+                  className={`flex items-center gap-2 rounded-[3px] border px-3 py-2.5 text-sm font-medium transition-all duration-300 ${
                     on
                       ? "border-primary/50 bg-primary/5 text-text"
                       : "border-border bg-bg-alt text-text-muted"

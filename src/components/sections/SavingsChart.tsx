@@ -44,7 +44,7 @@ export default function SavingsChart() {
   return (
     <div
       ref={ref}
-      className="flex h-full flex-col rounded-2xl border border-border bg-bg-card p-6 sm:p-7"
+      className="flex h-full flex-col rounded-[3px] border border-border bg-bg-card p-6 sm:p-7"
     >
       <div className="flex items-center justify-between gap-3">
         <h3 className="font-display text-lg font-bold">Uren, voor en na</h3>

@@ -212,7 +212,7 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
   return (
     <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)]">
       {/* Vragen */}
-      <div className="rounded-2xl border border-border bg-bg-card p-6 sm:p-7">
+      <div className="rounded-[3px] border border-border bg-bg-card p-6 sm:p-7">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <p className="text-xs font-semibold uppercase tracking-wider text-primary">
             {t.kicker}
@@ -242,7 +242,7 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
                       aria-checked={gekozen}
                       aria-label={String(n)}
                       onClick={() => zet(i, n)}
-                      className={`font-display h-9 flex-1 rounded-lg border text-sm font-bold transition-colors ${
+                      className={`font-display h-9 flex-1 rounded-[3px] border text-sm font-bold transition-colors ${
                         gekozen
                           ? "border-primary bg-primary text-white"
                           : "border-border bg-bg text-text-muted hover:border-primary/60 hover:text-primary"
@@ -260,7 +260,7 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
 
       {/* Uitkomst */}
       <div className="flex flex-col gap-5">
-        <div className="rounded-2xl border border-primary/50 bg-bg-card p-6 sm:p-7">
+        <div className="rounded-[3px] border border-primary/50 bg-bg-card p-6 sm:p-7">
           <MaturityRadar
             labels={dims.map((d) => d.as)}
             nu={scores}
@@ -288,7 +288,7 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
 
           {/* aria-live: schermlezers horen de uitkomst veranderen. */}
           <div aria-live="polite" className="mt-5">
-            <div className="rounded-xl bg-bg-muted px-4 py-3">
+            <div className="rounded-[3px] bg-bg-muted px-4 py-3">
               <p className="text-xs font-semibold uppercase tracking-wider text-primary">
                 {t.sprongLabel}
               </p>
@@ -314,7 +314,7 @@ export default function MaturityQuickScan({ lang = "nl" }: { lang?: Lang }) {
             daarmee is hij klaar. Dus staat hier eerst wat hij ervoor krijgt,
             en pas daarna de knop. De twee andere paden blijven staan als
             tweede keuze. */}
-        <div className="rounded-2xl border border-primary/50 bg-bg-card p-6 shadow-[0_10px_36px_rgba(12,14,24,0.1)] sm:p-7">
+        <div className="rounded-[3px] border border-primary/50 bg-bg-card p-6 shadow-[0_10px_36px_rgba(12,14,24,0.1)] sm:p-7">
           <p className="text-xs font-semibold uppercase tracking-wider text-magenta">
             {t.aanbodKicker}
           </p>

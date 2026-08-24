@@ -106,7 +106,7 @@ export default function Home() {
           (.foto-met-tekst) zodat de witte tekst overal leest. */}
       <section className="relative px-4 pb-14 pt-20 sm:px-5 sm:pb-16 sm:pt-24">
         <div className="mx-auto w-full max-w-6xl">
-          <div className="foto foto-met-tekst reveal-now relative min-h-[clamp(34rem,82svh,46rem)] rounded-[24px] sm:rounded-[28px]">
+          <div className="foto foto-met-tekst reveal-now relative min-h-[clamp(34rem,82svh,46rem)] rounded-[3px] sm:rounded-[4px]">
             <Image
               src="/images/beeld/zaal-verkenners.webp"
               alt="Volle zaal tijdens een AI-lezing van NinA AI"
@@ -232,6 +232,7 @@ export default function Home() {
           daaruit doorklikt. */}
       <SectieLicht
         id="quick-scan"
+        nr="01"
         label="Quick scan · gratis, twee minuten"
         title={
           <>
@@ -248,6 +249,7 @@ export default function Home() {
           methode; de verdieping staat op de partnershippagina. */}
       <SectieLicht
         variant="alt"
+        nr="02"
         label="APO methode · onze werkwijze"
         title={
           <>
@@ -262,6 +264,7 @@ export default function Home() {
 
       {/* Vier fasen */}
       <SectieLicht
+        nr="03"
         label="Vier fasen"
         title={
           <>
@@ -277,6 +280,7 @@ export default function Home() {
       {/* Producten per fase */}
       <SectieLicht
         variant="alt"
+        nr="04"
         label="Producten per fase"
         title={
           <>
@@ -292,6 +296,7 @@ export default function Home() {
 
       {/* Workflow showcase */}
       <SectieLicht
+        nr="05"
         label="Zie het werken"
         title={
           <>
@@ -307,6 +312,7 @@ export default function Home() {
       {/* Mens plus AI: Plan Mode */}
       <SectieLicht
         variant="alt"
+        nr="06"
         label="Mens in de loop"
         title={
           <>
@@ -320,6 +326,7 @@ export default function Home() {
 
       {/* Resultaten */}
       <SectieLicht
+        nr="07"
         label="Rendement"
         title={
           <>
@@ -350,6 +357,7 @@ export default function Home() {
       {/* Waarom NinA */}
       <SectieLicht
         variant="alt"
+        nr="08"
         label="Waarom NinA"
         title={
           <>
@@ -361,7 +369,7 @@ export default function Home() {
         <div className="grid gap-5 sm:grid-cols-2">
           {USPS.map((u, idx) => (
             <Reveal key={u.titel} delay={idx * 0.08} className="h-full">
-              <div className="glas h-full rounded-3xl p-7 sm:p-8">
+              <div className="glas h-full rounded-[3px] p-7 sm:p-8">
                 <p className="label-mono text-[11px] text-text-muted">
                   {String(idx + 1).padStart(2, "0")}
                 </p>
@@ -391,7 +399,7 @@ export default function Home() {
             </p>
             <figure className="grid items-center gap-14 lg:grid-cols-[1fr_1.05fr]">
               <div className="relative">
-                <div className="foto relative overflow-hidden rounded-[24px] border border-border">
+                <div className="foto relative overflow-hidden rounded-[3px] border border-border">
                   <Image
                     src="/images/beeld/klantteam-da.webp"
                     alt="Het team van DA Drogist na de AI-workshop van NinA"
@@ -447,6 +455,7 @@ export default function Home() {
       {/* Laatste blogposts, interne linking naar de kennislaag */}
       <SectieLicht
         variant="alt"
+        nr="09"
         label="Blog"
         title={
           <>
@@ -467,7 +476,7 @@ export default function Home() {
                   className="group flex h-full flex-col"
                 >
                   {post.image && (
-                    <div className="foto relative aspect-[16/10] overflow-hidden rounded-[18px] border border-border">
+                    <div className="foto relative aspect-[16/10] overflow-hidden rounded-[3px] border border-border">
                       <Image
                         src={post.image}
                         alt={post.title}

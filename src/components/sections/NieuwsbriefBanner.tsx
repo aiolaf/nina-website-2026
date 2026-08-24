@@ -13,7 +13,7 @@
 export default function NieuwsbriefBanner() {
   return (
     <section className="mx-auto max-w-6xl px-5 pb-12 sm:pb-16">
-      <div className="glas grid gap-8 rounded-[24px] p-7 sm:p-10 lg:grid-cols-[1fr_minmax(300px,400px)] lg:items-center lg:gap-12">
+      <div className="glas grid gap-8 rounded-[3px] p-7 sm:p-10 lg:grid-cols-[1fr_minmax(300px,400px)] lg:items-center lg:gap-12">
         <div>
           <p className="label-mono text-[11px] text-text-muted">
             Nieuwsbrief · gratis
@@ -38,7 +38,7 @@ export default function NieuwsbriefBanner() {
             scrolling="no"
             /* Op mobiel is het frame smaller, dus wikkelt de kleine letter
                van Substack over meer regels: daar iets meer hoogte. */
-            className="h-[235px] w-full rounded-2xl border border-border bg-white sm:h-[190px]"
+            className="h-[235px] w-full rounded-[3px] border border-border bg-white sm:h-[190px]"
           />
           <p className="mt-3 text-[12.5px] text-text-muted">
             Werkt het formulier niet?{" "}

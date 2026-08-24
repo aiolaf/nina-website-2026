@@ -8,6 +8,8 @@ import {
   Inter,
   Kalam,
 } from "next/font/google";
+import localFont from "next/font/local";
+import LetterVoorkeur from "@/components/layout/LetterVoorkeur";
 import CookieBanner from "@/components/layout/CookieBanner";
 import KlikMeting from "@/components/layout/KlikMeting";
 import ScrollDiepte from "@/components/layout/ScrollDiepte";
@@ -56,6 +58,34 @@ const kalam = Kalam({
   display: "swap",
 });
 
+/**
+ * Kandidaat-display-letters, zelf gehost uit Fontshare (ITF Free Font
+ * License: commercieel gebruik en self-hosting expliciet toegestaan, zie
+ * public/fonts/FONTSHARE-FFL-LICENSE.txt).
+ *
+ * Instrument Serif was de sterkste reden dat de site op elke andere
+ * AI-website leek. Deze twee staan tijdelijk naast elkaar zodat Olaf kan
+ * kiezen; daarna gaat de verliezer eruit. Wisselen kan met ?letter=zodiak of
+ * ?letter=sentient, zie LetterVoorkeur.
+ */
+const zodiak = localFont({
+  src: [
+    { path: "../../public/fonts/Zodiak-Light.woff2", weight: "300", style: "normal" },
+    { path: "../../public/fonts/Zodiak-LightItalic.woff2", weight: "300", style: "italic" },
+  ],
+  variable: "--font-zodiak",
+  display: "swap",
+});
+
+const sentient = localFont({
+  src: [
+    { path: "../../public/fonts/Sentient-Light.woff2", weight: "300", style: "normal" },
+    { path: "../../public/fonts/Sentient-LightItalic.woff2", weight: "300", style: "italic" },
+  ],
+  variable: "--font-sentient",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   // Canonieke host is nina-ai.nl zonder www; www stuurt daarheen door.
   metadataBase: new URL("https://nina-ai.nl"),
@@ -89,7 +119,8 @@ export default function RootLayout({
     <html
       lang="nl"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${bricolage.variable} ${instrumentSerif.variable} ${fragmentMono.variable} ${kalam.variable} h-full antialiased`}
+      className={`${inter.variable} ${bricolage.variable} ${instrumentSerif.variable} ${fragmentMono.variable} ${kalam.variable} ${zodiak.variable} ${sentient.variable} h-full antialiased`}
+      data-letter="zodiak"
     >
       {/* Consent Mode v2. Moet met beforeInteractive draaien, dus vóór het
           GTM-script: staat de default te laat, dan mogen tags in dat gaatje
@@ -122,6 +153,8 @@ export default function RootLayout({
           aria-hidden="true"
           className="pointer-events-none absolute top-0 h-8 w-px"
         />
+        {/* Tijdelijk: leest ?letter= en zet data-letter op <html>. */}
+        <LetterVoorkeur />
         <ScrollProgress />
         <CursorGlow />
         {children}

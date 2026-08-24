@@ -68,7 +68,7 @@ export function LogoTegel({
 }) {
   return (
     <span
-      className={`flex h-14 w-28 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-border bg-white transition-shadow duration-300 hover:shadow-[0_8px_20px_rgba(12,14,24,0.08)] sm:h-16 sm:w-32 ${
+      className={`flex h-14 w-28 shrink-0 items-center justify-center overflow-hidden rounded-[3px] border border-border bg-white transition-shadow duration-300 hover:shadow-[0_8px_20px_rgba(12,14,24,0.08)] sm:h-16 sm:w-32 ${
         logo.vlak ? "p-0" : "px-4 py-3"
       }`}
     >
