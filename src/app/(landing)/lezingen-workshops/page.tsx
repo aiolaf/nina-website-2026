@@ -379,6 +379,7 @@ export default function LezingenWorkshops() {
                 height={640}
                 deferMs={250}
                 meting="lezing_aanvraag_hero"
+                conversie="conversion_event_submit_lead_form"
               />
             </div>
 
@@ -939,6 +940,7 @@ export default function LezingenWorkshops() {
               formId="sxmVnPbAUcus"
               title="Vraag een voorstel aan voor een lezing of workshop"
               meting="lezing_aanvraag_slot"
+              conversie="conversion_event_submit_lead_form"
             />
           </Reveal>
         </div>

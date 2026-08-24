@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { stuurEvent } from "@/lib/analytics";
+import { stuurEvent, stuurConversie } from "@/lib/analytics";
 
 type Props = {
   formId: string;
@@ -14,6 +14,13 @@ type Props = {
    * naam meten we op formId, wat in GA4 minder leesbaar is.
    */
   meting?: string;
+  /**
+   * Naam van de Google Ads-conversie die bij een verzending moet vuren,
+   * bijvoorbeeld "conversion_event_submit_lead_form". Alleen zetten op
+   * formulieren die echt een aanvraag zijn; een sollicitatieformulier is geen
+   * Ads-conversie.
+   */
+  conversie?: string;
 };
 
 const FILLOUT_ORIGIN = "https://form.fillout.com";
@@ -52,6 +59,7 @@ export default function FilloutEmbed({
   className = "",
   deferMs = 0,
   meting,
+  conversie,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -102,7 +110,12 @@ export default function FilloutEmbed({
     function opBericht(e: MessageEvent) {
       if (e.origin !== FILLOUT_ORIGIN) return;
       const data = e.data as
-        | { type?: string; embedId?: string; size?: unknown }
+        | {
+            type?: string;
+            embedId?: string;
+            size?: unknown;
+            submissionUuid?: string;
+          }
         | null
         | undefined;
       if (!data || typeof data !== "object") return;
@@ -124,17 +137,29 @@ export default function FilloutEmbed({
 
       // generate_lead is een aanbevolen GA4-naam, dus je kunt hem in GA4 als
       // sleutelgebeurtenis markeren en naar Ads exporteren.
-      stuurEvent("generate_lead", {
+      const basis = {
         naam: meting || formId,
         soort: "formulier",
         locatie: window.location.pathname,
         taal: document.documentElement.lang || "nl",
-      });
+      };
+
+      stuurEvent("generate_lead", basis);
+
+      // Aparte eventnaam voor Google Ads, zodat de conversietag in GTM op één
+      // duidelijke trigger hangt en niet op elk generate_lead (waar ook
+      // sollicitaties onder vallen).
+      if (conversie) {
+        stuurConversie(conversie, {
+          ...basis,
+          transaction_id: data.submissionUuid,
+        });
+      }
     }
 
     window.addEventListener("message", opBericht);
     return () => window.removeEventListener("message", opBericht);
-  }, [visible, embedId, formId, meting]);
+  }, [visible, embedId, formId, meting, conversie]);
 
   const src =
     `${FILLOUT_ORIGIN}/t/${formId}?v=2&fillout-embed-id=${embedId}` +

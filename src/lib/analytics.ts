@@ -52,6 +52,42 @@ export function stuurEvent(naam: string, params: MeetParams = {}) {
   window.dataLayer.push({ event: naam, ...schoon });
 }
 
+/**
+ * Google Ads-conversie. Twee wegen tegelijk, want de site heeft de Google-tag
+ * via GTM en niet los:
+ *
+ * 1. Een dataLayer-push met de eventnaam. Dat is de weg die hier bewezen
+ *    werkt: in GTM maak je een trigger "Aangepaste gebeurtenis" op deze naam
+ *    en hang je daar de Google Ads-conversietag aan.
+ * 2. Daarnaast hetzelfde event via gtag, exact zoals het fragment dat Ads
+ *    aanlevert. Onder de huidige GTM-opzet doet die niets (gemeten: gtag.js
+ *    pikt losse event-commando's uit de dataLayer niet op), maar zodra er ooit
+ *    een losse Google-tag met AW-id op de site staat, telt de conversie mee
+ *    zonder dat hier iets hoeft te veranderen.
+ *
+ * Consent: niet zelf checken. Consent Mode v2 staat op denied tot iemand
+ * kiest, en dan houdt de Ads-tag in GTM zichzelf tegen. Een eigen check zou
+ * daar naast gaan lopen.
+ *
+ * transaction_id is de sleutel tegen dubbeltellen: Ads negeert een tweede
+ * conversie met hetzelfde id.
+ */
+export function stuurConversie(
+  naam: string,
+  params: MeetParams & { transaction_id?: string; value?: number; currency?: string } = {}
+) {
+  if (typeof window === "undefined") return;
+  const schoon: Record<string, string | number | boolean> = {};
+  for (const [k, v] of Object.entries(params)) {
+    if (v !== undefined && v !== null && v !== "") schoon[k] = v;
+  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: naam, ...schoon });
+
+  const g = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
+  if (typeof g === "function") g("event", naam, schoon);
+}
+
 /** Knip lange labels af, zodat GA4-parameters onder de 100 tekens blijven. */
 export function kort(tekst: string, max = 90) {
   const t = tekst.replace(/\s+/g, " ").trim();
