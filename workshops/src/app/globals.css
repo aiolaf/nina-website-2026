@@ -1,0 +1,419 @@
+@import "tailwindcss";
+
+/* ====================================================================
+   workshops.nina-ai.nl
+
+   Zelfde huisstijl als nina-ai.nl ("Licht": ivoor papier, inkt, violet als
+   merkmoment, Zodiak als display-letter), maar een ander spel. De hoofdsite
+   verkoopt een gesprek; deze site verkoopt een ticket. Dat verschil zit in
+   drie toevoegingen onderaan dit bestand:
+
+   - .ticket      een kaart met een echte afscheurrand en twee ponsgaten
+   - .koopbalk    de vaste balk onderin op mobiel met prijs en koopknop
+   - .stempel     het datumblokje, zoals een afgestempelde datum op een kaartje
+
+   Verder is alles gelijk aan de hoofdsite, zodat een bezoeker die van
+   nina-ai.nl komt hetzelfde merk ziet.
+   ==================================================================== */
+
+@theme {
+  --color-bg: #f4f2ee;
+  --color-bg-card: #fbfaf8;
+  --color-bg-alt: #efece5;
+  --color-bg-muted: #f0ede6;
+  --color-text: #0c0e18;
+  --color-text-muted: #6b6b70;
+  --color-border: #e2dfd7;
+
+  --color-ink: #0c0e18;
+  --color-ink-deep: #23252f;
+  --color-ink-muted: #6b6b70;
+  --color-violet: #9952e0;
+  --color-violet-light: #bf80ff;
+  --color-marker: #fde68b;
+  --color-sand: #e9dfc8;
+  --color-amber: #e8963e;
+  --color-cognac: #b0653a;
+  --color-blue: #3f7de0;
+  --color-green-soft: #d9ead3;
+  --color-green-deep: #2f6b3a;
+  --color-red-soft: #f6d7d7;
+  --color-red-deep: #9b3232;
+  --color-chip: #f0ede6;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-zodiak), Georgia, serif;
+  --font-mono: var(--font-fragment), ui-monospace, monospace;
+  --font-hand: var(--font-kalam), cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+  /* De vaste header mag geen anker-kop opeten bij een sprong naar #agenda. */
+  scroll-padding-top: 88px;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background: var(--color-ink);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------
+   Beweging: scroll-reveal en de entree boven de vouw
+   -------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 24px));
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal-now {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --------------------------------------------------------------------
+   Signatuur-elementen uit de huisstijl
+   -------------------------------------------------------------------- */
+.display-serif {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.display-serif em {
+  font-style: italic;
+}
+
+/* Violette marker achter één woord. Maximaal één per scherm. */
+.marker {
+  background-image: linear-gradient(
+    transparent 56%,
+    rgba(153, 82, 224, 0.32) 56%,
+    rgba(153, 82, 224, 0.32) 92%,
+    transparent 92%
+  );
+}
+
+.annotatie {
+  font-family: var(--font-hand);
+  font-weight: 300;
+  color: var(--color-violet);
+  transform: rotate(-2deg);
+}
+.annotatie-licht {
+  color: var(--color-violet-light);
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Gedrukt vlak in plaats van een afgeronde webkaart. Alleen knoppen en
+   chips blijven pillen, zodat rond overal "hier kun je klikken" betekent. */
+.kaart {
+  border-radius: 3px;
+}
+
+/* --------------------------------------------------------------------
+   Beeldrecept: één warme duotone over al het sessiemateriaal
+   -------------------------------------------------------------------- */
+.foto {
+  position: relative;
+  overflow: hidden;
+  background: #ddd8cf;
+}
+.foto img {
+  filter: grayscale(1) sepia(0.42) saturate(1.75) contrast(1.05) brightness(1.02)
+    hue-rotate(-6deg);
+}
+.foto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    160deg,
+    rgba(233, 223, 200, 0.28),
+    rgba(244, 242, 238, 0.08) 55%,
+    rgba(176, 101, 58, 0.2)
+  );
+  mix-blend-mode: soft-light;
+}
+.foto-met-tekst::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to top,
+      rgba(12, 14, 24, 0.92) 0%,
+      rgba(12, 14, 24, 0.74) 32%,
+      rgba(12, 14, 24, 0.4) 58%,
+      rgba(12, 14, 24, 0.1) 88%
+    ),
+    linear-gradient(
+      to right,
+      rgba(12, 14, 24, 0.66) 0%,
+      rgba(12, 14, 24, 0.22) 48%,
+      rgba(12, 14, 24, 0) 74%
+    );
+}
+.op-foto {
+  position: relative;
+  z-index: 3;
+}
+
+/* Papierkorrel: de site moet als bedrukt papier lezen, niet als scherm. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+@media (prefers-contrast: more) {
+  .grain::after {
+    display: none;
+  }
+}
+
+/* ====================================================================
+   Eigen aan deze site: het kaartje
+   ==================================================================== */
+
+/*
+ * .ticket is de drager van elke datum die te koop staat. Het is een gedrukt
+ * kaartje: links het datumdeel, dan een geperforeerde scheurlijn, rechts de
+ * inhoud en de knop. De twee ponsgaten zijn ::before en ::after in de kleur
+ * van de pagina-achtergrond, dus de wrapper mag geen andere achtergrond
+ * hebben dan --color-bg of --color-bg-alt (geef dan .ticket-op-alt mee).
+ *
+ * De perforatie zelf staat op het scheidingselement (.ticket-perforatie) en
+ * niet op de kaart, zodat de kaart bij een smal scherm gewoon onder elkaar
+ * mag vallen zonder dat de stippellijn scheef gaat staan.
+ */
+.ticket {
+  position: relative;
+  border-radius: 3px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  transition:
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ticket:hover {
+  border-color: rgba(12, 14, 24, 0.28);
+  box-shadow: 0 14px 40px rgba(12, 14, 24, 0.1);
+  transform: translateY(-2px);
+}
+/* Uitverkocht mag niet meeliften op de hover-belofte. */
+.ticket-uit,
+.ticket-uit:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--color-border);
+  background: var(--color-bg-alt);
+}
+
+.ticket-perforatie {
+  position: relative;
+  align-self: stretch;
+  width: 1px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(12, 14, 24, 0.22) 0 4px,
+    transparent 4px 10px
+  );
+}
+/* De twee ponsgaten, precies op de rand van de kaart. */
+.ticket-perforatie::before,
+.ticket-perforatie::after {
+  content: "";
+  position: absolute;
+  left: -7px;
+  width: 15px;
+  height: 15px;
+  border-radius: 9999px;
+  background: var(--color-bg);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+.ticket-perforatie::before {
+  top: -8px;
+}
+.ticket-perforatie::after {
+  bottom: -8px;
+}
+/* Staat de kaart op de zandkleurige sectie, dan moeten de gaten die kleur
+   hebben, anders zijn het twee lichte vlekken. */
+.ticket-op-alt .ticket-perforatie::before,
+.ticket-op-alt .ticket-perforatie::after {
+  background: var(--color-bg-alt);
+}
+
+/* Horizontale variant voor als de kaart onder elkaar valt (mobiel). */
+.ticket-perforatie-h {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(12, 14, 24, 0.22) 0 4px,
+    transparent 4px 10px
+  );
+}
+.ticket-perforatie-h::before,
+.ticket-perforatie-h::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 15px;
+  height: 15px;
+  border-radius: 9999px;
+  background: var(--color-bg);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+.ticket-perforatie-h::before {
+  left: -8px;
+}
+.ticket-perforatie-h::after {
+  right: -8px;
+}
+.ticket-op-alt .ticket-perforatie-h::before,
+.ticket-op-alt .ticket-perforatie-h::after {
+  background: var(--color-bg-alt);
+}
+
+/*
+ * Het datumstempel. Mono-cijfers, want dan staan de dagen in een lijst recht
+ * onder elkaar ongeacht of het de 1e of de 28e is.
+ */
+.stempel {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/*
+ * De vaste koopbalk onderin op mobiel. Boven de home-indicator van iOS,
+ * vandaar de safe-area-inset.
+ */
+.koopbalk {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 45;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: rgba(251, 250, 248, 0.94);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -8px 30px rgba(12, 14, 24, 0.08);
+  transform: translateY(110%);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.koopbalk.is-zichtbaar {
+  transform: none;
+}
+@supports not (backdrop-filter: blur(4px)) {
+  .koopbalk {
+    background: var(--color-bg-card);
+  }
+}
+
+/*
+ * Schaarste-chip. Bewust twee niveaus en niet meer: "laatste plekken" als er
+ * echt weinig over is, en "uitverkocht". Alles daartussen krijgt geen chip,
+ * want een teller die altijd rood staat gelooft niemand meer.
+ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  padding: 0.2rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.chip-schaars {
+  background: rgba(232, 150, 62, 0.16);
+  color: #8a4f13;
+}
+.chip-uit {
+  background: rgba(12, 14, 24, 0.07);
+  color: var(--color-ink-muted);
+}
+.chip-vrij {
+  background: rgba(47, 107, 58, 0.12);
+  color: var(--color-green-deep);
+}
+.chip-neutraal {
+  background: var(--color-chip);
+  color: var(--color-ink-muted);
+}
+
+/* Cookiemelding en koopbalk delen dezelfde plek onderaan het scherm. Staat
+   de melding open, dan wijkt de balk; zie CookieBanner.tsx. */
+[data-consent-open] .koopbalk {
+  transform: translateY(110%);
+}
