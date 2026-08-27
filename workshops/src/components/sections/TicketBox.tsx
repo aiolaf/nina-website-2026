@@ -3,6 +3,7 @@ import { plekkenRegel } from "@/components/ui/StatusChip";
 import { korteDatum } from "@/lib/datum";
 import { euro, metBtw, site } from "@/lib/site";
 import {
+  heeftMeerderePrijzen,
   komendeSessies,
   koopbareTickets,
   sessieStatus,
@@ -169,7 +170,8 @@ function metBtwRegel(workshop: Workshop) {
   const laagste = Math.min(...prijzen);
   return (
     <p className="mt-2 text-[11.5px] text-text-muted">
-      Vanaf {euro(metBtw(laagste))} inclusief btw per persoon.
+      {heeftMeerderePrijzen(workshop) ? "Vanaf " : ""}
+      {euro(metBtw(laagste))} inclusief btw per persoon.
     </p>
   );
 }

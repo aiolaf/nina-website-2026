@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // De workshopsite is een losse app met een eigen eslint-config; die
+    // lint je met `npm run lint` in workshops/ zelf.
+    "workshops/**",
   ]),
 ]);
 

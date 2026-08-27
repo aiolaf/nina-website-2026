@@ -39,9 +39,9 @@ export const VRAGEN: { vraag: string; antwoord: string }[] = [
       "Voor de Claude Workshop niet: die begint bij het begin. Je Second Brain voor AI gaat ervan uit dat je AI al regelmatig gebruikt. De Claude Pro Workshop is een masterclass: daar nemen we aan dat je de basis van Claude beheerst en al eens een connector hebt ingesteld. Twijfel je of je er klaar voor bent? Mail wat voor werk je doet, dan zeggen we eerlijk welke past — of dat het er geen is.",
   },
   {
-    vraag: "Kan ik de Claude Workshop en de Pro Workshop allebei doen?",
+    vraag: "Kan ik er meerdere doen?",
     antwoord:
-      "Dat is precies waarvoor ze bedoeld zijn: de eerste zet je op weg met Cowork, Code en Skills, de tweede gaat de diepte in met eigen Skills, Connectors, MCP en Claude Code als agent. Samen boek je ze als Claude Complete, en dan betaal je minder dan voor twee losse tickets.",
+      "Dat scheelt geld. Eén workshop kost € 399. De Claude Workshop en de Pro Workshop samen boek je als Claude Complete voor € 750 in plaats van € 798. Alle drie de workshops van dit najaar kosten € 999 in plaats van € 1.197. Alle bedragen zijn exclusief btw, en je boekt de bundel in één keer af.",
   },
   {
     vraag: "Wat is die gratis LinkedIn Live?",

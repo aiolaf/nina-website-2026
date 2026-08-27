@@ -168,6 +168,25 @@ ziet.
 - Dezelfde GTM-container als de hoofdsite (`workshops/src/lib/gtm.ts`), met
   hetzelfde Consent Mode-gedrag: alles op geweigerd tot de bezoeker kiest.
 
+## De twee apps naast elkaar in één repo
+
+De root-`tsconfig.json` en `eslint.config.mjs` sluiten `workshops/`
+uitdrukkelijk uit. Dat is geen netheid maar noodzaak: de `include` van de
+root pakt `**/*.ts` en `**/*.tsx` vanaf de repo-root, dus ook
+`workshops/src/**`. Die bestanden gebruiken hun eigen `@/`-alias naar
+`workshops/src`, terwijl de root `@/` naar `./src` laat wijzen. Zonder de
+uitsluiting typecheckt de hoofdsite de workshopsite tegen de verkeerde paden
+en valt `next build` om met `Cannot find module '@/components/...'` — precies
+de fout waarmee de preview-deploy stukliep.
+
+In `tsconfig.json` staat daar geen toelichting bij, want Next leest dat
+bestand als strikte JSON en struikelt over een commentaarblok. Vandaar dat
+het hier staat.
+
+Wie later nog een losse app toevoegt, moet die op dezelfde twee plekken
+uitsluiten. Elke app bouwt en lint zichzelf: `npm run build` en
+`npm run lint` in zijn eigen map.
+
 ## Randvoorwaarden van een statische export
 
 Wat hier **niet** kan, en wat je in de plaats gebruikt:

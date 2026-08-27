@@ -74,7 +74,7 @@ Voor elke datum, per tickettype:
    ```ts
    {
      naam: "Ticket",
-     prijs: 199,
+     prijs: 399,
      personen: 1,
      stripeLink: "https://buy.stripe.com/xxxxxxxxxxxx",
      uitgelicht: true,
@@ -83,21 +83,29 @@ Voor elke datum, per tickettype:
 
 9. **Bouwen en uploaden.** Zie `DEPLOY-HOSTNET.md`.
 
-## De bundel
+## De bundels
 
-`Claude Complete` is één Payment Link die twee workshops tegelijk dekt. Maak
-er een product van met beide datums in de naam
-(`Claude Complete — 1 en 22 oktober 2026`), en zet de voorraadlimiet op het
-laagste aantal vrije plekken van de twee. De success_url wijst naar de eerste
-van de twee datums:
+Er zijn er twee, allebei één Payment Link die meerdere datums tegelijk dekt:
+
+| Bundel | Wat erin zit | Prijs excl. btw |
+|---|---|---|
+| Claude Complete | Claude Workshop + Claude Pro | € 750 |
+| Het hele programma | alle drie de workshops | € 999 |
+
+Zet de datums in de productnaam (`Claude Complete — 1 en 22 oktober 2026`) en
+de voorraadlimiet op het laagste aantal vrije plekken van de sessies die
+erin zitten. De success_url wijst naar de eerste datum van de bundel:
 
 ```
 https://workshops.nina-ai.nl/bedankt/?w=claude-workshop&d=2026-10-01
 ```
 
-Zet de link in `BUNDELS` in `src/content/workshops.ts`. Vergeet niet dat een
-bundelverkoop twee stoelen bezet houdt: haal `vrij` bij allebei de sessies
-omlaag.
+Zet de links in `BUNDELS` in `src/content/workshops.ts`.
+
+**Let op bij een bundelverkoop**: die bezet een stoel in elke sessie die
+erin zit. Haal `vrij` dus bij allemaal omlaag, en houd er rekening mee dat de
+voorraadlimiet van de losse Payment Links daar niets van weet. Verkoop je er
+veel, zet de limiet op de losse links dan wat lager dan het aantal stoelen.
 
 ## Gratis sessies gaan niet via Stripe
 

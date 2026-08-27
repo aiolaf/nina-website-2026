@@ -4,6 +4,7 @@ import { korteDatum } from "@/lib/datum";
 import { euro } from "@/lib/site";
 import {
   eerstvolgende,
+  heeftMeerderePrijzen,
   komendeSessies,
   vanafPrijs,
   type Workshop,
@@ -21,6 +22,7 @@ export default function WorkshopKaart({ workshop }: { workshop: Workshop }) {
   const eerste = eerstvolgende(workshop);
   const aantalData = komendeSessies(workshop).length;
   const vanaf = vanafPrijs(workshop);
+  const meerdere = heeftMeerderePrijzen(workshop);
 
   return (
     <article className="kaart group flex h-full flex-col overflow-hidden border border-border bg-bg-card transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(12,14,24,0.1)]">
@@ -67,7 +69,9 @@ export default function WorkshopKaart({ workshop }: { workshop: Workshop }) {
         <div className="mt-auto pt-7">
           <div className="flex items-end justify-between gap-4 border-t border-border pt-4">
             <div>
-              <p className="label-mono text-[10.5px] text-text-muted">Vanaf</p>
+              <p className="label-mono text-[10.5px] text-text-muted">
+                {meerdere ? "Vanaf" : "Prijs"}
+              </p>
               <p className="stempel mt-1 text-xl leading-none">
                 {vanaf !== null ? `${euro(vanaf)} p.p.` : "op aanvraag"}
               </p>

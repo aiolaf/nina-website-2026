@@ -17,6 +17,7 @@ import { liveVoor } from "@/content/live";
 import {
   bundelsVoor,
   eerstvolgende,
+  heeftMeerderePrijzen,
   komendeSessies,
   koopbareTickets,
   vandaag,
@@ -55,7 +56,9 @@ export async function generateMetadata({
      zoekresultaat op beslist of hij klikt. */
   const staart = [
     eerste ? `Eerstvolgende datum ${korteDatum(eerste.datum)}` : null,
-    vanaf !== null ? `vanaf ${euro(vanaf)} p.p.` : null,
+    vanaf !== null
+      ? `${heeftMeerderePrijzen(workshop) ? "vanaf " : ""}${euro(vanaf)} p.p.`
+      : null,
     "Amsterdam",
   ]
     .filter(Boolean)
@@ -130,7 +133,8 @@ export default async function WorkshopPagina({
               <span className="chip chip-neutraal">{locatie.plaats}</span>
               {vanaf !== null && (
                 <span className="chip chip-neutraal">
-                  vanaf {euro(vanaf)} p.p.
+                  {heeftMeerderePrijzen(workshop) ? `vanaf ${euro(vanaf)}` : euro(vanaf)}{" "}
+                  p.p.
                 </span>
               )}
             </div>
@@ -428,7 +432,7 @@ export default async function WorkshopPagina({
           heeft net de datums gezien en weegt nu de prijs. */}
       {bundels.length > 0 && (
         <section className="border-t border-border">
-          <div className="mx-auto max-w-6xl px-5 py-16">
+          <div className="mx-auto max-w-6xl space-y-5 px-5 py-16">
             {bundels.map((b) => (
               <Reveal key={b.naam}>
                 <BundelBand bundel={b} />

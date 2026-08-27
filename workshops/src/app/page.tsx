@@ -243,7 +243,7 @@ export default function Home() {
           --------------------------------------------------------------- */}
       {BUNDELS.length > 0 && (
         <section className="border-t border-border bg-bg-alt">
-          <div className="mx-auto max-w-6xl px-5 py-16">
+          <div className="mx-auto max-w-6xl space-y-5 px-5 py-16">
             {BUNDELS.map((b) => (
               <Reveal key={b.naam}>
                 <BundelBand bundel={b} />

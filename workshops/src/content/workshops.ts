@@ -117,11 +117,15 @@ const OLAF: Trainer = {
    De data komen van Olaf en kloppen. De rest is overgenomen van de
    huidige Lovable-site en uit zoekresultaten, en moet nagelopen worden:
 
-   - Prijzen: Claude Workshop 199, Claude Pro 399, allebei exclusief btw.
-     Klopt dat, en staan ze op de huidige site ook exclusief?
-   - De Claude Complete-bundel (zie BUNDELS onderaan): wat is de prijs?
-   - Second Brain is nieuw: prijs, aantal plaatsen en de programmablokken
-     zijn een voorstel, geen bestaande tekst.
+   - Prijzen komen van Olaf: 399 per workshop, 750 voor twee en 999 voor
+     alle drie. Staat op de site exclusief btw; controleer of dat klopt met
+     hoe ze nu op de Lovable-versie staan.
+   - Er is één tickettype per sessie. De prijsladder loopt via de bundels
+     onderaan dit bestand, niet via een korting per persoon. Wil je toch een
+     duo-ticket, voeg dan een tweede ticket toe met `personen: 2`; de site
+     rekent dan zelf de prijs per persoon uit.
+   - Second Brain is nieuw: het aantal plaatsen en de programmablokken zijn
+     een voorstel, geen bestaande tekst.
    - Trainer staat overal op Olaf. Geeft Daan of iemand anders er een?
    - Tijden: inloop 12:30, programma 13:00-16:00, daarna borrel. Geldt dat
      ook voor Second Brain?
@@ -218,18 +222,11 @@ export const WORKSHOPS: Workshop[] = [
         tickets: [
           {
             naam: "Ticket",
-            prijs: 199,
+            prijs: 399,
             personen: 1,
             toelichting: "Eén plek, inclusief certificaat en borrel",
             stripeLink: "",
             uitgelicht: true,
-          },
-          {
-            naam: "Duo-ticket",
-            prijs: 358,
-            personen: 2,
-            toelichting: "Samen met een collega, 10% voordeliger",
-            stripeLink: "",
           },
         ],
       },
@@ -330,18 +327,11 @@ export const WORKSHOPS: Workshop[] = [
         tickets: [
           {
             naam: "Ticket",
-            prijs: 199,
+            prijs: 399,
             personen: 1,
             toelichting: "Eén plek, inclusief certificaat en borrel",
             stripeLink: "",
             uitgelicht: true,
-          },
-          {
-            naam: "Duo-ticket",
-            prijs: 358,
-            personen: 2,
-            toelichting: "Samen met een collega, 10% voordeliger",
-            stripeLink: "",
           },
         ],
       },
@@ -444,13 +434,6 @@ export const WORKSHOPS: Workshop[] = [
             stripeLink: "",
             uitgelicht: true,
           },
-          {
-            naam: "Duo-ticket",
-            prijs: 718,
-            personen: 2,
-            toelichting: "Samen met een collega, 10% voordeliger",
-            stripeLink: "",
-          },
         ],
       },
     ],
@@ -481,10 +464,14 @@ export const BUNDELS: Bundel[] = [
     naam: "Claude Complete",
     ondertitel: "De Claude Workshop en de Pro Workshop in één keer",
     workshops: ["claude-workshop", "claude-pro"],
-    /* TE BEVESTIGEN: bundelprijs. 199 + 399 is 598; hieronder staat een
-       voordeel van 100 euro. Vervang door de prijs die op de huidige site
-       staat. */
-    prijs: 498,
+    prijs: 750,
+    stripeLink: "",
+  },
+  {
+    naam: "Het hele programma",
+    ondertitel: "Alle drie de workshops van dit najaar",
+    workshops: ["claude-workshop", "second-brain", "claude-pro"],
+    prijs: 999,
     stripeLink: "",
   },
 ];
@@ -571,12 +558,26 @@ export function workshopBySlug(slug: string): Workshop | undefined {
   return WORKSHOPS.find((w) => w.slug === slug);
 }
 
-/** De laagste ticketprijs van een workshop, voor "vanaf €" op de kaart. */
+/** De laagste ticketprijs per persoon van een workshop. */
 export function vanafPrijs(workshop: Workshop): number | null {
   const prijzen = workshop.sessies.flatMap((s) =>
     s.tickets.map((t) => Math.round(t.prijs / t.personen))
   );
   return prijzen.length ? Math.min(...prijzen) : null;
+}
+
+/**
+ * Of er meer dan één prijs is. Zolang elke sessie hetzelfde enkele ticket
+ * heeft, is "vanaf 399" een rare manier om "399" te zeggen; de kaarten en de
+ * koppen schrijven dan gewoon de prijs op.
+ */
+export function heeftMeerderePrijzen(workshop: Workshop): boolean {
+  const prijzen = new Set(
+    workshop.sessies.flatMap((s) =>
+      s.tickets.map((t) => Math.round(t.prijs / t.personen))
+    )
+  );
+  return prijzen.size > 1;
 }
 
 /**

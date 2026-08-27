@@ -53,6 +53,11 @@ de knop naar Stripe komen er allemaal uit.
 
 ## Wat je moet weten voordat je iets verandert
 
+**De root sluit deze map uit.** `tsconfig.json` en `eslint.config.mjs` in de
+repo-root hebben `workshops` in hun exclude staan. Zonder dat typecheckt de
+hoofdsite deze app tegen zijn eigen `@/`-alias en valt de deploy van
+nina-ai.nl om. Bouw en lint deze app dus altijd vanuit `workshops/` zelf.
+
 **Er is geen server.** De site wordt gebouwd tot losse HTML-bestanden. Dus:
 geen formulieren die iets opslaan, geen inlog, geen API-routes, geen
 database. Betalen loopt daarom via Stripe Payment Links: die zijn gehost door
@@ -71,22 +76,32 @@ echte backend na te denken — niet eerder.
 | Datum | Wat | Prijs |
 |---|---|---|
 | wo 2 september | Je Second Brain voor AI — gratis LinkedIn Live, online | gratis |
-| do 1 oktober | Claude Workshop — Cowork, Code & Skills | € 199 |
-| wo 7 oktober | Je Second Brain voor AI — bouwt voort op de Live | € 199 |
+| do 1 oktober | Claude Workshop — Cowork, Code & Skills | € 399 |
+| wo 7 oktober | Je Second Brain voor AI — bouwt voort op de Live | € 399 |
 | do 22 oktober | Claude Pro Workshop — Skills, Connectors, MCP, agents | € 399 |
 
-Plus de bundel **Claude Complete** (de twee Claude-workshops samen) en een
-blok onder de agenda dat zegt dat de rest van 2026 volgt, met een
+Plus twee bundels, allebei exclusief btw:
+
+| Bundel | Wat erin zit | Prijs | Los |
+|---|---|---|---|
+| Claude Complete | Claude Workshop + Claude Pro | € 750 | € 798 |
+| Het hele programma | alle drie de workshops | € 999 | € 1.197 |
+
+En een blok onder de agenda dat zegt dat de rest van 2026 volgt, met een
 aanmeldknop. De data van november en december zet je erbij in
 `src/content/workshops.ts`.
 
+Er is één tickettype per sessie. Wil je toch een duo- of groepsticket, voeg
+dan een tweede ticket toe met `personen: 2`; de site rekent de prijs per
+persoon zelf uit en zet hem als tweede knop onder de eerste.
+
 ## Wat er nog moet gebeuren voordat dit live kan
 
-- [ ] **Nalopen wat er is overgenomen.** De data kloppen; de prijzen,
-      programma's en de bundelprijs komen van de huidige site en uit
-      zoekresultaten. In `src/content/workshops.ts`, `src/content/live.ts` en
-      `src/lib/site.ts` staan blokken met `TE BEVESTIGEN` die precies zeggen
-      wat er gecontroleerd moet worden.
+- [ ] **Nalopen wat er is overgenomen.** De data en de prijzen komen van
+      Olaf en kloppen. De programmablokken en de beschrijvingen komen van de
+      huidige site en uit zoekresultaten. In `src/content/workshops.ts`,
+      `src/content/live.ts` en `src/lib/site.ts` staan blokken met
+      `TE BEVESTIGEN` die precies zeggen wat er gecontroleerd moet worden.
 - [ ] Titel en tijden van de LinkedIn Live van 2 september (`src/content/live.ts`)
 - [ ] Stripe Payment Links aanmaken en invullen, ook voor de bundel (zie
       `STRIPE.md`)
