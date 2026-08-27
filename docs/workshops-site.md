@@ -48,6 +48,23 @@ De ponsgaten van `.ticket` krijgen de kleur van de sectie-achtergrond. Staat
 een kaart op een `bg-bg-alt`-sectie, geef dan `ticket-op-alt` mee, anders zijn
 het twee lichte vlekken.
 
+### Twee uitzonderingen op het beeldrecept
+
+**De fotowand (`Sfeer.tsx`) blijft in volle kleur.** Al het andere beeld gaat
+door de warme duotone, maar hier is de energie het argument: het rode licht
+van die zaal, het blauw van een dia, een zaal die zwaait. In cognac-duotone
+verdwijnt precies dat en is het weer stockbeeld. Zet de `.foto`-klasse daar
+dus niet terug bij een volgende veegslag. Zelfde afweging als bij
+`SessieFotos` op de hoofdsite.
+
+**De header klapt om boven een donkere hero.** Bovenaan de pagina is de
+header transparant; op de homepage ligt daar een donkere foto onder en
+verdwijnt het inktkleurige woordmerk erin, terwijl de andere pagina's juist
+licht beginnen. De header weet zelf niet op welke pagina hij staat — hij
+wordt vóór de inhoud gerenderd — dus de pagina zet een leeg `#donkere-hero`
+neer en `globals.css` vindt dat met `:has()`. Een browser zonder `:has()`
+houdt de donkere tekst: minder mooi, niet stuk.
+
 ## Conversie-uitgangspunten
 
 Deze staan vast; wijk er niet van af zonder aanleiding uit de cijfers.

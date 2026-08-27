@@ -209,7 +209,7 @@ export const WORKSHOPS: Workshop[] = [
       "Koffie, iets te eten en een borrel na afloop",
     ],
     trainer: OLAF,
-    foto: "/images/beeld/workshop-tafel.webp",
+    foto: "/images/sfeer/sessie-workshop-tafel.webp",
     fotoAlt: "Deelnemers werken aan tafel tijdens een Claude-workshop",
     sessies: [
       {
@@ -313,9 +313,9 @@ export const WORKSHOPS: Workshop[] = [
     /* Op de dia in dit beeld staat een AI-contentmachine die op eigen data
        draait. Dat is precies waar deze middag over gaat, dus dit beeld doet
        inhoudelijk werk in plaats van sfeer. */
-    foto: "/images/beeld/zaal-verkenners.webp",
+    foto: "/images/sfeer/foto-workshop.webp",
     fotoAlt:
-      "Olaf laat zien hoe hij een AI-contentmachine op zijn eigen data heeft gebouwd",
+      "Deelnemers bouwen aan hun eigen kennisbank tijdens een workshop op kantoor",
     sessies: [
       {
         datum: "2026-10-07",

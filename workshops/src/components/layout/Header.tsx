@@ -32,6 +32,12 @@ export default function Header() {
 
   return (
     <header
+      /* Zolang de header transparant is staat hij op de homepage over een
+         donkere fotohero, en dan moet het woordmerk licht zijn. Welke pagina
+         dat is weet dit component niet — de header wordt vóór de inhoud
+         gerenderd — dus de pagina zelf zet er een merkteken neer en de regel
+         staat in globals.css. Zoek daar op #donkere-hero. */
+      data-transparant={gescrold ? undefined : ""}
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         gescrold
           ? "border-b border-border bg-bg/85 backdrop-blur-md"
@@ -64,7 +70,7 @@ export default function Header() {
           ))}
           <Link
             href="/#agenda"
-            className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium leading-none text-white transition-transform duration-300 hover:scale-[1.03]"
+            className="header-cta rounded-full bg-ink px-5 py-2.5 text-sm font-medium leading-none text-white transition-transform duration-300 hover:scale-[1.03]"
           >
             Bekijk de data
           </Link>
@@ -84,7 +90,7 @@ export default function Header() {
           </button>
           <Link
             href="/#agenda"
-            className="rounded-full bg-ink px-4 py-2 text-sm font-medium leading-none text-white"
+            className="header-cta rounded-full bg-ink px-4 py-2 text-sm font-medium leading-none text-white"
           >
             Data
           </Link>

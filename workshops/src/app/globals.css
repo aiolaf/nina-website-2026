@@ -417,3 +417,34 @@ body {
 [data-consent-open] .koopbalk {
   transform: translateY(110%);
 }
+
+/* --------------------------------------------------------------------
+   Header over een donkere fotohero
+
+   De header is bovenaan de pagina transparant. Op de homepage ligt daar een
+   donkere foto onder, en dan verdwijnt het inktkleurige woordmerk erin. Op
+   de andere pagina's begint de pagina juist licht, dus daar moet de tekst
+   donker blijven.
+
+   De header weet zelf niet op welke pagina hij staat: hij wordt vóór de
+   inhoud gerenderd, dus een gewone sibling-selector komt er niet bij.
+   Vandaar :has() — de pagina zet ergens in de body een leeg #donkere-hero
+   neer en deze regels zoeken dat op. Browsers zonder :has() houden de
+   donkere tekst; dat is minder mooi maar niet stuk.
+   -------------------------------------------------------------------- */
+body:has(#donkere-hero) header[data-transparant] {
+  color: #f2f2f2;
+}
+body:has(#donkere-hero) header[data-transparant] a,
+body:has(#donkere-hero) header[data-transparant] button,
+body:has(#donkere-hero) header[data-transparant] span {
+  color: inherit;
+}
+body:has(#donkere-hero) header[data-transparant] button {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+/* Een zwarte pil op een donkere foto is geen knop meer; die klapt om. */
+body:has(#donkere-hero) header[data-transparant] .header-cta {
+  background: #f2f2f2;
+  color: var(--color-ink);
+}

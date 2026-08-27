@@ -5,6 +5,7 @@ import BundelBand from "@/components/sections/BundelBand";
 import LiveRij from "@/components/sections/LiveRij";
 import Praktisch from "@/components/sections/Praktisch";
 import Reviews from "@/components/sections/Reviews";
+import Sfeer from "@/components/sections/Sfeer";
 import TicketRij from "@/components/sections/TicketRij";
 import Vragen from "@/components/sections/Vragen";
 import WorkshopKaart from "@/components/sections/WorkshopKaart";
@@ -76,10 +77,14 @@ export default function Home() {
           Hero
           --------------------------------------------------------------- */}
       <section className="relative">
+        {/* Merkteken voor de header: hierboven ligt een donkere foto, dus het
+            woordmerk moet licht zijn zolang er niet gescrold is. De regel
+            staat in globals.css. */}
+        <div id="donkere-hero" hidden />
         <div className="foto foto-met-tekst relative min-h-[560px] w-full sm:min-h-[620px]">
           <Image
-            src="/images/beeld/sessie-staand.webp"
-            alt="Deelnemers aan het werk tijdens een AI-workshop bij NinA AI"
+            src="/images/beeld/zaal-verkenners.webp"
+            alt="Olaf Lemmens laat tijdens een sessie zien hoe hij een AI-contentmachine op eigen data heeft gebouwd"
             fill
             priority
             sizes="100vw"
@@ -163,7 +168,7 @@ export default function Home() {
         kicker="Het programma"
         title={
           <>
-            Kies een datum en <Em>hij is van jou</Em>.
+            Kies een <Em>datum</Em>.
           </>
         }
         sub="Van een gratis online sessie tot een middag bouwen op kantoor. Je betaalt direct online en krijgt meteen je bevestiging en factuur."
@@ -335,6 +340,23 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
+      </Section>
+
+      {/* Sfeer: de vier stappen hierboven vertellen het, deze foto's laten
+          het zien. Bewust direct erna en niet ergens onderaan. */}
+      <Section
+        kicker="Zo ziet het eruit"
+        title={
+          <>
+            Echte sessies, <Em>echte</Em> mensen.
+          </>
+        }
+        sub="Foto's uit onze eigen workshops en sessies. Geen stockbeeld, geen zaal die we ergens hebben gehuurd voor de foto."
+        annotatie="dit ben jij straks"
+      >
+        <Reveal>
+          <Sfeer />
+        </Reveal>
       </Section>
 
       <Reviews />
