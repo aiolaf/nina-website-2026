@@ -448,3 +448,72 @@ body:has(#donkere-hero) header[data-transparant] .header-cta {
   background: #f2f2f2;
   color: var(--color-ink);
 }
+
+/* --------------------------------------------------------------------
+   Het SendFox-formulier
+
+   SendFox levert zijn eigen HTML aan en wij hebben geen invloed op de
+   klassenamen die daarin zitten. Daarom staat hier geen enkele selector op
+   een klasse van hen, maar alleen op de elementen zelf binnen onze eigen
+   .sendfox-doos. Verandert SendFox morgen zijn markup, dan blijft dit
+   werken zolang het invoervelden en een knop zijn.
+
+   Zonder deze regels staat er een standaard browserformulier midden in een
+   pagina die verder helemaal in de huisstijl staat, en dat leest als een
+   advertentie van iemand anders.
+   -------------------------------------------------------------------- */
+.sendfox-doos form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.sendfox-doos input[type="text"],
+.sendfox-doos input[type="email"] {
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--color-text);
+}
+.sendfox-doos input[type="text"]:focus,
+.sendfox-doos input[type="email"]:focus {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.sendfox-doos input::placeholder {
+  color: var(--color-text-muted);
+}
+/* De knop is de enige ronde vorm in het formulier: rond betekent op deze
+   site "hier kun je klikken". */
+.sendfox-doos button,
+.sendfox-doos input[type="submit"] {
+  align-self: flex-start;
+  cursor: pointer;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--color-ink);
+  padding: 0.85rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: #ffffff;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sendfox-doos button:hover,
+.sendfox-doos input[type="submit"]:hover {
+  transform: scale(1.02);
+}
+/* Het vakje dat SendFox tegen bots gebruikt, hoort niemand te zien. */
+.sendfox-doos [aria-hidden="true"],
+.sendfox-doos input[type="checkbox"][name*="_"] {
+  display: none;
+}
+.sendfox-doos label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}

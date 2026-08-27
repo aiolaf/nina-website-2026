@@ -12,7 +12,7 @@ import Reveal from "@/components/ui/Reveal";
 import Section, { Em } from "@/components/ui/Section";
 import { korteDatum } from "@/lib/datum";
 import { evenementSchema } from "@/lib/schema";
-import { advies, euro, locatie, site } from "@/lib/site";
+import { advies, euro, locatie } from "@/lib/site";
 import { liveVoor } from "@/content/live";
 import {
   bundelsVoor,
@@ -417,12 +417,12 @@ export default async function WorkshopPagina({
                 We plannen deze workshop opnieuw zodra er genoeg aanmeldingen
                 zijn. Laat weten dat je erbij wilt, dan hoor je het als eerste.
               </p>
-              <a
-                href={`mailto:${site.email}?subject=${encodeURIComponent(`Nieuwe data ${workshop.naam}`)}`}
+              <Link
+                href="/#updates"
                 className="mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-white"
               >
                 Hou me op de hoogte
-              </a>
+              </Link>
             </div>
           </Reveal>
         )}

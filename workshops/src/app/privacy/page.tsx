@@ -59,12 +59,32 @@ export default function PrivacyPagina() {
         </div>
 
         <div>
+          <h2 className="font-display text-xl font-bold">
+            Als je je aanmeldt voor bericht bij nieuwe data
+          </h2>
+          <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
+            Dan gaan je naam en mailadres naar SendFox, de dienst waarmee we
+            die mails versturen. We gebruiken je adres alleen om je te laten
+            weten dat er nieuwe workshopdata zijn, en voor niets anders. Onder
+            elke mail staat een uitschrijflink; klik je die, dan ben je er
+            direct uit.
+          </p>
+          <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
+            SendFox is onze verwerker en verwerkt gegevens ook buiten de EU,
+            onder de standaardcontractbepalingen van de Europese Commissie. Het
+            formulier op deze site wordt door SendFox zelf geladen; er komt
+            geen cookie aan te pas voordat je hem invult.
+          </p>
+        </div>
+
+        <div>
           <h2 className="font-display text-xl font-bold">Als je mailt of appt</h2>
           <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
             Dan bewaren we wat je stuurt zolang we ermee bezig zijn, en daarna
             voor zover we het nodig hebben om je vraag later terug te kunnen
-            vinden. Voor een wachtlijst bewaren we je naam en mailadres tot de
-            volgende datum bekend is, of tot je zegt dat het niet meer hoeft.
+            vinden. Zet je jezelf op de wachtlijst voor een volle datum, dan
+            bewaren we je naam en mailadres tot die datum geweest is, of tot je
+            zegt dat het niet meer hoeft.
           </p>
         </div>
 

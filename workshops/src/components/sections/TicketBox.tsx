@@ -1,3 +1,4 @@
+import Link from "next/link";
 import KoopKnop from "@/components/ui/KoopKnop";
 import { plekkenRegel } from "@/components/ui/StatusChip";
 import { korteDatum } from "@/lib/datum";
@@ -130,12 +131,15 @@ export default function TicketBox({ workshop }: { workshop: Workshop }) {
             Er staat op dit moment geen datum gepland voor deze workshop. Laat
             je mailadres achter, dan hoor je het als eerste.
           </p>
-          <a
-            href={wachtlijst}
+          {/* Geen datum betekent geen specifieke sessie om op te wachten, dus
+              hier naar het algemene aanmeldformulier in plaats van naar een
+              mailtje over een datum die niet bestaat. */}
+          <Link
+            href="/#updates"
             className="mt-4 flex w-full items-center justify-center rounded-full bg-ink py-3 text-sm font-medium text-white"
           >
             Hou me op de hoogte
-          </a>
+          </Link>
         </div>
       )}
 

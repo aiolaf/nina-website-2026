@@ -38,6 +38,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/#updates" className="hover:text-violet">
+                  Bericht bij nieuwe data
+                </Link>
+              </li>
+              <li>
                 <Link href="/#vragen" className="hover:text-violet">
                   Veelgestelde vragen
                 </Link>

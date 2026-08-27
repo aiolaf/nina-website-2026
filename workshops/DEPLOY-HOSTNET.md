@@ -180,49 +180,31 @@ door, dan pas je `vrij` aan en upload je opnieuw. Zet in Stripe ook een
 maximum op de Payment Link (zie `STRIPE.md`), dan blijft de site hooguit een
 paar dagen achter maar kan er nooit worden overboekt.
 
-### Optioneel: uploaden automatiseren
+### Uploaden met één druk op de knop
 
-Wil je niet met FTP in de weer, dan kan een GitHub Action bij elke push naar
-`main` bouwen en uploaden. Zet de FTP-gegevens als repository-secrets
-(`HOSTNET_FTP_HOST`, `HOSTNET_FTP_USER`, `HOSTNET_FTP_PASSWORD`) en maak
-`.github/workflows/deploy-workshops.yml`:
+Er staat een GitHub Action klaar: `.github/workflows/deploy-workshops.yml`.
+Die bouwt de site, controleert dat de export gelukt is en zet hem via FTPS op
+Hostnet.
 
-```yaml
-name: Deploy workshops naar Hostnet
+Hij start **niet vanzelf**. Je draait hem met de hand vanuit het tabblad
+*Actions* in GitHub. Dat is bewust: zonder de secrets zou elke push een rood
+kruisje geven, en deze site is de kassa — een deploy die vertrekt zodra iemand
+een komma verandert is hier geen voordeel.
 
-on:
-  push:
-    branches: [main]
-    paths: ["workshops/**"]
-  workflow_dispatch:
+Eenmalig instellen, onder *Settings → Secrets and variables → Actions*:
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: workshops/package-lock.json
-      - run: npm ci
-        working-directory: workshops
-      - run: npm run build
-        working-directory: workshops
-      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.HOSTNET_FTP_HOST }}
-          username: ${{ secrets.HOSTNET_FTP_USER }}
-          password: ${{ secrets.HOSTNET_FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: workshops/out/
-          server-dir: /domains/nina-ai.nl/public_html/workshops/
-```
+| Secret | Wat erin hoort |
+|---|---|
+| `HOSTNET_FTP_HOST` | het FTP- of SFTP-adres van Hostnet |
+| `HOSTNET_FTP_USER` | de gebruikersnaam van het FTP-account |
+| `HOSTNET_FTP_PASSWORD` | het wachtwoord daarvan |
 
-Dit bestand staat er bewust nog **niet** in: zolang de secrets ontbreken zou
-elke push een rood kruisje geven. Zet hem er pas neer als de hosting staat en
-de gegevens in de secrets zitten.
+En in het workflow-bestand zelf: zet `server-dir` op de documentroot die
+Hostnet voor het subdomein heeft aangemaakt (stap 1.3 hierboven).
+
+Wil je hem later automatisch laten lopen bij elke wijziging in `workshops/`,
+haal dan het commentaar weg bij het `push`-blok bovenin het bestand.
+
 
 ---
 
@@ -236,6 +218,8 @@ de gegevens in de secrets zitten.
 - [ ] De koopknop opent de juiste Stripe-pagina, met het juiste bedrag
 - [ ] Na een testbetaling kom je op `/bedankt/` met de juiste datum erop
 - [ ] "Zet in mijn agenda" levert een `.ics` op die in de agenda opent
+- [ ] Het aanmeldformulier onder de agenda laadt en een testadres komt
+      daadwerkelijk in SendFox binnen
 - [ ] De cookiemelding verschijnt en de keuze blijft na een herlading staan
 - [ ] Op een telefoon verschijnt de koopbalk onderin bij het scrollen
 - [ ] `https://workshops.nina-ai.nl/sitemap.xml` en `/robots.txt` openen

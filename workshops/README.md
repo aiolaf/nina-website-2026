@@ -37,6 +37,7 @@ npm run start    # bekijkt out/ zoals hij straks op Hostnet staat
 src/content/workshops.ts   ← de workshops, de data, de prijzen, de Stripe-links
 src/content/live.ts        ← de gratis LinkedIn Lives (geen ticket, geen prijs)
 src/content/reviews.ts     ← quotes van deelnemers (nu nog leeg, met opzet)
+src/components/sections/Updates.tsx  ← het SendFox-aanmeldformulier
 src/lib/site.ts            ← adres, mailadres, KVK, beoordelingscijfer
 src/lib/programma.ts       ← voegt lives en workshops samen tot één agenda
 src/app/page.tsx           ← de homepage
@@ -115,6 +116,11 @@ persoon zelf uit en zet hem als tweede knop onder de eerste.
       toont alleen tekst)
 - [ ] Beslissen of de meting in dezelfde GTM-container blijft
       (`src/lib/gtm.ts`)
+- [ ] Het SendFox-formulier één keer in een echte browser controleren. Het
+      script komt van `cdn.sendfox.com` en is hier niet te bereiken, dus de
+      opmaak ervan is op de tast gedaan (zie `.sendfox-doos` in
+      `globals.css`). Meld je één keer aan met een testadres en kijk of hij
+      binnenkomt op lijst `3qoqw6`.
 
 ## Stijl
 

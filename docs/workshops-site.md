@@ -204,6 +204,27 @@ Wie later nog een losse app toevoegt, moet die op dezelfde twee plekken
 uitsluiten. Elke app bouwt en lint zichzelf: `npm run build` en
 `npm run lint` in zijn eigen map.
 
+## Mailaanmelding
+
+`Updates.tsx` laadt het embed-script van SendFox en laat dat zijn eigen
+formulier neerzetten. Het script zoekt bij uitvoering zijn eigen
+`<script>`-element op, dus we hangen het met de hand in een container in
+plaats van het bovenaan de pagina te laden; anders landt het formulier ergens
+anders dan bedoeld. Een vlag voorkomt dat een tweede aankoppeling (strict
+mode, of heen en terug navigeren) het formulier dubbel neerzet.
+
+De sectie staat direct onder de agenda, op `#updates`. Daar ontstaat de
+teleurstelling — je scrolt de data door en er zit niets bij dat schikt — en
+daar is het mailadres dus het meest waard. Alle algemene "hou me op de
+hoogte"-knoppen wijzen erheen. Wat wél een mailto blijft: de wachtlijst voor
+één specifieke volle datum, want die draagt informatie (welke workshop, welke
+dag) die een algemene lijst niet kan opslaan.
+
+De opmaak in `globals.css` (`.sendfox-doos`) hangt bewust aan elementen en
+niet aan klassenamen van SendFox: die zijn van hen en kunnen morgen anders
+zijn. Er staat geen cookiemuur omheen — dit is geen meting maar een formulier
+dat de bezoeker zelf invult.
+
 ## Randvoorwaarden van een statische export
 
 Wat hier **niet** kan, en wat je in de plaats gebruikt:

@@ -6,6 +6,7 @@ import LiveRij from "@/components/sections/LiveRij";
 import Praktisch from "@/components/sections/Praktisch";
 import Reviews from "@/components/sections/Reviews";
 import Sfeer from "@/components/sections/Sfeer";
+import Updates from "@/components/sections/Updates";
 import TicketRij from "@/components/sections/TicketRij";
 import Vragen from "@/components/sections/Vragen";
 import WorkshopKaart from "@/components/sections/WorkshopKaart";
@@ -201,7 +202,7 @@ export default function Home() {
                 inschrijving opengaat.
               </p>
               <a
-                href={`mailto:${site.email}?subject=${encodeURIComponent("Laat het me weten bij nieuwe workshopdata")}`}
+                href="#updates"
                 className="mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-white"
               >
                 Hou me op de hoogte
@@ -226,7 +227,7 @@ export default function Home() {
               </p>
             </div>
             <a
-              href={`mailto:${site.email}?subject=${encodeURIComponent("Hou me op de hoogte van nieuwe workshopdata")}&body=${encodeURIComponent("Hoi NinA,\n\nLaat het me weten zodra de nieuwe data bekend zijn.\n\nNaam:\nBedrijf:\nWaar ik interesse in heb:\n")}`}
+              href="#updates"
               className="shrink-0 rounded-full border border-ink/15 px-6 py-3 text-sm transition-colors hover:border-ink/35"
             >
               Hou me op de hoogte
@@ -242,6 +243,21 @@ export default function Home() {
           </p>
         </Reveal>
       </Section>
+
+      {/* ---------------------------------------------------------------
+          Aanmelden voor nieuwe data
+
+          Direct onder de agenda, want daar ontstaat de teleurstelling: je
+          scrolt de data door en er zit niets bij dat jou schikt. Dit is het
+          vangnet voor precies die bezoeker.
+          --------------------------------------------------------------- */}
+      <section id="updates" className="border-t border-border">
+        <div className="mx-auto max-w-6xl px-5 py-16">
+          <Reveal>
+            <Updates />
+          </Reveal>
+        </div>
+      </section>
 
       {/* ---------------------------------------------------------------
           Bundel — de tweede workshop verkopen aan wie de eerste koopt
