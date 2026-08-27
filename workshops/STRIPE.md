@@ -5,8 +5,8 @@ De site heeft geen server, dus geen eigen betaalafhandeling. Betalen loopt via
 gewone link naartoe stuurt. Dat is precies wat een statische site nodig heeft,
 en het scheelt dat wij nooit betaalgegevens aanraken.
 
-Eén Payment Link is één product op één datum. Verkoop je AI Start op 17
-september en op 15 oktober, dan zijn dat twee links.
+Eén Payment Link is één product op één datum. Draait de Claude Workshop op 1
+oktober en nog eens in november, dan zijn dat twee links.
 
 ## Eenmalig instellen
 
@@ -30,9 +30,9 @@ september en op 15 oktober, dan zijn dat twee links.
 
 Voor elke datum, per tickettype:
 
-1. **Product**: `AI Start — donderdag 17 september 2026`. Zet de datum in de
-   productnaam. Die naam staat op de factuur en in de mail; "AI Start" alleen
-   is over drie maanden niet meer terug te vinden.
+1. **Product**: `Claude Workshop — donderdag 1 oktober 2026`. Zet de datum in
+   de productnaam. Die naam staat op de factuur en in de mail; "Claude
+   Workshop" alleen is over drie maanden niet meer terug te vinden.
 2. **Prijs**: het bedrag exclusief btw, zoals het in `workshops.ts` staat.
    Eenmalig, EUR.
 3. **Aantal beperken**: zet onder *Inventory / limit* het aantal beschikbare
@@ -45,7 +45,8 @@ Voor elke datum, per tickettype:
    - bedrijfsnaam
    - factuuradres
    - een eigen veld *"Naam van de deelnemer(s), als dat iemand anders is"*
-   - een eigen veld *"Dieetwensen"* — er is lunch, dus dit voorkomt gedoe
+   - een eigen veld *"Dieetwensen"* — er is iets te eten in de pauze en een
+     borrel, dus dit voorkomt gedoe
    - een eigen veld *"Inkoop- of referentienummer"* — optioneel, scheelt
      later heen-en-weer over facturen
 6. **Kortingscodes toestaan**: aan. Handig voor een vroegboekactie of een
@@ -56,10 +57,10 @@ Voor elke datum, per tickettype:
    https://workshops.nina-ai.nl/bedankt/?w=<slug>&d=<jjjj-mm-dd>
    ```
 
-   Dus voor AI Start op 17 september 2026:
+   Dus voor de Claude Workshop op 1 oktober 2026:
 
    ```
-   https://workshops.nina-ai.nl/bedankt/?w=ai-start&d=2026-09-17
+   https://workshops.nina-ai.nl/bedankt/?w=claude-workshop&d=2026-10-01
    ```
 
    De slug is hetzelfde veld `slug` als in `workshops.ts`. Met die twee
@@ -73,7 +74,7 @@ Voor elke datum, per tickettype:
    ```ts
    {
      naam: "Ticket",
-     prijs: 395,
+     prijs: 199,
      personen: 1,
      stripeLink: "https://buy.stripe.com/xxxxxxxxxxxx",
      uitgelicht: true,
@@ -81,6 +82,30 @@ Voor elke datum, per tickettype:
    ```
 
 9. **Bouwen en uploaden.** Zie `DEPLOY-HOSTNET.md`.
+
+## De bundel
+
+`Claude Complete` is één Payment Link die twee workshops tegelijk dekt. Maak
+er een product van met beide datums in de naam
+(`Claude Complete — 1 en 22 oktober 2026`), en zet de voorraadlimiet op het
+laagste aantal vrije plekken van de twee. De success_url wijst naar de eerste
+van de twee datums:
+
+```
+https://workshops.nina-ai.nl/bedankt/?w=claude-workshop&d=2026-10-01
+```
+
+Zet de link in `BUNDELS` in `src/content/workshops.ts`. Vergeet niet dat een
+bundelverkoop twee stoelen bezet houdt: haal `vrij` bij allebei de sessies
+omlaag.
+
+## Gratis sessies gaan niet via Stripe
+
+De LinkedIn Lives staan in `src/content/live.ts` en verwijzen rechtstreeks
+naar het LinkedIn-event. Daar is niets aan in te stellen in Stripe. Wat je wel
+wilt: in GTM een aparte trigger op het `generate_lead`-event dat de site
+stuurt bij een klik op "Meld je aan". Dat is de goedkoopste lead die deze site
+oplevert en het is zonde om hem niet te tellen.
 
 ## Een datum zonder betaallink
 
@@ -104,6 +129,8 @@ team komen.
 
 ## Meten of het werkt
 
+- **Gratis aanmelding**: een klik op "Meld je aan" bij een LinkedIn Live
+  stuurt `generate_lead` met de naam en datum van de sessie.
 - **Klik naar Stripe**: de site stuurt bij elke koopknop een `begin_checkout`
   in de dataLayer, met workshop, datum, tickettype, prijs en de plek op de
   pagina waar geklikt is (`agenda`, `ticketbox`, `koopbalk`). Zo zie je welke

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Koopbalk from "@/components/layout/Koopbalk";
+import BundelBand from "@/components/sections/BundelBand";
 import Reviews from "@/components/sections/Reviews";
 import TicketBox from "@/components/sections/TicketBox";
 import TicketRij from "@/components/sections/TicketRij";
@@ -11,11 +12,14 @@ import Reveal from "@/components/ui/Reveal";
 import Section, { Em } from "@/components/ui/Section";
 import { korteDatum } from "@/lib/datum";
 import { evenementSchema } from "@/lib/schema";
-import { euro, locatie, site } from "@/lib/site";
+import { advies, euro, locatie, site } from "@/lib/site";
+import { liveVoor } from "@/content/live";
 import {
+  bundelsVoor,
   eerstvolgende,
   komendeSessies,
   koopbareTickets,
+  vandaag,
   vanafPrijs,
   workshopBySlug,
   WORKSHOPS,
@@ -82,6 +86,11 @@ export default async function WorkshopPagina({
   const sessies = komendeSessies(workshop);
   const eerste = sessies[0] ?? null;
   const vanaf = vanafPrijs(workshop);
+  /* De gratis online sessie die op deze workshop vooruitloopt, en de
+     bundels waar deze workshop in zit. Allebei afgeleid uit de content, dus
+     ze verschijnen vanzelf zodra ze bestaan. */
+  const live = liveVoor(workshop.slug, vandaag());
+  const bundels = bundelsVoor(workshop.slug);
 
   /* Voor de koopbalk onderin op mobiel: de eerste datum die echt te koop is. */
   const koopbaar = sessies.find((s) => koopbareTickets(s).length > 0) ?? null;
@@ -136,6 +145,31 @@ export default async function WorkshopPagina({
               {workshop.intro}
             </p>
 
+            {/* Loopt er een gratis online sessie op deze workshop vooruit,
+                dan hoort die hier: het is de goedkoopste manier om te zien
+                of dit onderwerp iets voor je is voordat je betaalt. */}
+            {live && (
+              <div className="kaart mt-7 max-w-2xl border border-violet/30 bg-violet/[0.05] p-5">
+                <p className="label-mono text-[10.5px] text-violet">
+                  Eerst gratis kennismaken
+                </p>
+                <p className="mt-2 text-[15px] leading-relaxed">
+                  Op {korteDatum(live.datum)} doen we{" "}
+                  <span className="font-semibold">{live.naam}</span> als gratis{" "}
+                  {live.platform}, online. Deze workshop bouwt daarop voort —
+                  maar je kunt ook los meedoen.
+                </p>
+                <a
+                  href={live.aanmeldUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-2 text-sm text-ink underline-offset-4 hover:text-violet hover:underline"
+                >
+                  Meld je aan voor de gratis sessie →
+                </a>
+              </div>
+            )}
+
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <PijlKnop href="#data" data-cta="detail-hero-data">
                 {eerste
@@ -148,7 +182,7 @@ export default async function WorkshopPagina({
                 zonderPijl
                 data-cta="detail-hero-programma"
               >
-                Wat doen we die dag?
+                Wat doen we die middag?
               </PijlKnop>
             </div>
           </div>
@@ -188,12 +222,29 @@ export default async function WorkshopPagina({
                   </li>
                 ))}
               </ul>
+
+              {/* Bij een masterclass is "ben ik hier wel klaar voor" de vraag
+                  die de verkoop tegenhoudt. Een mailadres van een mens erbij
+                  is goedkoper dan een terugbetaling achteraf. */}
+              {workshop.niveau === "Masterclass" && (
+                <p className="mt-6 max-w-2xl border-l-2 border-border pl-4 text-[15px] leading-relaxed text-text-muted">
+                  Twijfel je of je er klaar voor bent? Mail{" "}
+                  <a
+                    href={`mailto:${advies.email}?subject=${encodeURIComponent(`Is de ${workshop.naam} iets voor mij?`)}`}
+                    className="text-ink underline-offset-4 hover:text-violet hover:underline"
+                  >
+                    {advies.email}
+                  </a>{" "}
+                  met wat je nu met Claude doet, dan krijg je eerlijk antwoord —
+                  ook als dat &ldquo;doe eerst de andere&rdquo; is.
+                </p>
+              )}
             </Reveal>
 
             {/* Wat je leert */}
             <Reveal>
               <h2 className="display-serif mt-14 text-[1.9rem] leading-tight sm:text-[2.2rem]">
-                Wat je aan het eind van de dag <Em>kunt</Em>
+                Wat je aan het eind van de middag <Em>kunt</Em>
               </h2>
               <ul className="mt-6 space-y-4">
                 {workshop.leerdoelen.map((doel, i) => (
@@ -332,7 +383,11 @@ export default async function WorkshopPagina({
             Wanneer kom je <Em>langs</Em>?
           </>
         }
-        sub={`${workshop.naam} draait op ${locatie.straat} in ${locatie.plaats}. Je betaalt direct online en krijgt meteen je bevestiging en factuur.`}
+        sub={`${workshop.naam} draait op ${locatie.straat} in ${locatie.plaats}.${
+          eerste?.inloop
+            ? ` Inloop vanaf ${eerste.inloop}, we beginnen om ${eerste.start}.`
+            : ""
+        } Je betaalt direct online en krijgt meteen je bevestiging en factuur.`}
       >
         {sessies.length > 0 ? (
           <div className="space-y-4">
@@ -368,6 +423,20 @@ export default async function WorkshopPagina({
           </Reveal>
         )}
       </Section>
+
+      {/* Zit deze workshop in een bundel, dan is dit de plek: de bezoeker
+          heeft net de datums gezien en weegt nu de prijs. */}
+      {bundels.length > 0 && (
+        <section className="border-t border-border">
+          <div className="mx-auto max-w-6xl px-5 py-16">
+            {bundels.map((b) => (
+              <Reveal key={b.naam}>
+                <BundelBand bundel={b} />
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       <Reviews workshop={workshop.slug} />
 
@@ -418,7 +487,7 @@ function AndereWorkshops({ huidige }: { huidige: Workshop }) {
         </>
       }
     >
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {rest.map((w) => {
           const eerste = eerstvolgende(w);
           return (

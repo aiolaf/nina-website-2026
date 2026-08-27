@@ -71,12 +71,42 @@ Deze staan vast; wijk er niet van af zonder aanleiding uit de cijfers.
 7. **Geen verzonnen bewijs.** `src/content/reviews.ts` is leeg en het
    reviewblok rendert dan niets. Liever geen sectie dan een quote met een
    verzonnen naam eronder.
+8. **De gratis sessie is de instap, niet een bijzaak.** Hij staat in de hero,
+   in de agenda op zijn datum, en op de detailpagina van de workshop die erop
+   voortbouwt. Violet — de merkkleur die maximaal één keer per scherm mag —
+   is hier gereserveerd voor het enige item dat niets kost.
+9. **Eerlijk over wat er nog niet staat.** Onder de agenda staat een blok dat
+   zegt dat de rest van 2026 volgt, met een aanmeldknop. Anders komt iemand
+   die in november wil één keer langs en nooit meer terug.
 
 ## Contentmodel
 
-`workshops/src/content/workshops.ts` is de enige bron van waarheid: de agenda,
-de detailpagina's, de sitemap, de gestructureerde data en de koopknoppen komen
-er allemaal uit.
+`workshops/src/content/workshops.ts` is de bron voor alles wat geld kost;
+`workshops/src/content/live.ts` voor de gratis online sessies. Samen vullen ze
+de agenda, de detailpagina's, de sitemap, de gestructureerde data en de
+koopknoppen.
+
+### Waarom lives een eigen type hebben
+
+Een LinkedIn Live heeft geen ticket, geen prijs, geen zaal en geen maximum
+aantal plaatsen, en aanmelden gaat via LinkedIn in plaats van via Stripe. Dat
+in het workshopmodel proppen zou elk veld daar optioneel maken, en dan is er
+geen model meer. `lib/programma.ts` voegt de twee samen tot één lijst op
+datum, met een eigen kaart per soort (`TicketRij` en `LiveRij`).
+
+De agenda toont ze dus door elkaar. Dat is opzet: het programma loopt van
+gratis online kennismaken naar een middag op kantoor, en die volgorde ís het
+aanbod. Twee losse lijstjes zouden dat verhaal breken. `leidtNaar` op een Live
+legt vast welke workshop erop voortbouwt, zodat de verwijzing op beide
+plekken verschijnt zonder dat iemand het bijhoudt.
+
+### Bundels
+
+Een bundel (`BUNDELS`) hoort bij twee workshops tegelijk en heeft dus zijn
+eigen Payment Link, geen tickettype binnen een sessie. Het voordeel wordt
+berekend tegen de losse **enkele** ticketprijs, niet tegen `vanafPrijs`: die
+laatste pakt de goedkoopste prijs per persoon en dat is het duo-ticket,
+waardoor de bundel er onterecht minder voordelig uitziet.
 
 ```
 Workshop
@@ -84,9 +114,20 @@ Workshop
  ├─ voorWie[], leerdoelen[], programma[], meenemen[], inbegrepen[]
  ├─ trainer, foto
  └─ sessies[]
-     ├─ datum, start, eind, plaatsen, vrij
+     ├─ datum, inloop, start, eind, plaatsen, vrij
      └─ tickets[]  → naam, prijs (excl. btw), personen, stripeLink
+
+Live
+ └─ slug, naam, ondertitel, datum, start, eind, platform,
+    kort, wat[], aanmeldUrl, leidtNaar
+
+Bundel
+ └─ naam, ondertitel, workshops[], prijs, stripeLink
 ```
+
+`niveau` is `Instap` | `Verdieping` | `Masterclass`. Bij een masterclass toont
+de detailpagina automatisch een regel met het adviesadres uit `site.ts`:
+"ben ik hier klaar voor" is bij zo'n prijs de vraag die de verkoop tegenhoudt.
 
 Een sessie heeft vier toestanden, afgeleid in `sessieStatus()`:
 

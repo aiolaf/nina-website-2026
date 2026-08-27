@@ -26,6 +26,10 @@ export const site = {
  */
 export const locatie = {
   naam: "Het NinA AI kantoor",
+  /* Het gebouw is bekender dan ons huisnummer: wie hier voor het eerst komt
+     zoekt op B.Amsterdam, niet op 763A. Vandaar dat het gebouw overal
+     meegenoemd wordt. */
+  gebouw: "in het B.Amsterdam-gebouw",
   straat: "Johan Huizingalaan 763A",
   postcode: "1066 VH",
   plaats: "Amsterdam",
@@ -51,6 +55,19 @@ export const bewijs = {
   cijferBron: "gemiddelde beoordeling door deelnemers",
   deelnemers: "200+",
   organisaties: "160+",
+};
+
+/**
+ * Waar iemand terecht kan die niet weet welke workshop bij hem past. Staat
+ * los van het algemene adres: dit is persoonlijk advies vooraf, en dat is
+ * bij een masterclass van een paar honderd euro het verschil tussen kopen en
+ * afhaken.
+ *
+ * TE BEVESTIGEN: dit adres komt van de huidige site. Klopt het nog?
+ */
+export const advies = {
+  email: "daan@nina-ai.nl",
+  naam: "Daan",
 };
 
 /**

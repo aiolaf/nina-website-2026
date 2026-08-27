@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import Koopbalk from "@/components/layout/Koopbalk";
+import BundelBand from "@/components/sections/BundelBand";
+import LiveRij from "@/components/sections/LiveRij";
 import Praktisch from "@/components/sections/Praktisch";
 import Reviews from "@/components/sections/Reviews";
 import TicketRij from "@/components/sections/TicketRij";
@@ -11,14 +13,10 @@ import PijlKnop from "@/components/ui/PijlKnop";
 import Reveal from "@/components/ui/Reveal";
 import Section, { Em } from "@/components/ui/Section";
 import { korteDatum } from "@/lib/datum";
-import { bewijs, euro, site } from "@/lib/site";
-import {
-  agenda,
-  koopbareTickets,
-  WORKSHOPS,
-  type AgendaItem,
-} from "@/content/workshops";
+import { programma, programmaSleutel } from "@/lib/programma";
 import { evenementenSchema, vragenSchema } from "@/lib/schema";
+import { bewijs, euro, site } from "@/lib/site";
+import { BUNDELS, koopbareTickets, WORKSHOPS } from "@/content/workshops";
 
 /**
  * De homepage heeft één taak: de bezoeker bij een datum krijgen en die datum
@@ -29,21 +27,35 @@ import { evenementenSchema, vragenSchema } from "@/lib/schema";
  * workshop" hoeft dan niet eerst door drie secties overtuigingswerk heen.
  * Wie nog twijfelt scrolt door en vindt daar het aanbod, het bewijs en de
  * praktische zaken — en onderaan opnieuw de agenda.
+ *
+ * In die agenda staan de gratis LinkedIn Lives tussen de betaalde workshops,
+ * op datum. Dat is bewust: het programma loopt van gratis online kennismaken
+ * naar een middag op kantoor, en die volgorde is het aanbod.
  */
 export default function Home() {
-  const komend: AgendaItem[] = agenda();
-  const eerste = komend[0];
+  const items = programma();
+  const eerste = items[0];
 
   /* De koopbalk onderin op mobiel wijst naar de eerstvolgende datum die
      daadwerkelijk te koop staat. Is er niets te koop, dan wijst hij naar de
      agenda in plaats van naar een dode link. */
-  const eersteKoopbaar = komend.find(
-    (item) => koopbareTickets(item.sessie).length > 0
+  const eersteKoopbaar = items.find(
+    (item) => item.soort === "workshop" && koopbareTickets(item.sessie).length > 0
   );
-  const balkTicket = eersteKoopbaar
-    ? (koopbareTickets(eersteKoopbaar.sessie).find((t) => t.uitgelicht) ??
-      koopbareTickets(eersteKoopbaar.sessie)[0])
-    : null;
+  const balk =
+    eersteKoopbaar?.soort === "workshop"
+      ? {
+          workshop: eersteKoopbaar.workshop,
+          sessie: eersteKoopbaar.sessie,
+          ticket:
+            koopbareTickets(eersteKoopbaar.sessie).find((t) => t.uitgelicht) ??
+            koopbareTickets(eersteKoopbaar.sessie)[0],
+        }
+      : null;
+
+  /* De eerstvolgende gratis live, voor de regel onder de hero. Gratis en
+     online is de laagste drempel die we hebben; die hoort boven de vouw. */
+  const eersteLive = items.find((item) => item.soort === "live");
 
   return (
     <>
@@ -52,7 +64,7 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(evenementenSchema(komend)),
+          __html: JSON.stringify(evenementenSchema(items)),
         }}
       />
       <script
@@ -79,18 +91,18 @@ export default function Home() {
                 Open inschrijving · Amsterdam
               </p>
               <h1 className="display-serif mt-4 text-[2.6rem] leading-[1.03] text-white sm:text-[3.6rem] lg:text-[4.2rem]">
-                Een dag bij ons aan tafel, en je{" "}
+                Een middag bij ons aan tafel, en je{" "}
                 <em className="italic">werkt anders</em> op maandag.
               </h1>
               <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-white/85">
-                Losse tickets voor onze AI-workshops op kantoor in Amsterdam.
-                Kleine groepen, je eigen werk als oefenmateriaal, en je gaat
-                naar huis met iets dat draait.
+                Losse tickets voor onze Claude- en AI-workshops op kantoor in
+                Amsterdam. Kleine groepen, je eigen werk als oefenmateriaal, en
+                je gaat naar huis met iets dat draait.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <PijlKnop href="#agenda" variant="licht" data-cta="hero-agenda">
-                  Bekijk alle data
+                  Bekijk het programma
                 </PijlKnop>
                 <PijlKnop
                   href="#workshops"
@@ -102,19 +114,20 @@ export default function Home() {
                 </PijlKnop>
               </div>
 
-              {eerste && (
+              {/* De gratis live boven de vouw. Wie nog niets van ons kent
+                  begint daar, en dat is precies de bedoeling. */}
+              {eersteLive?.soort === "live" && (
                 <p className="mt-6 text-sm text-white/70">
-                  Eerstvolgend:{" "}
-                  <span className="text-white">
-                    {eerste.workshop.naam} op {korteDatum(eerste.sessie.datum)}
-                  </span>
-                  {eerste.sessie.vrij > 0 && eerste.sessie.vrij <= 4 && (
-                    <>
-                      {" "}
-                      · nog {eerste.sessie.vrij}{" "}
-                      {eerste.sessie.vrij === 1 ? "plek" : "plekken"}
-                    </>
-                  )}
+                  Eerst gratis kennismaken?{" "}
+                  <a
+                    href={eersteLive.live.aanmeldUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white underline-offset-4 hover:underline"
+                  >
+                    {eersteLive.live.naam}
+                  </a>{" "}
+                  op {korteDatum(eersteLive.live.datum)}, online en gratis.
                 </p>
               )}
             </div>
@@ -128,7 +141,7 @@ export default function Home() {
             {[
               { cijfer: bewijs.cijfer, label: "gemiddelde beoordeling" },
               { cijfer: bewijs.deelnemers, label: "deelnemers gingen je voor" },
-              { cijfer: "14", label: "deelnemers per groep, maximaal" },
+              { cijfer: "15", label: "deelnemers per groep, maximaal" },
               { cijfer: "100%", label: "zelf doen, geen slidesessie" },
             ].map((s) => (
               <div key={s.label}>
@@ -147,24 +160,28 @@ export default function Home() {
           --------------------------------------------------------------- */}
       <Section
         id="agenda"
-        kicker="De agenda"
+        kicker="Het programma"
         title={
           <>
             Kies een datum en <Em>hij is van jou</Em>.
           </>
         }
-        sub="Alle open workshops die eraan komen. Je betaalt direct online en krijgt meteen je bevestiging en factuur."
+        sub="Van een gratis online sessie tot een middag bouwen op kantoor. Je betaalt direct online en krijgt meteen je bevestiging en factuur."
         annotatie="vol is vol, echt waar"
       >
-        {komend.length > 0 ? (
+        {items.length > 0 ? (
           <div className="space-y-4">
-            {komend.map((item, i) => (
-              <Reveal key={`${item.workshop.slug}-${item.sessie.datum}`} delay={i * 0.05}>
-                <TicketRij
-                  workshop={item.workshop}
-                  sessie={item.sessie}
-                  plek="agenda"
-                />
+            {items.map((item, i) => (
+              <Reveal key={programmaSleutel(item)} delay={i * 0.05}>
+                {item.soort === "live" ? (
+                  <LiveRij live={item.live} plek="agenda" />
+                ) : (
+                  <TicketRij
+                    workshop={item.workshop}
+                    sessie={item.sessie}
+                    plek="agenda"
+                  />
+                )}
               </Reveal>
             ))}
           </div>
@@ -188,6 +205,30 @@ export default function Home() {
           </Reveal>
         )}
 
+        {/* Eerlijk zijn over wat er nog niet staat, en er meteen een
+            aanmelding van maken. Anders komt iemand die in november wil
+            één keer langs en nooit meer terug. */}
+        <Reveal>
+          <div className="kaart mt-4 flex flex-col gap-4 border border-dashed border-border p-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-display text-lg font-bold">
+                De rest van 2026 volgt
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-text-muted">
+                We plannen de data voor november en december binnenkort in.
+                Laat weten waar je interesse in hebt, dan hoor je het als
+                eerste — en houden we rekening met wat er gevraagd wordt.
+              </p>
+            </div>
+            <a
+              href={`mailto:${site.email}?subject=${encodeURIComponent("Hou me op de hoogte van nieuwe workshopdata")}&body=${encodeURIComponent("Hoi NinA,\n\nLaat het me weten zodra de nieuwe data bekend zijn.\n\nNaam:\nBedrijf:\nWaar ik interesse in heb:\n")}`}
+              className="shrink-0 rounded-full border border-ink/15 px-6 py-3 text-sm transition-colors hover:border-ink/35"
+            >
+              Hou me op de hoogte
+            </a>
+          </div>
+        </Reveal>
+
         <Reveal>
           <p className="mt-6 text-sm text-text-muted">
             Betalen gaat via Stripe met iDEAL, creditcard of Bancontact. Tot 14
@@ -197,8 +238,23 @@ export default function Home() {
         </Reveal>
       </Section>
 
+      {/* ---------------------------------------------------------------
+          Bundel — de tweede workshop verkopen aan wie de eerste koopt
+          --------------------------------------------------------------- */}
+      {BUNDELS.length > 0 && (
+        <section className="border-t border-border bg-bg-alt">
+          <div className="mx-auto max-w-6xl px-5 py-16">
+            {BUNDELS.map((b) => (
+              <Reveal key={b.naam}>
+                <BundelBand bundel={b} />
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Bewijs: wie hier eerder zat */}
-      <section className="border-t border-border bg-bg-alt">
+      <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-5 py-12">
           <Reveal>
             <LogoRij label="Deelnemers kwamen onder andere van" />
@@ -211,10 +267,10 @@ export default function Home() {
           --------------------------------------------------------------- */}
       <Section
         id="workshops"
-        kicker="Vier workshops"
+        kicker={`${WORKSHOPS.length} workshops`}
         title={
           <>
-            Van je eerste prompt tot een agent die <Em>zelf</Em> doorwerkt.
+            Van je eerste Skill tot een agent die <Em>zelf</Em> doorwerkt.
           </>
         }
         sub="Ze bouwen op elkaar voort, maar je hoeft ze niet op volgorde te doen. Kies waar je nu staat."
@@ -229,17 +285,17 @@ export default function Home() {
       </Section>
 
       {/* ---------------------------------------------------------------
-          Hoe een dag loopt
+          Hoe een middag loopt
           --------------------------------------------------------------- */}
       <Section
-        kicker="Zo loopt zo'n dag"
+        kicker="Zo loopt zo'n middag"
         variant="card"
         title={
           <>
             Geen zaal met slides, maar <Em>jouw werk</Em> op tafel.
           </>
         }
-        sub="Iedereen komt binnen met een taak uit de eigen week. Daar werken we de hele dag aan, en daar gaat de dag ook over."
+        sub="Iedereen komt binnen met een taak uit de eigen week. Daar werken we de hele middag aan, en daar gaat de middag ook over."
       >
         <div className="grid gap-6 md:grid-cols-4">
           {[
@@ -251,17 +307,17 @@ export default function Home() {
             {
               titel: "We leggen kort uit hoe het werkt",
               tekst:
-                "Genoeg theorie om te snappen waarom iets wel of niet lukt. Niet meer dan dat.",
+                "Genoeg om te snappen waarom iets wel of niet lukt. Niet meer dan dat.",
             },
             {
               titel: "Je bouwt het zelf",
               tekst:
-                "Met een trainer naast je die meekijkt zodra je vastloopt. Dat is het grootste deel van de dag.",
+                "Met een trainer naast je die meekijkt zodra je vastloopt. Dat is het grootste deel van de middag.",
             },
             {
               titel: "Je neemt het mee",
               tekst:
-                "Werkende prompts, workflows en bestanden. Plus een vragenuur twee weken later.",
+                "Werkende Skills, templates en een certificaat. Plus de borrel, waar de beste vragen komen.",
             },
           ].map((s, i) => (
             <Reveal key={s.titel} delay={i * 0.06}>
@@ -336,13 +392,16 @@ export default function Home() {
             </h2>
             {eerste && (
               <p className="mt-5 text-[15px] text-white/70">
-                De eerstvolgende is {eerste.workshop.naam} op{" "}
-                {korteDatum(eerste.sessie.datum)}.
+                Het programma begint op {korteDatum(eerste.datum)} met{" "}
+                {eerste.soort === "live"
+                  ? `${eerste.live.naam}, gratis en online`
+                  : eerste.workshop.naam}
+                .
               </p>
             )}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <PijlKnop href="#agenda" variant="licht" data-cta="slot-agenda">
-                Naar de agenda
+                Naar het programma
               </PijlKnop>
               <Link
                 href="/#vragen"
@@ -355,23 +414,23 @@ export default function Home() {
         </div>
       </section>
 
-      {balkTicket && eersteKoopbaar ? (
+      {balk?.ticket ? (
         <Koopbalk
-          titel={`${eersteKoopbaar.workshop.naam} · ${korteDatum(eersteKoopbaar.sessie.datum)}`}
-          onder={`${euro(Math.round(balkTicket.prijs / balkTicket.personen))} p.p. excl. btw`}
-          href={balkTicket.stripeLink}
+          titel={`${balk.workshop.naam} · ${korteDatum(balk.sessie.datum)}`}
+          onder={`${euro(Math.round(balk.ticket.prijs / balk.ticket.personen))} p.p. excl. btw`}
+          href={balk.ticket.stripeLink}
           knop="Koop ticket"
           meting={{
-            workshop: eersteKoopbaar.workshop.naam,
-            datum: eersteKoopbaar.sessie.datum,
-            ticket: balkTicket.naam,
-            prijs: balkTicket.prijs,
+            workshop: balk.workshop.naam,
+            datum: balk.sessie.datum,
+            ticket: balk.ticket.naam,
+            prijs: balk.ticket.prijs,
           }}
           verbergBij="#agenda"
         />
       ) : (
         <Koopbalk
-          titel="Alle workshopdata"
+          titel="Het najaarsprogramma"
           onder="Kies je datum en koop je ticket"
           href="#agenda"
           knop="Bekijk data"

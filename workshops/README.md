@@ -35,8 +35,10 @@ npm run start    # bekijkt out/ zoals hij straks op Hostnet staat
 
 ```
 src/content/workshops.ts   ← de workshops, de data, de prijzen, de Stripe-links
+src/content/live.ts        ← de gratis LinkedIn Lives (geen ticket, geen prijs)
 src/content/reviews.ts     ← quotes van deelnemers (nu nog leeg, met opzet)
 src/lib/site.ts            ← adres, mailadres, KVK, beoordelingscijfer
+src/lib/programma.ts       ← voegt lives en workshops samen tot één agenda
 src/app/page.tsx           ← de homepage
 src/app/workshop/[slug]/   ← één pagina per workshop, automatisch
 src/components/            ← de bouwstenen
@@ -64,10 +66,30 @@ sessie). Er is geen koppeling die dat live uit Stripe haalt. Werkbaar bij een
 handvol data per maand; wordt dat te veel, dan is dat het moment om over een
 echte backend na te denken — niet eerder.
 
+## Het programma dat er nu in staat
+
+| Datum | Wat | Prijs |
+|---|---|---|
+| wo 2 september | Je Second Brain voor AI — gratis LinkedIn Live, online | gratis |
+| do 1 oktober | Claude Workshop — Cowork, Code & Skills | € 199 |
+| wo 7 oktober | Je Second Brain voor AI — bouwt voort op de Live | € 199 |
+| do 22 oktober | Claude Pro Workshop — Skills, Connectors, MCP, agents | € 399 |
+
+Plus de bundel **Claude Complete** (de twee Claude-workshops samen) en een
+blok onder de agenda dat zegt dat de rest van 2026 volgt, met een
+aanmeldknop. De data van november en december zet je erbij in
+`src/content/workshops.ts`.
+
 ## Wat er nog moet gebeuren voordat dit live kan
 
-- [ ] De echte workshops, data en prijzen in `src/content/workshops.ts`
-- [ ] Stripe Payment Links aanmaken en invullen (zie `STRIPE.md`)
+- [ ] **Nalopen wat er is overgenomen.** De data kloppen; de prijzen,
+      programma's en de bundelprijs komen van de huidige site en uit
+      zoekresultaten. In `src/content/workshops.ts`, `src/content/live.ts` en
+      `src/lib/site.ts` staan blokken met `TE BEVESTIGEN` die precies zeggen
+      wat er gecontroleerd moet worden.
+- [ ] Titel en tijden van de LinkedIn Live van 2 september (`src/content/live.ts`)
+- [ ] Stripe Payment Links aanmaken en invullen, ook voor de bundel (zie
+      `STRIPE.md`)
 - [ ] Echte deelnemersquotes in `src/content/reviews.ts`
 - [ ] Btw-nummer invullen in `src/lib/site.ts`
 - [ ] `workshops@nina-ai.nl` laten bestaan, of vervangen door een adres dat
@@ -97,17 +119,18 @@ gaat en niet om een aanvraag:
 
 De volgorde op de homepage is geen smaakkwestie:
 
-1. **Hero** met de eerstvolgende datum erin
-2. **Agenda** — direct daarna, nog vóór de uitleg. Wie al overtuigd
-   binnenkomt hoeft niet door drie secties heen te scrollen
-3. **Logo's** — wie zaten hier eerder
-4. **De vier workshops** — voor wie nog moet kiezen
-5. **Hoe een dag loopt** — de belofte concreet gemaakt
-6. **Reviews** (zodra ze er zijn)
-7. **Praktisch** — waar, hoe kom ik er, wat is inbegrepen
-8. **Team op maat** — de tweede, grotere conversie
-9. **Vragen** — de laatste twijfels wegnemen
-10. **Terug naar de agenda**
+1. **Hero** met de gratis Live erin als laagste drempel
+2. **Agenda** — direct daarna, nog vóór de uitleg. Gratis en betaald door
+   elkaar, op datum, want die volgorde ís het aanbod
+3. **Bundel** — de tweede workshop verkopen aan wie de eerste overweegt
+4. **Logo's** — wie zaten hier eerder
+5. **De workshops** — voor wie nog moet kiezen
+6. **Hoe een middag loopt** — de belofte concreet gemaakt
+7. **Reviews** (zodra ze er zijn)
+8. **Praktisch** — waar, hoe kom ik er, wat is inbegrepen
+9. **Team op maat** — de tweede, grotere conversie
+10. **Vragen** — de laatste twijfels wegnemen
+11. **Terug naar de agenda**
 
 Op mobiel staat er vanaf de tweede schermhoogte een vaste koopbalk onderin,
 die weer verdwijnt zodra de agenda in beeld komt.

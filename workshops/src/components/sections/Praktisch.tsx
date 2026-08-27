@@ -16,22 +16,22 @@ const GEREGELD = [
   {
     titel: "Kleine groepen",
     tekst:
-      "Tien tot veertien deelnemers, nooit meer. Iedereen komt aan de beurt met zijn eigen vraag.",
+      "Maximaal vijftien deelnemers, nooit meer. Iedereen komt aan de beurt met zijn eigen vraag.",
   },
   {
-    titel: "Eten en drinken",
+    titel: "Inloop en borrel",
     tekst:
-      "Koffie de hele dag, iets te eten in de pauze, en een borrel als we klaar zijn.",
+      "Vanaf 12:30 koffie en samen je omgeving klaarzetten. Om 16:00 zijn we klaar en gaat de borrel open.",
   },
   {
     titel: "Alles mee naar huis",
     tekst:
-      "Werkboek, promptset en de bestanden die we die dag bouwen. Zonder abonnement erachter.",
+      "De Skills en templates die je die middag bouwt, plus een cheatsheet. Zonder abonnement erachter.",
   },
   {
-    titel: "Nazorg",
+    titel: "Certificaat",
     tekst:
-      "Twee weken later een online vragenuur met de hele groep. Want dan lopen de vragen pas echt binnen.",
+      "Na afloop krijg je een certificaat van deelname. Genoeg voor de meeste opleidingsbudgetten.",
   },
 ];
 
@@ -46,15 +46,15 @@ export default function Praktisch() {
           Bij ons op kantoor, aan <Em>één tafel</Em>.
         </>
       }
-      sub="Elke workshop is fysiek in Amsterdam. Geen webinar, geen zaal met honderd man: een ruimte, een tafel, en genoeg tijd voor je eigen werk."
+      sub="Elke workshop is fysiek in Amsterdam, in het B.Amsterdam-gebouw. Geen zaal met honderd man maar een ruimte, een tafel, en genoeg tijd voor je eigen werk."
       annotatie="tot ziens op de Johan Huizingalaan"
     >
       <div className="grid gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
         <Reveal>
           <div className="foto kaart aspect-[4/3] w-full overflow-hidden">
             <Image
-              src="/images/beeld/zaal-verkenners.webp"
-              alt="De zaal tijdens een workshop, deelnemers aan tafel"
+              src="/images/beeld/workshop-tafel.webp"
+              alt="Deelnemers met hun laptop rond één tafel op het NinA AI kantoor"
               width={900}
               height={675}
               className="h-full w-full object-cover"
@@ -66,6 +66,8 @@ export default function Praktisch() {
           <div className="kaart border border-border bg-bg-card p-7">
             <h3 className="font-display text-xl font-bold">{locatie.naam}</h3>
             <address className="mt-2 text-[15px] not-italic leading-relaxed text-text-muted">
+              {locatie.gebouw}
+              <br />
               {locatie.straat}
               <br />
               {locatie.postcode} {locatie.plaats}

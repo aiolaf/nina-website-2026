@@ -1,10 +1,11 @@
 import { isoMetTijd } from "@/lib/datum";
 import { locatie, site } from "@/lib/site";
+import type { ProgrammaItem } from "@/lib/programma";
 import { VRAGEN } from "@/components/sections/Vragen";
+import type { Live } from "@/content/live";
 import {
   koopbareTickets,
   sessieStatus,
-  type AgendaItem,
   type Sessie,
   type Workshop,
 } from "@/content/workshops";
@@ -90,9 +91,45 @@ export function evenementSchema(workshop: Workshop, sessie: Sessie) {
   };
 }
 
-/** Alle komende datums als één lijst, voor de homepage. */
-export function evenementenSchema(items: AgendaItem[]) {
-  return items.map((item) => evenementSchema(item.workshop, item.sessie));
+/**
+ * Een gratis online sessie. Ander bijwoningstype (online in plaats van op
+ * locatie) en een prijs van 0 — dat laatste is geen detail: zonder een offer
+ * met prijs 0 toont Google zo'n evenement niet als gratis, en juist dat woord
+ * doet het werk.
+ */
+export function liveSchema(live: Live) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "EducationEvent",
+    name: `${live.naam} — ${live.ondertitel}`,
+    description: live.kort,
+    startDate: isoMetTijd(live.datum, live.start),
+    endDate: isoMetTijd(live.datum, live.eind),
+    eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    location: {
+      "@type": "VirtualLocation",
+      url: live.aanmeldUrl,
+    },
+    url: live.aanmeldUrl,
+    organizer: ORGANISATIE,
+    offers: {
+      "@type": "Offer",
+      url: live.aanmeldUrl,
+      price: 0,
+      priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
+    },
+  };
+}
+
+/** Het hele programma als één lijst, voor de homepage. */
+export function evenementenSchema(items: ProgrammaItem[]) {
+  return items.map((item) =>
+    item.soort === "live"
+      ? liveSchema(item.live)
+      : evenementSchema(item.workshop, item.sessie)
+  );
 }
 
 /** De veelgestelde vragen, zodat ze als uitklapbaar blok kunnen verschijnen. */

@@ -168,7 +168,7 @@ npm run lint
 npm run build
 # 2. controleer out/ met npx serve out
 # 3. upload de inhoud van out/ naar de documentroot
-git add -A && git commit -m "Nieuwe datum voor AI Start in november"
+git add -A && git commit -m "Nieuwe datum voor de Claude Workshop in november"
 git push
 ```
 
@@ -231,7 +231,7 @@ de gegevens in de secrets zitten.
 - [ ] `https://workshops.nina-ai.nl/` opent, met slot in de adresbalk
 - [ ] `http://` stuurt door naar `https://`
 - [ ] Een workshoppagina opent rechtstreeks, dus zonder eerst via de
-      homepage te klikken: `https://workshops.nina-ai.nl/workshop/ai-start/`
+      homepage te klikken: `https://workshops.nina-ai.nl/workshop/claude-workshop/`
 - [ ] Een adres dat niet bestaat toont onze eigen 404 en niet die van Apache
 - [ ] De koopknop opent de juiste Stripe-pagina, met het juiste bedrag
 - [ ] Na een testbetaling kom je op `/bedankt/` met de juiste datum erop

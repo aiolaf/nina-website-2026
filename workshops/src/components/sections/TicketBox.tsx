@@ -66,6 +66,10 @@ export default function TicketBox({ workshop }: { workshop: Workshop }) {
                   </p>
                 </div>
                 <p className="mt-1 text-xs text-text-muted">
+                  {/* De inlooptijd hoort hier en niet alleen in het
+                      programma: wie leest dat het om 13:00 begint, komt om
+                      13:00 en mist de koffie en het klaarzetten. */}
+                  {sessie.inloop ? `Inloop vanaf ${sessie.inloop} · ` : ""}
                   {plekkenRegel(sessie)}
                 </p>
 
