@@ -508,12 +508,30 @@ body:has(#donkere-hero) header[data-transparant] .header-cta {
 .sendfox-doos input[type="submit"]:hover {
   transform: scale(1.02);
 }
-/* Het vakje dat SendFox tegen bots gebruikt, hoort niemand te zien. */
-.sendfox-doos [aria-hidden="true"],
-.sendfox-doos input[type="checkbox"][name*="_"] {
-  display: none;
-}
+/*
+ * Het formulier vraagt om toestemming met een verplicht vinkje ("Ik ga
+ * akkoord met het ontvangen van e-mailupdates"). Dat vinkje mag onder geen
+ * beding verdwijnen: zonder aanvinken verstuurt het formulier niet, en een
+ * onzichtbaar verplicht veld is een formulier dat stuk lijkt. Hier stond
+ * eerder een regel die checkboxes met een underscore in de naam verborg als
+ * bot-vangnet; die haalde precies dit vinkje weg.
+ */
 .sendfox-doos label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
   font-size: 13px;
+  line-height: 1.5;
   color: var(--color-text-muted);
+}
+.sendfox-doos input[type="checkbox"] {
+  margin-top: 0.15rem;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  accent-color: var(--color-ink);
+}
+/* Wat SendFox zelf voor schermlezers wegzet, blijft weg. */
+.sendfox-doos [aria-hidden="true"]:not(label):not(input) {
+  display: none;
 }

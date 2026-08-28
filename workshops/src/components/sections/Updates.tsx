@@ -23,6 +23,16 @@ import { site } from "@/lib/site";
  * geweigerd.
  */
 
+/*
+ * Het formulier-id uit de embed-snippet van SendFox. Gecontroleerd tegen het
+ * account (Olaf Lemmens, olaf@nina-ai.nl): dit is formulier 292895,
+ * "Newsletter signup", te vinden op sendfox.com/form/1re792/3qoqw6.
+ *
+ * Het vraagt alleen om een mailadres, met een verplicht toestemmingsvinkje
+ * eronder. De knop heet daar al "Hou me op de hoogte" en de bevestiging
+ * luidt "Dank voor je interesse, je hoort snel van ons over de volgende
+ * workshop!" — die twee teksten wijzig je in SendFox, niet hier.
+ */
 const SENDFOX_FORM = "3qoqw6";
 
 export default function Updates() {
