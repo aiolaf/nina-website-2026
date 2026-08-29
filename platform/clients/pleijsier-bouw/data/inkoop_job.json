@@ -1,0 +1,50 @@
+[{
+  "project": "Segro DHL distributiecentrum LC4-LC5, Hoofddorp",
+  "projectnummer": "122002",
+  "onderdeel": "232 Kanaalplaatvloeren",
+  "leveranciers": ["Preco", "Nieuwpoort", "Olbecon", "VBI"],
+  "begroting_totaal_pakket": 65137.13,
+  "valuta": "EUR",
+  "regels": [
+    {
+      "post": "Kanaalplaatvloer begane grond 200mm",
+      "begroting_totaal": 49046.36,
+      "aanbiedingen": {
+        "Preco": { "totaal": 52140, "voorwaarden": "standaard" },
+        "Nieuwpoort": { "totaal": 51053.75, "voorwaarden": "standaard" },
+        "Olbecon": { "totaal": 51922.75, "voorwaarden": "isolatie Rc=3,7 inbegrepen" },
+        "VBI": { "totaal": 49533, "voorwaarden": "standaard" }
+      }
+    },
+    {
+      "post": "Kanaalplaatvloer portiersloge 200mm",
+      "begroting_totaal": 970.77,
+      "aanbiedingen": {
+        "Preco": { "totaal": 1032, "voorwaarden": "standaard" },
+        "Nieuwpoort": { "totaal": 1032, "voorwaarden": "standaard" },
+        "Olbecon": { "totaal": 1027.7, "voorwaarden": "standaard" },
+        "VBI": { "totaal": 997.5, "voorwaarden": "hoeveelheid 17,5 i.p.v. 17,2 m2" }
+      }
+    },
+    {
+      "post": "Dakvloer energieplein 265mm",
+      "begroting_totaal": 15120,
+      "aanbiedingen": {
+        "Preco": { "totaal": 13080, "voorwaarden": "standaard" },
+        "Nieuwpoort": { "totaal": 14400, "voorwaarden": "standaard" },
+        "Olbecon": { "totaal": 13080, "voorwaarden": "standaard" },
+        "VBI": { "totaal": 16200, "voorwaarden": "fors duurder" }
+      }
+    }
+  ],
+  "inclusief_bij_alle": [
+    "montage, kraan en klem",
+    "engineering / uitwerken in 3D",
+    "sparingen en kruipgaten"
+  ],
+  "aandachtspunten": [
+    "Nieuwpoort levert isolatie + deksels als losse toeslag (EUR 2.450), niet uitgesplitst per m2.",
+    "Olbecon rekent isolatie (Rc=3,7) in de vloerprijs; scheelt een aparte post.",
+    "Per-post laagste prijs mixt leveranciers; één leverancier voor het hele pakket kan logistiek gunstiger zijn."
+  ]
+}]

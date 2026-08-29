@@ -1,0 +1,60 @@
+[
+  {
+    "onderdeel": "Kanaalplaatvloer begane grond 200mm",
+    "begroting": { "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 56.44, "totaal": 49046.36 },
+    "aanbiedingen": [
+      { "bedrijf": "Preco", "omschrijving": "Leveren kanaalplaatvloer begane grond 200mm", "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 60, "totaal": 52140, "opmerking": "" },
+      { "bedrijf": "Nieuwpoort", "omschrijving": "BG-vloer kanaalplaat dikte 200", "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 58.75, "totaal": 51053.75, "opmerking": "" },
+      { "bedrijf": "Olbecon", "omschrijving": "Kanaalplaatvloer begane grond, 200mm", "hoeveelheid": 869, "eenheid": "m2", "prijs_per_eenheid": 59.75, "totaal": 51922.75, "opmerking": "110 isolatie; Rc=3,7" },
+      { "bedrijf": "VBI", "omschrijving": "Kanaalplaatvloer beganegrond 200mm", "hoeveelheid": 869, "eenheid": "m²", "prijs_per_eenheid": 57, "totaal": 49533, "opmerking": "" }
+    ]
+  },
+  {
+    "onderdeel": "Kanaalplaatvloer portiersloge 200mm",
+    "begroting": { "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 56.44, "totaal": 970.77 },
+    "aanbiedingen": [
+      { "bedrijf": "Preco", "omschrijving": "Kanaalplaatvloer portiersloge 200mm", "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 60, "totaal": 1032, "opmerking": "" },
+      { "bedrijf": "Nieuwpoort", "omschrijving": "Vloer portiersloge 200 mm", "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 60, "totaal": 1032, "opmerking": "" },
+      { "bedrijf": "Olbecon", "omschrijving": "Kanaalplaatvloer portiersloge 200mm", "hoeveelheid": 17.2, "eenheid": "m2", "prijs_per_eenheid": 59.75, "totaal": 1027.7, "opmerking": "" },
+      { "bedrijf": "VBI", "omschrijving": "Kanaalplaatvloer portiersloge 200mm", "hoeveelheid": 17.5, "eenheid": "m²", "prijs_per_eenheid": 57, "totaal": 997.5, "opmerking": "hoeveelheid 17,5 i.p.v. 17,2" }
+    ]
+  },
+  {
+    "onderdeel": "Dakvloer energieplein 265mm",
+    "begroting": { "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 63, "totaal": 15120 },
+    "aanbiedingen": [
+      { "bedrijf": "Preco", "omschrijving": "Dakvloer energieplein 265mm", "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 54.5, "totaal": 13080, "opmerking": "" },
+      { "bedrijf": "Nieuwpoort", "omschrijving": "Dakvloer energieplein", "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 60, "totaal": 14400, "opmerking": "dikte 265mm" },
+      { "bedrijf": "Olbecon", "omschrijving": "Dakvloer energieplein 265mm", "hoeveelheid": 240, "eenheid": "m2", "prijs_per_eenheid": 54.5, "totaal": 13080, "opmerking": "" },
+      { "bedrijf": "VBI", "omschrijving": "Dakvloer energieplein 265mm", "hoeveelheid": 240, "eenheid": "m²", "prijs_per_eenheid": 67.5, "totaal": 16200, "opmerking": "fors duurder dan rest" }
+    ]
+  },
+  {
+    "onderdeel": "Deksels voor kanaalafdichting",
+    "begroting": { "hoeveelheid": 1708, "eenheid": "st", "prijs_per_eenheid": 0.65, "totaal": 1110.2 },
+    "aanbiedingen": [
+      { "bedrijf": "Preco", "omschrijving": "Sparingen, kruipgaten en deksels", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." },
+      { "bedrijf": "Nieuwpoort", "omschrijving": "Toeslag isolatie + deksels", "hoeveelheid": 1, "eenheid": "post", "prijs_per_eenheid": 2450, "totaal": 2450, "opmerking": "alleen totaalprijs, deksels + isolatie samen" },
+      { "bedrijf": "Olbecon", "omschrijving": "Levering deksels kanaalafdichting", "hoeveelheid": 1708, "eenheid": "st", "prijs_per_eenheid": 0.62, "totaal": 1058.96, "opmerking": "" },
+      { "bedrijf": "VBI", "omschrijving": "Engineering en sparingen", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." }
+    ]
+  },
+  {
+    "onderdeel": "Orderkosten isolatievloer",
+    "begroting": { "hoeveelheid": 1, "eenheid": "post", "prijs_per_eenheid": 937, "totaal": 937 },
+    "aanbiedingen": [
+      { "bedrijf": "Preco", "omschrijving": "Montage, kraan en klem", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." },
+      { "bedrijf": "Nieuwpoort", "omschrijving": "Toeslag isolatie + deksels", "hoeveelheid": 1, "eenheid": "post", "prijs_per_eenheid": 2450, "totaal": 2450, "opmerking": "isolatie + deksels samen, niet uitgesplitst" },
+      { "bedrijf": "Olbecon", "omschrijving": "in vloerprijs verwerkt (Rc=3,7)", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl. in begane grond vloer" }
+    ]
+  },
+  {
+    "onderdeel": "Sparingen",
+    "begroting": { "hoeveelheid": 878, "eenheid": "st", "prijs_per_eenheid": 1, "totaal": 878 },
+    "aanbiedingen": [
+      { "bedrijf": "Preco", "omschrijving": "Sparingen, kruipgaten en deksels", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." },
+      { "bedrijf": "Olbecon", "omschrijving": "Uitwerken 3D + sparingen", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." },
+      { "bedrijf": "VBI", "omschrijving": "Engineering en sparingen", "hoeveelheid": null, "eenheid": "", "prijs_per_eenheid": null, "totaal": null, "opmerking": "incl." }
+    ]
+  }
+]

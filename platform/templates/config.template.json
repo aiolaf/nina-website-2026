@@ -1,0 +1,32 @@
+{
+  "klant": "Naam van de klant",
+  "vraag": "Wat wil de klant automatiseren? (in één of twee zinnen)",
+  "type": "automation",
+  "workflow": [
+    {
+      "id": "trigger",
+      "label": "Trigger — nieuw record",
+      "kind": "trigger"
+    },
+    {
+      "id": "ai-stap-1",
+      "label": "AI-stap (bv. classificeren)",
+      "kind": "ai",
+      "prompt": "Beschrijf hier wat de AI met het record moet doen. De data wordt automatisch meegestuurd."
+    },
+    {
+      "id": "transform-1",
+      "label": "Transform / verrijken",
+      "kind": "transform",
+      "mockOutput": "Gemockte output. Gebruik {{veldnaam}} om waarden uit de data in te vullen."
+    },
+    {
+      "id": "output-1",
+      "label": "Output — wegschrijven",
+      "kind": "output",
+      "mockOutput": "Resultaat weggeschreven (gemockt)."
+    }
+  ],
+  "dataFiles": [],
+  "n8nWebhookUrl": ""
+}
