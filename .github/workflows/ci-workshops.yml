@@ -1,0 +1,62 @@
+# Bouwcontrole voor workshops.nina-ai.nl
+#
+# Deze workflow zet niets live. Cloudflare Pages bouwt en publiceert de site
+# zelf zodra er iets op main verandert in workshops/; zie
+# workshops/DEPLOY-CLOUDFLARE.md.
+#
+# Wat deze workflow wél doet: bij elke wijziging in workshops/ nagaan of de
+# site nog bouwt en of de export compleet is. Zonder deze controle merk je een
+# fout pas in het Pages-dashboard, en dat is één stap te laat voor een site die
+# tickets verkoopt.
+
+name: Controleer de workshopsite
+
+on:
+  push:
+    branches: [main]
+    paths: ["workshops/**", ".github/workflows/ci-workshops.yml"]
+  pull_request:
+    paths: ["workshops/**", ".github/workflows/ci-workshops.yml"]
+
+# Duw je twee commits achter elkaar, dan is alleen de laatste interessant.
+concurrency:
+  group: ci-workshops-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bouwen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: workshops/.nvmrc
+          cache: npm
+          cache-dependency-path: workshops/package-lock.json
+
+      - name: Installeren
+        run: npm ci
+        working-directory: workshops
+
+      # Eerst lint, dan pas bouwen: een lintfout is sneller te lezen dan een
+      # build die halverwege struikelt.
+      - name: Lint
+        run: npm run lint
+        working-directory: workshops
+
+      - name: Bouwen
+        run: npm run build
+        working-directory: workshops
+
+      # Controle dat de export echt gelukt is. `next build` kan slagen terwijl
+      # out/ toch niet klopt, bijvoorbeeld als een pagina uit de export valt.
+      - name: Controleer de export
+        run: |
+          test -f workshops/out/index.html
+          test -f workshops/out/404.html
+          test -f workshops/out/_headers
+          test -f workshops/out/_redirects
+          test -f workshops/out/sitemap.xml
+          test -f workshops/out/robots.txt
+          test -d workshops/out/workshop/claude-workshop

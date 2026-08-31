@@ -1,0 +1,41 @@
+# workshops.nina-ai.nl — headers voor Cloudflare Pages
+#
+# Dit bestand staat in workshops/public/ en komt bij `npm run build` mee in
+# out/. Cloudflare Pages leest het uit de root van de gepubliceerde map; het
+# wordt zelf niet als pagina uitgeleverd.
+#
+# Wat hier NIET in hoort:
+#
+#   - https afdwingen. Pages serveert alleen https en stuurt http zelf door.
+#   - rewrites om URL's te laten werken. De site exporteert met trailingSlash,
+#     dus elke pagina is een echte map met een index.html erin.
+#   - de 404. Pages pakt /404.html vanzelf voor een adres dat niet bestaat.
+#
+# Syntax: een padpatroon op kolom 1, de headers eronder ingesprongen. Staat
+# dezelfde header onder twee patronen, dan wint het specifiekere pad. Vandaar
+# de opbouw hieronder: /* zet de regel voor de hele site, de paden eronder
+# maken de uitzondering.
+
+# Het standaardgeval is een pagina, en pagina's cachen we niet. Verkoopt een
+# datum door en pas je `vrij` aan, dan moet de bezoeker dat bij zijn volgende
+# bezoek zien en niet volgende week.
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+
+# Alles onder /_next/static/ heeft een hash in de bestandsnaam en verandert
+# nooit meer. Dat mag een jaar in de cache van de bezoeker staan.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts en beeld leveren we zelf aan, onder een vaste naam. Een halfjaar
+# scheelt verkeer; wil je een foto vervangen, geef hem dan een nieuwe naam.
+/fonts/*
+  Cache-Control: public, max-age=15552000
+/images/*
+  Cache-Control: public, max-age=15552000
+
+# Geen strenge Content-Security-Policy. Die zou eerst getest moeten worden
+# tegen Stripe en Google Tag Manager, en een foute CSP breekt de betaalknop.

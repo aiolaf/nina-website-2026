@@ -2,12 +2,12 @@
 
 Spec van de losse ticketsite in `workshops/`. Lees dit voordat je daar iets
 aanpast; de praktische handleidingen staan in `workshops/README.md`,
-`workshops/STRIPE.md` en `workshops/DEPLOY-HOSTNET.md`.
+`workshops/STRIPE.md` en `workshops/DEPLOY-CLOUDFLARE.md`.
 
 ## Wat het is
 
 Een **aparte Next.js-app in dezelfde repository**, die als statische export
-op Hostnet komt te staan. Hij vervangt de Lovable-pagina op
+op Cloudflare Pages komt te staan. Hij vervangt de Lovable-pagina op
 `workshops.nina-ai.nl`.
 
 Waarom niet gewoon een route in de hoofdsite:
@@ -231,7 +231,7 @@ Wat hier **niet** kan, en wat je in de plaats gebruikt:
 
 | Werkt niet | In plaats daarvan |
 |---|---|
-| Redirects en headers in `next.config.ts` | `workshops/public/.htaccess` |
+| Redirects en headers in `next.config.ts` | `workshops/public/_redirects` en `_headers` |
 | Route handlers die een request lezen | niets; anders is een backend nodig |
 | Server actions, formulieren die opslaan | Stripe Checkout, of een mailto |
 | `next/image` met de standaard-loader | `images.unoptimized`, dus zelf webp aanleveren op ~1600px |

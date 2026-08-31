@@ -5,13 +5,13 @@ de huidige Lovable-pagina.
 
 Dit is een **losse app naast de hoofdsite**, in dezelfde repository. De
 hoofdsite (`/src`) blijft ongemoeid: die draait op een server, deze site
-wordt een map met HTML-bestanden die op Hostnet komt te staan.
+wordt een map met HTML-bestanden die op Cloudflare Pages komt te staan.
 
 | | Hoofdsite | Deze site |
 |---|---|---|
 | Domein | nina-ai.nl | workshops.nina-ai.nl |
 | Doel | een gesprek | een verkocht ticket |
-| Hosting | server | Hostnet, statische bestanden |
+| Hosting | server | Cloudflare Pages, statische bestanden |
 | Bouwen | `npm run build` in de root | `npm run build` in `workshops/` |
 
 ## Aan de slag
@@ -28,7 +28,7 @@ open hebben.
 ```bash
 npm run build    # schrijft de complete site naar workshops/out/
 npm run lint
-npm run start    # bekijkt out/ zoals hij straks op Hostnet staat
+npm run start    # bekijkt out/ zoals hij straks op Pages staat
 ```
 
 ## Waar wat staat
@@ -43,7 +43,7 @@ src/lib/programma.ts       ← voegt lives en workshops samen tot één agenda
 src/app/page.tsx           ← de homepage
 src/app/workshop/[slug]/   ← één pagina per workshop, automatisch
 src/components/            ← de bouwstenen
-docs → ../docs/workshops-site.md, STRIPE.md, DEPLOY-HOSTNET.md
+docs → ../docs/workshops-site.md, STRIPE.md, DEPLOY-CLOUDFLARE.md
 ```
 
 **Negen van de tien wijzigingen zitten in `src/content/workshops.ts`.** Een
@@ -64,8 +64,9 @@ geen formulieren die iets opslaan, geen inlog, geen API-routes, geen
 database. Betalen loopt daarom via Stripe Payment Links: die zijn gehost door
 Stripe zelf en werken vanaf een statische pagina.
 
-**Elke wijziging vraagt om een nieuwe build en een nieuwe upload.** Ook een
-gewijzigd aantal vrije plekken. Zie `DEPLOY-HOSTNET.md`.
+**Elke wijziging vraagt om een nieuwe build.** Ook een gewijzigd aantal vrije
+plekken. Pushen naar `main` is genoeg: Cloudflare Pages bouwt en publiceert
+zelf. Zie `DEPLOY-CLOUDFLARE.md`.
 
 **Het aantal vrije plekken bij houden we met de hand bij** (`vrij` per
 sessie). Er is geen koppeling die dat live uit Stripe haalt. Werkbaar bij een

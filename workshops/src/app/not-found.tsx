@@ -2,9 +2,9 @@ import Link from "next/link";
 import PijlKnop from "@/components/ui/PijlKnop";
 
 /**
- * Bij een statische export wordt hier 404.html van gemaakt. Apache serveert
- * die pas na de regel in .htaccess (zie DEPLOY-HOSTNET.md); zonder die regel
- * krijgt een bezoeker de standaardfoutpagina van de server te zien.
+ * Bij een statische export wordt hier 404.html van gemaakt. Cloudflare Pages
+ * pakt dat bestand vanzelf voor een adres dat niet bestaat; daar is geen
+ * instelling voor nodig (zie DEPLOY-CLOUDFLARE.md).
  *
  * Een verdwenen workshopdatum is de meest waarschijnlijke reden dat iemand
  * hier belandt, dus de knop wijst naar de agenda en niet naar de homepage.

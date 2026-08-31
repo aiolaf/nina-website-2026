@@ -5,13 +5,14 @@
  * detailpagina's, de kaartjes, de prijzen en de knop naar Stripe. Wie een
  * datum toevoegt of een workshop uit de verkoop haalt, past alleen dit
  * bestand aan. Er is geen CMS en geen database: dat is bewust, want de site
- * draait als statische export op gewone webhosting (zie next.config.ts).
+ * draait als statische export op Cloudflare Pages (zie next.config.ts).
  *
  * Werkwijze voor een nieuwe datum:
  *   1. Maak in Stripe een Payment Link voor die specifieke datum.
  *   2. Zet de link in `stripeLink` van het bijbehorende ticket.
  *   3. Zet `plaatsen` en `vrij`.
- *   4. Commit, bouw, upload. Zie STRIPE.md en DEPLOY-HOSTNET.md.
+ *   4. Commit en push; Pages bouwt zelf. Zie STRIPE.md en
+ *      DEPLOY-CLOUDFLARE.md.
  *
  * Een sessie zonder ingevulde `stripeLink` is niet kapot: de site toont hem
  * dan als "binnenkort in de verkoop" met een knop naar de wachtlijst. Zo kun
@@ -524,8 +525,8 @@ export type AgendaItem = {
  * Waar "vandaag" begint. De site is een statische export, dus dit wordt
  * vastgelegd op het moment van bouwen, niet in de browser van de bezoeker.
  * Gevolg: een datum verdwijnt pas uit de agenda na een nieuwe build. Dat is
- * precies waarom DEPLOY-HOSTNET.md zegt dat je na elke datumwijziging
- * opnieuw bouwt en uploadt.
+ * precies waarom DEPLOY-CLOUDFLARE.md zegt dat je na elke datumwijziging
+ * opnieuw pusht.
  */
 export function vandaag(): string {
   return new Date().toISOString().slice(0, 10);

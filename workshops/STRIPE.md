@@ -81,7 +81,7 @@ Voor elke datum, per tickettype:
    }
    ```
 
-9. **Bouwen en uploaden.** Zie `DEPLOY-HOSTNET.md`.
+9. **Committen en pushen.** Pages bouwt zelf. Zie `DEPLOY-CLOUDFLARE.md`.
 
 ## De bundels
 
