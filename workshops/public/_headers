@@ -9,18 +9,23 @@
 #   - https afdwingen. Pages serveert alleen https en stuurt http zelf door.
 #   - rewrites om URL's te laten werken. De site exporteert met trailingSlash,
 #     dus elke pagina is een echte map met een index.html erin.
-#   - de 404. Pages pakt /404.html vanzelf voor een adres dat niet bestaat.
+#   - de 404. Pages zoekt zelf de dichtstbijzijnde 404.html.
+#   - Cache-Control voor pagina's. Pages stuurt van zichzelf al
+#     `public, max-age=0, must-revalidate`, en dat is precies wat we willen:
+#     pas je `vrij` aan, dan ziet de bezoeker dat bij zijn volgende bezoek.
 #
-# Syntax: een padpatroon op kolom 1, de headers eronder ingesprongen. Staat
-# dezelfde header onder twee patronen, dan wint het specifiekere pad. Vandaar
-# de opbouw hieronder: /* zet de regel voor de hele site, de paden eronder
-# maken de uitzondering.
+# LET OP bij het uitbreiden: matcht een verzoek op twee patronen, dan krijgt
+# het de headers van beide. Staat dezelfde header onder beide, dan worden de
+# waarden achter elkaar geplakt met een komma — het specifiekere pad wint
+# niet. `Cache-Control: public, max-age=0, must-revalidate` onder /* plus
+# `Cache-Control: public, max-age=31536000, immutable` onder /_next/static/*
+# levert dus één onzinnige header op. Zet een header daarom onder precies
+# één patroon.
 
-# Het standaardgeval is een pagina, en pagina's cachen we niet. Verkoopt een
-# datum door en pas je `vrij` aan, dan moet de bezoeker dat bij zijn volgende
-# bezoek zien en niet volgende week.
+# Voor de hele site, en nergens anders gezet. Geen strenge
+# Content-Security-Policy: die zou eerst getest moeten worden tegen Stripe en
+# Google Tag Manager, en een foute CSP breekt de betaalknop.
 /*
-  Cache-Control: public, max-age=0, must-revalidate
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
@@ -36,6 +41,3 @@
   Cache-Control: public, max-age=15552000
 /images/*
   Cache-Control: public, max-age=15552000
-
-# Geen strenge Content-Security-Policy. Die zou eerst getest moeten worden
-# tegen Stripe en Google Tag Manager, en een foute CSP breekt de betaalknop.

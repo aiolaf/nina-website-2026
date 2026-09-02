@@ -34,6 +34,14 @@ die zelf iets opslaan, geen redirects vanuit `next.config.ts`. Headers en
 omleidingen staan in `public/_headers` en `public/_redirects`; betalen regelt
 Stripe. Zie `STRIPE.md`.
 
+Twee eigenaardigheden van die twee bestanden, want ze lezen anders dan ze
+werken. In `_headers` **stapelen** de patronen: matcht een verzoek op twee
+regels, dan krijgt het de headers van beide, en dezelfde header twee keer
+wordt met een komma aan elkaar geplakt. Het specifiekere pad wint niet. En
+`_redirects` kan **niet** omleiden per hostnaam; een regel met
+`https://www.…` erin doet niets. De bestanden zelf leggen dat ook uit, op de
+plek waar het misgaat.
+
 ---
 
 ## Deel 1 — Eenmalig klaarzetten (nog niets gaat live)
@@ -89,8 +97,9 @@ zien er daar met opzet anders uit:
 
 - De canonical-tags en de sitemap noemen `workshops.nina-ai.nl`, niet
   `pages.dev`. Dat is goed; `src/lib/site.ts` hoort het echte adres te noemen.
-- De redirect van `www.workshops` doet nog niets, want die host hangt nog niet
-  aan het project.
+- Een adres onder `www.workshops` bestaat niet. Dat blijft zo: Pages kan niet
+  omleiden per hostnaam, dus we hangen die host niet aan het project en houden
+  het bij één canonieke naam.
 
 Elke pull request krijgt ook een eigen preview-adres. Handig om een nieuwe
 datum of prijs te laten meelezen voordat hij op `main` staat.
@@ -182,6 +191,10 @@ achter maar kan er nooit worden overboekt.
 - [ ] Een workshoppagina opent rechtstreeks, dus zonder eerst via de homepage
       te klikken: `https://workshops.nina-ai.nl/workshop/claude-workshop/`
 - [ ] Een adres dat niet bestaat toont onze eigen 404
+- [ ] `curl -sI https://workshops.nina-ai.nl/` geeft één `cache-control`, met
+      `max-age=0, must-revalidate`, en een JS-bestand onder `/_next/static/`
+      geeft `max-age=31536000`. Staan er twee waarden achter elkaar in één
+      header, dan zet `_headers` dezelfde header onder twee patronen.
 - [ ] De koopknop opent de juiste Stripe-pagina, met het juiste bedrag
 - [ ] Na een testbetaling kom je op `/bedankt/` met de juiste datum erop
 - [ ] "Zet in mijn agenda" levert een `.ics` op die in de agenda opent

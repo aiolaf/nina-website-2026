@@ -1,18 +1,23 @@
 # workshops.nina-ai.nl — redirects voor Cloudflare Pages
 #
-# Eén regel per omleiding: van, naar, statuscode.
+# Eén regel per omleiding: van, naar, statuscode. Bijvoorbeeld:
 #
-# Dit bestand is nu bijna leeg, en dat hoort zo. http naar https doet
-# Cloudflare zelf, en de URL's binnen de site kloppen omdat de export met
-# trailingSlash werkt. Zet hier alleen omleidingen die een bezoeker echt
-# nodig heeft: een oud adres van de Lovable-pagina, of een korte link uit een
+#   /claude-workshop /workshop/claude-workshop/ 301
+#
+# Dit bestand is nu leeg op de uitleg na, en dat hoort zo. http naar https
+# doet Cloudflare zelf, en de URL's binnen de site kloppen omdat de export met
+# trailingSlash werkt. Zet hier alleen omleidingen die een bezoeker echt nodig
+# heeft: een oud adres van de Lovable-pagina, of een korte link uit een
 # nieuwsbrief.
 #
-# Let op: de reactie op /oud-adres komt van Cloudflare, niet van de pagina.
-# Een regel zonder statuscode wordt een 302. Wil je dat zoekmachines het
-# nieuwe adres overnemen, schrijf dan 301.
-
-# www.workshops.nina-ai.nl bestaat niet in DNS en hoeft er ook niet te komen.
-# Zet je hem later toch als custom domain op dit project, dan zorgt deze regel
-# dat er één canonieke host overblijft. Zonder dat custom domain doet hij niks.
-https://www.workshops.nina-ai.nl/* https://workshops.nina-ai.nl/:splat 301
+# Drie dingen om te weten voordat je hier iets neerzet:
+#
+#   - Een regel zonder statuscode wordt een 302. Wil je dat zoekmachines het
+#     nieuwe adres overnemen, schrijf dan 301.
+#   - Omleidingen gaan vóór bestanden. Een regel voor een pad dat óók een
+#     echte pagina is, maakt die pagina onbereikbaar.
+#   - Omleidingen per hostnaam kan Pages niet. Een regel als
+#     `https://www.workshops.nina-ai.nl/* ... 301` werkt dus niet, hoe logisch
+#     hij ook leest. Daarom hangen we `www.workshops.nina-ai.nl` ook niet aan
+#     dit project: dat adres bestaat niet in DNS en houden we zo. Eén host,
+#     geen omleiding nodig.
