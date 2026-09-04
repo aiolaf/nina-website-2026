@@ -58,7 +58,7 @@ export default function TicketRij({
 
   const wachtlijst =
     `mailto:${site.email}?subject=` +
-    encodeURIComponent(`Wachtlijst ${workshop.naam} — ${korteDatum(sessie.datum)}`) +
+    encodeURIComponent(`Wachtlijst ${workshop.naam}, ${korteDatum(sessie.datum)}`) +
     "&body=" +
     encodeURIComponent(
       `Hoi NinA,\n\nZet mij op de wachtlijst voor ${workshop.naam} op ${korteDatum(

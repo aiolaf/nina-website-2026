@@ -49,8 +49,8 @@ export default function BedanktDetails() {
     return (
       <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-text-muted">
         Je plek staat op je naam. De bevestiging en de factuur zijn onderweg
-        naar je mailbox — check ook even je spamfilter als je ze over vijf
-        minuten nog niet ziet.
+        naar je mailbox. Check ook je spamfilter als je ze over vijf minuten
+        nog niet ziet.
       </p>
     );
   }
@@ -148,7 +148,7 @@ function AgendaKnop({
          buitenland de workshop op een ander uur zetten. */
       `DTSTART;TZID=Europe/Amsterdam:${stempel(sessie.start)}`,
       `DTEND;TZID=Europe/Amsterdam:${stempel(sessie.eind)}`,
-      `SUMMARY:${workshop.naam} — NinA AI`,
+      `SUMMARY:${workshop.naam} (NinA AI)`,
       `LOCATION:${locatie.naam}\\, ${locatie.adres}`,
       `DESCRIPTION:${workshop.ondertitel}. Vragen? ${site.email}`,
       "END:VEVENT",

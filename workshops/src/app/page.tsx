@@ -97,13 +97,13 @@ export default function Home() {
                 Open inschrijving · Amsterdam
               </p>
               <h1 className="display-serif mt-4 text-[2.6rem] leading-[1.03] text-white sm:text-[3.6rem] lg:text-[4.2rem]">
-                Een middag bij ons aan tafel, en je{" "}
-                <em className="italic">werkt anders</em> op maandag.
+                Het beste AI workshop aanbod van{" "}
+                <em className="italic">Nederland</em>.
               </h1>
               <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-white/85">
                 Losse tickets voor onze Claude- en AI-workshops op kantoor in
-                Amsterdam. Kleine groepen, je eigen werk als oefenmateriaal, en
-                je gaat naar huis met iets dat draait.
+                Amsterdam. Kleine groepen, en je werkt de hele middag aan je
+                eigen taken.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -173,7 +173,7 @@ export default function Home() {
           </>
         }
         sub="Van een gratis online sessie tot een middag bouwen op kantoor. Je betaalt direct online en krijgt meteen je bevestiging en factuur."
-        annotatie="vol is vol, echt waar"
+        annotatie="maximaal 15 per workshop"
       >
         {items.length > 0 ? (
           <div className="space-y-4">
@@ -223,7 +223,7 @@ export default function Home() {
               <p className="mt-1 text-sm leading-relaxed text-text-muted">
                 We plannen de data voor november en december binnenkort in.
                 Laat weten waar je interesse in hebt, dan hoor je het als
-                eerste — en houden we rekening met wat er gevraagd wordt.
+                eerste.
               </p>
             </div>
             <a
@@ -291,10 +291,10 @@ export default function Home() {
         kicker={`${WORKSHOPS.length} workshops`}
         title={
           <>
-            Van je eerste Skill tot een agent die <Em>zelf</Em> doorwerkt.
+            Drie workshops, van <Em>beginner</Em> tot gevorderd.
           </>
         }
-        sub="Ze bouwen op elkaar voort, maar je hoeft ze niet op volgorde te doen. Kies waar je nu staat."
+        sub="Ze bouwen op elkaar voort, maar je kunt ze ook los doen."
       >
         <div className="grid gap-6 md:grid-cols-2">
           {WORKSHOPS.map((w, i) => (
@@ -313,32 +313,32 @@ export default function Home() {
         variant="card"
         title={
           <>
-            Geen zaal met slides, maar <Em>jouw werk</Em> op tafel.
+            Je werkt de hele middag aan je <Em>eigen</Em> taak.
           </>
         }
-        sub="Iedereen komt binnen met een taak uit de eigen week. Daar werken we de hele middag aan, en daar gaat de middag ook over."
+        sub="Vooraf vragen we welke taak jou nu te veel tijd kost. Die neem je mee."
       >
         <div className="grid gap-6 md:grid-cols-4">
           {[
             {
               titel: "Je komt binnen met een taak",
               tekst:
-                "Vooraf vragen we welk werk je te lang kost. Dat is je oefenmateriaal.",
+                "Vooraf vragen we welk werk je te veel tijd kost. Daar ga je die middag mee aan de slag.",
             },
             {
               titel: "We leggen kort uit hoe het werkt",
               tekst:
-                "Genoeg om te snappen waarom iets wel of niet lukt. Niet meer dan dat.",
+                "Kort: wat er onder de motorkap gebeurt, en waarom het soms misgaat.",
             },
             {
               titel: "Je bouwt het zelf",
               tekst:
-                "Met een trainer naast je die meekijkt zodra je vastloopt. Dat is het grootste deel van de middag.",
+                "Het grootste deel van de middag. Loop je vast, dan kijkt de trainer mee.",
             },
             {
               titel: "Je neemt het mee",
               tekst:
-                "Werkende Skills, templates en een certificaat. Plus de borrel, waar de beste vragen komen.",
+                "Je Skills, templates en een certificaat. Daarna de borrel.",
             },
           ].map((s, i) => (
             <Reveal key={s.titel} delay={i * 0.06}>
@@ -364,11 +364,11 @@ export default function Home() {
         kicker="Zo ziet het eruit"
         title={
           <>
-            Echte sessies, <Em>echte</Em> mensen.
+            Zo ziet een workshop bij ons <Em>eruit</Em>.
           </>
         }
-        sub="Foto's uit onze eigen workshops en sessies. Geen stockbeeld, geen zaal die we ergens hebben gehuurd voor de foto."
-        annotatie="dit ben jij straks"
+        sub="Foto's van onze eigen workshops en sessies."
+        annotatie="eigen foto's"
       >
         <Reveal>
           <Sfeer />
@@ -423,10 +423,10 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-5 py-20 text-center sm:py-24">
           <Reveal>
             <p className="label-mono text-[11.5px] text-white/60">
-              Nog even terug
+              Tot slot
             </p>
             <h2 className="display-serif mx-auto mt-4 max-w-2xl text-[2.2rem] leading-tight sm:text-[3rem]">
-              Er staat een stoel klaar. <em className="italic">Welke datum?</em>
+              Welke datum <em className="italic">wordt het</em>?
             </h2>
             {eerste && (
               <p className="mt-5 text-[15px] text-white/70">

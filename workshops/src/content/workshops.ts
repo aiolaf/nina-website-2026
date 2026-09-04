@@ -242,7 +242,7 @@ export const WORKSHOPS: Workshop[] = [
     kort:
       "AI is pas nuttig als hij weet wat jij weet. Deze middag bouw je de kennisbank waar je AI uit put, en zet je hem meteen aan het werk.",
     intro:
-      "Je AI geeft algemene antwoorden omdat hij algemene kennis heeft. Alles wat jou onderscheidt — je klanten, je afspraken, je manier van werken, je aantekeningen van drie jaar — zit in je hoofd, je mail en twaalf mappen. Deze middag brengen we dat samen tot één second brain, en koppelen we er AI aan vast. We gaan verder waar de gratis LinkedIn Live van 2 september ophield.",
+      "Je AI geeft algemene antwoorden omdat hij algemene kennis heeft. Alles wat jou onderscheidt zit in je hoofd, je mail en twaalf mappen: je klanten, je afspraken, je manier van werken, je aantekeningen van drie jaar. Deze middag brengen we dat samen tot één second brain, en koppelen we er AI aan vast. We gaan verder waar de gratis LinkedIn Live van 2 september ophield.",
     voorWie: [
       "Je gebruikt AI dagelijks en krijgt te algemene antwoorden terug",
       "Je aantekeningen, documenten en ideeën staan overal en nergens",
@@ -289,7 +289,7 @@ export const WORKSHOPS: Workshop[] = [
         tijd: "15:30",
         titel: "Het bijhouden automatiseren",
         tekst:
-          "De reden dat elk systeem doodbloedt is onderhoud. Dat laten we AI doen.",
+          "Bijhouden is waar het meestal stopt. Dat laten we AI doen.",
       },
       {
         tijd: "16:00",
@@ -300,7 +300,7 @@ export const WORKSHOPS: Workshop[] = [
     meenemen: [
       "Een laptop",
       "Een Claude-account",
-      "Je huidige aantekeningen, in welke vorm dan ook — ook als het een chaos is",
+      "Je huidige aantekeningen, in welke vorm dan ook, ook als het een chaos is",
       "Een vraag die je vaak aan collega's stelt omdat je het antwoord nooit terugvindt",
     ],
     inbegrepen: [
@@ -394,7 +394,7 @@ export const WORKSHOPS: Workshop[] = [
         tijd: "15:30",
         titel: "Stukmaken en dichttimmeren",
         tekst:
-          "We proberen elkaars agent te laten struikelen. Het leerzaamste half uur van de middag.",
+          "We proberen elkaars agent te laten struikelen, en leren daar het meest van.",
       },
       {
         tijd: "16:00",

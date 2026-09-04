@@ -65,7 +65,7 @@ export async function generateMetadata({
     .join(", ");
 
   return {
-    title: `${workshop.naam} — ${workshop.ondertitel}`,
+    title: `${workshop.naam}: ${workshop.ondertitel}`,
     description: `${workshop.kort} ${staart}.`,
     alternates: { canonical: `/workshop/${workshop.slug}/` },
     openGraph: {
@@ -160,7 +160,7 @@ export default async function WorkshopPagina({
                 <p className="mt-2 text-[15px] leading-relaxed">
                   Op {korteDatum(live.datum)} doen we{" "}
                   <span className="font-semibold">{live.naam}</span> als gratis{" "}
-                  {live.platform}, online. Deze workshop bouwt daarop voort —
+                  {live.platform}, online. Deze workshop bouwt daarop voort,
                   maar je kunt ook los meedoen.
                 </p>
                 <a
@@ -177,7 +177,7 @@ export default async function WorkshopPagina({
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <PijlKnop href="#data" data-cta="detail-hero-data">
                 {eerste
-                  ? `Kies je datum — vanaf ${korteDatum(eerste.datum)}`
+                  ? `Kies je datum, vanaf ${korteDatum(eerste.datum)}`
                   : "Bekijk de data"}
               </PijlKnop>
               <PijlKnop
@@ -239,7 +239,7 @@ export default async function WorkshopPagina({
                   >
                     {advies.email}
                   </a>{" "}
-                  met wat je nu met Claude doet, dan krijg je eerlijk antwoord —
+                  met wat je nu met Claude doet, dan krijg je eerlijk antwoord,
                   ook als dat &ldquo;doe eerst de andere&rdquo; is.
                 </p>
               )}

@@ -36,7 +36,7 @@ export default function BedanktPagina() {
             Betaling gelukt
           </p>
           <h1 className="display-serif mt-4 max-w-2xl text-[2.6rem] leading-[1.05] sm:text-[3.4rem]">
-            Tot dan. Er staat een <em className="italic">stoel</em> klaar.
+            Je plek is <em className="italic">geboekt</em>. Tot dan.
           </h1>
 
           <BedanktDetails />

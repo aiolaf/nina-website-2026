@@ -16,7 +16,7 @@ const GEREGELD = [
   {
     titel: "Kleine groepen",
     tekst:
-      "Maximaal vijftien deelnemers, nooit meer. Iedereen komt aan de beurt met zijn eigen vraag.",
+      "Maximaal vijftien deelnemers. Iedereen komt aan de beurt met zijn eigen vraag.",
   },
   {
     titel: "Inloop en borrel",

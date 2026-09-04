@@ -55,7 +55,7 @@ export function evenementSchema(workshop: Workshop, sessie: Sessie) {
   return {
     "@context": "https://schema.org",
     "@type": "EducationEvent",
-    name: `${workshop.naam} — ${workshop.ondertitel}`,
+    name: `${workshop.naam}: ${workshop.ondertitel}`,
     description: workshop.kort,
     startDate: isoMetTijd(sessie.datum, sessie.start),
     endDate: isoMetTijd(sessie.datum, sessie.eind),
@@ -101,7 +101,7 @@ export function liveSchema(live: Live) {
   return {
     "@context": "https://schema.org",
     "@type": "EducationEvent",
-    name: `${live.naam} — ${live.ondertitel}`,
+    name: `${live.naam}: ${live.ondertitel}`,
     description: live.kort,
     startDate: isoMetTijd(live.datum, live.start),
     endDate: isoMetTijd(live.datum, live.eind),

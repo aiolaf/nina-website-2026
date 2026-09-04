@@ -36,7 +36,7 @@ export const VRAGEN: { vraag: string; antwoord: string }[] = [
   {
     vraag: "Moet ik al iets kunnen?",
     antwoord:
-      "Voor de Claude Workshop niet: die begint bij het begin. Je Second Brain voor AI gaat ervan uit dat je AI al regelmatig gebruikt. De Claude Pro Workshop is een masterclass: daar nemen we aan dat je de basis van Claude beheerst en al eens een connector hebt ingesteld. Twijfel je of je er klaar voor bent? Mail wat voor werk je doet, dan zeggen we eerlijk welke past — of dat het er geen is.",
+      "Voor de Claude Workshop niet: die begint bij het begin. Je Second Brain voor AI gaat ervan uit dat je AI al regelmatig gebruikt. De Claude Pro Workshop is een masterclass: daar nemen we aan dat je de basis van Claude beheerst en al eens een connector hebt ingesteld. Twijfel je? Mail wat voor werk je doet, dan zeggen we welke past.",
   },
   {
     vraag: "Kan ik er meerdere doen?",
@@ -56,7 +56,7 @@ export const VRAGEN: { vraag: string; antwoord: string }[] = [
   {
     vraag: "Krijg ik een bewijs van deelname?",
     antwoord:
-      "Ja, je krijgt na afloop een certificaat. Het is geen erkend diploma — het is een bewijs dat je erbij was en waar de middag over ging, genoeg voor de meeste opleidingsbudgetten.",
+      "Ja, je krijgt na afloop een certificaat. Het is geen erkend diploma, maar een bewijs dat je erbij was en waar de middag over ging. Genoeg voor de meeste opleidingsbudgetten.",
   },
   {
     vraag: "Kan ik dit betalen uit een opleidingsbudget?",
@@ -75,7 +75,7 @@ export default function Vragen() {
           Vragen die we <Em>vaker</Em> krijgen.
         </>
       }
-      sub="Staat je vraag er niet bij? Mail of app ons; je krijgt binnen een werkdag antwoord van een mens."
+      sub="Staat je vraag er niet bij? Mail of app ons, je krijgt binnen een werkdag antwoord."
     >
       <div className="mx-auto max-w-3xl">
         {VRAGEN.map((v, i) => (

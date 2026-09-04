@@ -25,8 +25,7 @@ export default function AfgebrokenPagina() {
           Er is niets afgeschreven
         </p>
         <h1 className="display-serif mt-4 text-[2.4rem] leading-[1.05] sm:text-[3.1rem]">
-          Geen probleem. Je plek is nog{" "}
-          <em className="italic">niet vergeven</em>.
+          Je plek is nog <em className="italic">vrij</em>.
         </h1>
         <p className="mt-6 text-[17px] leading-relaxed text-text-muted">
           De betaling is afgebroken, dus er is niets in rekening gebracht. Wil
@@ -70,7 +69,7 @@ export default function AfgebrokenPagina() {
             </h2>
             <p className="mt-1.5 text-[15px] leading-relaxed text-text-muted">
               Schrijf ons wat voor werk je doet en waar je nu vastloopt, dan
-              zeggen we eerlijk welke van de vier past — of dat het er geen is.
+              zeggen we welke past, of dat er geen bij zit.
             </p>
           </div>
           <div>

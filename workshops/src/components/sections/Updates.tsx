@@ -65,7 +65,7 @@ export default function Updates() {
       </h3>
       <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
         We plannen de data voor november en december binnenkort in. Laat je
-        mailadres achter, dan hoor je het als eerste — en niet vaker dan dat.
+        mailadres achter, dan hoor je het als eerste. Meer mail sturen we niet.
       </p>
 
       {/* Hier zet SendFox het formulier neer. Zonder JavaScript blijft de doos

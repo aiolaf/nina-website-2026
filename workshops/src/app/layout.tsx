@@ -54,16 +54,16 @@ const zodiak = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "AI Workshops in Amsterdam | NinA AI",
+    default: "Het beste AI workshop aanbod van Nederland",
     template: "%s | NinA AI Workshops",
   },
   description:
-    "Open AI-workshops op ons kantoor in Amsterdam. Kleine groepen, zelf aan de slag, en je gaat weg met iets dat werkt. Bekijk de data en koop direct je ticket.",
+    "Open AI-workshops op ons kantoor in Amsterdam. Kleine groepen, zelf aan de slag met je eigen werk. Bekijk de data en koop direct je ticket.",
   openGraph: {
     type: "website",
     locale: "nl_NL",
     siteName: "NinA AI Workshops",
-    title: "AI Workshops in Amsterdam | NinA AI",
+    title: "Het beste AI workshop aanbod van Nederland",
     description:
       "Open AI-workshops op ons kantoor in Amsterdam. Kleine groepen, zelf aan de slag. Bekijk de data en koop direct je ticket.",
   },
