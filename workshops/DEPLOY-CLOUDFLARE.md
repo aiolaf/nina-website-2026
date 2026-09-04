@@ -61,6 +61,19 @@ bewijs dat de serverinstellingen kloppen — dat is stap 3.
 
 ### 2. Het Pages-project aanmaken
 
+**Gedaan op 4 september 2026.** Het project heet `nina-workshops`, de
+productie-URL is `https://nina-workshops.pages.dev`, en het staat in het
+Cloudflare-account van `olaf@nina-ai.nl`. Onderstaande stappen zijn dus alleen
+nog nodig als het project ooit opnieuw moet.
+
+> In hetzelfde account staat ook een **Worker** `nina-website-2026`, per
+> ongeluk aangemaakt bij de eerste poging (Workers & Pages → Create kiest
+> standaard Workers). Die bouwt bij elke push mee en verbruikt bouwminuten,
+> maar doet verder niets. Kan weg: Workers & Pages → nina-website-2026 →
+> Settings → Delete. Een Worker had hier ook niet gekund: een custom domain op
+> een Worker vereist dat het hele domein bij Cloudflare staat, en `nina-ai.nl`
+> blijft bij Hostnet.
+
 In het Cloudflare-dashboard: **Workers & Pages → Create → Pages → Connect to
 Git**, en kies de repository `aiolaf/nina-website-2026`.
 
