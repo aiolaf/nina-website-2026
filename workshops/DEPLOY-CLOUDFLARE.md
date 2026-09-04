@@ -3,10 +3,10 @@
 Hoe `workshops.nina-ai.nl` van Lovable naar Cloudflare Pages gaat, en hoe je
 daarna een wijziging live zet.
 
-**Doe de omzetting pas als de site inhoudelijk klaar is** — dus met de echte
-data, de echte prijzen en werkende Stripe-links erin. Tot die tijd blijft de
-Lovable-versie gewoon staan; er gaat niets kapot zolang het DNS-record voor
-`workshops` nog naar Lovable wijst.
+**De site staat live sinds 4 september 2026.** De Stripe-links ontbraken op
+dat moment nog: de site toont elke datum als *binnenkort in de verkoop* met de
+wachtlijst. Zodra de links in `workshops.ts` staan en gepusht zijn, gaat de
+kassa open — zie `STRIPE.md`.
 
 ---
 
@@ -120,6 +120,21 @@ datum of prijs te laten meelezen voordat hij op `main` staat.
 ---
 
 ## Deel 2 — De omzetting
+
+**Gedaan op 4 september 2026, rond 16:15.** Het A-record naar Lovable is
+vervangen door de CNAME naar `nina-workshops.pages.dev`; het custom domain in
+Pages staat op *Active, SSL enabled*. Lovable staat er nog, opzeggen kan na
+een week. Onderstaande stappen zijn dus voor als het ooit opnieuw moet.
+
+> **Wat het draaiboek niet had voorzien.** Lovable draait óók op Cloudflare.
+> Na de DNS-wijziging bleef `workshops.nina-ai.nl` daarom ruim een half uur de
+> Lovable-site tonen, met een geldig certificaat, terwijl Pages *Inactive
+> (Requires DNS setup)* meldde. Eén hostnaam kan maar in één Cloudflare-account
+> actief zijn, en Lovable had hem nog geclaimd. Cloudflare controleert die
+> claim periodiek; zodra hij zag dat de CNAME niet meer naar Lovable wees, liet
+> hij hem los en sprong Pages vanzelf op *Active*. Er was dus niets kapot en
+> niets te doen — alleen wachten. Sneller had gekund door in Lovable het domein
+> los te koppelen vóór de DNS-wijziging.
 
 Doe dit op een rustig moment, niet op een dag waarop er een workshop is en niet
 vlak voor het weekend.
