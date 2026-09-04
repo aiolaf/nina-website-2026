@@ -2,7 +2,7 @@ import Link from "next/link";
 import KoopKnop from "@/components/ui/KoopKnop";
 import { plekkenRegel } from "@/components/ui/StatusChip";
 import { korteDatum } from "@/lib/datum";
-import { euro, metBtw, site } from "@/lib/site";
+import { euro, metBtw } from "@/lib/site";
 import {
   heeftMeerderePrijzen,
   komendeSessies,
@@ -26,13 +26,9 @@ export default function TicketBox({ workshop }: { workshop: Workshop }) {
   const getoond = sessies.slice(0, 3);
   const rest = sessies.length - getoond.length;
 
-  const wachtlijst =
-    `mailto:${site.email}?subject=` +
-    encodeURIComponent(`Nieuwe data ${workshop.naam}`) +
-    "&body=" +
-    encodeURIComponent(
-      `Hoi NinA,\n\nLaat het me weten zodra er nieuwe data voor ${workshop.naam} zijn.\n\nNaam:\nBedrijf:\n`
-    );
+  /* Interesse en wachtlijst lopen allebei via het SendFox-formulier op de
+     homepage. Er is geen apart mailadres voor deze site. */
+  const wachtlijst = "/#updates";
 
   return (
     <div className="kaart border border-border bg-bg-card p-6 shadow-[0_18px_50px_rgba(12,14,24,0.07)]">

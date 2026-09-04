@@ -7,7 +7,10 @@ export const site = {
   bedrijf: "NinA AI B.V.",
   url: "https://workshops.nina-ai.nl",
   hoofdsite: "https://nina-ai.nl",
-  email: "workshops@nina-ai.nl",
+  /* Er is geen mailadres voor deze site. Interesse en wachtlijst lopen via
+     het SendFox-formulier op de homepage (#updates); dit is de losse versie
+     daarvan, voor wie het formulier niet ziet laden. Vragen gaan via WhatsApp. */
+  formulier: "https://sendfox.com/form/1re792/3qoqw6",
   kvk: "93390688",
   /* Het btw-nummer hoort op de factuur en in de voorwaarden. Vul aan zodra
      bekend; laat leeg staan liever dan een verzonnen nummer. */

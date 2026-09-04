@@ -103,19 +103,12 @@ export default function Vragen() {
           <p className="mt-8 text-sm text-text-muted">
             Nog iets anders?{" "}
             <a
-              href={`mailto:${site.email}`}
-              className="text-ink underline-offset-4 hover:text-violet hover:underline"
-            >
-              {site.email}
-            </a>{" "}
-            of{" "}
-            <a
               href={site.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="text-ink underline-offset-4 hover:text-violet hover:underline"
             >
-              stuur een appje
+              Stuur een appje
             </a>
             .
           </p>

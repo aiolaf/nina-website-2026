@@ -84,14 +84,6 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href={`mailto:${site.email}`}
-                  className="hover:text-violet"
-                >
-                  {site.email}
-                </a>
-              </li>
-              <li>
-                <a
                   href={site.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"

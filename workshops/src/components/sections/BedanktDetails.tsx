@@ -150,7 +150,7 @@ function AgendaKnop({
       `DTEND;TZID=Europe/Amsterdam:${stempel(sessie.eind)}`,
       `SUMMARY:${workshop.naam} (NinA AI)`,
       `LOCATION:${locatie.naam}\\, ${locatie.adres}`,
-      `DESCRIPTION:${workshop.ondertitel}. Vragen? ${site.email}`,
+      `DESCRIPTION:${workshop.ondertitel}. Vragen? ${site.url}`,
       "END:VEVENT",
       "END:VCALENDAR",
     ];

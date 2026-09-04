@@ -2,7 +2,7 @@ import Link from "next/link";
 import KoopKnop from "@/components/ui/KoopKnop";
 import StatusChip, { plekkenRegel } from "@/components/ui/StatusChip";
 import { korteDatum, stempel } from "@/lib/datum";
-import { euro, metBtw, site } from "@/lib/site";
+import { euro, metBtw } from "@/lib/site";
 import {
   koopbareTickets,
   sessieStatus,
@@ -56,15 +56,10 @@ export default function TicketRij({
   const extraTeKoop = teKoop.filter((t) => t !== hoofd);
   const hoofdTeKoop = hoofd && teKoop.includes(hoofd) ? hoofd : null;
 
-  const wachtlijst =
-    `mailto:${site.email}?subject=` +
-    encodeURIComponent(`Wachtlijst ${workshop.naam}, ${korteDatum(sessie.datum)}`) +
-    "&body=" +
-    encodeURIComponent(
-      `Hoi NinA,\n\nZet mij op de wachtlijst voor ${workshop.naam} op ${korteDatum(
-        sessie.datum
-      )}.\n\nNaam:\nBedrijf:\nAantal personen:\n`
-    );
+  /* De wachtlijst is het SendFox-formulier onder de agenda. Er is geen
+     mailadres voor deze site, en een formulier vult zichzelf niet met een
+     verkeerd gespeld adres. */
+  const wachtlijst = "/#updates";
 
   return (
     <div

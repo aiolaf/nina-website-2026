@@ -62,12 +62,14 @@ export default function BedanktPagina() {
             </ol>
 
             <p className="mt-6 text-sm text-text-muted">
-              Klopt er iets niet, of wil je iemand anders sturen? Mail{" "}
+              Klopt er iets niet, of wil je iemand anders sturen?{" "}
               <a
-                href={`mailto:${site.email}`}
+                href={site.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-ink underline-offset-4 hover:text-violet hover:underline"
               >
-                {site.email}
+                Stuur ons een WhatsApp-bericht
               </a>
               .
             </p>

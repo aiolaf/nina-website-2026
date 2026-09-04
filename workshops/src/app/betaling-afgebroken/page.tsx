@@ -52,15 +52,17 @@ export default function AfgebrokenPagina() {
               Wil je liever op factuur betalen?
             </h2>
             <p className="mt-1.5 text-[15px] leading-relaxed text-text-muted">
-              Dat kan. Mail{" "}
+              Dat kan.{" "}
               <a
-                href={`mailto:${site.email}`}
+                href={site.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-ink underline-offset-4 hover:text-violet hover:underline"
               >
-                {site.email}
+                Stuur ons via WhatsApp
               </a>{" "}
-              met de workshop, de datum en de factuurgegevens, dan sturen we je
-              een factuur en houden we de plek vast.
+              de workshop, de datum en de factuurgegevens, dan sturen we je een
+              factuur en houden we de plek vast.
             </p>
           </div>
           <div>

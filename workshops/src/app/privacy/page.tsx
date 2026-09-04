@@ -106,12 +106,14 @@ export default function PrivacyPagina() {
           <h2 className="font-display text-xl font-bold">Je rechten</h2>
           <p className="mt-3 text-[15px] leading-relaxed text-text-muted">
             Je mag opvragen welke gegevens we van je hebben, ze laten
-            corrigeren of laten verwijderen. Mail{" "}
+            corrigeren of laten verwijderen.{" "}
             <a
-              href={`mailto:${site.email}`}
+              href={site.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-ink underline-offset-4 hover:text-violet hover:underline"
             >
-              {site.email}
+              Stuur ons een bericht via WhatsApp
             </a>{" "}
             en je krijgt binnen een week antwoord. Kom je er met ons niet uit,
             dan kun je terecht bij de Autoriteit Persoonsgegevens.

@@ -90,7 +90,7 @@ const BLOKKEN: { kop: string; tekst: string[] }[] = [
   {
     kop: "Vragen of een klacht",
     tekst: [
-      `Mail ${site.email}. Je krijgt binnen een werkdag antwoord van een mens, en bij een klacht binnen vijf werkdagen een inhoudelijke reactie.`,
+      `Stuur ons een bericht via WhatsApp (de link staat onderaan elke pagina). Je krijgt binnen een werkdag antwoord, en bij een klacht binnen vijf werkdagen een inhoudelijke reactie.`,
       `${site.bedrijf} · ${locatie.adres} · KVK ${site.kvk}`,
     ],
   },

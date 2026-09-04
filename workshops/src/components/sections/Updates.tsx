@@ -73,12 +73,14 @@ export default function Updates() {
       <div ref={doos} className="sendfox-doos mt-6" />
 
       <p className="mt-5 border-t border-border pt-4 text-[13px] leading-relaxed text-text-muted">
-        Liever gewoon mailen? Dat mag ook:{" "}
+        Laadt het formulier niet?{" "}
         <a
-          href={`mailto:${site.email}?subject=${encodeURIComponent("Hou me op de hoogte van nieuwe workshopdata")}`}
+          href={site.formulier}
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-ink underline-offset-4 hover:text-violet hover:underline"
         >
-          {site.email}
+          Open het hier
         </a>
         . Uitschrijven kan met één klik, en je adres gaat nergens anders heen.
       </p>
