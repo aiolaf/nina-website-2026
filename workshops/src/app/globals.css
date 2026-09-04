@@ -449,65 +449,8 @@ body:has(#donkere-hero) header[data-transparant] .header-cta {
   color: var(--color-ink);
 }
 
-/* --------------------------------------------------------------------
-   Het SendFox-formulier
-
-   SendFox levert zijn eigen HTML aan en wij hebben geen invloed op de
-   klassenamen die daarin zitten. Daarom staat hier geen enkele selector op
-   een klasse van hen, maar alleen op de elementen zelf binnen onze eigen
-   .sendfox-doos. Verandert SendFox morgen zijn markup, dan blijft dit
-   werken zolang het invoervelden en een knop zijn.
-
-   Zonder deze regels staat er een standaard browserformulier midden in een
-   pagina die verder helemaal in de huisstijl staat, en dat leest als een
-   advertentie van iemand anders.
-   -------------------------------------------------------------------- */
-.sendfox-doos form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.sendfox-doos input[type="text"],
-.sendfox-doos input[type="email"] {
-  width: 100%;
-  border-radius: 3px;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
-  padding: 0.75rem 1rem;
-  font-family: var(--font-sans);
-  font-size: 15px;
-  color: var(--color-text);
-}
-.sendfox-doos input[type="text"]:focus,
-.sendfox-doos input[type="email"]:focus {
-  outline: 2px solid var(--color-violet);
-  outline-offset: 1px;
-  border-color: transparent;
-}
-.sendfox-doos input::placeholder {
-  color: var(--color-text-muted);
-}
 /* De knop is de enige ronde vorm in het formulier: rond betekent op deze
    site "hier kun je klikken". */
-.sendfox-doos button,
-.sendfox-doos input[type="submit"] {
-  align-self: flex-start;
-  cursor: pointer;
-  border: 0;
-  border-radius: 9999px;
-  background: var(--color-ink);
-  padding: 0.85rem 1.75rem;
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1;
-  color: #ffffff;
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.sendfox-doos button:hover,
-.sendfox-doos input[type="submit"]:hover {
-  transform: scale(1.02);
-}
 /*
  * Het formulier vraagt om toestemming met een verplicht vinkje ("Ik ga
  * akkoord met het ontvangen van e-mailupdates"). Dat vinkje mag onder geen
@@ -516,22 +459,4 @@ body:has(#donkere-hero) header[data-transparant] .header-cta {
  * eerder een regel die checkboxes met een underscore in de naam verborg als
  * bot-vangnet; die haalde precies dit vinkje weg.
  */
-.sendfox-doos label {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--color-text-muted);
-}
-.sendfox-doos input[type="checkbox"] {
-  margin-top: 0.15rem;
-  width: 1rem;
-  height: 1rem;
-  flex-shrink: 0;
-  accent-color: var(--color-ink);
-}
 /* Wat SendFox zelf voor schermlezers wegzet, blijft weg. */
-.sendfox-doos [aria-hidden="true"]:not(label):not(input) {
-  display: none;
-}
