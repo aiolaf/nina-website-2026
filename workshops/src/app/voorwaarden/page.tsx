@@ -40,7 +40,7 @@ const BLOKKEN: { kop: string; tekst: string[] }[] = [
     tekst: [
       "Alle prijzen op deze site staan in euro's en zijn exclusief 21% btw, tenzij er uitdrukkelijk bij staat dat het bedrag inclusief btw is.",
       "Betalen gaat via Stripe, met iDEAL, creditcard of Bancontact. NinA AI ontvangt en bewaart je betaalgegevens niet.",
-      "Betalen op factuur vooraf kan ook. Mail ons voordat je bestelt; we houden de plek dan vast tot de factuur voldaan is, en uiterlijk tot een week voor de workshop.",
+      "Betalen op factuur vooraf kan ook. Stuur ons een WhatsApp-bericht voordat je bestelt; we houden de plek dan vast tot de factuur voldaan is, en uiterlijk tot een week voor de workshop.",
     ],
   },
   {

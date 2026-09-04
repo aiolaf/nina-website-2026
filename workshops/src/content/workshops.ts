@@ -127,7 +127,7 @@ const OLAF: Trainer = {
      rekent dan zelf de prijs per persoon uit.
    - Second Brain is nieuw: het aantal plaatsen en de programmablokken zijn
      een voorstel, geen bestaande tekst.
-   - Trainer staat overal op Olaf. Geeft Daan of iemand anders er een?
+   - Trainer staat overal op Olaf. Geeft Senna of iemand anders er een?
    - Tijden: inloop 12:30, programma 13:00-16:00, daarna borrel. Geldt dat
      ook voor Second Brain?
    ==================================================================== */

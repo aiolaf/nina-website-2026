@@ -66,11 +66,11 @@ export const bewijs = {
  * bij een masterclass van een paar honderd euro het verschil tussen kopen en
  * afhaken.
  *
- * TE BEVESTIGEN: dit adres komt van de huidige site. Klopt het nog?
+ * Senna, sinds september 2026. Daan werkt niet meer bij NinA.
  */
 export const advies = {
-  email: "daan@nina-ai.nl",
-  naam: "Daan",
+  email: "senna@nina-ai.nl",
+  naam: "Senna",
 };
 
 /**
